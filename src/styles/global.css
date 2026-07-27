@@ -333,6 +333,41 @@ p {
 	margin-bottom: 1.5rem;
 }
 
+.record-block {
+	margin: 0 0 2rem;
+	padding-top: 0.5rem;
+	border-top: 1px solid var(--line);
+}
+
+.record-block__title {
+	margin: 0 0 0.85rem;
+	font-size: 1.35rem;
+}
+
+.record-chips {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 0.5rem;
+	list-style: none;
+	margin: 0;
+	padding: 0;
+}
+
+.record-chips li {
+	padding: 0.35rem 0.7rem;
+	border: 1px solid var(--line);
+	border-radius: var(--radius);
+	background: var(--surface);
+	font-size: 0.92rem;
+	color: var(--ink-muted);
+}
+
+.meta-table thead th {
+	color: var(--ink);
+	font-weight: 600;
+	border-bottom: 1px solid var(--line);
+}
+
 .en-sub {
 	display: block;
 	margin-top: 0.25rem;

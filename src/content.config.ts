@@ -29,24 +29,55 @@ const methods = defineCollection({
 	}),
 });
 
+const ingredient = z.object({
+	/** 鮮奶 / 奶粉 / 水 / 其他 */
+	type: z.enum(['fresh-milk', 'milk-powder', 'water', 'other']),
+	/** 品牌（必填） */
+	brand: z.string(),
+	/** 份量，例如 1000 ml、80 g */
+	amount: z.string(),
+	note: z.string().optional(),
+});
+
 const batches = defineCollection({
 	loader: glob({ pattern: '**/*.md', base: './src/content/batches' }),
 	schema: z.object({
 		title: z.string(),
 		titleEn: z.string().optional(),
+
+		/** 1. 日期及溫度 */
 		date: z.coerce.date(),
-		culture: z.string(),
-		method: z.string(),
-		milk: z.string(),
-		inoculationRate: z.string(),
+		ambientTempC: z.string().optional(),
 		peakHeatC: z.string().optional(),
 		inoculationTempC: z.string(),
 		incubationTempC: z.string(),
 		incubationTimeH: z.string(),
-		acidity: z.string().optional(),
-		texture: z.string().optional(),
-		wheySeparation: z.string().optional(),
-		flavor: z.string().optional(),
+
+		/** 2. 器材 */
+		equipment: z.array(z.string()).min(1),
+
+		/** 3. 食材與份量（含品牌） */
+		ingredients: z.array(ingredient).min(1),
+
+		/** 4. 菌種 */
+		/** mother = 留存母種；new-powder = 新菌粉；commercial-yogurt = 市售優格當 starter */
+		cultureSource: z.enum(['mother', 'new-powder', 'commercial-yogurt', 'other']),
+		cultureName: z.string(),
+		/** 購得處，或母種來自哪一批次 */
+		cultureOrigin: z.string(),
+		cultureAmount: z.string(),
+		/** 可選：連到菌種檔 slug */
+		culture: z.string().optional(),
+		method: z.string().optional(),
+
+		/** 5. 成品狀況 */
+		resultSet: z.string(),
+		resultAcidity: z.string().optional(),
+		resultTexture: z.string().optional(),
+		resultWhey: z.string().optional(),
+		resultFlavor: z.string().optional(),
+		resultOverall: z.string().optional(),
+
 		scoreReproducibility: z.number().min(1).max(5).optional(),
 		scoreSatisfaction: z.number().min(1).max(5).optional(),
 		draft: z.boolean().default(false),

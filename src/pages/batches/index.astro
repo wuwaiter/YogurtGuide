@@ -2,6 +2,13 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
+const cultureSourceShort: Record<string, string> = {
+	mother: '母種',
+	'new-powder': '新菌粉',
+	'commercial-yogurt': '市售優格',
+	other: '其他',
+};
+
 const batches = (await getCollection('batches'))
 	.filter((b) => !b.data.draft)
 	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
@@ -9,24 +16,33 @@ const batches = (await getCollection('batches'))
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="批次實驗" description="優格批次日誌：接種參數、溫度曲線與成品觀察。">
+<BaseLayout title="批次實驗" description="優格批次日誌：日期溫度、器材、食材、菌種與成品狀況。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">批次實驗<span class="en-sub">Batch Logs</span></h1>
-			<p class="page-lead">每次實作一則紀錄，便於橫向比較不同菌種與製法。</p>
+			<p class="page-lead">
+				每次實作固定記錄五類資訊：日期溫度、器材、食材份量、菌種來源、成品狀況。
+			</p>
 			<ul class="list">
 				{
-					batches.map((batch) => (
-						<li>
-							<a class="list-item" href={`${base}batches/${batch.id}/`}>
-								<h3>{batch.data.title}</h3>
-								<p class="meta">
-									{batch.data.date.toISOString().slice(0, 10)} · culture: {batch.data.culture} ·
-									method: {batch.data.method}
-								</p>
-							</a>
-						</li>
-					))
+					batches.map((batch) => {
+						const milk = batch.data.ingredients
+							.filter((i) => i.type === 'fresh-milk' || i.type === 'milk-powder')
+							.map((i) => i.brand)
+							.join('、');
+						return (
+							<li>
+								<a class="list-item" href={`${base}batches/${batch.id}/`}>
+									<h3>{batch.data.title}</h3>
+									<p class="meta">
+										{batch.data.date.toISOString().slice(0, 10)} ·{' '}
+										{cultureSourceShort[batch.data.cultureSource]} · {batch.data.cultureName}
+										{milk && <> · {milk}</>}
+									</p>
+								</a>
+							</li>
+						);
+					})
 				}
 			</ul>
 		</div>

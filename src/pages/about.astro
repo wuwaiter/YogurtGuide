@@ -16,6 +16,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<li>不同<strong>製法（process method）</strong>的控制點與適用情境</li>
 					<li>每次<strong>批次實驗（batch log）</strong>的參數、觀察與下次調整</li>
 				</ul>
+				<h2>批次必記五項（Batch Record）</h2>
+				<ol>
+					<li><strong>日期及溫度</strong>：室溫、加熱高峰、接種溫度、保溫溫度、發酵時間</li>
+					<li><strong>器材</strong>：溫度計、鍋具、保溫裝置等</li>
+					<li><strong>食材與份量</strong>：鮮奶／奶粉等，含<strong>品牌</strong>與用量</li>
+					<li><strong>菌種</strong>：留存母種或新菌粉（或市售優格），以及購得處／母種來源批次</li>
+					<li><strong>成品狀況</strong>：凝乳、酸度、質地、乳清、風味</li>
+				</ol>
 				<h2>紀錄原則（Method）</h2>
 				<ul>
 					<li>一次盡量只改一個變因，其餘條件固定，以便對照。</li>
@@ -23,12 +31,12 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<li>觀察用語優先使用酸度、質地、乳清、風味等可比較指標。</li>
 					<li>正文以中文撰寫；專業術語附英文，例如發酵（fermentation）。</li>
 				</ul>
-				<h2>如何新增內容</h2>
-				<p>
-					在 <code>src/content/</code> 下新增 Markdown：
-					<code>cultures/</code>、<code>methods/</code>、<code>batches/</code>、<code>glossary/</code>。
-					frontmatter 欄位請對照既有範例與 <code>src/content.config.ts</code>。
-				</p>
+				<h2>如何新增一批次</h2>
+				<ol>
+					<li>複製 <code>src/content/templates/batch-log.md</code></li>
+					<li>貼到 <code>src/content/batches/</code>，改名（例如 <code>b002-....md</code>）</li>
+					<li>填寫 frontmatter 五類欄位；正文可寫 Observation / Next Trial</li>
+				</ol>
 			</div>
 		</div>
 	</section>

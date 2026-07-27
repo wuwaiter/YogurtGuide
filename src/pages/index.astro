@@ -29,7 +29,7 @@ const base = import.meta.env.BASE_URL;
 		<div class="wrap">
 			<div class="section__head">
 				<h2>最新批次（Recent Batches）</h2>
-				<p>每次實作固定記錄接種、溫度曲線與成品觀察，作為後續比較的基準。</p>
+				<p>每次實作固定記錄日期溫度、器材、食材、菌種與成品狀況。</p>
 			</div>
 			<ul class="list">
 				{
@@ -38,8 +38,8 @@ const base = import.meta.env.BASE_URL;
 							<a class="list-item" href={`${base}batches/${batch.id}/`}>
 								<h3>{batch.data.title}</h3>
 								<p class="meta">
-									{batch.data.date.toISOString().slice(0, 10)} · {batch.data.culture} ·{' '}
-									{batch.data.method}
+									{batch.data.date.toISOString().slice(0, 10)} · {batch.data.cultureName} ·{' '}
+									{batch.data.resultSet}
 								</p>
 							</a>
 						</li>

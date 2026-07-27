@@ -1,0 +1,198 @@
+---
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+	batch: CollectionEntry<'batches'>;
+}
+
+const { batch } = Astro.props;
+const d = batch.data;
+const base = import.meta.env.BASE_URL;
+
+const ingredientTypeLabel: Record<string, string> = {
+	'fresh-milk': '鮮奶（fresh milk）',
+	'milk-powder': '奶粉（milk powder）',
+	water: '水（water）',
+	other: '其他（other）',
+};
+
+const cultureSourceLabel: Record<string, string> = {
+	mother: '留存母種（mother culture）',
+	'new-powder': '新菌粉（new starter powder）',
+	'commercial-yogurt': '市售優格（commercial yogurt）',
+	other: '其他（other）',
+};
+---
+
+<section class="record-block">
+	<h2 class="record-block__title">1. 日期及溫度<span class="en-sub">Date & Temperature</span></h2>
+	<table class="meta-table">
+		<tbody>
+			<tr>
+				<th>日期（date）</th>
+				<td>{d.date.toISOString().slice(0, 10)}</td>
+			</tr>
+			{
+				d.ambientTempC && (
+					<tr>
+						<th>室溫（ambient）</th>
+						<td>{d.ambientTempC}°C</td>
+					</tr>
+				)
+			}
+			{
+				d.peakHeatC && (
+					<tr>
+						<th>加熱高峰（peak heat）</th>
+						<td>{d.peakHeatC}°C</td>
+					</tr>
+				)
+			}
+			<tr>
+				<th>接種溫度（inoculation）</th>
+				<td>{d.inoculationTempC}°C</td>
+			</tr>
+			<tr>
+				<th>保溫溫度（incubation）</th>
+				<td>{d.incubationTempC}°C</td>
+			</tr>
+			<tr>
+				<th>發酵時間（time）</th>
+				<td>{d.incubationTimeH} h</td>
+			</tr>
+		</tbody>
+	</table>
+</section>
+
+<section class="record-block">
+	<h2 class="record-block__title">2. 器材<span class="en-sub">Equipment</span></h2>
+	<ul class="record-chips">
+		{d.equipment.map((item) => <li>{item}</li>)}
+	</ul>
+</section>
+
+<section class="record-block">
+	<h2 class="record-block__title">3. 食材與份量<span class="en-sub">Ingredients</span></h2>
+	<table class="meta-table">
+		<thead>
+			<tr>
+				<th>類型</th>
+				<th>品牌</th>
+				<th>份量</th>
+				<th>備註</th>
+			</tr>
+		</thead>
+		<tbody>
+			{
+				d.ingredients.map((ing) => (
+					<tr>
+						<td>{ingredientTypeLabel[ing.type]}</td>
+						<td>{ing.brand}</td>
+						<td>{ing.amount}</td>
+						<td>{ing.note ?? '—'}</td>
+					</tr>
+				))
+			}
+		</tbody>
+	</table>
+</section>
+
+<section class="record-block">
+	<h2 class="record-block__title">4. 菌種<span class="en-sub">Culture / Starter</span></h2>
+	<table class="meta-table">
+		<tbody>
+			<tr>
+				<th>來源類型</th>
+				<td>{cultureSourceLabel[d.cultureSource]}</td>
+			</tr>
+			<tr>
+				<th>名稱</th>
+				<td>
+					{d.culture ? <a href={`${base}cultures/${d.culture}/`}>{d.cultureName}</a> : d.cultureName}
+				</td>
+			</tr>
+			<tr>
+				<th>購得／來源</th>
+				<td>{d.cultureOrigin}</td>
+			</tr>
+			<tr>
+				<th>接種量</th>
+				<td>{d.cultureAmount}</td>
+			</tr>
+			{
+				d.method && (
+					<tr>
+						<th>製法（method）</th>
+						<td>
+							<a href={`${base}methods/${d.method}/`}>{d.method}</a>
+						</td>
+					</tr>
+				)
+			}
+		</tbody>
+	</table>
+</section>
+
+<section class="record-block">
+	<h2 class="record-block__title">5. 成品狀況<span class="en-sub">Result</span></h2>
+	<table class="meta-table">
+		<tbody>
+			<tr>
+				<th>凝乳（set）</th>
+				<td>{d.resultSet}</td>
+			</tr>
+			{
+				d.resultAcidity && (
+					<tr>
+						<th>酸度（acidity）</th>
+						<td>{d.resultAcidity}</td>
+					</tr>
+				)
+			}
+			{
+				d.resultTexture && (
+					<tr>
+						<th>質地（texture）</th>
+						<td>{d.resultTexture}</td>
+					</tr>
+				)
+			}
+			{
+				d.resultWhey && (
+					<tr>
+						<th>乳清（whey）</th>
+						<td>{d.resultWhey}</td>
+					</tr>
+				)
+			}
+			{
+				d.resultFlavor && (
+					<tr>
+						<th>風味（flavor）</th>
+						<td>{d.resultFlavor}</td>
+					</tr>
+				)
+			}
+			{
+				d.resultOverall && (
+					<tr>
+						<th>總評</th>
+						<td>{d.resultOverall}</td>
+					</tr>
+				)
+			}
+			{
+				(d.scoreReproducibility || d.scoreSatisfaction) && (
+					<tr>
+						<th>評分</th>
+						<td>
+							{d.scoreReproducibility && <>可重複性 {d.scoreReproducibility}/5</>}
+							{d.scoreReproducibility && d.scoreSatisfaction && ' · '}
+							{d.scoreSatisfaction && <>滿意度 {d.scoreSatisfaction}/5</>}
+						</td>
+					</tr>
+				)
+			}
+		</tbody>
+	</table>
+</section>
