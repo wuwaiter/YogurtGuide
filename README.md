@@ -36,4 +36,4 @@ npm run preview
 本站 `astro.config.mjs` 已設定：
 
 - `site`: `https://wuwaiter.github.io`
-- `base`: `/YogurtGuide`
+- `base`: `/YogurtGuide/`
