@@ -1,0 +1,104 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CulturesSubnav from '../../components/CulturesSubnav.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="接種型態" description="母種、direct-set 菌粉與市售優格當 starter 的差異。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">接種型態<span class="en-sub">Starter Formats</span></h1>
+			<p class="page-lead">對應分類總覽第 3 點：能不能反復接種，以及實務注意事項。</p>
+			<CulturesSubnav current="starters" />
+
+			<section class="record-block">
+				<h2 class="record-block__title">三種常見取得方式</h2>
+				<table class="meta-table">
+					<thead>
+						<tr>
+							<th>類型</th>
+							<th>英文</th>
+							<th>優點</th>
+							<th>風險／成本</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>凍乾菌粉</td>
+							<td>Direct-set</td>
+							<td>穩定、適合偶爾做</td>
+							<td>長期成本高；不宜當無限母種</td>
+						</tr>
+						<tr>
+							<td>可傳代菌種</td>
+							<td>Heirloom / mother</td>
+							<td>一次購入可長期用</td>
+							<td>需規律製作；易污染或衰退</td>
+						</tr>
+						<tr>
+							<td>市售原味優格</td>
+							<td>Commercial yogurt</td>
+							<td>取得容易</td>
+							<td>未必適傳代；常數代後變弱</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="meta">工業用語 DVS／DVI = 高濃縮凍乾或冷凍菌，直接接種生產槽。</p>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">母種實務</h2>
+				<ul>
+					<li>傳代固定接種量、溫度、時間，避免多菌株比例漂移。</li>
+					<li>容器消毒；多種 heirloom 分開存放。</li>
+					<li>需較規律重做以維持活性。</li>
+				</ul>
+				<p>
+					批次欄位：<code>cultureSource: mother</code> 時，<code>cultureOrigin</code> 寫來自哪一批次；
+					<code>new-powder</code> 則寫購買通路。
+				</p>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">市售優格當 starter</h2>
+				<ul>
+					<li>選原味、無糖、成分單純，標示 live active cultures。</li>
+					<li>避免果粒與大量安定劑干擾變因。</li>
+					<li>預期可做數代，但常逐漸變稀／變慢。</li>
+				</ul>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">溫度 × 型態矩陣</h2>
+				<table class="meta-table">
+					<thead>
+						<tr>
+							<th></th>
+							<th>Direct-set</th>
+							<th>Heirloom</th>
+							<th>市售優格</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<th>Thermophilic</th>
+							<td>最常見家用菌粉</td>
+							<td>保加利亞等可傳代</td>
+							<td>多數原味優格</td>
+						</tr>
+						<tr>
+							<th>Mesophilic</th>
+							<td>較少但有</td>
+							<td>Viili／Filmjölk／Matsoni／Piimä</td>
+							<td>視產品</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					<a href={`${base}cultures/#by-reuse`}>回到分類總覽 §3</a>
+				</p>
+			</section>
+		</div>
+	</section>
+</BaseLayout>

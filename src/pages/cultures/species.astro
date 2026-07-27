@@ -1,0 +1,128 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import CulturesSubnav from '../../components/CulturesSubnav.astro';
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="物種對照" description="優格相關乳酸菌物種中英對照與角色。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">物種對照<span class="en-sub">Species Glossary</span></h1>
+			<p class="page-lead">
+				學名可能隨分類學更名；食品標示與舊文獻常仍用舊名。精確菌株組成以商品標示為準。
+			</p>
+			<CulturesSubnav current="species" />
+
+			<section class="record-block">
+				<h2 class="record-block__title">優格核心種<span class="en-sub">Defining Pair</span></h2>
+				<table class="meta-table">
+					<thead>
+						<tr>
+							<th>中文</th>
+							<th>學名</th>
+							<th>角色</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>嗜熱鏈球菌（S 菌）</td>
+							<td><em>Streptococcus thermophilus</em></td>
+							<td>產酸較快；乙醛等香氣；提供 formate／CO₂ 助共生</td>
+						</tr>
+						<tr>
+							<td>保加利亞乳桿菌（L 菌）</td>
+							<td><em>Lactobacillus delbrueckii</em> subsp. <em>bulgaricus</em></td>
+							<td>蛋白質水解較強；強化酸度與典型優格風味</td>
+						</tr>
+					</tbody>
+				</table>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">常溫發酵相關<span class="en-sub">Mesophilic LAB</span></h2>
+				<table class="meta-table">
+					<thead>
+						<tr>
+							<th>慣稱</th>
+							<th>學名</th>
+							<th>適溫（常見）</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>乳酸乳球菌</td>
+							<td><em>Lactococcus lactis</em> subsp. <em>lactis</em></td>
+							<td>25–30°C</td>
+						</tr>
+						<tr>
+							<td>乳脂乳球菌</td>
+							<td><em>Lactococcus lactis</em> subsp. <em>cremoris</em></td>
+							<td>25–30°C</td>
+						</tr>
+						<tr>
+							<td>丁二酮乳球菌等</td>
+							<td><em>Lc. lactis</em> biovar <em>diacetylactis</em></td>
+							<td>25–30°C</td>
+						</tr>
+						<tr>
+							<td>腸膜明串珠菌等</td>
+							<td><em>Leuconostoc mesenteroides</em> subsp. <em>cremoris</em></td>
+							<td>25–30°C</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="meta">Viili／Filmjölk 等常概括為 Lactococcus／Leuconostoc 相關。</p>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">附加／機能菌<span class="en-sub">Adjunct Cultures</span></h2>
+				<table class="meta-table">
+					<thead>
+						<tr>
+							<th>中文</th>
+							<th>學名（常見）</th>
+							<th>備註</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>嗜酸乳桿菌（A 菌）</td>
+							<td><em>Lactobacillus acidophilus</em></td>
+							<td>約 37°C；常作益生添加</td>
+						</tr>
+						<tr>
+							<td>雙歧桿菌（B 菌）</td>
+							<td><em>Bifidobacterium</em> spp.</td>
+							<td>厭氧；多用在成品添加</td>
+						</tr>
+						<tr>
+							<td>乾酪乳桿菌</td>
+							<td><em>Lacticaseibacillus casei</em></td>
+							<td>舊名 L. casei</td>
+						</tr>
+						<tr>
+							<td>鼠李糖乳桿菌</td>
+							<td><em>Lacticaseibacillus rhamnosus</em></td>
+							<td>舊名 L. rhamnosus</td>
+						</tr>
+						<tr>
+							<td>植物乳桿菌</td>
+							<td><em>Lactiplantibacillus plantarum</em></td>
+							<td>舊名 L. plantarum</td>
+						</tr>
+						<tr>
+							<td>瑞士乳桿菌</td>
+							<td><em>Lactobacillus helveticus</em></td>
+							<td>嗜熱；起司／發酵乳亦常見</td>
+						</tr>
+					</tbody>
+				</table>
+				<p>
+					工業資料常強調：優格主發酵靠兩核心種；其他菌多為附加性質。
+					<a href={`${base}cultures/#core-species`}>回到分類總覽 §4</a>
+				</p>
+			</section>
+		</div>
+	</section>
+</BaseLayout>

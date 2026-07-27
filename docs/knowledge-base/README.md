@@ -7,19 +7,20 @@
 
 | 檔案 | 內容 |
 |------|------|
-| [01-culture-taxonomy.md](./01-culture-taxonomy.md) | 菌種分類總覽（嗜熱／常溫、產品型、物種） |
+| [01-culture-taxonomy.md](./01-culture-taxonomy.md) | 菌種分類總覽（適溫 → 風格 → 反復接種 → 核心種） |
 | [02-culture-profiles.md](./02-culture-profiles.md) | 常見「產品型菌種」說明（Bulgarian、Greek、Viili…） |
 | [03-species-glossary.md](./03-species-glossary.md) | 常見乳酸菌物種中英對照與角色 |
 | [04-starter-formats.md](./04-starter-formats.md) | 菌種型態：母種／direct-set／市售優格 |
 | [SOURCES.md](./SOURCES.md) | 來源清單與取用日期 |
 
-## 使用原則
+## 網站對應
 
-1. 網站公開內容請用自己的話重寫，並可連結／註明參考來源。
-2. 同一學名（species）下，**不同廠商菌株（strain）特性仍可能不同**。
-3. 「希臘優格」多半是**製程（瀝乳／straining）**，不一定等於特定菌種配方。
-4. 台灣法規對「優格」菌種標示未必與美國 FDA／IDFA 定義完全相同；知識庫會並陳差異。
+| 知識庫 | 網站路徑 |
+|--------|----------|
+| 01 分類總覽 + 02 風格檔 | `/cultures/` 與 `/cultures/<slug>/` |
+| 03 物種 | `/cultures/species/` |
+| 04 接種型態 | `/cultures/starters/` |
 
 ## 更新紀錄
 
-- 2026-07-28：初版——彙整嗜熱／常溫分類、常見產品型與物種表。
+- 2026-07-28：初版彙整；01 章節改為 適溫→風格→反復接種→核心種；同步上架網站菌種區。

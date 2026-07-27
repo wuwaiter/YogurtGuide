@@ -7,7 +7,9 @@ equipment:
   - 探針溫度計（probe thermometer）
   - 保溫容器或優格機
 suitableCultures:
-  - bulgarian-thermophilic
+  - bulgarian
+  - traditional
+  - greek-starter
 draft: false
 ---
 

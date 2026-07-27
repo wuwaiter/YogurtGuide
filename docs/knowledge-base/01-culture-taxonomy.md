@@ -1,11 +1,18 @@
 # 01 — 優格菌種分類總覽（Culture Taxonomy）
 
-> 整理日期：2026-07-28  
+> 整理日期：2026-07-28（章節順序調整）  
 > 目的：先建立「怎麼分類菌種」的骨架，再往下填產品型與物種細節。
+
+本章固定四層分類：
+
+1. 依適溫分類  
+2. 依「產品風格名稱」分類  
+3. 依「能不能反復接種」分類  
+4. 法規／定義上的「優格菌」核心種  
 
 ---
 
-## 1. 最重要的一刀：依適溫分類
+## 1. 依適溫分類
 
 幾乎所有中英文 DIY／乳品加工資料，都會先把 starter 分成兩大類：
 
@@ -25,21 +32,9 @@
 
 ---
 
-## 2. 第二刀：依「能不能反復接種」分類
+## 2. 依「產品風格名稱」分類
 
-| 類型 | 英文常見說法 | 特點 |
-|------|--------------|------|
-| **可延續／傳代** | Heirloom、re-culturable、mother culture | 成品可留一部份當下一劑 starter；需規律製作與衛生 |
-| **一次／數次用完** | Direct-set、single-use、DVS／DVI（工業用語） | 凍乾粉直接接種；結果穩定，但通常不宜長期傳代 |
-| **市售優格當 starter** | Store-bought yogurt as starter | 方便；菌相未必為傳代最佳化，常數代後變弱 |
-
-詳見 [04-starter-formats.md](./04-starter-formats.md)。
-
----
-
-## 3. 第三刀：依「產品風格名稱」分類（≠ 純微生物分類）
-
-市售菌粉與教學站常用**風格名**，方便選購，但背後物種可能重疊：
+市售菌粉與教學站常用**風格名**，方便選購，但背後物種可能重疊（≠ 純微生物分類）。
 
 ### 嗜熱風格（Thermophilic styles）
 
@@ -57,10 +52,34 @@
 |--------|----------------------|------|
 | Viili | 芬蘭 | 溫和、常有黏絲／蜂蜜般黏稠（ropy） |
 | Filmjölk | 瑞典 | 偏可飲、酪乳感、略酸 |
-| Matsoni（Caspian Sea Yogurt） | 喬治亞 |  custard 感、常帶蜂蜜樣香氣；偏「優格味」 |
+| Matsoni（Caspian Sea Yogurt） | 喬治亞 | custard 感、常帶蜂蜜樣香氣；偏「優格味」 |
 | Piimä | 北歐 | 很稀、可飲、溫和；可用鮮奶油做偏酸稀奶油 |
 
 詳見 [02-culture-profiles.md](./02-culture-profiles.md)。
+
+### 「風格名」vs「製程」——容易混淆的點
+
+| 名稱 | 本質上比較像 |
+|------|----------------|
+| Bulgarian / Viili / Filmjölk | **菌種／配方風格** |
+| Greek yogurt（希臘優格） | 多為**發酵後瀝乳（straining）** 的產品型態 |
+| Greek-style（希臘式） | 常以增稠劑／奶粉等模擬濃稠，**不一定**瀝乳 |
+| Set yogurt（凝態） | 容器內靜置凝固的型態 |
+| Stirred yogurt（攪拌型） | 發酵後攪拌的型態 |
+
+→ YogurtGuide 建議：菌種頁寫 culture；製法頁寫 straining／set／stirred。
+
+---
+
+## 3. 依「能不能反復接種」分類
+
+| 類型 | 英文常見說法 | 特點 |
+|------|--------------|------|
+| **可延續／傳代** | Heirloom、re-culturable、mother culture | 成品可留一部份當下一劑 starter；需規律製作與衛生 |
+| **一次／數次用完** | Direct-set、single-use、DVS／DVI（工業用語） | 凍乾粉直接接種；結果穩定，但通常不宜長期傳代 |
+| **市售優格當 starter** | Store-bought yogurt as starter | 方便；菌相未必為傳代最佳化，常數代後變弱 |
+
+詳見 [04-starter-formats.md](./04-starter-formats.md)。
 
 ---
 
@@ -80,23 +99,11 @@
 **台灣相關筆記（來源：家酪優、本地衛教文）：**  
 IDFA／部分國際定義強調上述兩菌；台灣未必用同一套「必須兩菌才叫優格」的標示規範。實務上市售品常再加 A／B／C 等機能菌。
 
----
-
-## 5. 「風格名」vs「製程」——容易混淆的點
-
-| 名稱 | 本質上比較像 |
-|------|----------------|
-| Bulgarian / Viili / Filmjölk | **菌種／配方風格** |
-| Greek yogurt（希臘優格） | 多為**發酵後瀝乳（straining）** 的產品型態 |
-| Greek-style（希臘式） | 常以增稠劑／奶粉等模擬濃稠，**不一定**瀝乳 |
-| Set yogurt（凝態） | 容器內靜置凝固的型態 |
-| Stirred yogurt（攪拌型） | 發酵後攪拌的型態 |
-
-→ YogurtGuide 建議：菌種頁寫 culture；製法頁寫 straining／set／stirred。
+物種細節見 [03-species-glossary.md](./03-species-glossary.md)。
 
 ---
 
-## 6. 建議的知識架構（給本站）
+## 附錄：建議的知識架構（給本站）
 
 ```
 Culture（菌種檔）
@@ -112,9 +119,7 @@ Batch（批次）
   └─ 連到 culture + method + 實際溫度／結果
 ```
 
----
-
-## 7. 待實測／待補洞（給你之後填）
+## 附錄：待實測／待補洞
 
 - [ ] 你實際使用過的菌粉商品名 ↔ 對應 style／species
 - [ ] 台灣常溫菌粉（如 MESO）與北歐 Viili／Filmjölk 是否同類型、差異何在

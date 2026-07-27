@@ -24,7 +24,7 @@ cultureSource: new-powder
 cultureName: 保加利亞嗜熱菌粉（示意）
 cultureOrigin: 示意來源／請改為實際購買通路
 cultureAmount: 1 包（約對 1 L）
-culture: bulgarian-thermophilic
+culture: bulgarian
 method: pasteurized-inoculation
 
 resultSet: 凝乳完整，輕搖表面整體移動

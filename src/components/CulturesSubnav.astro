@@ -1,0 +1,18 @@
+---
+interface Props {
+	current?: 'index' | 'species' | 'starters';
+}
+
+const { current = 'index' } = Astro.props;
+const base = import.meta.env.BASE_URL;
+---
+
+<nav class="subnav" aria-label="菌種知識導覽">
+	<a href={`${base}cultures/`} aria-current={current === 'index' ? 'page' : undefined}>分類總覽</a>
+	<a href={`${base}cultures/species/`} aria-current={current === 'species' ? 'page' : undefined}
+		>物種對照</a
+	>
+	<a href={`${base}cultures/starters/`} aria-current={current === 'starters' ? 'page' : undefined}
+		>接種型態</a
+	>
+</nav>

@@ -6,13 +6,17 @@ const cultures = defineCollection({
 	schema: z.object({
 		title: z.string(),
 		titleEn: z.string(),
+		summary: z.string(),
 		species: z.string().optional(),
-		form: z.enum(['powder', 'liquid', 'commercial-yogurt', 'other']),
+		temperatureClass: z.enum(['thermophilic', 'mesophilic']),
+		form: z.enum(['powder', 'liquid', 'commercial-yogurt', 'other']).default('powder'),
 		source: z.string().optional(),
 		tempRangeC: z.string().optional(),
 		timeRangeH: z.string().optional(),
 		flavorProfile: z.string().optional(),
 		textureProfile: z.string().optional(),
+		reuseHint: z.string().optional(),
+		sortOrder: z.number().default(100),
 		draft: z.boolean().default(false),
 	}),
 });
