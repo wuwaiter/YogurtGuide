@@ -1,0 +1,35 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+---
+
+<BaseLayout title="關於" description="YogurtGuide 的定位與紀錄方法。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">關於<span class="en-sub">About</span></h1>
+			<div class="prose">
+				<p>
+					<strong>YogurtGuide</strong> 是一份優格製程筆記（Yogurt Process Notes），以專業、可重複的方式記錄家庭與實驗尺度的發酵實作。
+				</p>
+				<p>內容主軸不是「今天做了什麼料理」，而是：</p>
+				<ul>
+					<li>不同<strong>菌種（culture / starter）</strong>的特性與表現</li>
+					<li>不同<strong>製法（process method）</strong>的控制點與適用情境</li>
+					<li>每次<strong>批次實驗（batch log）</strong>的參數、觀察與下次調整</li>
+				</ul>
+				<h2>紀錄原則（Method）</h2>
+				<ul>
+					<li>一次盡量只改一個變因，其餘條件固定，以便對照。</li>
+					<li>溫度、時間、接種量寫成可被他人複現的數字，而非印象式描述。</li>
+					<li>觀察用語優先使用酸度、質地、乳清、風味等可比較指標。</li>
+					<li>正文以中文撰寫；專業術語附英文，例如發酵（fermentation）。</li>
+				</ul>
+				<h2>如何新增內容</h2>
+				<p>
+					在 <code>src/content/</code> 下新增 Markdown：
+					<code>cultures/</code>、<code>methods/</code>、<code>batches/</code>、<code>glossary/</code>。
+					frontmatter 欄位請對照既有範例與 <code>src/content.config.ts</code>。
+				</p>
+			</div>
+		</div>
+	</section>
+</BaseLayout>

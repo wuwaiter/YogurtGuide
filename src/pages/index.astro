@@ -1,0 +1,51 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const batches = (await getCollection('batches'))
+	.filter((b) => !b.data.draft)
+	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf())
+	.slice(0, 3);
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout>
+	<section class="hero">
+		<div class="hero__inner">
+			<p class="hero__brand">YogurtGuide</p>
+			<h1 class="hero__title">優格製程筆記</h1>
+			<p class="hero__lead">
+				以菌種（culture）與製法（process）為軸，記錄可對照、可重複的發酵實驗。
+			</p>
+			<div class="hero__actions">
+				<a class="btn btn--primary" href={`${base}batches/`}>查看批次實驗</a>
+				<a class="btn btn--ghost" href={`${base}about/`}>方法論</a>
+			</div>
+		</div>
+	</section>
+
+	<section class="section">
+		<div class="wrap">
+			<div class="section__head">
+				<h2>最新批次（Recent Batches）</h2>
+				<p>每次實作固定記錄接種、溫度曲線與成品觀察，作為後續比較的基準。</p>
+			</div>
+			<ul class="list">
+				{
+					batches.map((batch) => (
+						<li>
+							<a class="list-item" href={`${base}batches/${batch.id}/`}>
+								<h3>{batch.data.title}</h3>
+								<p class="meta">
+									{batch.data.date.toISOString().slice(0, 10)} · {batch.data.culture} ·{' '}
+									{batch.data.method}
+								</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

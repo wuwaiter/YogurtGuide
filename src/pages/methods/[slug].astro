@@ -1,0 +1,60 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const methods = await getCollection('methods');
+	return methods.map((method) => ({
+		params: { slug: method.id },
+		props: { method },
+	}));
+}
+
+const { method } = Astro.props;
+const { Content } = await render(method);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={method.data.title} description={method.data.summary}>
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">
+				{method.data.title}
+				<span class="en-sub">{method.data.titleEn}</span>
+			</h1>
+			<p class="page-lead">{method.data.summary}</p>
+
+			<table class="meta-table">
+				<tbody>
+					{
+						method.data.equipment.length > 0 && (
+							<tr>
+								<th>器材（equipment）</th>
+								<td>{method.data.equipment.join('、')}</td>
+							</tr>
+						)
+					}
+					{
+						method.data.suitableCultures.length > 0 && (
+							<tr>
+								<th>適用菌種</th>
+								<td>
+									{method.data.suitableCultures.map((id, i) => (
+										<>
+											{i > 0 && '、'}
+											<a href={`${base}cultures/${id}/`}>{id}</a>
+										</>
+									))}
+								</td>
+							</tr>
+						)
+					}
+				</tbody>
+			</table>
+
+			<article class="prose">
+				<Content />
+			</article>
+		</div>
+	</section>
+</BaseLayout>

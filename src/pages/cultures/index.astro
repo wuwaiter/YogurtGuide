@@ -1,0 +1,42 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const cultures = (await getCollection('cultures'))
+	.filter((c) => !c.data.draft)
+	.sort((a, b) => a.data.title.localeCompare(b.data.title, 'zh-Hant'));
+
+const formLabel: Record<string, string> = {
+	powder: '粉劑（powder）',
+	liquid: '液態（liquid）',
+	'commercial-yogurt': '市售優格（commercial yogurt）',
+	other: '其他（other）',
+};
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="菌種" description="優格菌種檔案：物種、適溫、風味與質地預期。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">菌種<span class="en-sub">Culture Profiles</span></h1>
+			<p class="page-lead">記錄使用中的 starter／菌種特性，作為批次實驗的對照基準。</p>
+			<ul class="list list--split">
+				{
+					cultures.map((culture) => (
+						<li>
+							<a class="list-item" href={`${base}cultures/${culture.id}/`}>
+								<h3>
+									{culture.data.title}
+									<span class="en-sub">{culture.data.titleEn}</span>
+								</h3>
+								<p>{formLabel[culture.data.form]}</p>
+								{culture.data.species && <p class="meta">{culture.data.species}</p>}
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,0 +1,49 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { render } from 'astro:content';
+
+const terms = (await getCollection('glossary')).sort((a, b) =>
+	a.data.termZh.localeCompare(b.data.termZh, 'zh-Hant'),
+);
+
+const categoryLabel: Record<string, string> = {
+	process: '製程（process）',
+	microbiology: '微生物（microbiology）',
+	quality: '品質（quality）',
+	equipment: '器材（equipment）',
+	general: '一般（general）',
+};
+
+const rendered = await Promise.all(
+	terms.map(async (term) => {
+		const { Content } = await render(term);
+		return { term, Content };
+	}),
+);
+---
+
+<BaseLayout title="詞彙" description="優格製程中英詞彙對照表。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">詞彙表<span class="en-sub">Glossary</span></h1>
+			<p class="page-lead">中文為主，專業用語附英文，方便閱讀與對照文獻。</p>
+			<ul class="list">
+				{
+					rendered.map(({ term, Content }) => (
+						<li class="list-item" style="cursor: default;">
+							<h3>
+								{term.data.termZh}
+								<span class="en-sub">{term.data.termEn}</span>
+							</h3>
+							<p class="meta">{categoryLabel[term.data.category]}</p>
+							<div class="prose">
+								<Content />
+							</div>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>

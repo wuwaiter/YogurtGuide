@@ -1,0 +1,64 @@
+---
+interface Props {
+	title?: string;
+	description?: string;
+}
+
+const { title, description = '以專業製程角度紀錄優格菌種、製法與批次實驗。' } = Astro.props;
+const pageTitle = title ? `${title} · YogurtGuide` : 'YogurtGuide';
+const { pathname } = Astro.url;
+const base = import.meta.env.BASE_URL;
+---
+
+<!doctype html>
+<html lang="zh-Hant">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" type="image/svg+xml" href={`${base}favicon.svg`} />
+		<meta name="viewport" content="width=device-width" />
+		<meta name="generator" content={Astro.generator} />
+		<meta name="description" content={description} />
+		<title>{pageTitle}</title>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=Manrope:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+	</head>
+	<body>
+		<header class="site-header">
+			<div class="site-header__inner">
+				<a class="brand" href={base}>Yogurt<span>Guide</span></a>
+				<nav class="nav" aria-label="主要導覽">
+					<a href={`${base}batches/`} aria-current={pathname.includes('/batches') ? 'page' : undefined}
+						>批次實驗</a
+					>
+					<a href={`${base}cultures/`} aria-current={pathname.includes('/cultures') ? 'page' : undefined}
+						>菌種</a
+					>
+					<a href={`${base}methods/`} aria-current={pathname.includes('/methods') ? 'page' : undefined}
+						>製法</a
+					>
+					<a href={`${base}glossary/`} aria-current={pathname.includes('/glossary') ? 'page' : undefined}
+						>詞彙</a
+					>
+					<a href={`${base}about/`} aria-current={pathname.includes('/about') ? 'page' : undefined}>關於</a>
+				</nav>
+			</div>
+		</header>
+		<main>
+			<slot />
+		</main>
+		<footer class="site-footer">
+			<div class="site-footer__inner">
+				<p>YogurtGuide — Yogurt Process Notes</p>
+				<p>中文記述 · 專業術語附英文</p>
+			</div>
+		</footer>
+	</body>
+</html>
+
+<style is:global>
+	@import '../styles/global.css';
+</style>

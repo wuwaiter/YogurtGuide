@@ -1,0 +1,109 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+	const batches = await getCollection('batches');
+	return batches.map((batch) => ({
+		params: { slug: batch.id },
+		props: { batch },
+	}));
+}
+
+const { batch } = Astro.props;
+const { Content } = await render(batch);
+const base = import.meta.env.BASE_URL;
+const d = batch.data;
+---
+
+<BaseLayout title={d.title} description={`批次實驗 ${d.date.toISOString().slice(0, 10)}`}>
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">
+				{d.title}
+				{d.titleEn && <span class="en-sub">{d.titleEn}</span>}
+			</h1>
+
+			<table class="meta-table">
+				<tbody>
+					<tr>
+						<th>日期（date）</th>
+						<td>{d.date.toISOString().slice(0, 10)}</td>
+					</tr>
+					<tr>
+						<th>菌種（culture）</th>
+						<td><a href={`${base}cultures/${d.culture}/`}>{d.culture}</a></td>
+					</tr>
+					<tr>
+						<th>製法（method）</th>
+						<td><a href={`${base}methods/${d.method}/`}>{d.method}</a></td>
+					</tr>
+					<tr>
+						<th>奶源（milk）</th>
+						<td>{d.milk}</td>
+					</tr>
+					<tr>
+						<th>接種量（inoculation）</th>
+						<td>{d.inoculationRate}</td>
+					</tr>
+					{d.peakHeatC && (
+						<tr>
+							<th>加熱高峰</th>
+							<td>{d.peakHeatC}°C</td>
+						</tr>
+					)}
+					<tr>
+						<th>接種溫度</th>
+						<td>{d.inoculationTempC}°C</td>
+					</tr>
+					<tr>
+						<th>保溫溫度</th>
+						<td>{d.incubationTempC}°C</td>
+					</tr>
+					<tr>
+						<th>發酵時間</th>
+						<td>{d.incubationTimeH} h</td>
+					</tr>
+					{d.acidity && (
+						<tr>
+							<th>酸度（acidity）</th>
+							<td>{d.acidity}</td>
+						</tr>
+					)}
+					{d.texture && (
+						<tr>
+							<th>質地（texture）</th>
+							<td>{d.texture}</td>
+						</tr>
+					)}
+					{d.wheySeparation && (
+						<tr>
+							<th>乳清（whey）</th>
+							<td>{d.wheySeparation}</td>
+						</tr>
+					)}
+					{d.flavor && (
+						<tr>
+							<th>風味（flavor）</th>
+							<td>{d.flavor}</td>
+						</tr>
+					)}
+					{(d.scoreReproducibility || d.scoreSatisfaction) && (
+						<tr>
+							<th>評分</th>
+							<td>
+								{d.scoreReproducibility && <>可重複性 {d.scoreReproducibility}/5</>}
+								{d.scoreReproducibility && d.scoreSatisfaction && ' · '}
+								{d.scoreSatisfaction && <>滿意度 {d.scoreSatisfaction}/5</>}
+							</td>
+						</tr>
+					)}
+				</tbody>
+			</table>
+
+			<article class="prose">
+				<Content />
+			</article>
+		</div>
+	</section>
+</BaseLayout>

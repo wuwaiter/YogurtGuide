@@ -1,0 +1,34 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+
+const methods = (await getCollection('methods'))
+	.filter((m) => !m.data.draft)
+	.sort((a, b) => a.data.title.localeCompare(b.data.title, 'zh-Hant'));
+
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title="製法" description="優格製法檔案：流程步驟與關鍵控制點。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">製法<span class="en-sub">Process Methods</span></h1>
+			<p class="page-lead">固定可重複的流程，並標出關鍵控制點（critical control points）。</p>
+			<ul class="list">
+				{
+					methods.map((method) => (
+						<li>
+							<a class="list-item" href={`${base}methods/${method.id}/`}>
+								<h3>
+									{method.data.title}
+									<span class="en-sub">{method.data.titleEn}</span>
+								</h3>
+								<p>{method.data.summary}</p>
+							</a>
+						</li>
+					))
+				}
+			</ul>
+		</div>
+	</section>
+</BaseLayout>
