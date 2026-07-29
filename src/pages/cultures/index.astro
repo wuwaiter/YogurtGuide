@@ -1,15 +1,13 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CulturesSubnav from '../../components/CulturesSubnav.astro';
-import { getCollection } from 'astro:content';
+import { assertDbExists, listCultures } from '../../lib/db';
 
-const cultures = (await getCollection('cultures'))
-	.filter((c) => !c.data.draft)
-	.sort((a, b) => a.data.sortOrder - b.data.sortOrder || a.data.title.localeCompare(b.data.title, 'zh-Hant'));
+assertDbExists();
 
-const thermophilic = cultures.filter((c) => c.data.temperatureClass === 'thermophilic');
-const mesophilic = cultures.filter((c) => c.data.temperatureClass === 'mesophilic');
-
+const cultures = listCultures();
+const thermophilic = cultures.filter((c) => c.temperature_class === 'thermophilic');
+const mesophilic = cultures.filter((c) => c.temperature_class === 'mesophilic');
 const base = import.meta.env.BASE_URL;
 
 const tempLabel: Record<string, string> = {
@@ -23,7 +21,7 @@ const tempLabel: Record<string, string> = {
 		<div class="wrap">
 			<h1 class="page-title">菌種<span class="en-sub">Culture Knowledge</span></h1>
 			<p class="page-lead">
-				由知識庫整理的分類架構與風格檔。數值為常見範圍，實作以包裝與批次紀錄為準。
+				資料存放於 SQLite（data/yogurtguide.db）。數值為常見範圍，實作以包裝與批次紀錄為準。
 			</p>
 			<CulturesSubnav current="index" />
 
@@ -56,15 +54,12 @@ const tempLabel: Record<string, string> = {
 						</tr>
 					</tbody>
 				</table>
-				<p class="meta">
-					批次的保溫溫度應先標明 thermophilic 或 mesophilic，否則難以橫向比較。
-				</p>
 			</section>
 
 			<section class="record-block" id="by-style">
 				<h2 class="record-block__title">2. 依產品風格名稱分類<span class="en-sub">By Style</span></h2>
 				<p class="page-lead" style="margin-bottom: 1rem;">
-					風格名方便選購，背後物種可能重疊。希臘優格的「濃」多半來自瀝乳製程，不只菌粉名稱。
+					風格名方便選購，背後物種可能重疊。希臘優格的「濃」多半來自瀝乳製程。
 				</p>
 
 				<h3 class="section-kicker">嗜熱風格（Thermophilic）</h3>
@@ -74,13 +69,13 @@ const tempLabel: Record<string, string> = {
 							<li>
 								<a class="list-item" href={`${base}cultures/${culture.id}/`}>
 									<h3>
-										{culture.data.title}
-										<span class="en-sub">{culture.data.titleEn}</span>
+										{culture.title}
+										<span class="en-sub">{culture.title_en}</span>
 									</h3>
-									<p>{culture.data.summary}</p>
+									<p>{culture.summary}</p>
 									<p class="meta">
-										{tempLabel[culture.data.temperatureClass]}
-										{culture.data.tempRangeC && <> · {culture.data.tempRangeC}°C</>}
+										{tempLabel[culture.temperature_class]}
+										{culture.temp_range_c && <> · {culture.temp_range_c}°C</>}
 									</p>
 								</a>
 							</li>
@@ -95,13 +90,13 @@ const tempLabel: Record<string, string> = {
 							<li>
 								<a class="list-item" href={`${base}cultures/${culture.id}/`}>
 									<h3>
-										{culture.data.title}
-										<span class="en-sub">{culture.data.titleEn}</span>
+										{culture.title}
+										<span class="en-sub">{culture.title_en}</span>
 									</h3>
-									<p>{culture.data.summary}</p>
+									<p>{culture.summary}</p>
 									<p class="meta">
-										{tempLabel[culture.data.temperatureClass]}
-										{culture.data.tempRangeC && <> · {culture.data.tempRangeC}°C</>}
+										{tempLabel[culture.temperature_class]}
+										{culture.temp_range_c && <> · {culture.temp_range_c}°C</>}
 									</p>
 								</a>
 							</li>
@@ -135,20 +130,10 @@ const tempLabel: Record<string, string> = {
 
 			<section class="record-block" id="core-species">
 				<h2 class="record-block__title">4. 法規／定義上的核心種<span class="en-sub">Defining Cultures</span></h2>
-				<p>
-					在美國等定義下，稱為 yogurt 常要求含：
-				</p>
 				<ol>
 					<li>嗜熱鏈球菌（<em>Streptococcus thermophilus</em>）</li>
 					<li>保加利亞乳桿菌（<em>Lactobacillus delbrueckii</em> subsp. <em>bulgaricus</em>）</li>
 				</ol>
-				<p>
-					兩者共生（proto-cooperation）：前者較早產酸並提供 formate／CO₂ 等；後者蛋白質水解較強，回饋胜肽／胺基酸。pH
-					降至約 4.6 時凝乳。
-				</p>
-				<p>
-					台灣未必採用「必須兩菌才叫優格」的同一套標示規範；市售品常再加 A／B／C 等機能菌。
-				</p>
 				<p>
 					<a href={`${base}cultures/species/`}>詳見物種中英對照 →</a>
 				</p>

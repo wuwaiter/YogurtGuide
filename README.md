@@ -4,14 +4,22 @@
 
 線上預覽（部署後）：https://wuwaiter.github.io/YogurtGuide/
 
-## 內容結構
+## 資料存放（SQLite）
+
+網站在 **建置時** 讀取 SQLite，再輸出靜態頁（適合 GitHub Pages）。
 
 | 路徑 | 用途 |
 |------|------|
-| `src/content/cultures/` | 菌種檔 |
-| `src/content/methods/` | 製法檔 |
-| `src/content/batches/` | 批次實驗日誌 |
-| `src/content/glossary/` | 中英詞彙 |
+| `data/schema.sql` | 資料表結構 |
+| `data/seed-data.mjs` | **資料來源**（編輯這個來新增／修改） |
+| `data/yogurtguide.db` | 由 `npm run db:init` 產生的資料庫 |
+| `scripts/db-init.mjs` | 重建資料庫 |
+
+```sh
+npm run db:init   # 依 seed 重建 yogurtguide.db
+```
+
+`npm run dev` / `npm run build` 會自動先執行 `db:init`。
 
 ## 本地開發
 
@@ -20,20 +28,13 @@ npm install
 npm run dev
 ```
 
-建置：
-
-```sh
-npm run build
-npm run preview
-```
-
 ## GitHub Pages
 
 1. 推送到 `main`
-2. 在 GitHub repo → **Settings → Pages**，Source 選 **GitHub Actions**
-3. 等待 workflow `Deploy to GitHub Pages` 成功
+2. Repo → **Settings → Pages** → Source 選 **GitHub Actions**
+3. 等待 workflow 成功
 
-本站 `astro.config.mjs` 已設定：
+設定：
 
 - `site`: `https://wuwaiter.github.io`
 - `base`: `/YogurtGuide/`

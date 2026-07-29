@@ -1,12 +1,13 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { BatchRow, IngredientRow } from '../lib/db';
 
 interface Props {
-	batch: CollectionEntry<'batches'>;
+	batch: BatchRow;
+	equipment: string[];
+	ingredients: IngredientRow[];
 }
 
-const { batch } = Astro.props;
-const d = batch.data;
+const { batch: d, equipment, ingredients } = Astro.props;
 const base = import.meta.env.BASE_URL;
 
 const ingredientTypeLabel: Record<string, string> = {
@@ -30,35 +31,35 @@ const cultureSourceLabel: Record<string, string> = {
 		<tbody>
 			<tr>
 				<th>日期（date）</th>
-				<td>{d.date.toISOString().slice(0, 10)}</td>
+				<td>{d.date}</td>
 			</tr>
 			{
-				d.ambientTempC && (
+				d.ambient_temp_c && (
 					<tr>
 						<th>室溫（ambient）</th>
-						<td>{d.ambientTempC}°C</td>
+						<td>{d.ambient_temp_c}°C</td>
 					</tr>
 				)
 			}
 			{
-				d.peakHeatC && (
+				d.peak_heat_c && (
 					<tr>
 						<th>加熱高峰（peak heat）</th>
-						<td>{d.peakHeatC}°C</td>
+						<td>{d.peak_heat_c}°C</td>
 					</tr>
 				)
 			}
 			<tr>
 				<th>接種溫度（inoculation）</th>
-				<td>{d.inoculationTempC}°C</td>
+				<td>{d.inoculation_temp_c}°C</td>
 			</tr>
 			<tr>
 				<th>保溫溫度（incubation）</th>
-				<td>{d.incubationTempC}°C</td>
+				<td>{d.incubation_temp_c}°C</td>
 			</tr>
 			<tr>
 				<th>發酵時間（time）</th>
-				<td>{d.incubationTimeH} h</td>
+				<td>{d.incubation_time_h} h</td>
 			</tr>
 		</tbody>
 	</table>
@@ -67,7 +68,7 @@ const cultureSourceLabel: Record<string, string> = {
 <section class="record-block">
 	<h2 class="record-block__title">2. 器材<span class="en-sub">Equipment</span></h2>
 	<ul class="record-chips">
-		{d.equipment.map((item) => <li>{item}</li>)}
+		{equipment.map((item) => <li>{item}</li>)}
 	</ul>
 </section>
 
@@ -84,9 +85,9 @@ const cultureSourceLabel: Record<string, string> = {
 		</thead>
 		<tbody>
 			{
-				d.ingredients.map((ing) => (
+				ingredients.map((ing) => (
 					<tr>
-						<td>{ingredientTypeLabel[ing.type]}</td>
+						<td>{ingredientTypeLabel[ing.type] ?? ing.type}</td>
 						<td>{ing.brand}</td>
 						<td>{ing.amount}</td>
 						<td>{ing.note ?? '—'}</td>
@@ -103,28 +104,34 @@ const cultureSourceLabel: Record<string, string> = {
 		<tbody>
 			<tr>
 				<th>來源類型</th>
-				<td>{cultureSourceLabel[d.cultureSource]}</td>
+				<td>{cultureSourceLabel[d.culture_source] ?? d.culture_source}</td>
 			</tr>
 			<tr>
 				<th>名稱</th>
 				<td>
-					{d.culture ? <a href={`${base}cultures/${d.culture}/`}>{d.cultureName}</a> : d.cultureName}
+					{
+						d.culture_id ? (
+							<a href={`${base}cultures/${d.culture_id}/`}>{d.culture_name}</a>
+						) : (
+							d.culture_name
+						)
+					}
 				</td>
 			</tr>
 			<tr>
 				<th>購得／來源</th>
-				<td>{d.cultureOrigin}</td>
+				<td>{d.culture_origin}</td>
 			</tr>
 			<tr>
 				<th>接種量</th>
-				<td>{d.cultureAmount}</td>
+				<td>{d.culture_amount}</td>
 			</tr>
 			{
-				d.method && (
+				d.method_id && (
 					<tr>
 						<th>製法（method）</th>
 						<td>
-							<a href={`${base}methods/${d.method}/`}>{d.method}</a>
+							<a href={`${base}methods/${d.method_id}/`}>{d.method_id}</a>
 						</td>
 					</tr>
 				)
@@ -139,56 +146,56 @@ const cultureSourceLabel: Record<string, string> = {
 		<tbody>
 			<tr>
 				<th>凝乳（set）</th>
-				<td>{d.resultSet}</td>
+				<td>{d.result_set}</td>
 			</tr>
 			{
-				d.resultAcidity && (
+				d.result_acidity && (
 					<tr>
 						<th>酸度（acidity）</th>
-						<td>{d.resultAcidity}</td>
+						<td>{d.result_acidity}</td>
 					</tr>
 				)
 			}
 			{
-				d.resultTexture && (
+				d.result_texture && (
 					<tr>
 						<th>質地（texture）</th>
-						<td>{d.resultTexture}</td>
+						<td>{d.result_texture}</td>
 					</tr>
 				)
 			}
 			{
-				d.resultWhey && (
+				d.result_whey && (
 					<tr>
 						<th>乳清（whey）</th>
-						<td>{d.resultWhey}</td>
+						<td>{d.result_whey}</td>
 					</tr>
 				)
 			}
 			{
-				d.resultFlavor && (
+				d.result_flavor && (
 					<tr>
 						<th>風味（flavor）</th>
-						<td>{d.resultFlavor}</td>
+						<td>{d.result_flavor}</td>
 					</tr>
 				)
 			}
 			{
-				d.resultOverall && (
+				d.result_overall && (
 					<tr>
 						<th>總評</th>
-						<td>{d.resultOverall}</td>
+						<td>{d.result_overall}</td>
 					</tr>
 				)
 			}
 			{
-				(d.scoreReproducibility || d.scoreSatisfaction) && (
+				(d.score_reproducibility || d.score_satisfaction) && (
 					<tr>
 						<th>評分</th>
 						<td>
-							{d.scoreReproducibility && <>可重複性 {d.scoreReproducibility}/5</>}
-							{d.scoreReproducibility && d.scoreSatisfaction && ' · '}
-							{d.scoreSatisfaction && <>滿意度 {d.scoreSatisfaction}/5</>}
+							{d.score_reproducibility && <>可重複性 {d.score_reproducibility}/5</>}
+							{d.score_reproducibility && d.score_satisfaction && ' · '}
+							{d.score_satisfaction && <>滿意度 {d.score_satisfaction}/5</>}
 						</td>
 					</tr>
 				)

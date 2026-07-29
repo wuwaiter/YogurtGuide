@@ -128,17 +128,23 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 ---
 
-## E. 與「菌種檔」欄位建議對應
+## E. 與資料欄位建議對應
 
-之後寫 `src/content/cultures/*.md` 時可對齊：
+之後在 `data/seed-data.mjs` 的 `cultures` 陣列新增時可對齊：
 
-```yaml
-title: ...
-titleEn: ...
-temperatureClass: thermophilic | mesophilic
-reuseMode: heirloom | direct-set | other
-style: bulgarian | greek-starter | viili | filmjolk | matsoni | piima | traditional | other
-species: "..."
-tempRangeC: "40–45"
-timeRangeH: "4–12"
+```js
+{
+  id: '...',
+  title: '...',
+  titleEn: '...',
+  temperatureClass: 'thermophilic', // 或 'mesophilic'
+  reuseHint: 'heirloom / direct-set / ...',
+  // style 概念可用 id 表達：bulgarian | greek-starter | viili | ...
+  species: '...',
+  tempRangeC: '40–45',
+  timeRangeH: '4–12',
+  summary: '...',
+  bodyMd: `...`,
+  sortOrder: 10,
+}
 ```

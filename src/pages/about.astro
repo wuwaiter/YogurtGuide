@@ -33,10 +33,14 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				</ul>
 				<h2>如何新增一批次</h2>
 				<ol>
-					<li>複製 <code>src/content/templates/batch-log.md</code></li>
-					<li>貼到 <code>src/content/batches/</code>，改名（例如 <code>b002-....md</code>）</li>
-					<li>填寫 frontmatter 五類欄位；正文可寫 Observation / Next Trial</li>
+					<li>編輯 <code>data/seed-data.mjs</code> 的 <code>batches</code> 陣列</li>
+					<li>執行 <code>npm run db:init</code>（或直接 <code>npm run dev</code>，會自動重建）</li>
+					<li>在瀏覽器開啟對應批次頁確認</li>
 				</ol>
+				<p>
+					菌種、製法、詞彙同樣寫在 <code>data/seed-data.mjs</code>，結構見 <code>data/schema.sql</code>。
+					知識庫筆記仍保留在 <code>docs/knowledge-base/</code>。
+				</p>
 			</div>
 		</div>
 	</section>

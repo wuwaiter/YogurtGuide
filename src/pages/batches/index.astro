@@ -1,6 +1,8 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { getCollection } from 'astro:content';
+import { assertDbExists, listBatches } from '../../lib/db';
+
+assertDbExists();
 
 const cultureSourceShort: Record<string, string> = {
 	mother: '母種',
@@ -9,10 +11,7 @@ const cultureSourceShort: Record<string, string> = {
 	other: '其他',
 };
 
-const batches = (await getCollection('batches'))
-	.filter((b) => !b.data.draft)
-	.sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
-
+const batches = listBatches();
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -20,29 +19,20 @@ const base = import.meta.env.BASE_URL;
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">批次實驗<span class="en-sub">Batch Logs</span></h1>
-			<p class="page-lead">
-				每次實作固定記錄五類資訊：日期溫度、器材、食材份量、菌種來源、成品狀況。
-			</p>
+			<p class="page-lead">資料來自 SQLite。每次實作固定記錄五類資訊。</p>
 			<ul class="list">
 				{
-					batches.map((batch) => {
-						const milk = batch.data.ingredients
-							.filter((i) => i.type === 'fresh-milk' || i.type === 'milk-powder')
-							.map((i) => i.brand)
-							.join('、');
-						return (
-							<li>
-								<a class="list-item" href={`${base}batches/${batch.id}/`}>
-									<h3>{batch.data.title}</h3>
-									<p class="meta">
-										{batch.data.date.toISOString().slice(0, 10)} ·{' '}
-										{cultureSourceShort[batch.data.cultureSource]} · {batch.data.cultureName}
-										{milk && <> · {milk}</>}
-									</p>
-								</a>
-							</li>
-						);
-					})
+					batches.map((batch) => (
+						<li>
+							<a class="list-item" href={`${base}batches/${batch.id}/`}>
+								<h3>{batch.title}</h3>
+								<p class="meta">
+									{batch.date} · {cultureSourceShort[batch.culture_source] ?? batch.culture_source} ·{' '}
+									{batch.culture_name}
+								</p>
+							</a>
+						</li>
+					))
 				}
 			</ul>
 		</div>

@@ -1,18 +1,24 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CulturesSubnav from '../../components/CulturesSubnav.astro';
-import { getCollection, render } from 'astro:content';
+import { assertDbExists, getCulture, listCultures } from '../../lib/db';
+import { renderMarkdown } from '../../lib/markdown';
 
-export async function getStaticPaths() {
-	const cultures = await getCollection('cultures');
-	return cultures.map((culture) => ({
+assertDbExists();
+
+export function getStaticPaths() {
+	return listCultures().map((culture) => ({
 		params: { slug: culture.id },
-		props: { culture },
 	}));
 }
 
-const { culture } = Astro.props;
-const { Content } = await render(culture);
+const { slug } = Astro.params;
+const culture = getCulture(slug!);
+if (!culture) {
+	throw new Error(`Culture not found: ${slug}`);
+}
+
+const bodyHtml = renderMarkdown(culture.body_md);
 
 const tempLabel: Record<string, string> = {
 	thermophilic: '嗜熱（thermophilic）',
@@ -27,74 +33,78 @@ const formLabel: Record<string, string> = {
 };
 ---
 
-<BaseLayout title={culture.data.title} description={culture.data.summary}>
+<BaseLayout title={culture.title} description={culture.summary}>
 	<section class="section">
 		<div class="wrap">
 			<CulturesSubnav current="index" />
 			<h1 class="page-title">
-				{culture.data.title}
-				<span class="en-sub">{culture.data.titleEn}</span>
+				{culture.title}
+				<span class="en-sub">{culture.title_en}</span>
 			</h1>
-			<p class="page-lead">{culture.data.summary}</p>
+			<p class="page-lead">{culture.summary}</p>
 
 			<table class="meta-table">
 				<tbody>
 					<tr>
 						<th>適溫類別</th>
-						<td>{tempLabel[culture.data.temperatureClass]}</td>
+						<td>{tempLabel[culture.temperature_class]}</td>
 					</tr>
-					{culture.data.species && (
-						<tr>
-							<th>菌相（species）</th>
-							<td>{culture.data.species}</td>
-						</tr>
-					)}
+					{
+						culture.species && (
+							<tr>
+								<th>菌相（species）</th>
+								<td>{culture.species}</td>
+							</tr>
+						)
+					}
 					<tr>
 						<th>型態（form）</th>
-						<td>{formLabel[culture.data.form]}</td>
+						<td>{formLabel[culture.form] ?? culture.form}</td>
 					</tr>
-					{culture.data.tempRangeC && (
-						<tr>
-							<th>適溫（temp）</th>
-							<td>{culture.data.tempRangeC}°C</td>
-						</tr>
-					)}
-					{culture.data.timeRangeH && (
-						<tr>
-							<th>時間（time）</th>
-							<td>{culture.data.timeRangeH} h</td>
-						</tr>
-					)}
-					{culture.data.flavorProfile && (
-						<tr>
-							<th>風味（flavor）</th>
-							<td>{culture.data.flavorProfile}</td>
-						</tr>
-					)}
-					{culture.data.textureProfile && (
-						<tr>
-							<th>質地（texture）</th>
-							<td>{culture.data.textureProfile}</td>
-						</tr>
-					)}
-					{culture.data.reuseHint && (
-						<tr>
-							<th>反復接種</th>
-							<td>{culture.data.reuseHint}</td>
-						</tr>
-					)}
-					{culture.data.source && (
-						<tr>
-							<th>來源（source）</th>
-							<td>{culture.data.source}</td>
-						</tr>
-					)}
+					{
+						culture.temp_range_c && (
+							<tr>
+								<th>適溫（temp）</th>
+								<td>{culture.temp_range_c}°C</td>
+							</tr>
+						)
+					}
+					{
+						culture.time_range_h && (
+							<tr>
+								<th>時間（time）</th>
+								<td>{culture.time_range_h} h</td>
+							</tr>
+						)
+					}
+					{
+						culture.flavor_profile && (
+							<tr>
+								<th>風味（flavor）</th>
+								<td>{culture.flavor_profile}</td>
+							</tr>
+						)
+					}
+					{
+						culture.texture_profile && (
+							<tr>
+								<th>質地（texture）</th>
+								<td>{culture.texture_profile}</td>
+							</tr>
+						)
+					}
+					{
+						culture.reuse_hint && (
+							<tr>
+								<th>反復接種</th>
+								<td>{culture.reuse_hint}</td>
+							</tr>
+						)
+					}
 				</tbody>
 			</table>
 
-			<article class="prose">
-				<Content />
-			</article>
+			<article class="prose" set:html={bodyHtml} />
 		</div>
 	</section>
 </BaseLayout>

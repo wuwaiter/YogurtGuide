@@ -6,12 +6,16 @@
     "node": ">=22.12.0"
   },
   "scripts": {
+    "db:init": "node scripts/db-init.mjs",
+    "predev": "npm run db:init",
     "dev": "astro dev",
+    "prebuild": "npm run db:init",
     "build": "astro build",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.1.4"
+    "astro": "^7.1.4",
+    "marked": "^18.0.7"
   }
 }

@@ -15,12 +15,13 @@
 
 ## 網站對應
 
-| 知識庫 | 網站路徑 |
-|--------|----------|
-| 01 分類總覽 + 02 風格檔 | `/cultures/` 與 `/cultures/<slug>/` |
-| 03 物種 | `/cultures/species/` |
-| 04 接種型態 | `/cultures/starters/` |
+| 知識庫 | 網站路徑 | 資料來源 |
+|--------|----------|----------|
+| 01 分類總覽 + 02 風格檔 | `/cultures/` 與 `/cultures/<slug>/` | `data/seed-data.mjs` → SQLite |
+| 03 物種 | `/cultures/species/` | 頁面內容（靜態） |
+| 04 接種型態 | `/cultures/starters/` | 頁面內容（靜態） |
 
 ## 更新紀錄
 
 - 2026-07-28：初版彙整；01 章節改為 適溫→風格→反復接種→核心種；同步上架網站菌種區。
+- 2026-07-29：內容改由 SQLite／seed 驅動；移除 `src/content/`。

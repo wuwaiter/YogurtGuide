@@ -1,37 +1,48 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import BatchRecord from '../../components/BatchRecord.astro';
-import { getCollection, render } from 'astro:content';
+import {
+	assertDbExists,
+	getBatch,
+	getBatchEquipment,
+	getBatchIngredients,
+	listBatches,
+} from '../../lib/db';
+import { renderMarkdown } from '../../lib/markdown';
 
-export async function getStaticPaths() {
-	const batches = await getCollection('batches');
-	return batches.map((batch) => ({
+assertDbExists();
+
+export function getStaticPaths() {
+	return listBatches().map((batch) => ({
 		params: { slug: batch.id },
-		props: { batch },
 	}));
 }
 
-const { batch } = Astro.props;
-const { Content } = await render(batch);
-const d = batch.data;
+const { slug } = Astro.params;
+const batch = getBatch(slug!);
+if (!batch) {
+	throw new Error(`Batch not found: ${slug}`);
+}
+
+const equipment = getBatchEquipment(batch.id);
+const ingredients = getBatchIngredients(batch.id);
+const bodyHtml = renderMarkdown(batch.body_md);
 ---
 
-<BaseLayout title={d.title} description={`批次實驗 ${d.date.toISOString().slice(0, 10)}`}>
+<BaseLayout title={batch.title} description={`批次實驗 ${batch.date}`}>
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">
-				{d.title}
-				{d.titleEn && <span class="en-sub">{d.titleEn}</span>}
+				{batch.title}
+				{batch.title_en && <span class="en-sub">{batch.title_en}</span>}
 			</h1>
 			<p class="page-lead">
-				{d.date.toISOString().slice(0, 10)} · {d.cultureName} · {d.cultureSource}
+				{batch.date} · {batch.culture_name} · {batch.culture_source}
 			</p>
 
-			<BatchRecord batch={batch} />
+			<BatchRecord batch={batch} equipment={equipment} ingredients={ingredients} />
 
-			<article class="prose">
-				<Content />
-			</article>
+			<article class="prose" set:html={bodyHtml} />
 		</div>
 	</section>
 </BaseLayout>
