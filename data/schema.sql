@@ -94,3 +94,20 @@ CREATE TABLE IF NOT EXISTS glossary (
   category TEXT NOT NULL CHECK (category IN ('process', 'microbiology', 'quality', 'equipment', 'general')),
   body_md TEXT NOT NULL DEFAULT ''
 );
+
+-- 市售優格對照（成分以公開標示整理；配方可能改版）
+CREATE TABLE IF NOT EXISTS market_yogurts (
+  id TEXT PRIMARY KEY,
+  brand TEXT NOT NULL,
+  product_name TEXT NOT NULL,
+  recommended INTEGER NOT NULL DEFAULT 0 CHECK (recommended IN (0, 1)),
+  milk_base TEXT NOT NULL CHECK (milk_base IN ('fresh', 'powder', 'mixed', 'other')),
+  milk_base_note TEXT NOT NULL DEFAULT '',
+  added_sugar INTEGER NOT NULL DEFAULT 0 CHECK (added_sugar IN (0, 1)),
+  additives TEXT NOT NULL DEFAULT '',
+  cultures TEXT NOT NULL,
+  ingredients_label TEXT NOT NULL DEFAULT '',
+  note TEXT NOT NULL DEFAULT '',
+  sort_order INTEGER NOT NULL DEFAULT 100,
+  draft INTEGER NOT NULL DEFAULT 0
+);

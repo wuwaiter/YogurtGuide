@@ -412,6 +412,26 @@ p {
 	letter-spacing: 0;
 }
 
+.market-card {
+	margin: 0 0 1.75rem;
+	padding-bottom: 0.25rem;
+}
+
+.market-card__title {
+	margin: 0 0 0.65rem;
+	font-size: 1.15rem;
+	font-weight: 600;
+}
+
+.market-card__star {
+	color: var(--accent);
+	margin-right: 0.2rem;
+}
+
+.market-card--star .market-card__title {
+	font-family: var(--font-display, inherit);
+}
+
 .site-footer {
 	border-top: 1px solid var(--line);
 	padding: 2rem 0 3rem;

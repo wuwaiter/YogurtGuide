@@ -1,14 +1,15 @@
 # 01 — 優格菌種分類總覽（Culture Taxonomy）
 
-> 整理日期：2026-07-28（章節順序調整）  
+> 整理日期：2026-07-28（章節順序調整）／2026-07-31（新增第 5 層分類）  
 > 目的：先建立「怎麼分類菌種」的骨架，再往下填產品型與物種細節。
 
-本章固定四層分類：
+本章固定五層分類：
 
 1. 依適溫分類  
 2. 依「產品風格名稱」分類  
 3. 依「能不能反復接種」分類  
 4. 法規／定義上的「優格菌」核心種  
+5. 依「是否含酵母／真菌」分類（SCOBY 型 vs 純乳酸菌型）  
 
 ---
 
@@ -50,10 +51,13 @@
 
 | 風格名 | 來源區域（常見說法） | 簡述 |
 |--------|----------------------|------|
-| Viili | 芬蘭 | 溫和、常有黏絲／蜂蜜般黏稠（ropy） |
+| Viili | 芬蘭 | 溫和、常有黏絲（ropy）；傳統菌相含黴菌與酵母 |
 | Filmjölk | 瑞典 | 偏可飲、酪乳感、略酸 |
-| Matsoni（Caspian Sea Yogurt） | 喬治亞 | custard 感、常帶蜂蜜樣香氣；偏「優格味」 |
+| Caspian Sea Yogurt（日本流通型） | 日本（名義上溯源高加索） | 黏稠 custard；優勢菌為 *Lactococcus cremoris* |
 | Piimä | 北歐 | 很稀、可飲、溫和；可用鮮奶油做偏酸稀奶油 |
+
+> **注意：Matsoni ≠ Caspian Sea Yogurt。**  
+> DIY 站常把兩者當同義詞並歸為常溫，但文獻不支持：日本的「カスピ海ヨーグルト」樣本優勢菌一致為常溫的 *Lactococcus cremoris*；喬治亞原產 matsoni 菌相不定，多篇研究以嗜熱的 *S. thermophilus* + *L. delbrueckii* 為主，且常伴隨真菌。細節見 [02-culture-profiles.md](./02-culture-profiles.md) B3／B5。
 
 詳見 [02-culture-profiles.md](./02-culture-profiles.md)。
 
@@ -103,12 +107,33 @@ IDFA／部分國際定義強調上述兩菌；台灣未必用同一套「必須�
 
 ---
 
+## 5. 依「是否含酵母／真菌」分類
+
+前四層都只看乳酸菌，但同一個溫區裡混著兩種本質不同的東西。這一層是**判斷一支菌能不能無限傳代、會不會產氣**的關鍵。
+
+| 型別 | 組成 | 代表 | 特徵 |
+|------|------|------|------|
+| **純乳酸菌型** | 僅 LAB（多為分離菌株組合） | 一般優格菌粉、Filmjölk、台灣 MESO | 不產氣；direct-set 多屬此類，傳代數代後易失衡 |
+| **含真菌／酵母型** | LAB + 酵母／黴菌 | Viili、Kefir、部分 matsoni | 風味較複雜；可能產 CO₂；群落有自我平衡結構，較耐傳代 |
+| **SCOBY（顆粒／膠團）型** | LAB + 酵母包在多醣基質中 | Kefir grains | 顆粒本身可無限延續；粉狀替代品數批後衰退 |
+
+實務上的意義：
+
+- **看到「可無限傳代」的宣稱，先問它是不是含真菌／SCOBY。** 純由分離菌株組成的粉，通常沒有那個平衡結構。
+- **產氣是分型線索。** 罐子鼓起、有氣泡感，指向含酵母（kefir、部分 viili）；純 LAB 優格通常不該明顯產氣。
+- **黏絲（ropy）與含酵母無關**，那是特定乳球菌株的 EPS 能力，見 [02](./02-culture-profiles.md) B1。
+
+Kefir 專節見 [05-kefir-and-scoby.md](./05-kefir-and-scoby.md)。
+
+---
+
 ## 附錄：建議的知識架構（給本站）
 
 ```
 Culture（菌種檔）
   ├─ temperatureClass: thermophilic | mesophilic
   ├─ reuseMode: heirloom | direct-set | commercial-yogurt
+  ├─ cultureType: lab-only | lab-with-fungi | scoby   ← 第 5 層
   ├─ styleName: bulgarian | greek-starter | viili | ...
   └─ species[]: 學名列表
 
@@ -121,7 +146,16 @@ Batch（批次）
 
 ## 附錄：待實測／待補洞
 
-- [ ] 你實際使用過的菌粉商品名 ↔ 對應 style／species
-- [ ] 台灣常溫菌粉（如 MESO）與北歐 Viili／Filmjölk 是否同類型、差異何在
-- [ ] Skyr 家用菌粉的實際適溫與是否需瀝乳
-- [ ] 母種傳代幾代後的活性衰退觀察
+已由文獻／商品標示補上（2026-07-31）：
+
+- [x] 台灣常溫菌粉（MESO）與北歐 Viili／Filmjölk **不同類**：MESO 是「優格兩菌 + 乳球菌」的 direct-set 混搭配方，北歐型是純乳球菌＋真菌的 heirloom。見 [02](./02-culture-profiles.md) C。
+- [x] Skyr 家用菌粉多為**嗜熱**（42–43°C／6–12 h），且**必須瀝乳** 8–12 h 才有標誌濃稠度。見 [02](./02-culture-profiles.md) A4。
+- [x] 傳代衰退代數：分離菌株型約 **3–5 代**後明顯失衡；heirloom 可長期延續。見 [04](./04-starter-formats.md) 2。
+- [x] 常見商品菌株對照（MESO／730／28）：見 [02](./02-culture-profiles.md) C。
+
+仍待你實測：
+
+- [ ] 你自己每支菌粉的實際凝固時間 ↔ 室溫曲線（台灣夏冬差異大）
+- [ ] MESO 在台灣夏季室溫（>30°C）是否會因偏離 25°C 而變酸或離水
+- [ ] 母種傳代的**主觀**衰退點：文獻說 3–5 代，你的批次實際在第幾代開始變稀
+- [ ] Viili 若取得，觀察 ropy 是否隨保存溫度流失（EPS 質體不穩定，見 [02](./02-culture-profiles.md) B1）

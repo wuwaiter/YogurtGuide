@@ -11,7 +11,7 @@
 | 路徑 | 用途 |
 |------|------|
 | `data/schema.sql` | 資料表結構 |
-| `data/seed-data.mjs` | **資料來源**（編輯這個來新增／修改） |
+| `data/seed-data.mjs` | **資料來源**（編輯這個來新增／修改；含 cultures／methods／batches／glossary／marketYogurts） |
 | `data/yogurtguide.db` | 由 `npm run db:init` 產生的資料庫 |
 | `scripts/db-init.mjs` | 重建資料庫 |
 

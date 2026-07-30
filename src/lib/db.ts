@@ -162,6 +162,29 @@ export function listGlossary(): GlossaryRow[] {
 		.all() as GlossaryRow[];
 }
 
+export type MarketYogurtRow = {
+	id: string;
+	brand: string;
+	product_name: string;
+	recommended: number;
+	milk_base: 'fresh' | 'powder' | 'mixed' | 'other';
+	milk_base_note: string;
+	added_sugar: number;
+	additives: string;
+	cultures: string;
+	ingredients_label: string;
+	note: string;
+	sort_order: number;
+};
+
+export function listMarketYogurts(): MarketYogurtRow[] {
+	return getDb()
+		.prepare(
+			`SELECT * FROM market_yogurts WHERE draft = 0 ORDER BY recommended DESC, sort_order ASC`,
+		)
+		.all() as MarketYogurtRow[];
+}
+
 /** Ensure DB exists when Astro starts (dev/build). */
 export function assertDbExists() {
 	try {

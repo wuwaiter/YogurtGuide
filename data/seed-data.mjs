@@ -93,65 +93,138 @@ export const cultures = [
 		id: 'skyr',
 		title: 'Skyr（冰島）',
 		titleEn: 'Skyr',
-		summary: '濃稠發酵乳傳統；現代常搭配嗜熱菌與濃縮／瀝乳。',
+		summary: '技術上屬新鮮起司；嗜熱發酵後需瀝乳才有標誌濃稠度。',
+		species: 'Streptococcus thermophilus + Lactobacillus delbrueckii subsp. bulgaricus（常宣稱含冰島特有菌株）',
 		temperatureClass: 'thermophilic',
-		tempRangeC: '40–45',
-		timeRangeH: '5–12',
-		flavorProfile: '偏溫和至微酸，依配方而異',
-		textureProfile: '濃稠；傳統偏脫脂乳路線',
-		reuseHint: 'DIY 菌粉常標 heirloom／需保溫',
+		tempRangeC: '42–43',
+		timeRangeH: '6–12',
+		flavorProfile: '偏溫和至微酸；乾粉第一批常較弱',
+		textureProfile: '發酵後常有乳清分離；瀝乳 8–12 h 後才濃稠',
+		reuseHint: '家用多為 heirloom；每公升留約 1 大匙，建議至少每週回接',
 		sortOrder: 40,
 		bodyMd: `## 概述（Overview）
 
-Skyr 文化上接近濃縮發酵乳／鮮乳起司光譜。現代家用 starter 多仍走嗜熱保溫，並常搭配瀝乳或濃縮。`,
+Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。家用 starter 幾乎都是嗜熱型：約 **42–43°C／6–12 h**（供應商說明常見 42°C、約 10 h）。
+
+## 瀝乳是必要步驟
+
+冷藏瀝乳約 **8–12 h**，越久越厚。濃稠來自瀝乳，而非菌種本身。發酵中出現乳清分離是正常現象。
+
+## 使用筆記（Usage Notes）
+
+- 傳統用**脫脂乳**——少數「脫脂才正宗」的發酵；全脂較濃郁但不傳統。
+- 傳統做法可加**一滴凝乳酶（rennet）** 幫助結構。
+- 凍乾乾粉的**第一批常表現不足**；用第一批的一匙做第二批，才是該菌真實水準。第 1 代不宜當基準線。`,
+	},
+	{
+		id: 'matsoni',
+		title: 'Matsoni（喬治亞原產）',
+		titleEn: 'Matsoni',
+		summary: '原產菌相不定、偏嗜熱；常含真菌。與日本「裡海優格」不是同一件事。',
+		species: 'S. thermophilus + L. delbrueckii（常見）；菌相隨產地而異，可含真菌',
+		temperatureClass: 'thermophilic',
+		tempRangeC: '40–45',
+		timeRangeH: '依配方／產地',
+		flavorProfile: '依產地菌相差異大；文獻描述不一',
+		textureProfile: '依配方；不宜假設為常溫 custard',
+		reuseHint: '傳統家傳型；市售「matsoni starter」多半其實是 Caspian Sea 常溫乳球菌型',
+		sortOrder: 45,
+		bodyMd: `## 概述（Overview）
+
+喬治亞原產 matsoni **不宜歸常溫**。多篇研究以嗜熱的 *S. thermophilus* 與 *L. delbrueckii*（bulgaricus／lactis）為主，並常伴隨 *Geotrichum candidum*、*Kluyveromyces marxianus*、*Candida* 等真菌。菌相**隨產地而異、各地區內相對穩定**。
+
+## 重要澄清：≠ Caspian Sea Yogurt
+
+| | Matsoni（原產） | Caspian Sea Yogurt（日本流通型） |
+|--|-----------------|----------------------------------|
+| 溫度 | 偏嗜熱 | 常溫 |
+| 優勢菌 | 嗜熱兩菌＋多樣伴隨菌 | 單一 *Lactococcus cremoris* 主導 |
+| 真菌 | 常有 | 通常無（少數樣本見醋酸菌） |
+
+英文 DIY 站常把兩者當同義詞。本站分開登錄：常溫乳球菌型見 [Caspian Sea Yogurt](../caspian-sea/)。`,
 	},
 	{
 		id: 'viili',
 		title: 'Viili（芬蘭）',
 		titleEn: 'Viili',
-		summary: '常溫 heirloom；溫和風味，常有黏絲／蜂蜜般黏稠。',
+		summary: '常溫 heirloom；黏絲來自產 EPS 的乳球菌；傳統菌相含黴菌與酵母。',
+		species: 'Lactococcus cremoris（產黏）+ L. lactis + Leuconostoc；傳統另含 Geotrichum candidum 與酵母',
 		temperatureClass: 'mesophilic',
-		tempRangeC: '21–25',
+		tempRangeC: '20–25',
 		timeRangeH: '12–24',
-		flavorProfile: '偏淡、偏甜潤',
-		textureProfile: '常有 ropy／黏絲感（胞外多醣 EPS）',
-		reuseHint: '典型可傳代（heirloom）',
+		flavorProfile: '偏淡、偏甜潤，帶奶油香',
+		textureProfile: 'ropy／黏絲（胞外多醣 viilian）；不黏可能是菌株變異',
+		reuseHint: '典型 heirloom；EPS 基因常在質體上，保存溫度偏高易失黏',
 		sortOrder: 50,
 		bodyMd: `## 概述（Overview）
 
-Viili 為芬蘭常溫風格，適溫約 21–25°C。質地以溫和、黏絲著稱。`,
+芬蘭常溫風格。工業製程常寫冷卻至約 20°C 接種、熟成約 20 h。質地以溫和、**黏絲（ropy）** 著稱。
+
+## 菌相（不只乳酸菌）
+
+傳統 viili 是 LAB + 黴菌 + 酵母：
+
+| 成員 | 角色 |
+|------|------|
+| *Lactococcus cremoris*（舊 *L. lactis* subsp. *cremoris*） | 產 EPS（viilian），黏絲來源 |
+| *L. lactis* subsp. *lactis* | 主要酸化 |
+| biovar *diacetylactis*、*Leuconostoc mesenteroides* | 雙乙醯奶油香 |
+| *Geotrichum candidum* | 表面絨毛層；消耗乳酸、貢獻風味 |
+| *Kluyveromyces marxianus* 等酵母 | 酵母香；可發酵乳糖 |
+
+## 使用筆記（Usage Notes）
+
+- 黏絲物質叫 **viilian**（含磷雜多醣）。EPS 合成基因常在**質體**上；培養／保存偏高溫可能丟失黏性。
+- 某批不黏，**可能是菌株變異而非操作失誤**。批次建議記「本批是否 ropy」。
+- 若菌種含 *G. candidum*，均勻白絲絨表面是正常成熟；純 LAB 菌粉長毛則視為污染。`,
 	},
 	{
 		id: 'filmjolk',
 		title: 'Filmjölk（瑞典）',
 		titleEn: 'Filmjölk',
-		summary: '常溫風格；偏可飲、酪乳感，略酸。',
+		summary: '常溫風格；偏可飲、酪乳感。菌相為乳球菌＋明串珠菌，通常不含黴菌。',
+		species: 'Lactococcus lactis subsp. lactis + Lactococcus cremoris + biovar diacetylactis + Leuconostoc mesenteroides',
 		temperatureClass: 'mesophilic',
-		tempRangeC: '20–25',
-		timeRangeH: '18–30',
-		flavorProfile: '略酸，有時帶輕乳酪感',
-		textureProfile: '偏可飲、custard／酪乳感',
-		reuseHint: '常為 heirloom',
+		tempRangeC: '20–21',
+		timeRangeH: '18–20',
+		flavorProfile: '略酸，帶奶油香',
+		textureProfile: '偏可飲、比牛奶稠但比優格薄；不以 ropy 為主',
+		reuseHint: '常為 heirloom；商業配方可另加機能菌',
 		sortOrder: 60,
 		bodyMd: `## 概述（Overview）
 
-Filmjölk 為瑞典常溫發酵乳風格，成品偏可飲、帶酪乳感。`,
+瑞典常溫發酵乳。商業菌種商製程建議約 **20–21°C／18–20 h**。
+
+## 與 Viili 的差別
+
+- Filmjölk **通常不含黴菌**，不以產黏菌株為主，因此一般不 ropy。
+- 現代商業配方有時另加 *L. acidophilus*、*B. animalis* subsp. *lactis* 做機能訴求。`,
 	},
 	{
-		id: 'matsoni',
-		title: 'Matsoni（喬治亞）',
-		titleEn: 'Matsoni (Caspian Sea Yogurt)',
-		summary: '常溫風格；薄 custard，常帶蜂蜜樣香氣。',
+		id: 'caspian-sea',
+		title: 'Caspian Sea Yogurt（日本流通型）',
+		titleEn: 'Caspian Sea Yogurt',
+		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。≠ 喬治亞原產 Matsoni。',
+		species: 'Lactococcus cremoris（優勢；舊名 L. lactis subsp. cremoris）',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–25',
 		timeRangeH: '12–24',
-		flavorProfile: '蜂蜜樣香氣；相對「比較像優格」',
-		textureProfile: '偏薄 custard',
-		reuseHint: '英文站常歸 mesophilic heirloom',
+		flavorProfile: '溫和；相對「比較像優格」',
+		textureProfile: '黏稠 custard；黏性來自優勢菌的 EPS',
+		reuseHint: 'mesophilic heirloom；名義溯源高加索，菌相已與原產 matsoni 分道',
 		sortOrder: 70,
 		bodyMd: `## 概述（Overview）
 
-Matsoni（亦稱 Caspian Sea Yogurt）來自喬治亞一帶的常溫風格。`,
+日本流通的「カスピ海ヨーグルト」。調查顯示樣本優勢菌一致為產 EPS 的 ***Lactococcus cremoris***（約 10⁸–10⁹ CFU/g），黏稠來自該菌胞外多醣。
+
+## 重要澄清：≠ Matsoni
+
+名義上溯源高加索，但與喬治亞原產 [Matsoni](../matsoni/) **不是同一件事**：
+
+- 本品：常溫、單一乳球菌主導、可傳代。
+- Matsoni：偏嗜熱、菌相不定、常含真菌。
+
+英文 DIY 站販售的「matsoni starter」多半其實是本類型。`,
 	},
 	{
 		id: 'piima',
@@ -322,5 +395,207 @@ export const glossary = [
 		termEn: 'Whey Separation / Syneresis',
 		category: 'quality',
 		bodyMd: '凝乳網狀結構收縮時釋出的清澈液相。適量可見；過多常暗示溫度波動或過度攪拌。',
+	},
+];
+
+/**
+ * 市售優格對照。
+ * recommended：僅允許 鮮乳／生乳 或 奶粉＋水 ＋ 菌種（含凍乾菌粉常見載體）。
+ * 標示整理自公開商品頁／比較文（約 2026）；配方改版時請覆核。
+ *
+ * @type {Array<{
+ *  id: string,
+ *  brand: string,
+ *  productName: string,
+ *  recommended: boolean,
+ *  milkBase: 'fresh' | 'powder' | 'mixed' | 'other',
+ *  milkBaseNote: string,
+ *  addedSugar: boolean,
+ *  additives: string,
+ *  cultures: string,
+ *  ingredientsLabel: string,
+ *  note?: string,
+ *  sortOrder: number
+ * }>}
+ */
+export const marketYogurts = [
+	{
+		id: 'ceabys-no-sugar',
+		brand: '雪比',
+		productName: '無加糖生優格',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 純生乳',
+		addedSugar: false,
+		additives: '無（標示僅生乳＋乳酸菌）',
+		cultures:
+			'長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌',
+		ingredientsLabel: '生乳、乳酸菌（長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳酸桿菌、保加利亞乳酸桿菌、嗜熱鏈球菌）',
+		note: '無凝固劑；搖晃易變稀或析乳清屬正常。',
+		sortOrder: 10,
+	},
+	{
+		id: 'fulo-premium-fresh',
+		brand: '福樂',
+		productName: '頂級鮮奶優酪',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 鮮乳（一番鮮）',
+		addedSugar: false,
+		additives: '無（標示僅鮮乳＋菌種）',
+		cultures: '嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌（植物乳桿菌）',
+		ingredientsLabel:
+			'100% 鮮乳、嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌',
+		sortOrder: 20,
+	},
+	{
+		id: 'kuangchuan-premium-fresh',
+		brand: '光泉',
+		productName: '頂級鮮奶優酪',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 生乳／鮮乳',
+		addedSugar: false,
+		additives: '無（標示僅生乳＋活性乳酸菌；宣稱無奶粉／香料／加糖）',
+		cultures:
+			'嗜酸乳桿菌、比菲德氏菌（B. lactis）、嗜熱鏈球菌、德氏乳桿菌乳酸亞種、保加利亞乳桿菌',
+		ingredientsLabel:
+			'100% 生乳、活性乳酸菌（嗜酸乳桿菌、比菲德氏菌、嗜熱鏈球菌、德氏乳桿菌乳酸亞種、保加利亞乳桿菌）',
+		sortOrder: 30,
+	},
+	{
+		id: 'bettermilk-true',
+		brand: '鮮乳坊',
+		productName: '真優格',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 豐樂牧場生乳',
+		addedSugar: false,
+		additives: '無（宣稱無膠體、奶粉、糖）',
+		cultures:
+			'嗜熱鏈球菌、保加利亞乳桿菌、嗜酸乳桿菌、鼠李糖乳桿菌、乳雙歧桿菌、植物乳桿菌、乾酪乳桿菌',
+		ingredientsLabel: '鮮乳、乳酸菌（上述 7 菌）',
+		note: '主婦聯盟等通路亦見「吃吃鮮乳優格」等同系標示。',
+		sortOrder: 40,
+	},
+	{
+		id: 'snowfactory-no6',
+		brand: '雪坊',
+		productName: '6 號精品優格',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 鮮乳',
+		addedSugar: false,
+		additives: '無（標示僅鮮乳＋活性乳酸菌）',
+		cultures:
+			'保加利亞乳桿菌、嗜熱鏈球菌、植物乳桿菌、副乾酪乳桿菌、鼠李糖乳桿菌、雷特氏 B 菌（B. animalis）',
+		ingredientsLabel:
+			'鮮乳、活性乳酸菌（保加利亞乳桿菌、嗜熱鏈球菌、植物乳桿菌、副乾酪乳桿菌、鼠李糖乳桿菌、雷特氏 B 菌）',
+		note: '同系列 5 號亦為純鮮乳路線，菌種組合不同。',
+		sortOrder: 50,
+	},
+	{
+		id: 'matthew-plain',
+		brand: '馬修嚴選',
+		productName: '原味優格（分享號）',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '台灣生乳或鮮乳',
+		addedSugar: false,
+		additives: '無（宣稱無加糖、無添加膠體）',
+		cultures: '嗜熱鏈球菌、嗜酸乳桿菌、鼠李糖乳桿菌、長雙歧桿菌（經典四株；G+／K+ 系列菌數不同）',
+		ingredientsLabel: '鮮乳／生乳、乳酸菌（系列而異）',
+		note: 'G+、K+ 等同品牌系列配方不同，請以當批包裝為準。',
+		sortOrder: 60,
+	},
+	{
+		id: 'lioujia-plain',
+		brand: '六甲田莊',
+		productName: '原味優格',
+		recommended: true,
+		milkBase: 'fresh',
+		milkBaseNote: '100% 生乳',
+		addedSugar: false,
+		additives: '無產品級增稠／調味；標示含菌粉載體（果寡醣粉、乳糖）',
+		cultures:
+			'嗜熱鏈球菌、長雙歧桿菌、鼠李糖乳桿菌、嗜酸乳桿菌、醱酵乳桿菌、副乾酪乳桿菌、瑞士乳桿菌',
+		ingredientsLabel:
+			'100% 生乳、活性乳酸菌【果寡醣粉（非基改玉米澱粉、果寡醣）、嗜熱鏈球菌、長雙歧桿菌、鼠李糖乳桿菌、嗜酸乳桿菌、醱酵乳桿菌、副乾酪乳桿菌、瑞士乳桿菌】、乳糖',
+		note: '依本站規則：菌粉載體仍算「菌種」側，故給 ★；若你要求標示字面零載體，則需自行排除。',
+		sortOrder: 70,
+	},
+	{
+		id: 'linfengying-thick',
+		brand: '林鳳營',
+		productName: '特濃重乳優格（無加糖）',
+		recommended: false,
+		milkBase: 'mixed',
+		milkBaseNote: '水＋全脂乳粉為主，另含生乳',
+		addedSugar: false,
+		additives: '乳清蛋白、濃縮牛奶蛋白；乳酸菌欄含蔗糖、麥芽糊精',
+		cultures: '嗜熱鏈球菌、保加利亞乳桿菌',
+		ingredientsLabel:
+			'水、全脂乳粉、乳清蛋白、濃縮牛奶蛋白、生乳、乳酸菌（乳酸菌、蔗糖、麥芽糊精）',
+		note: '無加糖訴求，但有蛋白濃縮與還原乳，不符 ★ 條件。',
+		sortOrder: 80,
+	},
+	{
+		id: 'linfengying-greek-style',
+		brand: '林鳳營',
+		productName: '希臘式優格（無加糖）',
+		recommended: false,
+		milkBase: 'mixed',
+		milkBaseNote: '水＋生乳＋乳粉',
+		addedSugar: false,
+		additives: '濃縮牛奶蛋白（部分標示另見玉米澱粉作為菌劑載體）',
+		cultures:
+			'嗜熱鏈球菌、保加利亞乳桿菌、乳雙歧桿菌、嗜酸乳桿菌（標示版本可能另列乳酸乳球菌等，以包裝為準）',
+		ingredientsLabel: '水、生乳、乳粉、濃縮牛奶蛋白、乳酸菌…',
+		note: '「希臘式」靠乳粉／蛋白濃縮增稠，非瀝乳希臘優格。',
+		sortOrder: 90,
+	},
+	{
+		id: 'zhili-greek-style',
+		brand: '質立',
+		productName: '希臘式優格（無加糖）',
+		recommended: false,
+		milkBase: 'powder',
+		milkBaseNote: '以水、奶粉為首（還原乳為主）',
+		addedSugar: false,
+		additives: '異麥芽寡醣、柑橘果膠（含蔗糖、洋菜）、洋菜粉',
+		cultures: '保加利亞乳桿菌、嗜熱鏈球菌',
+		ingredientsLabel:
+			'水、奶粉、異麥芽寡醣、生乳、柑橘果膠（蔗糖、柑橘果膠、洋菜）、洋菜粉、乳酸菌（L. bulgaricus、S. thermophilus）',
+		note: '標榜無加糖，但果膠預混含蔗糖且糖量偏高；屬增稠「希臘式」。',
+		sortOrder: 100,
+	},
+	{
+		id: 'fulo-greek-style',
+		brand: '福樂',
+		productName: '頂級無加糖希臘式優酪',
+		recommended: false,
+		milkBase: 'other',
+		milkBaseNote: '公開比較文多指向乳粉／增稠路線（請以包裝覆核）',
+		addedSugar: false,
+		additives: '常見希臘式配方會含乳粉或膠體；本列暫不給 ★，待核對最新標示',
+		cultures: '嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌（同系列常標此組）',
+		ingredientsLabel: '請以杯身最新標示為準',
+		note: '同品牌「頂級鮮奶優酪」為 ★；本款希臘式勿混為一談。',
+		sortOrder: 110,
+	},
+	{
+		id: 'ceabys-classic',
+		brand: '雪比',
+		productName: '經典優格',
+		recommended: false,
+		milkBase: 'fresh',
+		milkBaseNote: '純生乳為基底',
+		addedSugar: false,
+		additives: '異麥芽寡醣、大豆纖維（公開介紹）',
+		cultures:
+			'長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌',
+		ingredientsLabel: '生乳、乳酸菌…＋異麥芽寡醣、大豆纖維（以包裝為準）',
+		note: '與「無加糖生優格」不同款；有額外纖維／寡糖則不給 ★。',
+		sortOrder: 120,
 	},
 ];

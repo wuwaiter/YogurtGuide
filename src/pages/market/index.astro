@@ -1,0 +1,140 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { assertDbExists, listMarketYogurts } from '../lib/db';
+
+assertDbExists();
+
+const yogurts = listMarketYogurts();
+const recommended = yogurts.filter((y) => y.recommended === 1);
+const others = yogurts.filter((y) => y.recommended === 0);
+
+const milkLabel: Record<string, string> = {
+	fresh: '鮮乳／生乳',
+	powder: '奶粉＋水（還原）',
+	mixed: '混合（鮮乳＋奶粉／水等）',
+	other: '其他／待核對',
+};
+---
+
+<BaseLayout
+	title="市售優格"
+	description="台灣常見市售優格：乳源、加糖、添加物與菌種清單；★ 僅限鮮乳或奶粉加水加菌種。"
+>
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">市售優格<span class="en-sub">Market Yogurts</span></h1>
+			<p class="page-lead">
+				整理台灣通路常見的凝態／杯裝優格（原味／無加糖為主）。成分與菌種來自公開標示，配方可能改版，購買時請以包裝為準。
+			</p>
+
+			<section class="record-block" id="recommend-rule">
+				<h2 class="record-block__title">推薦符號 ★ 的條件</h2>
+				<p>
+					成品成分<strong>只能</strong>有：
+				</p>
+				<ul>
+					<li>鮮乳／生乳，或</li>
+					<li>奶粉＋水，以及</li>
+					<li>菌種（含凍乾菌粉常見載體：乳糖、寡糖粉、麥芽糊精、澱粉等）</li>
+				</ul>
+				<p class="meta">
+					不得另有：加糖、果膠／洋菜等膠體、香料、色素、纖維添加、濃縮乳蛋白、乳清蛋白（作增稠）等。
+					「無加糖」≠ 符合 ★；「希臘式」常靠乳粉／膠體增稠，多半不給 ★。
+				</p>
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">★ 符合推薦條件（{recommended.length}）</h2>
+				{
+					recommended.map((y) => (
+						<article class="market-card market-card--star" id={y.id}>
+							<h3 class="market-card__title">
+								<span class="market-card__star" aria-label="推薦">★</span>
+								{y.brand} {y.product_name}
+							</h3>
+							<table class="meta-table">
+								<tbody>
+									<tr>
+										<th>乳源</th>
+										<td>
+											{milkLabel[y.milk_base]}
+											{y.milk_base_note && <> — {y.milk_base_note}</>}
+										</td>
+									</tr>
+									<tr>
+										<th>加糖</th>
+										<td>{y.added_sugar ? '有加糖' : '無加糖（乳糖仍可能來自乳）'}</td>
+									</tr>
+									<tr>
+										<th>其他添加物</th>
+										<td>{y.additives}</td>
+									</tr>
+									<tr>
+										<th>菌種</th>
+										<td>{y.cultures}</td>
+									</tr>
+									<tr>
+										<th>成分標示摘要</th>
+										<td>{y.ingredients_label}</td>
+									</tr>
+									{y.note && (
+										<tr>
+											<th>備註</th>
+											<td>{y.note}</td>
+										</tr>
+									)}
+								</tbody>
+							</table>
+						</article>
+					))
+				}
+			</section>
+
+			<section class="record-block">
+				<h2 class="record-block__title">其他常見款（未給 ★）（{others.length}）</h2>
+				{
+					others.map((y) => (
+						<article class="market-card" id={y.id}>
+							<h3 class="market-card__title">
+								{y.brand} {y.product_name}
+							</h3>
+							<table class="meta-table">
+								<tbody>
+									<tr>
+										<th>乳源</th>
+										<td>
+											{milkLabel[y.milk_base]}
+											{y.milk_base_note && <> — {y.milk_base_note}</>}
+										</td>
+									</tr>
+									<tr>
+										<th>加糖</th>
+										<td>{y.added_sugar ? '有加糖' : '無加糖（乳糖仍可能來自乳）'}</td>
+									</tr>
+									<tr>
+										<th>其他添加物</th>
+										<td>{y.additives}</td>
+									</tr>
+									<tr>
+										<th>菌種</th>
+										<td>{y.cultures}</td>
+									</tr>
+									<tr>
+										<th>成分標示摘要</th>
+										<td>{y.ingredients_label}</td>
+									</tr>
+									{y.note && (
+										<tr>
+											<th>備註</th>
+											<td>{y.note}</td>
+										</tr>
+									)}
+								</tbody>
+							</table>
+						</article>
+					))
+				}
+			</section>
+		</div>
+	</section>
+</BaseLayout>

@@ -2,7 +2,7 @@ import { mkdirSync, readFileSync, rmSync } from 'node:fs';
 import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import { DatabaseSync } from 'node:sqlite';
-import { batches, cultures, glossary, methods } from '../data/seed-data.mjs';
+import { batches, cultures, glossary, marketYogurts, methods } from '../data/seed-data.mjs';
 
 const __dirname = dirname(fileURLToPath(import.meta.url));
 const root = join(__dirname, '..');
@@ -121,6 +121,30 @@ for (const g of glossary) {
 	insertGlossary.run(g.id, g.termZh, g.termEn, g.category, g.bodyMd);
 }
 
+const insertMarketYogurt = db.prepare(`
+  INSERT INTO market_yogurts (
+    id, brand, product_name, recommended, milk_base, milk_base_note,
+    added_sugar, additives, cultures, ingredients_label, note, sort_order, draft
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+`);
+
+for (const y of marketYogurts) {
+	insertMarketYogurt.run(
+		y.id,
+		y.brand,
+		y.productName,
+		y.recommended ? 1 : 0,
+		y.milkBase,
+		y.milkBaseNote,
+		y.addedSugar ? 1 : 0,
+		y.additives,
+		y.cultures,
+		y.ingredientsLabel,
+		y.note ?? '',
+		y.sortOrder,
+	);
+}
+
 db.close();
 
 const counts = {
@@ -128,6 +152,7 @@ const counts = {
 	methods: methods.length,
 	batches: batches.length,
 	glossary: glossary.length,
+	marketYogurts: marketYogurts.length,
 };
 console.log(`SQLite ready: ${dbPath}`);
 console.log(counts);

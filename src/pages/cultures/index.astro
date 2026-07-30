@@ -16,7 +16,7 @@ const tempLabel: Record<string, string> = {
 };
 ---
 
-<BaseLayout title="菌種" description="優格菌種分類：適溫、產品風格、反復接種與核心物種。">
+<BaseLayout title="菌種" description="優格菌種分類：適溫、產品風格、反復接種、核心物種與是否含酵母。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">菌種<span class="en-sub">Culture Knowledge</span></h1>
@@ -115,11 +115,11 @@ const tempLabel: Record<string, string> = {
 						</tr>
 						<tr>
 							<th>一次／數次用完</th>
-							<td>Direct-set、DVS／DVI — 凍乾粉直接接種；穩定，通常不宜長期傳代</td>
+							<td>Direct-set、DVS／DVI — 凍乾粉直接接種；穩定，通常不宜長期傳代（約 3–5 代後易失衡）</td>
 						</tr>
 						<tr>
 							<th>市售優格當 starter</th>
-							<td>方便取得；菌相未必適傳代，常數代後變弱</td>
+							<td>方便取得；菌相未必適傳代，常第 3–5 代後變弱</td>
 						</tr>
 					</tbody>
 				</table>
@@ -136,6 +136,29 @@ const tempLabel: Record<string, string> = {
 				</ol>
 				<p>
 					<a href={`${base}cultures/species/`}>詳見物種中英對照 →</a>
+				</p>
+			</section>
+
+			<section class="record-block" id="by-fungi">
+				<h2 class="record-block__title">5. 依是否含酵母／真菌分類<span class="en-sub">By Fungi / Yeast</span></h2>
+				<table class="meta-table">
+					<tbody>
+						<tr>
+							<th>純乳酸菌型</th>
+							<td>僅 LAB；一般優格菌粉、Filmjölk、台灣 MESO — 不產氣；direct-set 傳代易失衡</td>
+						</tr>
+						<tr>
+							<th>含真菌／酵母型</th>
+							<td>LAB + 酵母／黴菌；Viili、部分 Matsoni — 風味較複雜，可能產 CO₂，較耐傳代</td>
+						</tr>
+						<tr>
+							<th>SCOBY（顆粒）型</th>
+							<td>細菌與酵母包在多醣基質中；kefir grains 可無限延續，粉狀替代品數批後衰退</td>
+						</tr>
+					</tbody>
+				</table>
+				<p class="meta">
+					注意：Matsoni（喬治亞原產）≠ Caspian Sea Yogurt（日本流通型）。後者為常溫乳球菌主導；前者偏嗜熱且菌相不定。
 				</p>
 			</section>
 		</div>
