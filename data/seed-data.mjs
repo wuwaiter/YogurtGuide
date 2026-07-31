@@ -400,8 +400,8 @@ export const glossary = [
 
 /**
  * 市售優格對照。
- * recommended：僅允許 鮮乳／生乳 或 奶粉＋水 ＋ 菌種（含凍乾菌粉常見載體）。
- * 標示整理自公開商品頁／比較文（約 2026）；配方改版時請覆核。
+ * recommended：僅允許 鮮乳/生乳 或 奶粉＋水 ＋ 菌種（含凍乾菌粉常見載體）。
+ * 標示整理自公開商品頁/比較文（約 2026）；配方改版時請覆核。
  *
  * @type {Array<{
  *  id: string,
@@ -425,7 +425,7 @@ export const marketYogurts = [
 		productName: '無加糖生優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 純生乳',
+		milkBaseNote: '生乳',
 		addedSugar: false,
 		additives: '無（標示僅生乳＋乳酸菌）',
 		cultures:
@@ -440,7 +440,7 @@ export const marketYogurts = [
 		productName: '頂級鮮奶優酪',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 鮮乳（一番鮮）',
+		milkBaseNote: '鮮奶 — 一番鮮',
 		addedSugar: false,
 		additives: '無（標示僅鮮乳＋菌種）',
 		cultures: '嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌（植物乳桿菌）',
@@ -454,9 +454,9 @@ export const marketYogurts = [
 		productName: '頂級鮮奶優酪',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 生乳／鮮乳',
+		milkBaseNote: '鮮奶/生乳',
 		addedSugar: false,
-		additives: '無（標示僅生乳＋活性乳酸菌；宣稱無奶粉／香料／加糖）',
+		additives: '無（標示僅生乳＋活性乳酸菌；宣稱無奶粉/香料/加糖）',
 		cultures:
 			'嗜酸乳桿菌、比菲德氏菌（B. lactis）、嗜熱鏈球菌、德氏乳桿菌乳酸亞種、保加利亞乳桿菌',
 		ingredientsLabel:
@@ -469,7 +469,7 @@ export const marketYogurts = [
 		productName: '真優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 豐樂牧場生乳',
+		milkBaseNote: '生乳 — 豐樂牧場',
 		addedSugar: false,
 		additives: '無（宣稱無膠體、奶粉、糖）',
 		cultures:
@@ -484,7 +484,7 @@ export const marketYogurts = [
 		productName: '6 號精品優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 鮮乳',
+		milkBaseNote: '鮮奶',
 		addedSugar: false,
 		additives: '無（標示僅鮮乳＋活性乳酸菌）',
 		cultures:
@@ -500,11 +500,11 @@ export const marketYogurts = [
 		productName: '原味優格（分享號）',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '台灣生乳或鮮乳',
+		milkBaseNote: '鮮奶/生乳',
 		addedSugar: false,
 		additives: '無（宣稱無加糖、無添加膠體）',
-		cultures: '嗜熱鏈球菌、嗜酸乳桿菌、鼠李糖乳桿菌、長雙歧桿菌（經典四株；G+／K+ 系列菌數不同）',
-		ingredientsLabel: '鮮乳／生乳、乳酸菌（系列而異）',
+		cultures: '嗜熱鏈球菌、嗜酸乳桿菌、鼠李糖乳桿菌、長雙歧桿菌（經典四株；G+/K+ 系列菌數不同）',
+		ingredientsLabel: '鮮乳/生乳、乳酸菌（系列而異）',
 		note: 'G+、K+ 等同品牌系列配方不同，請以當批包裝為準。',
 		sortOrder: 60,
 	},
@@ -514,9 +514,9 @@ export const marketYogurts = [
 		productName: '原味優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 生乳',
+		milkBaseNote: '生乳',
 		addedSugar: false,
-		additives: '無產品級增稠／調味；標示含菌粉載體（果寡醣粉、乳糖）',
+		additives: '無產品級增稠/調味；標示含菌粉載體（果寡醣粉、乳糖）',
 		cultures:
 			'嗜熱鏈球菌、長雙歧桿菌、鼠李糖乳桿菌、嗜酸乳桿菌、醱酵乳桿菌、副乾酪乳桿菌、瑞士乳桿菌',
 		ingredientsLabel:
@@ -530,13 +530,13 @@ export const marketYogurts = [
 		productName: '100%鮮乳優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '100% 生乳／鮮乳（美廉社自有品牌）',
+		milkBaseNote: '鮮奶/生乳',
 		addedSugar: false,
 		additives: '無（公開介紹與消費者回報：無糖、無香料、無膠體、無奶粉）',
 		cultures:
 			'保加利亞乳桿菌、嗜熱鏈球菌、嗜酸乳桿菌、比菲德氏菌（雷特氏 B 菌）、鼠李糖乳桿菌（公開整理約 5 菌；以包裝為準）',
-		ingredientsLabel: '生乳／鮮乳、乳酸菌（以杯身最新標示為準）',
-		note: '美廉社／心樸市集通路；菌種清單請以當批包裝覆核。',
+		ingredientsLabel: '生乳/鮮乳、乳酸菌（以杯身最新標示為準）',
+		note: '美廉社/心樸市集通路；菌種清單請以當批包裝覆核。',
 		sortOrder: 75,
 	},
 	{
@@ -545,14 +545,14 @@ export const marketYogurts = [
 		productName: '零脂希臘式優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '巴氏殺菌脫脂牛奶（美國產；好市多通路）',
+		milkBaseNote: '鮮奶 — 巴氏殺菌脫脂牛奶',
 		addedSugar: false,
-		additives: '無（標示僅脫脂牛奶＋乳酸菌；無增稠劑／香料／加糖）',
+		additives: '無（標示僅脫脂牛奶＋乳酸菌；無增稠劑/香料/加糖）',
 		cultures:
 			'保加利亞乳桿菌、嗜熱鏈球菌、嗜酸乳桿菌、乳雙歧桿菌（B. lactis）、乾酪乳桿菌',
 		ingredientsLabel:
 			'巴氏殺菌發酵脫脂牛奶（巴氏殺菌脫脂牛奶、乳酸菌）、乳酸菌（L. bulgaricus、S. thermophilus、L. acidophilus、B. lactis、L. casei）',
-		note: '好市多賣場常見（#599369）。品名寫「希臘式」，成分卻是脫脂乳＋菌，濃稠多來自瀝乳，非膠體／乳粉增稠款。',
+		note: '好市多賣場常見（#599369）。品名寫「希臘式」，成分卻是脫脂乳＋菌，濃稠多來自瀝乳，非膠體/乳粉增稠款。',
 		sortOrder: 78,
 	},
 	{
@@ -561,7 +561,7 @@ export const marketYogurts = [
 		productName: '特濃重乳優格（無加糖）',
 		recommended: false,
 		milkBase: 'mixed',
-		milkBaseNote: '水＋全脂乳粉為主，另含生乳',
+		milkBaseNote: '生乳/奶粉 — 水＋全脂乳粉為主，另含生乳',
 		addedSugar: false,
 		additives: '乳清蛋白、濃縮牛奶蛋白；乳酸菌欄含蔗糖、麥芽糊精',
 		cultures: '嗜熱鏈球菌、保加利亞乳桿菌',
@@ -576,13 +576,13 @@ export const marketYogurts = [
 		productName: '希臘式優格（無加糖）',
 		recommended: false,
 		milkBase: 'mixed',
-		milkBaseNote: '水＋生乳＋乳粉',
+		milkBaseNote: '生乳/奶粉 — 水＋生乳＋乳粉',
 		addedSugar: false,
 		additives: '濃縮牛奶蛋白（部分標示另見玉米澱粉作為菌劑載體）',
 		cultures:
 			'嗜熱鏈球菌、保加利亞乳桿菌、乳雙歧桿菌、嗜酸乳桿菌（標示版本可能另列乳酸乳球菌等，以包裝為準）',
 		ingredientsLabel: '水、生乳、乳粉、濃縮牛奶蛋白、乳酸菌…',
-		note: '「希臘式」靠乳粉／蛋白濃縮增稠，非瀝乳希臘優格。',
+		note: '「希臘式」靠乳粉/蛋白濃縮增稠，非瀝乳希臘優格。',
 		sortOrder: 90,
 	},
 	{
@@ -591,7 +591,7 @@ export const marketYogurts = [
 		productName: '希臘式優格（無加糖）',
 		recommended: false,
 		milkBase: 'powder',
-		milkBaseNote: '以水、奶粉為首（還原乳為主）',
+		milkBaseNote: '奶粉 — 還原乳為主',
 		addedSugar: false,
 		additives: '異麥芽寡醣、柑橘果膠（含蔗糖、洋菜）、洋菜粉',
 		cultures: '保加利亞乳桿菌、嗜熱鏈球菌',
@@ -605,13 +605,15 @@ export const marketYogurts = [
 		brand: '福樂',
 		productName: '頂級無加糖希臘式優酪',
 		recommended: false,
-		milkBase: 'other',
-		milkBaseNote: '公開比較文多指向乳粉／增稠路線（請以包裝覆核）',
+		milkBase: 'mixed',
+		milkBaseNote: '鮮奶/奶粉 — 水＋乳粉＋鮮乳',
 		addedSugar: false,
-		additives: '常見希臘式配方會含乳粉或膠體；本列暫不給 ★，待核對最新標示',
-		cultures: '嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌（同系列常標此組）',
-		ingredientsLabel: '請以杯身最新標示為準',
-		note: '同品牌「頂級鮮奶優酪」為 ★；本款希臘式勿混為一談。',
+		additives: '乳脂、乳清蛋白、牛奶蛋白；乳酸菌欄含玉米澱粉',
+		cultures:
+			'嗜熱鏈球菌 Streptococcus thermophilus、保加利亞乳桿菌 Lactobacillus delbrueckii subsp. bulgaricus、鼠李糖乳桿菌 Lactobacillus rhamnosus、胚芽乳桿菌 Lactobacillus plantarum',
+		ingredientsLabel:
+			'水、乳粉、鮮乳、乳脂、乳清蛋白、牛奶蛋白、乳酸菌（乳酸菌、玉米澱粉）',
+		note: '含乳脂/乳清蛋白/牛奶蛋白增稠，不符 ★；同品牌「頂級鮮奶優酪」為 ★，勿混為一談。',
 		sortOrder: 110,
 	},
 	{
@@ -620,13 +622,13 @@ export const marketYogurts = [
 		productName: '經典優格',
 		recommended: false,
 		milkBase: 'fresh',
-		milkBaseNote: '純生乳為基底',
+		milkBaseNote: '生乳',
 		addedSugar: false,
 		additives: '異麥芽寡醣、大豆纖維（公開介紹）',
 		cultures:
 			'長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌',
 		ingredientsLabel: '生乳、乳酸菌…＋異麥芽寡醣、大豆纖維（以包裝為準）',
-		note: '與「無加糖生優格」不同款；有額外纖維／寡糖則不給 ★。',
+		note: '與「無加糖生優格」不同款；有額外纖維/寡糖則不給 ★。',
 		sortOrder: 120,
 	},
 ];

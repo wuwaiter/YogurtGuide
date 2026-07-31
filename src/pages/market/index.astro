@@ -7,13 +7,6 @@ assertDbExists();
 const yogurts = listMarketYogurts();
 const recommended = yogurts.filter((y) => y.recommended === 1);
 const others = yogurts.filter((y) => y.recommended === 0);
-
-const milkLabel: Record<string, string> = {
-	fresh: '鮮乳／生乳',
-	powder: '奶粉＋水（還原）',
-	mixed: '混合（鮮乳＋奶粉／水等）',
-	other: '其他／待核對',
-};
 ---
 
 <BaseLayout
@@ -24,7 +17,7 @@ const milkLabel: Record<string, string> = {
 		<div class="wrap">
 			<h1 class="page-title">市售優格<span class="en-sub">Market Yogurts</span></h1>
 			<p class="page-lead">
-				整理台灣通路常見的凝態／杯裝優格（原味／無加糖為主）。成分與菌種來自公開標示，配方可能改版，購買時請以包裝為準。
+				整理台灣通路常見的凝態/杯裝優格（原味/無加糖為主）。成分與菌種來自公開標示，配方可能改版，購買時請以包裝為準。
 			</p>
 
 			<section class="record-block" id="recommend-rule">
@@ -33,13 +26,12 @@ const milkLabel: Record<string, string> = {
 					成品成分<strong>只能</strong>有：
 				</p>
 				<ul>
-					<li>鮮乳／生乳，或</li>
+					<li>鮮乳/生乳，或</li>
 					<li>奶粉＋水，以及</li>
 					<li>菌種（含凍乾菌粉常見載體：乳糖、寡糖粉、麥芽糊精、澱粉等）</li>
 				</ul>
 				<p class="meta">
-					不得另有：加糖、果膠／洋菜等膠體、香料、色素、纖維添加、濃縮乳蛋白、乳清蛋白（作增稠）等。
-					「無加糖」≠ 符合 ★；「希臘式」常靠乳粉／膠體增稠，多半不給 ★。
+					不得另有：加糖、果膠/洋菜等膠體、香料、色素、纖維添加、濃縮乳蛋白、乳清蛋白（作增稠）等。
 				</p>
 			</section>
 
@@ -55,27 +47,24 @@ const milkLabel: Record<string, string> = {
 							<table class="meta-table">
 								<tbody>
 									<tr>
-										<th>乳源</th>
-										<td>
-											{milkLabel[y.milk_base]}
-											{y.milk_base_note && <> — {y.milk_base_note}</>}
-										</td>
-									</tr>
-									<tr>
-										<th>加糖</th>
-										<td>{y.added_sugar ? '有加糖' : '無加糖（乳糖仍可能來自乳）'}</td>
-									</tr>
-									<tr>
-										<th>其他添加物</th>
-										<td>{y.additives}</td>
+										<th>成分標示</th>
+										<td>{y.ingredients_label}</td>
 									</tr>
 									<tr>
 										<th>菌種</th>
 										<td>{y.cultures}</td>
 									</tr>
 									<tr>
-										<th>成分標示摘要</th>
-										<td>{y.ingredients_label}</td>
+										<th>乳源</th>
+										<td>{y.milk_base_note}</td>
+									</tr>
+									<tr>
+										<th>加糖</th>
+										<td>{y.added_sugar ? '有加糖' : '無加糖'}</td>
+									</tr>
+									<tr>
+										<th>其它添加物</th>
+										<td>{y.additives}</td>
 									</tr>
 									{y.note && (
 										<tr>
@@ -102,14 +91,11 @@ const milkLabel: Record<string, string> = {
 								<tbody>
 									<tr>
 										<th>乳源</th>
-										<td>
-											{milkLabel[y.milk_base]}
-											{y.milk_base_note && <> — {y.milk_base_note}</>}
-										</td>
+										<td>{y.milk_base_note}</td>
 									</tr>
 									<tr>
 										<th>加糖</th>
-										<td>{y.added_sugar ? '有加糖' : '無加糖（乳糖仍可能來自乳）'}</td>
+										<td>{y.added_sugar ? '有加糖' : '無加糖'}</td>
 									</tr>
 									<tr>
 										<th>其他添加物</th>
