@@ -78,6 +78,8 @@
 | 全聯小時達 — 林鳳營希臘式無加糖 | https://shop.pxgo.com.tw/hourArrive/goods/237769-31050066-4710063338564 | 水／生乳／乳粉／濃縮牛奶蛋白＋多菌 |
 | Open Food Facts／食品 wiki — 林鳳營特濃重乳 | https://tw.openfoodfacts.org/product/4710063338038 | 水／乳粉／乳清蛋白／濃縮牛奶蛋白 |
 | 全聯無糖優格比較文 | https://pixcdn.tw/sugar-free-yogurt-quanlian/ | 質立／六甲／雪比／光泉對照與價位 |
+| 美廉社 — 心樸100%鮮乳優格 | https://www.simplemart.com.tw/ec99/ushop20097/goodsdescr.asp?category_id=66&parent_id=0&prod_id=1106087 | 美廉社自有品牌；規格 120g |
+| 好市多 — 科克蘭零脂希臘式優格 | https://www.costco.com.tw/Warehouse-Only/Food-Beverages/Chilled/Kirkland-Signature-Chilled-Nonfat-Greek-Yogurt-907-g-X-2-Count/p/599369 | 脫脂牛奶＋5 菌完整成分標示 |
 
 > 部落格類來源僅用於**抄錄商品菌株標示**；機制與數據以學術文獻與菌種商技術文件為準。
 
