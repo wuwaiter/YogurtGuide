@@ -537,7 +537,7 @@ export const marketYogurts = [
 			'保加利亞乳桿菌、嗜熱鏈球菌、嗜酸乳桿菌、比菲德氏菌（雷特氏 B 菌）、鼠李糖乳桿菌（公開整理約 5 菌；以包裝為準）',
 		ingredientsLabel: '生乳/鮮乳、乳酸菌（以杯身最新標示為準）',
 		note: '美廉社/心樸市集通路；菌種清單請以當批包裝覆核。',
-		sortOrder: 75,
+		sortOrder: 2,
 	},
 	{
 		id: 'kirkland-nonfat-greek',
@@ -553,7 +553,7 @@ export const marketYogurts = [
 		ingredientsLabel:
 			'巴氏殺菌發酵脫脂牛奶（巴氏殺菌脫脂牛奶、乳酸菌）、乳酸菌（L. bulgaricus、S. thermophilus、L. acidophilus、B. lactis、L. casei）',
 		note: '好市多賣場常見（#599369）。品名寫「希臘式」，成分卻是脫脂乳＋菌，濃稠多來自瀝乳，非膠體/乳粉增稠款。',
-		sortOrder: 78,
+		sortOrder: 1,
 	},
 	{
 		id: 'linfengying-thick',
