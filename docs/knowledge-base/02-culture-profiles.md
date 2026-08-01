@@ -111,7 +111,18 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 與 Viili 的關鍵差別：**Filmjölk 菌相不含黴菌**，且一般不以產黏菌株為主，因此不 ropy。
 
-### B3. Caspian Sea Yogurt（カスピ海ヨーグルト，日本流通型）
+### B2.5. Onaka（お腹／fil＋bifido）
+
+| 項目 | 說明 |
+|------|------|
+| 本質 | **瑞典 filmjölk 變體**＋雙歧桿菌；名稱取日文「お腹（肚子）」 |
+| 起源 | Arla 約 1990 年上市；與森永合作引入日本 bifido |
+| 適溫 | 常溫（mesophilic／fil 型） |
+| 市售菌相（Arla Cultura Onaka） | filkultur＋*B. lactis* BB-12®、*L. acidophilus* LA-5®、*L. casei* F-19® |
+| DIY starter | 常標 fil-style＋*B. lactis*；風味清爽、酸度偏溫和 |
+| 備註 | **≠ Japanese Caspian Sea**（裏海為 *L. cremoris* 單菌主導＋強 EPS）；較接近 Filmjölk 的機能加強版 |
+
+### B3. Japanese Caspian Sea（カスピ海ヨーグルト／日本裏海）
 
 | 項目 | 說明 |
 |------|------|
@@ -119,7 +130,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 優勢菌 | **單一株 *Lactococcus cremoris* 主導**，10⁸–10⁹ CFU/g |
 | 質地 | 黏稠 custard；黏性同樣來自該菌的 EPS |
 | 風味 | 溫和、相對「比較像優格」 |
-| 備註 | 名義上溯源高加索，但**與原產地 matsoni 不是同一件事**（見 B5） |
+| 備註 | 名義上溯源高加索，但**與原產地 matsoni 不是同一件事**（見 B5）；亦**≠ Onaka** |
 
 日本 2010 年一項調查採集五地共六款樣本，60 個分離株中 59 株為同一株產黏 *L. cremoris*；PFGE 分析顯示可分四個亞群，推測是在日本多年傳代中發生輕微變異。少數樣本另檢出 *Latilactobacillus sakei*、*L. plantarum*、*L. paracasei*、*L. kefiri*、*Leuconostoc mesenteroides*，以及醋酸菌（*Acetobacter aceti*、*Gluconacetobacter sacchari*）。
 
@@ -147,7 +158,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 **為什麼會被混為一談：** 日本流通的常溫型商品借用了高加索的地名與淵源故事，但其菌相在日本長期傳代後已由單一產黏乳球菌主導。DIY 商店販售的「matsoni starter」實際多半是前者那種常溫乳球菌型。
 
-→ **本站寫法建議：** 菌種頁分成 `caspian-sea`（常溫、乳球菌型、可傳代）與 `matsoni`（原產、菌相不定、偏嗜熱、含真菌），並在兩頁互相註明差異，避免沿用英文 DIY 站的混用。
+→ **本站寫法建議：** 菌種頁分成 `caspian-sea`（常溫、乳球菌型、可傳代）、`onaka`（fil＋bifido）、與 `matsoni`（原產、菌相不定、偏嗜熱、含真菌），並互相註明差異。
 
 ---
 
@@ -200,7 +211,8 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 想長期留母種 | Heirloom（需規律製作）；最耐傳代的是含真菌／SCOBY 型 |
 | 偶爾做、求穩定 | Direct-set 菌粉 |
 | 想要真正「無限」延續 | Kefir grains（見 [05-kefir-and-scoby.md](./05-kefir-and-scoby.md)） |
-| 想要黏絲（ropy）口感 | Viili 或 Caspian Sea 型（產 EPS 的 *L. cremoris*） |
+| 想要黏絲（ropy）口感 | Viili 或 Japanese Caspian Sea（產 EPS 的 *L. cremoris*） |
+| 想要 fil＋雙歧、清爽常溫 | Onaka（≠ 裏海） |
 
 ---
 

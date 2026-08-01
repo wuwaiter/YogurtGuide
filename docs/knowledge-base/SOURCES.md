@@ -51,8 +51,15 @@
 | Startercultures.eu — Skyr | https://startercultures.eu/product/fermentation/dairy/yoghurt/skyr/ | 嗜熱型；可加一滴凝乳酶；**乾粉第一批較弱，第二批才是真實水準** |
 | Startercultures.eu — How to make yogurt | https://startercultures.eu/how-to-make-yogurt-at-home-and-answer-to-all-your-questions/ | Skyr 43°C／6–8 h；傳統脫脂乳；瀝乳常比希臘優格更久 |
 | Sacco System — Filmjölk 技術文件 | https://saccosystem.com/wp-content/uploads/2025/02/FILMJOLK.pdf | Filmjölk 菌相四菌；**20–21°C／18–20 h**；已採用新學名 *Lactococcus cremoris* |
+| Arla — Historien bakom Onaka | https://www.arla.se/om-arla/arlas-historia/produkterna/onaka/ | 1990 年 Onaka；與森永合作引入日本 bifido；fil＋雙歧 |
+| Arla Cultura Onaka | https://www.arla.se/produkter/cultura/onaka/ | 現售菌：BB-12／LA-5／F-19 |
+| Positively Probiotic — Onaka starter | https://www.positivelyprobiotic.com/shop-all-cultures/p/onaka-heirloom-mesophilic-yogurt-starter-culture | DIY：fil-style＋*B. lactis*；常溫 heirloom |
 | Splendid Table 訪談（Sandor Katz） | https://www.splendidtable.org/story/2013/07/26/commercial-yogurt-starters-degrade-but-heirloom-cultures-last-generations | 市售優格第 3–5 代明顯變差；heirloom 為「未定義菌種」有自我平衡結構；實踐約 60 代 |
 | Cultures for Health — Kefir vs Yogurt | https://culturesforhealth.com/blogs/learn/milk-kefir-difference-between-kefir-yogurt | Kefir 為常溫且含酵母；粉狀替代品數批後衰退；顆粒需約每 24 h 換乳 |
+| Tolu & Altun (2021) 自製 vs 市售優格 | https://doi.org/10.1590/fst.08321 | Van 省：兩菌約 10⁷–10⁹；自製酵母／黴菌明顯較高 |
+| BDU — homemade ergo vs commercial yogurt | http://ir.bdu.edu.et/handle/123456789/16018 | LAB 約同級（~5×10⁸）；自製污染相關菌較多 |
+| Philippine commercial yogurt LAB counts | https://doi.org/10.19070/2379-1578-150008 | 市售抽樣兩菌多過 10⁶ 下限 |
+| NC 市售 *L. bulgaricus* 存活 | https://link.springer.com/article/10.1007/s44187-026-00882-4 | 部分市售低於標示／接近測不到 |
 
 ### 繁中（商品標示與廠商說明）
 

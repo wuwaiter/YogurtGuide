@@ -53,11 +53,12 @@
 |--------|----------------------|------|
 | Viili | 芬蘭 | 溫和、常有黏絲（ropy）；傳統菌相含黴菌與酵母 |
 | Filmjölk | 瑞典 | 偏可飲、酪乳感、略酸 |
-| Caspian Sea Yogurt（日本流通型） | 日本（名義上溯源高加索） | 黏稠 custard；優勢菌為 *Lactococcus cremoris* |
+| Onaka（お腹） | 瑞典商品名（日文行銷）；fil＋bifido | Filmjölk 機能加強；≠ 日本裏海 |
+| Japanese Caspian Sea（日本裏海） | 日本（名義上溯源高加索） | 黏稠 custard；優勢菌為 *Lactococcus cremoris* |
 | Piimä | 北歐 | 很稀、可飲、溫和；可用鮮奶油做偏酸稀奶油 |
 
-> **注意：Matsoni ≠ Caspian Sea Yogurt。**  
-> DIY 站常把兩者當同義詞並歸為常溫，但文獻不支持：日本的「カスピ海ヨーグルト」樣本優勢菌一致為常溫的 *Lactococcus cremoris*；喬治亞原產 matsoni 菌相不定，多篇研究以嗜熱的 *S. thermophilus* + *L. delbrueckii* 為主，且常伴隨真菌。細節見 [02-culture-profiles.md](./02-culture-profiles.md) B3／B5。
+> **注意：Matsoni ≠ Japanese Caspian Sea；Onaka ≠ Japanese Caspian Sea。**  
+> DIY 站常把 Matsoni 與裏海當同義詞並歸為常溫，文獻不支持。Onaka 則是瑞典 fil＋雙歧桿菌，勿與裏海乳球菌型混為一談。細節見 [02-culture-profiles.md](./02-culture-profiles.md)。
 
 詳見 [02-culture-profiles.md](./02-culture-profiles.md)。
 

@@ -198,13 +198,46 @@ Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。�
 ## 與 Viili 的差別
 
 - Filmjölk **通常不含黴菌**，不以產黏菌株為主，因此一般不 ropy。
-- 現代商業配方有時另加 *L. acidophilus*、*B. animalis* subsp. *lactis* 做機能訴求。`,
+- 現代商業配方有時另加 *L. acidophilus*、*B. animalis* subsp. *lactis* 做機能訴求。
+- 瑞典 Arla 的 [Onaka](../onaka/) 即是「fil 基底＋雙歧桿菌」路線的知名商品名。`,
+	},
+	{
+		id: 'onaka',
+		title: 'Onaka（お腹／fil＋bifido）',
+		titleEn: 'Onaka',
+		summary: '常溫 fil 型＋雙歧桿菌；源自瑞典 Arla（與森永合作）。≠ Japanese Caspian Sea。',
+		species:
+			'fil 系 Lactococcus／Leuconostoc；另加 Bifidobacterium lactis（商品常見 BB-12）、常另含 L. acidophilus、L. casei',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–25',
+		timeRangeH: '12–24',
+		flavorProfile: '溫和清爽、酸度偏低；偏「純乳」感',
+		textureProfile: 'fil 型；偏滑順，可略稠於一般 filmjölk；不以 Caspian 式強黏絲為主',
+		reuseHint: 'DIY 店多作 mesophilic heirloom；市售 Onaka filmjölk 亦可當 starter（傳代穩定性視菌相）',
+		sortOrder: 65,
+		bodyMd: `## 概述（Overview）
+
+**Onaka（お腹）**＝日文「肚子」。1990 年前後瑞典 **Arla** 推出的 filmjölk 變體：在 fil 菌基底上加入來自日本合作（森永）的雙歧桿菌，打腸道健康概念。
+
+現售 **Arla Cultura Onaka** 常見標示：乳＋filkultur＋*Bifidobacterium lactis* BB-12®、*Lactobacillus acidophilus* LA-5®、*Lactobacillus casei* F-19®。
+
+西方 DIY 店（如 Positively Probiotic）販售的 Onaka starter 多描述為 **fil-style＋*B. lactis***，常溫發酵、風味清爽。
+
+## 重要澄清
+
+| | Onaka | [Japanese Caspian Sea](../caspian-sea/) | [Filmjölk](../filmjolk/) |
+|--|-------|-------------------------------------------|---------------------------|
+| 本質 | fil＋bifido（機能強化） | 單一產 EPS 的 *L. cremoris* 主導 | 傳統／商業 fil 四菌 |
+| 地名故事 | 日本「お腹」行銷名 | 名義溯源裏海／高加索 | 瑞典 |
+| 黏絲 | 通常不如 Caspian／Viili 強 | 強（EPS） | 一般不強調 ropy |
+
+→ **Onaka ≠ 日本裏海優格。** 較接近 Filmjölk 的機能加強版。`,
 	},
 	{
 		id: 'caspian-sea',
 		title: 'Japanese Caspian Sea (日本裏海)',
 		titleEn: 'Japanese Caspian Sea',
-		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。≠ 喬治亞原產 Matsoni。',
+		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。≠ 喬治亞原產 Matsoni；≠ Onaka。',
 		species: 'Lactococcus cremoris（優勢；舊名 L. lactis subsp. cremoris）',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–25',
@@ -217,14 +250,16 @@ Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。�
 
 日本流通的「カスピ海ヨーグルト」。調查顯示樣本優勢菌一致為產 EPS 的 ***Lactococcus cremoris***（約 10⁸–10⁹ CFU/g），黏稠來自該菌胞外多醣。
 
-## 重要澄清：≠ Matsoni
+## 重要澄清：≠ Matsoni；≠ Onaka
 
 名義上溯源高加索，但與喬治亞原產 [Matsoni](../matsoni/) **不是同一件事**：
 
 - 本品：常溫、單一乳球菌主導、可傳代。
 - Matsoni：偏嗜熱、菌相不定、常含真菌。
 
-英文 DIY 站販售的「matsoni starter」多半其實是本類型。`,
+亦勿與 [Onaka](../onaka/) 混淆：Onaka 是瑞典 fil＋雙歧桿菌路線，不是裏海式 *L. cremoris* 單菌主導。
+
+英文 DIY 站販售的「matsoni starter」多半其實是本類型（Caspian／乳球菌型）。`,
 	},
 	{
 		id: 'piima',
@@ -349,6 +384,45 @@ export const batches = [
 
 - 維持製法不變，僅更換菌種，比較酸度上升速率與質地。
 - 或改用留存母種（mother culture），對照新菌粉的表現差異。`,
+	},
+	{
+		id: 'b002-fulo-microwave',
+		title: '批次 B002 — 福樂好優＋微波爐輔助',
+		titleEn: 'Batch B002 — Fulo commercial yogurt, microwave-assisted',
+		date: '2026-08-01',
+		ambientTempC: '32',
+		inoculationTempC: '約 32',
+		incubationTempC: '約 32（微波爐＋熱水碗蒸汽輔助）',
+		incubationTimeH: '6（其後移入冰箱冷藏）',
+		equipment: ['微波爐', '發酵容器', '熱水碗（蒸汽加溫）'],
+		ingredients: [
+			{ type: 'fresh-milk', brand: '戀職人鮮奶', amount: '500 ml' },
+		],
+		cultureSource: 'commercial-yogurt',
+		cultureName: '福樂 好優牛奶優格',
+		cultureOrigin: '市售優格當 starter',
+		cultureAmount: '未記（以實際接種量為準）',
+		resultSet: '成型略不足：約下半（≤1/2）僅黏稠、未接近固態',
+		resultTexture: '下層偏黏稠液態／半凝；上層相對較成',
+		resultOverall: '嗜熱路線用室溫＋微波爐蒸汽，保溫偏不穩；下次改穩定 40–43°C 定溫再對照',
+		scoreSatisfaction: 2,
+		bodyMd: `## Observation（觀察）
+
+- 室溫 32°C；發酵 6 h 後改冷藏。
+- 發酵期間放微波爐，另放一碗熱水以蒸汽加溫，但**未達穩定嗜熱保溫**。
+- 成品凝乳不足：約一半以下只到黏稠、沒有接近固態。
+
+## 可能原因（假說）
+
+1. **保溫不足／波動大**：市售優格當母種多為嗜熱兩菌路線，適溫常在 40–45°C；32°C＋間歇蒸汽可能產酸與凝乳偏慢。
+2. **接種量未記錄**：無法判斷是否接種偏少。
+3. **未做加熱乳／冷卻接種紀錄**：蛋白結構與競爭菌控制不明。
+
+## Next Trial（下次調整）
+
+1. 改用優格機或定溫設備，目標 **42°C ±1–2°C**，同樣 6 h（或延長至凝乳完整）。
+2. 記錄母種接種量（例如每 500 ml 用 X g／湯匙）。
+3. 可選：鮮乳先加熱至約 85°C 持溫後冷卻再接種，與本批對照。`,
 	},
 ];
 
@@ -534,7 +608,7 @@ export const marketYogurts = [
 		addedSugar: false,
 		additives: '無（公開介紹與消費者回報：無糖、無香料、無膠體、無奶粉）',
 		cultures:
-			'保加利亞乳桿菌、嗜熱鏈球菌、嗜酸乳桿菌、比菲德氏菌（雷特氏 B 菌）、鼠李糖乳桿菌（公開整理約 5 菌；以包裝為準）',
+			'保加利亞乳桿菌、嗜熱鏈球菌、嗜酸乳桿菌、比菲德氏菌（雷特氏B菌）、鼠李糖乳桿菌（公開整理約 5 菌；以包裝為準）',
 		ingredientsLabel: '生乳/鮮乳、乳酸菌（以杯身最新標示為準）',
 		note: '美廉社/心樸市集通路；菌種清單請以當批包裝覆核。',
 		sortOrder: 2,
