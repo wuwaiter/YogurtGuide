@@ -120,28 +120,28 @@ Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。�
 		id: 'matsoni',
 		title: 'Matsoni（喬治亞原產）',
 		titleEn: 'Matsoni',
-		summary: '原產菌相不定、偏嗜熱；常含真菌。與日本「裡海優格」不是同一件事。',
+		summary: '原產菌相不定、偏嗜熱；常含真菌。與 Japanese Caspian Sea（日本裏海）不是同一件事。',
 		species: 'S. thermophilus + L. delbrueckii（常見）；菌相隨產地而異，可含真菌',
 		temperatureClass: 'thermophilic',
 		tempRangeC: '40–45',
 		timeRangeH: '依配方／產地',
 		flavorProfile: '依產地菌相差異大；文獻描述不一',
 		textureProfile: '依配方；不宜假設為常溫 custard',
-		reuseHint: '傳統家傳型；市售「matsoni starter」多半其實是 Caspian Sea 常溫乳球菌型',
+		reuseHint: '傳統家傳型；市售「matsoni starter」多半其實是 Japanese Caspian Sea 常溫乳球菌型',
 		sortOrder: 45,
 		bodyMd: `## 概述（Overview）
 
 喬治亞原產 matsoni **不宜歸常溫**。多篇研究以嗜熱的 *S. thermophilus* 與 *L. delbrueckii*（bulgaricus／lactis）為主，並常伴隨 *Geotrichum candidum*、*Kluyveromyces marxianus*、*Candida* 等真菌。菌相**隨產地而異、各地區內相對穩定**。
 
-## 重要澄清：≠ Caspian Sea Yogurt
+## 重要澄清：≠ Japanese Caspian Sea
 
-| | Matsoni（原產） | Caspian Sea Yogurt（日本流通型） |
+| | Matsoni（原產） | Japanese Caspian Sea (日本裏海) |
 |--|-----------------|----------------------------------|
 | 溫度 | 偏嗜熱 | 常溫 |
 | 優勢菌 | 嗜熱兩菌＋多樣伴隨菌 | 單一 *Lactococcus cremoris* 主導 |
 | 真菌 | 常有 | 通常無（少數樣本見醋酸菌） |
 
-英文 DIY 站常把兩者當同義詞。本站分開登錄：常溫乳球菌型見 [Caspian Sea Yogurt](../caspian-sea/)。`,
+英文 DIY 站常把兩者當同義詞。本站分開登錄：常溫乳球菌型見 [Japanese Caspian Sea](../caspian-sea/)。`,
 	},
 	{
 		id: 'viili',
@@ -202,8 +202,8 @@ Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。�
 	},
 	{
 		id: 'caspian-sea',
-		title: 'Caspian Sea Yogurt（日本流通型）',
-		titleEn: 'Caspian Sea Yogurt',
+		title: 'Japanese Caspian Sea (日本裏海)',
+		titleEn: 'Japanese Caspian Sea',
 		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。≠ 喬治亞原產 Matsoni。',
 		species: 'Lactococcus cremoris（優勢；舊名 L. lactis subsp. cremoris）',
 		temperatureClass: 'mesophilic',
@@ -440,7 +440,7 @@ export const marketYogurts = [
 		productName: '頂級鮮奶優酪',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '鮮奶 — 一番鮮',
+		milkBaseNote: '鮮奶(一番鮮)',
 		addedSugar: false,
 		additives: '無（標示僅鮮乳＋菌種）',
 		cultures: '嗜熱鏈球菌、德氏乳桿菌、鼠李糖乳桿菌、胚芽乳桿菌（植物乳桿菌）',
@@ -469,7 +469,7 @@ export const marketYogurts = [
 		productName: '真優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '生乳 — 豐樂牧場',
+		milkBaseNote: '生乳 (豐樂牧場)',
 		addedSugar: false,
 		additives: '無（宣稱無膠體、奶粉、糖）',
 		cultures:
@@ -500,7 +500,7 @@ export const marketYogurts = [
 		productName: '原味優格（分享號）',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '鮮奶/生乳',
+		milkBaseNote: '台灣 鮮奶/生乳',
 		addedSugar: false,
 		additives: '無（宣稱無加糖、無添加膠體）',
 		cultures: '嗜熱鏈球菌、嗜酸乳桿菌、鼠李糖乳桿菌、長雙歧桿菌（經典四株；G+/K+ 系列菌數不同）',
@@ -545,7 +545,7 @@ export const marketYogurts = [
 		productName: '零脂希臘式優格',
 		recommended: true,
 		milkBase: 'fresh',
-		milkBaseNote: '鮮奶 — 巴氏殺菌脫脂牛奶',
+		milkBaseNote: '鮮奶 (巴氏殺菌脫脂牛奶)',
 		addedSugar: false,
 		additives: '無（標示僅脫脂牛奶＋乳酸菌；無增稠劑/香料/加糖）',
 		cultures:
@@ -576,7 +576,7 @@ export const marketYogurts = [
 		productName: '希臘式優格（無加糖）',
 		recommended: false,
 		milkBase: 'mixed',
-		milkBaseNote: '生乳/奶粉 — 水＋生乳＋乳粉',
+		milkBaseNote: '水＋生乳＋乳粉',
 		addedSugar: false,
 		additives: '濃縮牛奶蛋白（部分標示另見玉米澱粉作為菌劑載體）',
 		cultures:
@@ -591,7 +591,7 @@ export const marketYogurts = [
 		productName: '希臘式優格（無加糖）',
 		recommended: false,
 		milkBase: 'powder',
-		milkBaseNote: '奶粉 — 還原乳為主',
+		milkBaseNote: '水+奶粉',
 		addedSugar: false,
 		additives: '異麥芽寡醣、柑橘果膠（含蔗糖、洋菜）、洋菜粉',
 		cultures: '保加利亞乳桿菌、嗜熱鏈球菌',
@@ -606,7 +606,7 @@ export const marketYogurts = [
 		productName: '頂級無加糖希臘式優酪',
 		recommended: false,
 		milkBase: 'mixed',
-		milkBaseNote: '鮮奶/奶粉 — 水＋乳粉＋鮮乳',
+		milkBaseNote: '水＋乳粉＋鮮乳',
 		addedSugar: false,
 		additives: '乳脂、乳清蛋白、牛奶蛋白；乳酸菌欄含玉米澱粉',
 		cultures:
