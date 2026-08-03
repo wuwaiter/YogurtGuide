@@ -55,6 +55,9 @@
 | Arla — Historien bakom Onaka | https://www.arla.se/om-arla/arlas-historia/produkterna/onaka/ | 1990 年 Onaka；與森永合作引入日本 bifido；fil＋雙歧 |
 | Arla Cultura Onaka | https://www.arla.se/produkter/cultura/onaka/ | 現售菌：BB-12／LA-5／F-19 |
 | Positively Probiotic — Onaka starter | https://www.positivelyprobiotic.com/shop-all-cultures/p/onaka-heirloom-mesophilic-yogurt-starter-culture | DIY：fil-style＋*B. lactis*；常溫 heirloom |
+| Positively Probiotic — Amasi | https://www.positivelyprobiotic.com/shop-all-cultures/p/amasi-heirloom-mesophilic-yogurt-starter-culture | 南非常溫；乳球菌；加倍接種可更稠 |
+| Startercultures.eu — Ayran | https://startercultures.eu/product/fermentation/dairy/yoghurt/ayran/ | 嗜熱；優格飲基底 |
+| Wikipedia — Amasi | https://en.wikipedia.org/wiki/Amasi | 南非傳統發酵乳；商業約 30°C／乳球菌 |
 | Splendid Table 訪談（Sandor Katz） | https://www.splendidtable.org/story/2013/07/26/commercial-yogurt-starters-degrade-but-heirloom-cultures-last-generations | 市售優格第 3–5 代明顯變差；heirloom 為「未定義菌種」有自我平衡結構；實踐約 60 代 |
 | Cultures for Health — Kefir vs Yogurt | https://culturesforhealth.com/blogs/learn/milk-kefir-difference-between-kefir-yogurt | Kefir 為常溫且含酵母；粉狀替代品數批後衰退；顆粒需約每 24 h 換乳 |
 | Tolu & Altun (2021) 自製 vs 市售優格 | https://doi.org/10.1590/fst.08321 | Van 省：兩菌約 10⁷–10⁹；自製酵母／黴菌明顯較高 |

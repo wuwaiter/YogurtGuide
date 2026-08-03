@@ -42,24 +42,40 @@
 | 風格名 | 英文 | 簡述 |
 |--------|------|------|
 | 一般／傳統優格 | Traditional / plain yogurt | 典型 S. thermophilus + L. bulgaricus 路線 |
-| 保加利亞優格 | Bulgarian yogurt | 常強調較酸、較「正宗優格」酸香；發酵可偏長 |
+| 保加利亞優格 | Bulgarian yogurt | 較酸、優格狀凝乳；發酵可偏長 |
+| Ayran | Ayran | 土耳其優格飲基底；凝乳優格狀，常再加水／鹽 |
+| Persis | Persis (Persian-style) | DIY 用名；對應伊朗 mast 優格狀；多接近嗜熱兩菌 |
 | 希臘優格菌粉 | Greek yogurt starter | 常訴求較厚凝乳、較溫和；**真正 Greek 濃稠多靠瀝乳** |
-| 冰島 Short Skyr | Short Skyr | 傳統嗜熱＋瀝乳；DIY 稱 Short＝正統路線 |
+| 冰島 Short Skyr | Short Skyr | 傳統嗜熱＋瀝乳；瀝前優格狀 |
 | 冰島 Long Skyr（DIY） | Long Skyr | 常溫、常帶黏絲；**非**傳統製法 |
+| Matsoni | Matsoni | 喬治亞原產；偏嗜熱、菌相不定；≠ 日本裏海 |
 | 其他（羊奶等） | Goat milk yogurt 等 | 依供應商配方 |
 
 ### 常溫風格（Mesophilic / countertop styles）
 
 | 風格名 | 來源區域（常見說法） | 簡述 |
 |--------|----------------------|------|
-| Viili | 芬蘭 | 溫和、常有黏絲（ropy）；傳統菌相含黴菌與酵母 |
-| Filmjölk | 瑞典 | 偏可飲、酪乳感、略酸 |
+| Short Viili（SV） | 芬蘭 | **無黏絲**；優格狀／布丁；≠ Long |
+| Long Viili | 芬蘭 | 溫和、**黏絲（ropy）**；傳統菌相含黴菌與酵母 |
+| Filmjölk | 瑞典 | 偏可飲／優格狀、酪乳感、略酸 |
+| Short／Long Långfil | 瑞典 | Short＝優格狀；Long＝Filmjölk 黏絲變體 |
+| Amasi | 南非 | 常溫發酵乳；可飲至優格狀（視接種量） |
 | Onaka（お腹） | 瑞典商品名（日文行銷）；fil＋bifido | Filmjölk 機能加強；≠ 日本裏海 |
-| Japanese Caspian Sea（日本裏海） | 日本（名義上溯源高加索） | 黏稠 custard；優勢菌為 *Lactococcus cremoris* |
+| Japanese Caspian Sea（日本裏海） | 日本（名義上溯源高加索） | 黏稠 custard／布丁感；優勢菌為 *Lactococcus cremoris* |
 | Piimä | 北歐 | 很稀、可飲、溫和；可用鮮奶油做偏酸稀奶油 |
 
-> **注意：Matsoni ≠ Japanese Caspian Sea；Onaka ≠ Japanese Caspian Sea。**  
-> DIY 站常把 Matsoni 與裏海當同義詞並歸為常溫，文獻不支持。Onaka 則是瑞典 fil＋雙歧桿菌，勿與裏海乳球菌型混為一談。細節見 [02-culture-profiles.md](./02-culture-profiles.md)。
+### 口感對照：布丁奶酪／優格狀（DIY 表常見）
+
+不嚴格微生物分類，僅方便選購對照：
+
+| 群 | 代表 id |
+|----|---------|
+| 嗜熱優格狀 | `bulgarian`、`ayran`、`persis`、`matsoni`、`skyr-short` |
+| 常溫優格狀／布丁 | `viili-short`、`langfil-short`、`filmjolk`、`amasi`、`onaka`、`caspian-sea` |
+| 常溫黏絲（對照用，非此群） | `viili-long`、`langfil-long`、`skyr-long` |
+
+> **注意：Matsoni ≠ Japanese Caspian Sea；Onaka ≠ Japanese Caspian Sea；Short ≠ Long（Viili／Långfil／Skyr）。**  
+> DIY 站常把 Matsoni 與裏海當同義詞並歸為常溫，文獻不支持。細節見 [02-culture-profiles.md](./02-culture-profiles.md)。
 
 詳見 [02-culture-profiles.md](./02-culture-profiles.md)。
 
@@ -136,7 +152,7 @@ Culture（菌種檔）
   ├─ temperatureClass: thermophilic | mesophilic
   ├─ reuseMode: heirloom | direct-set | commercial-yogurt
   ├─ cultureType: lab-only | lab-with-fungi | scoby   ← 第 5 層
-  ├─ styleName: bulgarian | greek-starter | viili | ...
+  ├─ styleName: bulgarian | ayran | persis | viili-short | viili-long | amasi | langfil-short | ...
   └─ species[]: 學名列表
 
 Method（製法）

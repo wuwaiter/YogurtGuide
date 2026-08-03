@@ -27,10 +27,31 @@
 | 核心物種 | 傳統上強調僅 *L. bulgaricus* + *S. thermophilus*（保加利亞產品定義常見此要求） |
 | 適溫 | 約 42–43°C（文獻／DIY 常落此區間） |
 | 時間 | DIY 常寫 **8–12 h** 可更酸更稠；工業亦有 4–6 h 區間視配方 |
-| 風味／質地 | 酸感較明顯、乙醛等優格香氣較突出的形象 |
+| 風味／質地 | 酸感較明顯；**優格狀／布丁凝乳**對照常見 |
 | 備註 | 同為兩菌共生；差異常在**菌株組合與發酵終點**，不只「有沒有這兩菌」 |
 
 **菌株比例確有實證：** 一篇 2023 年研究把 *L. bulgaricus* : *S. thermophilus* 以 1:1、1:10、1:100、1:1000、1:2000 混合，42°C 發酵至 pH ≈ 4.5，共測出 63 種揮發性化合物；**1:100 組**的風味輪廓與感官評價最接近對照優格。→ 支持「同樣兩菌、不同比例即是不同產品」的說法。
+
+### A2.5. Ayran／Persis（西亞優格狀）
+
+#### Ayran
+
+| 項目 | 說明 |
+|------|------|
+| 本質 | 土耳其等**鹹味優格飲**；先做出優格狀凝乳，再加水與鹽 |
+| DIY starter | 多標嗜熱 **40–45°C**；常強調 *S. thermophilus* |
+| 質地 | 未稀釋＝優格狀／布丁；稀釋後可飲 |
+| seed id | `ayran` |
+
+#### Persis（Persian-style）
+
+| 項目 | 說明 |
+|------|------|
+| 本質 | DIY／口感表用名；對應伊朗 **mast** 優格狀凝乳 |
+| 菌相 | 公開「Persis」正式菌相少；實務多接近嗜熱兩菌 |
+| 質地 | 優格狀／布丁 |
+| 注意 | 以包裝適溫為準；勿當成獨立標準菌種 |
+| seed id | `persis` |
 
 ### A3. 希臘優格菌粉（Greek yogurt starter）
 
@@ -93,7 +114,20 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 共同點：室溫附近發酵、常可 heirloom 傳代；質地多偏稀或特殊黏性；風味多較溫和。
 
-### B1. Viili（芬蘭）
+### B1. Viili（芬蘭）— Short vs Long
+
+#### B1a. Short Viili（短版／無黏絲）
+
+| 項目 | 說明 |
+|------|------|
+| 英文 | Short Viili (SV) |
+| 適溫 | 約 20–25°C |
+| 質地 | **優格狀／布丁**；平滑可勺，**不 ropey** |
+| 風味 | 仍偏芬蘭常溫奶油香 |
+| seed id | `viili-short` |
+| 備註 | 口感對照「布丁奶酪（優格狀）」常指這一格；可由 Long 失黏而來 |
+
+#### B1b. Long Viili（長版／黏絲）
 
 | 項目 | 說明 |
 |------|------|
@@ -101,8 +135,9 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 質地 | 溫和、**ropy／黏絲**（胞外多醣 EPS） |
 | 風味 | 偏淡、偏甜潤，帶奶油香 |
 | 型態 | heirloom；**不只乳酸菌**（見下） |
+| seed id | `viili-long` |
 
-**傳統 viili 是 LAB + 黴菌 + 酵母的混合群落**，不是純乳酸菌配方：
+**傳統 Long viili 是 LAB + 黴菌 + 酵母的混合群落**，不是純乳酸菌配方：
 
 | 成員 | 學名 | 角色 |
 |------|------|------|
@@ -117,7 +152,26 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 **⚠️ ropy 特性會流失：** EPS 合成基因常位於**質體**上，保存或培養溫度偏高即可能丟失。1988 年研究把產黏菌株從 17°C 移到 30°C，黏性由 +++ 掉到幾乎消失；連續傳代 21 代亦出現自發性失黏變異株。
 
-→ **對批次紀錄的意義：** viili 某批不黏，**可能是菌株變異而非操作失誤**。批次欄位建議獨立記「本批是否 ropy」與母種保存溫度。
+→ **對批次紀錄的意義：** Long viili 某批不黏，**可能是菌株變異（變成 Short）而非操作失誤**。批次欄位建議獨立記「本批是否 ropy」與母種保存溫度。
+
+### B1.5. Långfil（瑞典）— Short vs Long
+
+| | Short | Long |
+|--|-------|------|
+| seed id | `langfil-short` | `langfil-long` |
+| 質地 | 優格狀／布丁 | 長彈性黏絲（ropey） |
+| 關係 | 失黏或商家短版 | Filmjölk 的黏絲變體 |
+| 適溫 | 常溫 | 常溫 |
+
+### B1.6. Amasi（南非）
+
+| 項目 | 說明 |
+|------|------|
+| 英文 | Amasi / Amasai |
+| 適溫 | DIY 常溫；商業約 **30°C／16–24 h** |
+| 菌相（商業常見） | *Lactococcus lactis* + *L. cremoris*；傳統為自然發酵 |
+| 質地 | 可飲／酪乳至優格狀（加倍接種可更稠） |
+| seed id | `amasi` |
 
 ### B2. Filmjölk（瑞典）
 
@@ -231,7 +285,8 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 想長期留母種 | Heirloom（需規律製作）；最耐傳代的是含真菌／SCOBY 型 |
 | 偶爾做、求穩定 | Direct-set 菌粉 |
 | 想要真正「無限」延續 | Kefir grains（見 [05-kefir-and-scoby.md](./05-kefir-and-scoby.md)） |
-| 想要黏絲（ropy）口感 | Viili、Japanese Caspian Sea，或 Long Skyr（常溫變體） |
+| 想要黏絲（ropy）口感 | Long Viili、Long Långfil、Japanese Caspian Sea，或 Long Skyr |
+| 想要優格狀／布丁、不要黏絲 | Short Viili、Short Långfil、Filmjölk、Bulgarian、Ayran／Persis、Amasi |
 | 想做傳統 Skyr（瀝乳濃稠） | Short Skyr（嗜熱）＋瀝乳 8–12 h；勿用 Long |
 | 想要 fil＋雙歧、清爽常溫 | Onaka（≠ 裏海） |
 
@@ -248,7 +303,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
   titleEn: '...',
   temperatureClass: 'thermophilic', // 或 'mesophilic'
   reuseHint: 'heirloom / direct-set / ...',
-  // style 概念可用 id 表達：bulgarian | greek-starter | viili | ...
+  // style 概念可用 id 表達：bulgarian | ayran | persis | viili-short | viili-long | amasi | ...
   species: '...',
   tempRangeC: '40–45',
   timeRangeH: '4–12',

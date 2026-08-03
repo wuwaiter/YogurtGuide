@@ -37,3 +37,4 @@
 - 2026-08-01：新增常溫菌種 **Onaka**（fil＋bifido；≠ Japanese Caspian Sea）；來源 Arla／DIY starter。
 - 2026-08-02：新增 [07-homemade-vs-commercial-cfu.md](./07-homemade-vs-commercial-cfu.md)；批次 B002（市售優格當母種、微波爐輔助發酵）。
 - 2026-08-03：Skyr 拆成 Short（嗜熱傳統）／Long（常溫黏絲）；菌種總覽除風格外改橫式條列。
+- 2026-08-03：布丁／優格狀對照補齊：新增 Amasi、Ayran、Persis；Viili／Långfil 拆 Short／Long；01／02／SOURCES 同步。

@@ -47,13 +47,13 @@ export const cultures = [
 		id: 'bulgarian',
 		title: '保加利亞優格',
 		titleEn: 'Bulgarian Yogurt',
-		summary: '嗜熱兩菌共生；常強調較明顯的酸香與較長發酵終點。',
+		summary: '嗜熱兩菌共生；常強調較明顯的酸香與較長發酵終點。口感偏優格狀／布丁凝乳。',
 		species: 'Lactobacillus delbrueckii subsp. bulgaricus + Streptococcus thermophilus',
 		temperatureClass: 'thermophilic',
 		tempRangeC: '42–43',
 		timeRangeH: '8–12',
 		flavorProfile: '酸感較明顯，乙醛等優格香氣較突出',
-		textureProfile: '可偏稠；實際厚度仍受加熱與保溫穩定度影響',
+		textureProfile: '優格狀凝乳（布丁奶酪口感對照常見）；厚度受加熱與保溫影響',
 		reuseHint: '市售有 heirloom 與 direct-set；傳統產品定義常強調僅此兩菌',
 		sortOrder: 20,
 		bodyMd: `## 概述（Overview）
@@ -64,6 +64,53 @@ export const cultures = [
 
 - 與「傳統優格菌」同屬嗜熱兩菌路線；差異常在**菌株組合與發酵終點**。
 - 接種溫度避免過高燙死菌體；保溫穩定度比單純延長時間更關鍵。`,
+	},
+	{
+		id: 'ayran',
+		title: 'Ayran（土耳其優格飲基底）',
+		titleEn: 'Ayran',
+		summary: '嗜熱優格路線；凝乳可呈優格狀，常再加水／鹽做成鹹飲。',
+		species: 'Streptococcus thermophilus（DIY starter 常強調；完整配方依供應商）',
+		temperatureClass: 'thermophilic',
+		tempRangeC: '40–45',
+		timeRangeH: '4–8',
+		flavorProfile: '偏酸；飲用時常加鹽',
+		textureProfile: '凝乳為優格狀／布丁感；稀釋後可飲',
+		reuseHint: 'DIY 多為 thermophilic 凍乾／heirloom；需定溫',
+		sortOrder: 22,
+		bodyMd: `## 概述（Overview）
+
+**Ayran** 是土耳其（及中亞／巴爾幹）經典**鹹味優格飲**：先做出優格狀凝乳，再加水與鹽稀釋冰鎮。
+
+DIY starter（如 Startercultures.eu）多標 **嗜熱 40–45°C**，並強調 *S. thermophilus* 對滑順質地的貢獻。
+
+## 口感分類
+
+未稀釋凝乳常被歸在「布丁奶酪／優格狀」族群；成品飲料則偏可飲。`,
+	},
+	{
+		id: 'persis',
+		title: 'Persis（波斯／伊朗優格風格）',
+		titleEn: 'Persis (Persian-style)',
+		summary: 'DIY／對照表用名；對應伊朗 mast 優格狀凝乳。多接近嗜熱兩菌，非獨立標準菌相。',
+		species: 'S. thermophilus + L. bulgaricus（推定／依供應商；傳統多以成品傳代）',
+		temperatureClass: 'thermophilic',
+		tempRangeC: '40–45',
+		timeRangeH: '4–8',
+		flavorProfile: '溫和至微酸；日常優格感',
+		textureProfile: '優格狀／布丁凝乳',
+		reuseHint: '傳統以成品當母種；市售「Persis」請以包裝適溫為準',
+		sortOrder: 25,
+		bodyMd: `## 概述（Overview）
+
+**Persis** 多見於 DIY 口感對照表，指涉**波斯／伊朗優格（mast，ماست）**：可勺食的優格狀凝乳，可再做成 mast-o-khiar、doogh 等。
+
+公開文獻較少把「Persis」當正式菌種學名；實務多接近**嗜熱兩菌優格**。
+
+## 注意
+
+- 包裝若寫常溫，以包裝為準（可能是商家自訂配方）。
+- 與 [Ayran](../ayran/) 同屬西亞優格文化圈，但 Ayran 更常以稀釋鹹飲為終點。`,
 	},
 	{
 		id: 'greek-starter',
@@ -93,13 +140,13 @@ export const cultures = [
 		id: 'skyr-short',
 		title: 'Short Skyr（短版／傳統嗜熱）',
 		titleEn: 'Short Skyr (Thermophilic)',
-		summary: '傳統冰島路線：嗜熱發酵後瀝乳。DIY 店所稱 Short Skyr＝正統 Skyr。',
+		summary: '傳統冰島路線：嗜熱發酵後瀝乳。DIY 店所稱 Short Skyr＝正統 Skyr。瀝前可歸優格狀／布丁對照。',
 		species: 'Streptococcus thermophilus + Lactobacillus delbrueckii subsp. bulgaricus（常宣稱含冰島特有菌株）',
 		temperatureClass: 'thermophilic',
 		tempRangeC: '42–43',
 		timeRangeH: '6–12',
 		flavorProfile: '偏溫和至微酸；乾粉第一批常較弱',
-		textureProfile: '發酵後常有乳清分離；瀝乳 8–12 h 後才濃稠；傳統不強調黏絲',
+		textureProfile: '發酵後優格狀凝乳、常有乳清分離；瀝乳 8–12 h 後才濃稠；傳統不強調黏絲',
 		reuseHint: '家用多為 heirloom；每公升留約 1 大匙，建議至少每週回接',
 		sortOrder: 40,
 		bodyMd: `## 概述（Overview）
@@ -160,13 +207,13 @@ export const cultures = [
 		id: 'matsoni',
 		title: 'Matsoni（喬治亞原產）',
 		titleEn: 'Matsoni',
-		summary: '原產菌相不定、偏嗜熱；常含真菌。與 Japanese Caspian Sea（日本裏海）不是同一件事。',
+		summary: '原產菌相不定、偏嗜熱；常含真菌。口感對照常列優格狀。與 Japanese Caspian Sea 不是同一件事。',
 		species: 'S. thermophilus + L. delbrueckii（常見）；菌相隨產地而異，可含真菌',
 		temperatureClass: 'thermophilic',
 		tempRangeC: '40–45',
 		timeRangeH: '依配方／產地',
 		flavorProfile: '依產地菌相差異大；文獻描述不一',
-		textureProfile: '依配方；不宜假設為常溫 custard',
+		textureProfile: '常為優格狀凝乳；不宜假設為常溫 custard',
 		reuseHint: '傳統家傳型；市售「matsoni starter」多半其實是 Japanese Caspian Sea 常溫乳球菌型',
 		sortOrder: 45,
 		bodyMd: `## 概述（Overview）
@@ -184,21 +231,52 @@ export const cultures = [
 英文 DIY 站常把兩者當同義詞。本站分開登錄：常溫乳球菌型見 [Japanese Caspian Sea](../caspian-sea/)。`,
 	},
 	{
-		id: 'viili',
-		title: 'Viili（芬蘭）',
-		titleEn: 'Viili',
+		id: 'viili-short',
+		title: 'Short Viili（短版／無黏絲）',
+		titleEn: 'Short Viili (SV)',
+		summary: '常溫；奶油香但無傳統黏絲。口感接近優格狀／布丁。≠ Long Viili。',
+		species: 'Lactococcus／Leuconostoc 等常溫 LAB；通常無強產黏 L. cremoris，亦常無 G. candidum',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–25',
+		timeRangeH: '12–24',
+		flavorProfile: '溫和、偏甜潤奶油香（類似 Viili 風味）',
+		textureProfile: '優格狀／布丁凝乳；平滑可勺，不 ropey',
+		reuseHint: 'mesophilic heirloom；Long Viili 過度發酵也可能「變成」短版且難回復',
+		sortOrder: 48,
+		bodyMd: `## 概述（Overview）
+
+**Short Viili（SV）**＝失去（或不含）產黏能力的 Viili：風味仍偏芬蘭常溫乳，但質地像一般優格／布丁，**沒有**長版的黏絲玩具感。
+
+DIY 店常單獨販售；也可因 Long Viili 過度發酵、質體質體丟失而「變成」短版。
+
+## 與 Long Viili
+
+| | Short | [Long](../viili-long/) |
+|--|-------|------------------------|
+| 黏絲 | 無 | 有（viilian／EPS） |
+| 口感 | 優格狀／布丁 | 黏、可拉絲 |
+| 適溫 | 常溫 | 常溫 |
+
+→ 口感對照表裡的「布丁奶酪（優格狀）」常列的是 **Short**，不是 Long。`,
+	},
+	{
+		id: 'viili-long',
+		title: 'Long Viili（長版／黏絲）',
+		titleEn: 'Long Viili',
 		summary: '常溫 heirloom；黏絲來自產 EPS 的乳球菌；傳統菌相含黴菌與酵母。',
 		species: 'Lactococcus cremoris（產黏）+ L. lactis + Leuconostoc；傳統另含 Geotrichum candidum 與酵母',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–25',
 		timeRangeH: '12–24',
 		flavorProfile: '偏淡、偏甜潤，帶奶油香',
-		textureProfile: 'ropy／黏絲（胞外多醣 viilian）；不黏可能是菌株變異',
+		textureProfile: 'ropy／黏絲（胞外多醣 viilian）；不黏可能已變成短版',
 		reuseHint: '典型 heirloom；EPS 基因常在質體上，保存溫度偏高易失黏',
 		sortOrder: 50,
 		bodyMd: `## 概述（Overview）
 
-芬蘭常溫風格。工業製程常寫冷卻至約 20°C 接種、熟成約 20 h。質地以溫和、**黏絲（ropy）** 著稱。
+芬蘭常溫風格的**長版（傳統黏絲）**。工業製程常寫冷卻至約 20°C 接種、熟成約 20 h。
+
+若要優格狀／布丁、不要黏絲，請改看 [Short Viili](../viili-short/)。
 
 ## 菌相（不只乳酸菌）
 
@@ -215,29 +293,91 @@ export const cultures = [
 ## 使用筆記（Usage Notes）
 
 - 黏絲物質叫 **viilian**（含磷雜多醣）。EPS 合成基因常在**質體**上；培養／保存偏高溫可能丟失黏性。
-- 某批不黏，**可能是菌株變異而非操作失誤**。批次建議記「本批是否 ropy」。
+- 某批不黏，**可能是菌株變異而非操作失誤**（變成 Short）。批次建議記「本批是否 ropy」。
 - 若菌種含 *G. candidum*，均勻白絲絨表面是正常成熟；純 LAB 菌粉長毛則視為污染。`,
+	},
+	{
+		id: 'amasi',
+		title: 'Amasi（南非）',
+		titleEn: 'Amasi',
+		summary: '常溫發酵乳；傳統偏可飲／凝乳，加倍接種可更稠。商業多用乳球菌。',
+		species: 'Lactococcus lactis + Lactococcus cremoris（商業常見）；傳統為自然發酵菌相',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–30',
+		timeRangeH: '16–48',
+		flavorProfile: '偏酸、風味可較強烈',
+		textureProfile: '傳統偏液態優格／酪乳；加倍 starter 可接近優格狀',
+		reuseHint: 'DIY 多為 mesophilic heirloom；室溫 20–25°C 常見',
+		sortOrder: 52,
+		bodyMd: `## 概述（Overview）
+
+**Amasi**（亦見 Amasai）是南非等地傳統發酵乳：傳統用生乳在葫蘆等容器自然發酵；商業製程約 **30°C／16–24 h**，常用 *Lactococcus lactis* 與 *L. cremoris*。
+
+DIY 店多標 **常溫 heirloom**；質地可像可飲優格／克菲爾，加倍接種量可更稠、接近優格狀。
+
+## 口感分類
+
+口感對照表常把它放在「布丁／優格狀」旁；實際成品厚度變化大，請以你的接種量與發酵終點為準。`,
+	},
+	{
+		id: 'langfil-short',
+		title: 'Short Långfil（短版）',
+		titleEn: 'Short Långfil',
+		summary: '常溫；Långfil 失去黏絲後的優格狀版本。接近 Filmjölk／布丁凝乳。',
+		species: 'fil／Långfil 系 Lactococcus／Leuconostoc；弱或無產黏能力',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–25',
+		timeRangeH: '12–24',
+		flavorProfile: '溫和、可帶奶油香（fil 系）',
+		textureProfile: '優格狀／布丁；不拉絲',
+		reuseHint: 'mesophilic；可由 Long Långfil 失黏而來，或商家短版配方',
+		sortOrder: 57,
+		bodyMd: `## 概述（Overview）
+
+**Short Långfil**＝不帶（或已失去）彈性黏絲的 Långfil：風味仍偏瑞典 fil，質地像優格／布丁。
+
+傳統 **Långfil** 以長絲著名；短版才是口感對照表裡「優格狀」那一格。見 [Long Långfil](../langfil-long/)。`,
+	},
+	{
+		id: 'langfil-long',
+		title: 'Long Långfil（長版／黏絲）',
+		titleEn: 'Långfil (Long)',
+		summary: '瑞典常溫；Filmjölk 的黏絲變體，彈性拉絲、奶油香。',
+		species: '產 EPS 的 Lactococcus（常與 L. cremoris／ropy 菌株相關）＋ fil 系伴隨菌',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–25',
+		timeRangeH: '12–24',
+		flavorProfile: '溫和奶油香、微酸',
+		textureProfile: '長彈性黏絲（ropey）；攪拌後可變滑順',
+		reuseHint: 'mesophilic heirloom；過度發酵可能失黏變成短版',
+		sortOrder: 58,
+		bodyMd: `## 概述（Overview）
+
+**Långfil**＝瑞典「長絲 fil」：常溫發酵，質地可拉成長絲，風味偏奶油。可視為 [Filmjölk](../filmjolk/) 的**黏絲變體**。
+
+若要優格狀、不要黏絲：用 [Short Långfil](../langfil-short/) 或 Filmjölk。`,
 	},
 	{
 		id: 'filmjolk',
 		title: 'Filmjölk（瑞典）',
 		titleEn: 'Filmjölk',
-		summary: '常溫風格；偏可飲、酪乳感。菌相為乳球菌＋明串珠菌，通常不含黴菌。',
+		summary: '常溫風格；偏可飲／優格狀。菌相為乳球菌＋明串珠菌，通常不含黴菌。',
 		species: 'Lactococcus lactis subsp. lactis + Lactococcus cremoris + biovar diacetylactis + Leuconostoc mesenteroides',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–21',
 		timeRangeH: '18–20',
 		flavorProfile: '略酸，帶奶油香',
-		textureProfile: '偏可飲、比牛奶稠但比優格薄；不以 ropy 為主',
+		textureProfile: '偏可飲至優格狀；比牛奶稠、比稠優格薄；不以 ropy 為主',
 		reuseHint: '常為 heirloom；商業配方可另加機能菌',
 		sortOrder: 60,
 		bodyMd: `## 概述（Overview）
 
-瑞典常溫發酵乳。商業菌種商製程建議約 **20–21°C／18–20 h**。
+瑞典常溫發酵乳。商業菌種商製程建議約 **20–21°C／18–20 h**。口感對照表常歸「布丁／優格狀」旁。
 
-## 與 Viili 的差別
+## 與 Viili／Långfil 的差別
 
 - Filmjölk **通常不含黴菌**，不以產黏菌株為主，因此一般不 ropy。
+- 要黏絲用 [Long Långfil](../langfil-long/)；要優格狀短版用 [Short Långfil](../langfil-short/)。
 - 現代商業配方有時另加 *L. acidophilus*、*B. animalis* subsp. *lactis* 做機能訴求。
 - 瑞典 Arla 的 [Onaka](../onaka/) 即是「fil 基底＋雙歧桿菌」路線的知名商品名。`,
 	},
@@ -245,14 +385,14 @@ export const cultures = [
 		id: 'onaka',
 		title: 'Onaka（お腹／fil＋bifido）',
 		titleEn: 'Onaka',
-		summary: '常溫 fil 型＋雙歧桿菌；源自瑞典 Arla（與森永合作）。≠ Japanese Caspian Sea。',
+		summary: '常溫 fil 型＋雙歧桿菌；源自瑞典 Arla。口感對照常列優格狀。≠ Japanese Caspian Sea。',
 		species:
 			'fil 系 Lactococcus／Leuconostoc；另加 Bifidobacterium lactis（商品常見 BB-12）、常另含 L. acidophilus、L. casei',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–25',
 		timeRangeH: '12–24',
 		flavorProfile: '溫和清爽、酸度偏低；偏「純乳」感',
-		textureProfile: 'fil 型；偏滑順，可略稠於一般 filmjölk；不以 Caspian 式強黏絲為主',
+		textureProfile: 'fil／優格狀；偏滑順，可略稠於一般 filmjölk；不以 Caspian 式強黏絲為主',
 		reuseHint: 'DIY 店多作 mesophilic heirloom；市售 Onaka filmjölk 亦可當 starter（傳代穩定性視菌相）',
 		sortOrder: 65,
 		bodyMd: `## 概述（Overview）
@@ -277,13 +417,13 @@ export const cultures = [
 		id: 'caspian-sea',
 		title: 'Japanese Caspian Sea (日本裏海)',
 		titleEn: 'Japanese Caspian Sea',
-		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。≠ 喬治亞原產 Matsoni；≠ Onaka。',
+		summary: '常溫、可傳代；優勢菌為產 EPS 的 Lactococcus cremoris。口感對照常列布丁／優格狀。≠ Matsoni；≠ Onaka。',
 		species: 'Lactococcus cremoris（優勢；舊名 L. lactis subsp. cremoris）',
 		temperatureClass: 'mesophilic',
 		tempRangeC: '20–25',
 		timeRangeH: '12–24',
 		flavorProfile: '溫和；相對「比較像優格」',
-		textureProfile: '黏稠 custard；黏性來自優勢菌的 EPS',
+		textureProfile: '黏稠 custard／布丁感；黏性來自優勢菌的 EPS',
 		reuseHint: 'mesophilic heirloom；名義溯源高加索，菌相已與原產 matsoni 分道',
 		sortOrder: 70,
 		bodyMd: `## 概述（Overview）
