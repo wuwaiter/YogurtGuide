@@ -44,7 +44,8 @@
 | 一般／傳統優格 | Traditional / plain yogurt | 典型 S. thermophilus + L. bulgaricus 路線 |
 | 保加利亞優格 | Bulgarian yogurt | 常強調較酸、較「正宗優格」酸香；發酵可偏長 |
 | 希臘優格菌粉 | Greek yogurt starter | 常訴求較厚凝乳、較溫和；**真正 Greek 濃稠多靠瀝乳** |
-| 冰島 Skyr | Skyr | 傳統上偏脫脂、濃稠；現代常仍用嗜熱菌，且常搭配瀝乳 |
+| 冰島 Short Skyr | Short Skyr | 傳統嗜熱＋瀝乳；DIY 稱 Short＝正統路線 |
+| 冰島 Long Skyr（DIY） | Long Skyr | 常溫、常帶黏絲；**非**傳統製法 |
 | 其他（羊奶等） | Goat milk yogurt 等 | 依供應商配方 |
 
 ### 常溫風格（Mesophilic / countertop styles）
@@ -150,7 +151,7 @@ Batch（批次）
 已由文獻／商品標示補上（2026-07-31）：
 
 - [x] 台灣常溫菌粉（MESO）與北歐 Viili／Filmjölk **不同類**：MESO 是「優格兩菌 + 乳球菌」的 direct-set 混搭配方，北歐型是純乳球菌＋真菌的 heirloom。見 [02](./02-culture-profiles.md) C。
-- [x] Skyr 家用菌粉多為**嗜熱**（42–43°C／6–12 h），且**必須瀝乳** 8–12 h 才有標誌濃稠度。見 [02](./02-culture-profiles.md) A4。
+- [x] Skyr 家用有 **Short（嗜熱傳統）** 與 **Long（常溫黏絲變體）** 兩路；傳統需瀝乳 8–12 h。見 [02](./02-culture-profiles.md) A4。
 - [x] 傳代衰退代數：分離菌株型約 **3–5 代**後明顯失衡；heirloom 可長期延續。見 [04](./04-starter-formats.md) 2。
 - [x] 常見商品菌株對照（MESO／730／28）：見 [02](./02-culture-profiles.md) C。
 

@@ -79,8 +79,8 @@
 
 |  | Direct-set | Heirloom | 市售優格 |
 |--|------------|----------|----------|
-| Thermophilic | 最常見家用菌粉（台灣 730／28） | 保加利亞、Skyr 等可傳代粉／母種 | 多數原味優格 |
-| Mesophilic | 較少但有（台灣 MESO 屬此） | Viili／Filmjölk／Caspian Sea／Piimä 常見 | 視產品（台灣較少標北歐風格） |
+| Thermophilic | 最常見家用菌粉（台灣 730／28） | 保加利亞、Short Skyr 等可傳代粉／母種 | 多數原味優格 |
+| Mesophilic | 較少但有（台灣 MESO 屬此） | Viili／Filmjölk／Caspian Sea／Piimä／Long Skyr 常見 | 視產品（台灣較少標北歐風格） |
 | SCOBY 型 | kefir 粉（數批後衰退） | **kefir grains（真正無限延續）** | — |
 
 注意台灣的 MESO 雖是常溫菌，但配方是分離菌株組合的 **direct-set**，不等於北歐那種常溫 heirloom；見 [02-culture-profiles.md](./02-culture-profiles.md) C1。

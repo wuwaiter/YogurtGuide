@@ -36,3 +36,4 @@
 - 2026-07-31：新增市售優格大類（`/market/`、`market_yogurts`、知識庫 06）；★ = 僅鮮乳或奶粉＋水＋菌種。
 - 2026-08-01：新增常溫菌種 **Onaka**（fil＋bifido；≠ Japanese Caspian Sea）；來源 Arla／DIY starter。
 - 2026-08-02：新增 [07-homemade-vs-commercial-cfu.md](./07-homemade-vs-commercial-cfu.md)；批次 B002（市售優格當母種、微波爐輔助發酵）。
+- 2026-08-03：Skyr 拆成 Short（嗜熱傳統）／Long（常溫黏絲）；菌種總覽除風格外改橫式條列。

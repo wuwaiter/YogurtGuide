@@ -42,20 +42,40 @@
 | **重要澄清** | 「希臘優格」成品定義上多指**瀝去乳清（strained yogurt）**；菌粉名稱≠保證已是希臘優格 |
 | 對照中文市場 | 「希臘式」常加膠體／奶粉增稠，與真正 strained 不同 |
 
-### A4. Skyr（冰島）
+### A4. Skyr（冰島）— Short vs Long
+
+Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。DIY 市場常分成兩種商品名：
+
+#### A4a. Short Skyr（短版／傳統嗜熱）
 
 | 項目 | 說明 |
 |------|------|
-| 英文 | Skyr |
-| 本質 | **技術上屬新鮮起司（fresh cheese）**，只是被當優格吃 |
-| 核心物種 | 嗜熱路線：*S. thermophilus* + *L. delbrueckii* subsp. *bulgaricus*，常宣稱含冰島特有菌株 |
-| 適溫／時間 | **42–43°C／6–12 h**（英國供應商說明書寫 42°C、約 10 h；要更酸則拉長） |
-| 瀝乳 | **必要步驟。** 冷藏瀝 8–12 h，越久越厚；濃稠來自瀝乳而非菌種 |
-| 乳品選擇 | 傳統用**脫脂乳**——少數「脫脂才正宗」的發酵；全脂較濃郁但不傳統 |
-| 型態 | 市售家用款多為 heirloom，可長期傳代（每公升留約 1 大匙） |
-| 備註 | 傳統做法會加**一滴凝乳酶（rennet）** 幫助結構；發酵中出現乳清分離是正常現象，不是失敗 |
+| 英文 | Short Skyr / Traditional Icelandic Skyr |
+| 適溫／時間 | **42–43°C／6–12 h**（常見說明 42°C、約 10 h） |
+| 核心物種 | *S. thermophilus* + *L. delbrueckii* subsp. *bulgaricus*（常宣稱冰島特有菌株） |
+| 瀝乳 | **必要。** 冷藏 8–12 h，濃稠來自瀝乳 |
+| 質地 | 濃稠、溫和；**傳統不強調 sticky／ropy** |
+| 乳品 | 傳統**脫脂乳**；可加一滴凝乳酶（rennet） |
+| 備註 | 凍乾第一批常較弱，第 2 代才是真實水準 |
 
-**給批次紀錄的重要提醒：** 供應商明確指出乾粉的**第一批常表現不足**，需用第一批的一匙做第二批才是該菌的真實水準。因此 Skyr（乃至其他凍乾 heirloom）的**第 1 代不應當作基準線**，批次欄位務必記代數。
+#### A4b. Long Skyr（長版／常溫黏絲）
+
+| 項目 | 說明 |
+|------|------|
+| 英文 | Long Skyr (Ropey) |
+| 適溫 | **常溫（mesophilic）**，無需優格機 |
+| 質地 | 偏厚，常帶 **ropey／黏絲** |
+| 定位 | DIY 變體；商用說法推測混入產黏菌株 |
+| 備註 | **≠ 傳統冰島製法**；不要用 Long 的說明書去對照文獻裡的 Skyr |
+
+| | Short | Long |
+|--|-------|------|
+| 溫度 | 嗜熱 | 常溫 |
+| 黏絲 | 通常無 | 常見 |
+| 瀝乳 | 標誌步驟 | 可選 |
+| 與傳統 | 接近 | 偏離 |
+
+**給批次紀錄：** Short／一般 thermophilic Skyr 的第 1 代不宜當基準線；若用 Long，請在批次註明「常溫黏絲變體」，避免與 Short 混比。
 
 ### A5. 機能加強型（Probiotic-fortified yogurt cultures）
 
@@ -211,7 +231,8 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 想長期留母種 | Heirloom（需規律製作）；最耐傳代的是含真菌／SCOBY 型 |
 | 偶爾做、求穩定 | Direct-set 菌粉 |
 | 想要真正「無限」延續 | Kefir grains（見 [05-kefir-and-scoby.md](./05-kefir-and-scoby.md)） |
-| 想要黏絲（ropy）口感 | Viili 或 Japanese Caspian Sea（產 EPS 的 *L. cremoris*） |
+| 想要黏絲（ropy）口感 | Viili、Japanese Caspian Sea，或 Long Skyr（常溫變體） |
+| 想做傳統 Skyr（瀝乳濃稠） | Short Skyr（嗜熱）＋瀝乳 8–12 h；勿用 Long |
 | 想要 fil＋雙歧、清爽常溫 | Onaka（≠ 裏海） |
 
 ---

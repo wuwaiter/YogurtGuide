@@ -90,21 +90,31 @@ export const cultures = [
 | Greek yogurt starter | 菌粉風格；不保證成品已是希臘優格 |`,
 	},
 	{
-		id: 'skyr',
-		title: 'Skyr（冰島）',
-		titleEn: 'Skyr',
-		summary: '技術上屬新鮮起司；嗜熱發酵後需瀝乳才有標誌濃稠度。',
+		id: 'skyr-short',
+		title: 'Short Skyr（短版／傳統嗜熱）',
+		titleEn: 'Short Skyr (Thermophilic)',
+		summary: '傳統冰島路線：嗜熱發酵後瀝乳。DIY 店所稱 Short Skyr＝正統 Skyr。',
 		species: 'Streptococcus thermophilus + Lactobacillus delbrueckii subsp. bulgaricus（常宣稱含冰島特有菌株）',
 		temperatureClass: 'thermophilic',
 		tempRangeC: '42–43',
 		timeRangeH: '6–12',
 		flavorProfile: '偏溫和至微酸；乾粉第一批常較弱',
-		textureProfile: '發酵後常有乳清分離；瀝乳 8–12 h 後才濃稠',
+		textureProfile: '發酵後常有乳清分離；瀝乳 8–12 h 後才濃稠；傳統不強調黏絲',
 		reuseHint: '家用多為 heirloom；每公升留約 1 大匙，建議至少每週回接',
 		sortOrder: 40,
 		bodyMd: `## 概述（Overview）
 
-Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。家用 starter 幾乎都是嗜熱型：約 **42–43°C／6–12 h**（供應商說明常見 42°C、約 10 h）。
+**Short Skyr**＝DIY 菌種商對**傳統嗜熱 Skyr**的稱呼（相對常溫「Long Skyr」）。技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。
+
+家用 starter：約 **42–43°C／6–12 h**（常見說明 42°C、約 10 h）。
+
+## 與 Long Skyr 的差別
+
+| | Short Skyr | [Long Skyr](../skyr-long/) |
+|--|------------|----------------------------|
+| 適溫 | 嗜熱（需定溫） | 常溫（mesophilic） |
+| 質地 | 瀝乳後濃稠；**傳統不 sticky／ropy** | 常帶**黏絲（ropey）** |
+| 定位 | 接近傳統冰島製法 | DIY 變體／混菌偶然產物，非傳統 Skyr |
 
 ## 瀝乳是必要步驟
 
@@ -112,9 +122,39 @@ Skyr 技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。�
 
 ## 使用筆記（Usage Notes）
 
-- 傳統用**脫脂乳**——少數「脫脂才正宗」的發酵；全脂較濃郁但不傳統。
+- 傳統用**脫脂乳**；全脂較濃郁但不傳統。
 - 傳統做法可加**一滴凝乳酶（rennet）** 幫助結構。
 - 凍乾乾粉的**第一批常表現不足**；用第一批的一匙做第二批，才是該菌真實水準。第 1 代不宜當基準線。`,
+	},
+	{
+		id: 'skyr-long',
+		title: 'Long Skyr（長版／常溫黏絲）',
+		titleEn: 'Long Skyr (Mesophilic / Ropey)',
+		summary: '常溫、可帶黏絲的 Skyr 風格變體；非傳統冰島製法。≠ Short Skyr。',
+		species: '常溫 LAB 為主；商用描述常暗示混入產黏菌株（實際菌相依供應商）',
+		temperatureClass: 'mesophilic',
+		tempRangeC: '20–25',
+		timeRangeH: '12–24',
+		flavorProfile: '溫和微酸，可帶一點甜潤',
+		textureProfile: '偏厚 cream；常有 subtle ropey／黏絲',
+		reuseHint: 'DIY 店多作 mesophilic heirloom；勿當成傳統嗜熱 Skyr 的替代說明書',
+		sortOrder: 55,
+		bodyMd: `## 概述（Overview）
+
+**Long Skyr** 是西方 DIY 菌種商（如 Positively Probiotic）販售的**常溫 Skyr 風格變體**：室溫發酵，成品常帶**黏絲（ropey）**。
+
+商用說法多推測：可能原為傳統 Skyr 菌，後來混入產黏菌株；**不是**冰島傳統「加熱＋嗜熱＋瀝乳」流程的標準答案。
+
+## 重要澄清：≠ Short Skyr
+
+| | Long Skyr | [Short Skyr](../skyr-short/) |
+|--|-----------|------------------------------|
+| 溫度 | 常溫 | 嗜熱 42–43°C |
+| 黏絲 | 常見特色 | 傳統 Skyr 通常沒有 |
+| 瀝乳 | 可選（看喜歡的厚度） | **標誌步驟**（8–12 h） |
+| 名稱 | DIY 商品名 | DIY 對「傳統版」的稱呼 |
+
+→ 要做**傳統口感 Skyr**請選 Short／一般標 thermophilic 的 Skyr starter，不要用 Long 的說明書去對照文獻裡的冰島製法。`,
 	},
 	{
 		id: 'matsoni',

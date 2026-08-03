@@ -47,8 +47,9 @@
 
 | 來源 | URL | 取用重點 |
 |------|-----|----------|
-| Freshly Fermented — Skyr starter 說明書 | https://freshlyfermented.co.uk/instructions/skyr-yoghurt-starter-instructions/ | Skyr 42°C／約 10 h；瀝乳 8–12 h；heirloom 每公升留 1 大匙、至少每週回接 |
-| Startercultures.eu — Skyr | https://startercultures.eu/product/fermentation/dairy/yoghurt/skyr/ | 嗜熱型；可加一滴凝乳酶；**乾粉第一批較弱，第二批才是真實水準** |
+| Freshly Fermented — Skyr starter 說明書 | https://freshlyfermented.co.uk/instructions/skyr-yoghurt-starter-instructions/ | Short／傳統嗜熱：42°C／約 10 h；瀝乳 8–12 h |
+| Startercultures.eu — Skyr | https://startercultures.eu/product/fermentation/dairy/yoghurt/skyr/ | 嗜熱型；可加一滴凝乳酶；**乾粉第一批較弱** |
+| Positively Probiotic — Long Skyr | https://www.positivelyprobiotic.com/shop-all-cultures/p/long-skyr-ropey-heirloom-mesophilic-yogurt-starter-culture | Long＝常溫＋ropey；明示非傳統 Skyr |
 | Startercultures.eu — How to make yogurt | https://startercultures.eu/how-to-make-yogurt-at-home-and-answer-to-all-your-questions/ | Skyr 43°C／6–8 h；傳統脫脂乳；瀝乳常比希臘優格更久 |
 | Sacco System — Filmjölk 技術文件 | https://saccosystem.com/wp-content/uploads/2025/02/FILMJOLK.pdf | Filmjölk 菌相四菌；**20–21°C／18–20 h**；已採用新學名 *Lactococcus cremoris* |
 | Arla — Historien bakom Onaka | https://www.arla.se/om-arla/arlas-historia/produkterna/onaka/ | 1990 年 Onaka；與森永合作引入日本 bifido；fil＋雙歧 |

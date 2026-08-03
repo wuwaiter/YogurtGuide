@@ -21,39 +21,26 @@ const tempLabel: Record<string, string> = {
 		<div class="wrap">
 			<h1 class="page-title">菌種<span class="en-sub">Culture Knowledge</span></h1>
 			<p class="page-lead">
-				資料存放於 SQLite（data/yogurtguide.db）。數值為常見範圍，實作以包裝與批次紀錄為準。
+				數值為常見範圍，實作以包裝與批次紀錄為準。
 			</p>
 			<CulturesSubnav current="index" />
 
 			<section class="record-block" id="by-temperature">
 				<h2 class="record-block__title">1. 依適溫分類<span class="en-sub">By Temperature</span></h2>
-				<table class="meta-table">
-					<thead>
-						<tr>
-							<th>類別</th>
-							<th>英文</th>
-							<th>適溫（約）</th>
-							<th>典型時間</th>
-							<th>傾向</th>
-						</tr>
-					</thead>
-					<tbody>
-						<tr>
-							<td>中高溫（嗜熱菌）</td>
-							<td>Thermophilic</td>
-							<td>40–45°C（常 42–43°C）</td>
-							<td>約 4–12 h</td>
-							<td>較濃稠、典型優格酸香；需定溫</td>
-						</tr>
-						<tr>
-							<td>常溫（中溫菌）</td>
-							<td>Mesophilic</td>
-							<td>約 20–30°C（DIY 常 21–25°C）</td>
-							<td>約 12–48 h</td>
-							<td>較柔清爽，有時可飲；多可室溫靜置</td>
-						</tr>
-					</tbody>
-				</table>
+				<ul class="classify-list">
+					<li class="classify-list__row">
+						<span class="classify-list__label">中高溫（嗜熱菌）</span>
+						<span class="classify-list__body"
+							>Thermophilic · 40–45°C（常 42–43°C） · 約 4–12 h · 較濃稠、典型優格酸香；需定溫</span
+						>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">常溫（中溫菌）</span>
+						<span class="classify-list__body"
+							>Mesophilic · 約 20–30°C（DIY 常 21–25°C） · 約 12–48 h · 較柔清爽，有時可飲；多可室溫靜置</span
+						>
+					</li>
+				</ul>
 			</section>
 
 			<section class="record-block" id="by-style">
@@ -107,22 +94,26 @@ const tempLabel: Record<string, string> = {
 
 			<section class="record-block" id="by-reuse">
 				<h2 class="record-block__title">3. 依能不能反復接種分類<span class="en-sub">By Reuse</span></h2>
-				<table class="meta-table">
-					<tbody>
-						<tr>
-							<th>可延續／傳代</th>
-							<td>Heirloom、mother culture — 成品可留作下一劑；需規律製作與衛生</td>
-						</tr>
-						<tr>
-							<th>一次／數次用完</th>
-							<td>Direct-set、DVS／DVI — 凍乾粉直接接種；穩定，通常不宜長期傳代（約 3–5 代後易失衡）</td>
-						</tr>
-						<tr>
-							<th>市售優格當 starter</th>
-							<td>方便取得；菌相未必適傳代，常第 3–5 代後變弱</td>
-						</tr>
-					</tbody>
-				</table>
+				<ul class="classify-list">
+					<li class="classify-list__row">
+						<span class="classify-list__label">可延續／傳代</span>
+						<span class="classify-list__body"
+							>Heirloom、mother culture — 成品可留作下一劑；需規律製作與衛生</span
+						>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">一次／數次用完</span>
+						<span class="classify-list__body"
+							>Direct-set、DVS／DVI — 凍乾粉直接接種；穩定，通常不宜長期傳代（約 3–5 代後易失衡）</span
+						>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">市售優格當 starter</span>
+						<span class="classify-list__body"
+							>方便取得；菌相未必適傳代，常第 3–5 代後變弱</span
+						>
+					</li>
+				</ul>
 				<p>
 					<a href={`${base}cultures/starters/`}>詳見接種型態說明 →</a>
 				</p>
@@ -130,10 +121,18 @@ const tempLabel: Record<string, string> = {
 
 			<section class="record-block" id="core-species">
 				<h2 class="record-block__title">4. 法規／定義上的核心種<span class="en-sub">Defining Cultures</span></h2>
-				<ol>
-					<li>嗜熱鏈球菌（<em>Streptococcus thermophilus</em>）</li>
-					<li>保加利亞乳桿菌（<em>Lactobacillus delbrueckii</em> subsp. <em>bulgaricus</em>）</li>
-				</ol>
+				<ul class="classify-list">
+					<li class="classify-list__row">
+						<span class="classify-list__label">嗜熱鏈球菌</span>
+						<span class="classify-list__body"><em>Streptococcus thermophilus</em></span>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">保加利亞乳桿菌</span>
+						<span class="classify-list__body"
+							><em>Lactobacillus delbrueckii</em> subsp. <em>bulgaricus</em></span
+						>
+					</li>
+				</ul>
 				<p>
 					<a href={`${base}cultures/species/`}>詳見物種中英對照 →</a>
 				</p>
@@ -141,22 +140,26 @@ const tempLabel: Record<string, string> = {
 
 			<section class="record-block" id="by-fungi">
 				<h2 class="record-block__title">5. 依是否含酵母／真菌分類<span class="en-sub">By Fungi / Yeast</span></h2>
-				<table class="meta-table">
-					<tbody>
-						<tr>
-							<th>純乳酸菌型</th>
-							<td>僅 LAB；一般優格菌粉、Filmjölk、台灣 MESO — 不產氣；direct-set 傳代易失衡</td>
-						</tr>
-						<tr>
-							<th>含真菌／酵母型</th>
-							<td>LAB + 酵母／黴菌；Viili、部分 Matsoni — 風味較複雜，可能產 CO₂，較耐傳代</td>
-						</tr>
-						<tr>
-							<th>SCOBY（顆粒）型</th>
-							<td>細菌與酵母包在多醣基質中；kefir grains 可無限延續，粉狀替代品數批後衰退</td>
-						</tr>
-					</tbody>
-				</table>
+				<ul class="classify-list">
+					<li class="classify-list__row">
+						<span class="classify-list__label">純乳酸菌型</span>
+						<span class="classify-list__body"
+							>僅 LAB；一般優格菌粉、Filmjölk、台灣 MESO — 不產氣；direct-set 傳代易失衡</span
+						>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">含真菌／酵母型</span>
+						<span class="classify-list__body"
+							>LAB + 酵母／黴菌；Viili、部分 Matsoni — 風味較複雜，可能產 CO₂，較耐傳代</span
+						>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">SCOBY（顆粒）型</span>
+						<span class="classify-list__body"
+							>細菌與酵母包在多醣基質中；kefir grains 可無限延續，粉狀替代品數批後衰退</span
+						>
+					</li>
+				</ul>
 				<p class="meta">
 					注意：Matsoni（喬治亞原產）≠ Japanese Caspian Sea (日本裏海)；Onaka（fil＋bifido）≠ 裏海。後者為常溫乳球菌主導；Onaka 較接近 Filmjölk 機能加強。
 				</p>
