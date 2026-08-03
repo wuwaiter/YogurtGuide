@@ -65,14 +65,12 @@ const insertBatch = db.prepare(`
   INSERT INTO batches (
     id, title, title_en, date, ambient_temp_c, peak_heat_c,
     inoculation_temp_c, incubation_temp_c, incubation_time_h,
+    equipment_device, equipment_vessel, equipment_note,
     culture_source, culture_name, culture_origin, culture_amount,
     culture_generation, culture_id, method_id, result_set, result_acidity, result_texture,
     result_whey, result_flavor, result_overall, score_reproducibility,
     score_satisfaction, body_md, draft
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
-`);
-const insertBatchEquipment = db.prepare(`
-  INSERT INTO batch_equipment (batch_id, name, sort_order) VALUES (?, ?, ?)
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 `);
 const insertBatchIngredient = db.prepare(`
   INSERT INTO batch_ingredients (batch_id, type, brand, amount, note, sort_order)
@@ -90,6 +88,9 @@ for (const b of batches) {
 		b.inoculationTempC,
 		b.incubationTempC,
 		b.incubationTimeH,
+		b.equipment?.device ?? null,
+		b.equipment?.vessel ?? null,
+		b.equipment?.note ?? null,
 		b.cultureSource,
 		b.cultureName,
 		b.cultureOrigin,
@@ -107,7 +108,6 @@ for (const b of batches) {
 		b.scoreSatisfaction ?? null,
 		b.bodyMd,
 	);
-	b.equipment.forEach((name, i) => insertBatchEquipment.run(b.id, name, i));
 	b.ingredients.forEach((ing, i) =>
 		insertBatchIngredient.run(b.id, ing.type, ing.brand, ing.amount, ing.note ?? null, i),
 	);

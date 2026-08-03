@@ -25,9 +25,9 @@ const categoryLabel: Record<string, string> = {
 				{
 					terms.map((term) => (
 						<li class="list-item" style="cursor: default;">
-							<h3>
+							<h3 class="glossary-term">
 								{term.term_zh}
-								<span class="en-sub">{term.term_en}</span>
+								<span class="glossary-term__en">{term.term_en}</span>
 							</h3>
 							<p class="meta">{categoryLabel[term.category] ?? term.category}</p>
 							<div class="prose" set:html={renderMarkdown(term.body_md)} />

@@ -343,6 +343,10 @@ p {
 	gap: 0;
 }
 
+.record-fields {
+	--classify-label-w: 11.5rem;
+}
+
 .classify-list__row {
 	display: grid;
 	grid-template-columns: var(--classify-label-w) minmax(0, 1fr);
@@ -445,6 +449,14 @@ p {
 	letter-spacing: 0;
 }
 
+.glossary-term__en {
+	margin-left: 0.5em;
+	font-family: var(--font-body);
+	font-weight: 500;
+	color: var(--ink-muted);
+	letter-spacing: 0;
+}
+
 .market-card {
 	margin: 0 0 1.75rem;
 	padding-bottom: 0.25rem;
@@ -511,5 +523,9 @@ p {
 
 	.classify-list {
 		--classify-label-w: 7rem;
+	}
+
+	.record-fields {
+		--classify-label-w: 8.5rem;
 	}
 }

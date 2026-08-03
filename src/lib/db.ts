@@ -49,6 +49,9 @@ export type BatchRow = {
 	inoculation_temp_c: string;
 	incubation_temp_c: string;
 	incubation_time_h: string;
+	equipment_device: string | null;
+	equipment_vessel: string | null;
+	equipment_note: string | null;
 	culture_source: string;
 	culture_name: string;
 	culture_origin: string;
@@ -136,16 +139,6 @@ export function getBatch(id: string): BatchRow | undefined {
 	return getDb().prepare(`SELECT * FROM batches WHERE id = ? AND draft = 0`).get(id) as
 		| BatchRow
 		| undefined;
-}
-
-export function getBatchEquipment(batchId: string): string[] {
-	return (
-		getDb()
-			.prepare(
-				`SELECT name FROM batch_equipment WHERE batch_id = ? ORDER BY sort_order ASC`,
-			)
-			.all(batchId) as Array<{ name: string }>
-	).map((r) => r.name);
 }
 
 export function getBatchIngredients(batchId: string): IngredientRow[] {

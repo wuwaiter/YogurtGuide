@@ -3,211 +3,184 @@ import type { BatchRow, IngredientRow } from '../lib/db';
 
 interface Props {
 	batch: BatchRow;
-	equipment: string[];
 	ingredients: IngredientRow[];
 }
 
-const { batch: d, equipment, ingredients } = Astro.props;
-const base = import.meta.env.BASE_URL;
+const { batch: d, ingredients } = Astro.props;
 
 const ingredientTypeLabel: Record<string, string> = {
-	'fresh-milk': '鮮奶（fresh milk）',
-	'milk-powder': '奶粉（milk powder）',
-	water: '水（water）',
-	other: '其他（other）',
+	'fresh-milk': '鮮奶',
+	'milk-powder': '奶粉',
+	water: '水',
+	other: '其他',
 };
 
-const cultureSourceLabel: Record<string, string> = {
-	mother: '留存母種（mother culture）',
-	'new-powder': '新菌粉（new starter powder）',
-	'commercial-yogurt': '市售優格（commercial yogurt）',
-	other: '其他（other）',
+const cultureSourceShort: Record<string, string> = {
+	mother: '留存母種',
+	'new-powder': '新菌粉',
+	'commercial-yogurt': '市售優格',
+	other: '其他',
 };
+
+const cultureSourceLine = (() => {
+	const kind = cultureSourceShort[d.culture_source] ?? d.culture_source;
+	let line = `${kind}（${d.culture_name}）`;
+	if (d.culture_generation != null) {
+		line += ` · 傳代第 ${d.culture_generation} 次`;
+	}
+	return line;
+})();
+
+function formatTemp(value: string): string {
+	const m = value.match(/^(\d+(?:\.\d+)?)(.*)$/);
+	if (m && !m[2].startsWith('°')) return `${m[1]}°C${m[2]}`;
+	const approx = value.match(/^(約\s*)(\d+(?:\.\d+)?)(.*)$/);
+	if (approx && !approx[3].startsWith('°')) {
+		return `${approx[1]}${approx[2]}°C${approx[3]}`;
+	}
+	return value.includes('°C') ? value : `${value}°C`;
+}
 ---
 
 <section class="record-block">
 	<h2 class="record-block__title">1. 日期及溫度<span class="en-sub">Date & Temperature</span></h2>
-	<table class="meta-table">
-		<tbody>
-			<tr>
-				<th>日期（date）</th>
-				<td>{d.date}</td>
-			</tr>
-			{
-				d.ambient_temp_c && (
-					<tr>
-						<th>室溫（ambient）</th>
-						<td>{d.ambient_temp_c}°C</td>
-					</tr>
-				)
-			}
-			{
-				d.peak_heat_c && (
-					<tr>
-						<th>加熱高峰（peak heat）</th>
-						<td>{d.peak_heat_c}°C</td>
-					</tr>
-				)
-			}
-			<tr>
-				<th>接種溫度（inoculation）</th>
-				<td>{d.inoculation_temp_c}°C</td>
-			</tr>
-			<tr>
-				<th>保溫溫度（incubation）</th>
-				<td>{d.incubation_temp_c}°C</td>
-			</tr>
-			<tr>
-				<th>發酵時間（time）</th>
-				<td>{d.incubation_time_h} h</td>
-			</tr>
-		</tbody>
-	</table>
-</section>
-
-<section class="record-block">
-	<h2 class="record-block__title">2. 器材<span class="en-sub">Equipment</span></h2>
-	<ul class="record-chips">
-		{equipment.map((item) => <li>{item}</li>)}
+	<ul class="classify-list record-fields">
+		<li class="classify-list__row">
+			<span class="classify-list__label">日期（date）</span>
+			<span class="classify-list__body">{d.date}</span>
+		</li>
+		{
+			d.ambient_temp_c && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">室溫（ambient）</span>
+					<span class="classify-list__body">{formatTemp(d.ambient_temp_c)}</span>
+				</li>
+			)
+		}
+		{
+			d.peak_heat_c && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">加熱高峰（peak heat）</span>
+					<span class="classify-list__body">{formatTemp(d.peak_heat_c)}</span>
+				</li>
+			)
+		}
+		<li class="classify-list__row">
+			<span class="classify-list__label">接種溫度（inoculation）</span>
+			<span class="classify-list__body">{formatTemp(d.inoculation_temp_c)}</span>
+		</li>
+		<li class="classify-list__row">
+			<span class="classify-list__label">保溫溫度（incubation）</span>
+			<span class="classify-list__body">{formatTemp(d.incubation_temp_c)}</span>
+		</li>
+		<li class="classify-list__row">
+			<span class="classify-list__label">發酵時間（time）</span>
+			<span class="classify-list__body">{d.incubation_time_h}</span>
+		</li>
 	</ul>
 </section>
 
 <section class="record-block">
-	<h2 class="record-block__title">3. 食材與份量<span class="en-sub">Ingredients</span></h2>
-	<table class="meta-table">
-		<thead>
-			<tr>
-				<th>類型</th>
-				<th>品牌</th>
-				<th>份量</th>
-				<th>備註</th>
-			</tr>
-		</thead>
-		<tbody>
-			{
-				ingredients.map((ing) => (
-					<tr>
-						<td>{ingredientTypeLabel[ing.type] ?? ing.type}</td>
-						<td>{ing.brand}</td>
-						<td>{ing.amount}</td>
-						<td>{ing.note ?? '—'}</td>
-					</tr>
-				))
-			}
-		</tbody>
-	</table>
+	<h2 class="record-block__title">2. 器材<span class="en-sub">Equipment</span></h2>
+	<ul class="classify-list record-fields">
+		<li class="classify-list__row">
+			<span class="classify-list__label">發酵設備</span>
+			<span class="classify-list__body">{d.equipment_device ?? '—'}</span>
+		</li>
+		<li class="classify-list__row">
+			<span class="classify-list__label">發酵容器</span>
+			<span class="classify-list__body">{d.equipment_vessel ?? '—'}</span>
+		</li>
+		<li class="classify-list__row">
+			<span class="classify-list__label">備註</span>
+			<span class="classify-list__body">{d.equipment_note ?? '—'}</span>
+		</li>
+	</ul>
 </section>
 
 <section class="record-block">
-	<h2 class="record-block__title">4. 菌種<span class="en-sub">Culture / Starter</span></h2>
-	<table class="meta-table">
-		<tbody>
-			<tr>
-				<th>來源類型</th>
-				<td>{cultureSourceLabel[d.culture_source] ?? d.culture_source}</td>
-			</tr>
-			<tr>
-				<th>名稱</th>
-				<td>
-					{
-						d.culture_id ? (
-							<a href={`${base}cultures/${d.culture_id}/`}>{d.culture_name}</a>
-						) : (
-							d.culture_name
-						)
-					}
-				</td>
-			</tr>
-			<tr>
-				<th>購得／來源</th>
-				<td>{d.culture_origin}</td>
-			</tr>
-			<tr>
-				<th>接種量</th>
-				<td>{d.culture_amount}</td>
-			</tr>
-			{
-				d.culture_generation != null && (
-					<tr>
-						<th>傳代次數</th>
-						<td>第 {d.culture_generation} 次</td>
-					</tr>
-				)
-			}
-			{
-				d.method_id && (
-					<tr>
-						<th>製法（method）</th>
-						<td>
-							<a href={`${base}methods/${d.method_id}/`}>{d.method_id}</a>
-						</td>
-					</tr>
-				)
-			}
-		</tbody>
-	</table>
+	<h2 class="record-block__title">3. 食材與菌種<span class="en-sub">Ingredients & Culture</span></h2>
+	<ul class="classify-list record-fields">
+		{
+			ingredients.map((ing) => (
+				<li class="classify-list__row">
+					<span class="classify-list__label">{ingredientTypeLabel[ing.type] ?? ing.type}</span>
+					<span class="classify-list__body">
+						{ing.brand} · {ing.amount}
+						{ing.note ? ` · ${ing.note}` : ''}
+					</span>
+				</li>
+			))
+		}
+		<li class="classify-list__row">
+			<span class="classify-list__label">來源類型</span>
+			<span class="classify-list__body">{cultureSourceLine}</span>
+		</li>
+		<li class="classify-list__row">
+			<span class="classify-list__label">接種量</span>
+			<span class="classify-list__body">{d.culture_amount}</span>
+		</li>
+	</ul>
 </section>
 
 <section class="record-block">
-	<h2 class="record-block__title">5. 成品狀況<span class="en-sub">Result</span></h2>
-	<table class="meta-table">
-		<tbody>
-			<tr>
-				<th>凝乳（set）</th>
-				<td>{d.result_set}</td>
-			</tr>
-			{
-				d.result_acidity && (
-					<tr>
-						<th>酸度（acidity）</th>
-						<td>{d.result_acidity}</td>
-					</tr>
-				)
-			}
-			{
-				d.result_texture && (
-					<tr>
-						<th>質地（texture）</th>
-						<td>{d.result_texture}</td>
-					</tr>
-				)
-			}
-			{
-				d.result_whey && (
-					<tr>
-						<th>乳清（whey）</th>
-						<td>{d.result_whey}</td>
-					</tr>
-				)
-			}
-			{
-				d.result_flavor && (
-					<tr>
-						<th>風味（flavor）</th>
-						<td>{d.result_flavor}</td>
-					</tr>
-				)
-			}
-			{
-				d.result_overall && (
-					<tr>
-						<th>總評</th>
-						<td>{d.result_overall}</td>
-					</tr>
-				)
-			}
-			{
-				(d.score_reproducibility || d.score_satisfaction) && (
-					<tr>
-						<th>評分</th>
-						<td>
-							{d.score_reproducibility && <>可重複性 {d.score_reproducibility}/5</>}
-							{d.score_reproducibility && d.score_satisfaction && ' · '}
-							{d.score_satisfaction && <>滿意度 {d.score_satisfaction}/5</>}
-						</td>
-					</tr>
-				)
-			}
-		</tbody>
-	</table>
+	<h2 class="record-block__title">4. 成品狀況<span class="en-sub">Result</span></h2>
+	<ul class="classify-list record-fields">
+		<li class="classify-list__row">
+			<span class="classify-list__label">凝乳（set）</span>
+			<span class="classify-list__body">{d.result_set}</span>
+		</li>
+		{
+			d.result_acidity && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">酸度（acidity）</span>
+					<span class="classify-list__body">{d.result_acidity}</span>
+				</li>
+			)
+		}
+		{
+			d.result_texture && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">質地（texture）</span>
+					<span class="classify-list__body">{d.result_texture}</span>
+				</li>
+			)
+		}
+		{
+			d.result_whey && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">乳清（whey）</span>
+					<span class="classify-list__body">{d.result_whey}</span>
+				</li>
+			)
+		}
+		{
+			d.result_flavor && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">風味（flavor）</span>
+					<span class="classify-list__body">{d.result_flavor}</span>
+				</li>
+			)
+		}
+		{
+			d.result_overall && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">總評</span>
+					<span class="classify-list__body">{d.result_overall}</span>
+				</li>
+			)
+		}
+		{
+			(d.score_reproducibility || d.score_satisfaction) && (
+				<li class="classify-list__row">
+					<span class="classify-list__label">評分</span>
+					<span class="classify-list__body">
+						{d.score_reproducibility && <>可重複性 {d.score_reproducibility}/5</>}
+						{d.score_reproducibility && d.score_satisfaction && ' · '}
+						{d.score_satisfaction && <>滿意度 {d.score_satisfaction}/5</>}
+					</span>
+				</li>
+			)
+		}
+	</ul>
 </section>

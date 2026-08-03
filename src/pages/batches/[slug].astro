@@ -4,7 +4,6 @@ import BatchRecord from '../../components/BatchRecord.astro';
 import {
 	assertDbExists,
 	getBatch,
-	getBatchEquipment,
 	getBatchIngredients,
 	listBatches,
 } from '../../lib/db';
@@ -25,7 +24,6 @@ if (!batch) {
 	throw new Error(`Batch not found: ${slug}`);
 }
 
-const equipment = getBatchEquipment(batch.id);
 const ingredients = getBatchIngredients(batch.id);
 const bodyHtml = renderMarkdown(batch.body_md);
 const dateLabel = formatBatchDate(batch.date);
@@ -38,7 +36,7 @@ const cultureLabel = formatBatchCultureLabel(batch);
 			<h1 class="page-title">{dateLabel}</h1>
 			<p class="page-lead">{cultureLabel}</p>
 
-			<BatchRecord batch={batch} equipment={equipment} ingredients={ingredients} />
+			<BatchRecord batch={batch} ingredients={ingredients} />
 
 			<article class="prose" set:html={bodyHtml} />
 		</div>
