@@ -66,10 +66,10 @@ const insertBatch = db.prepare(`
     id, title, title_en, date, ambient_temp_c, peak_heat_c,
     inoculation_temp_c, incubation_temp_c, incubation_time_h,
     culture_source, culture_name, culture_origin, culture_amount,
-    culture_id, method_id, result_set, result_acidity, result_texture,
+    culture_generation, culture_id, method_id, result_set, result_acidity, result_texture,
     result_whey, result_flavor, result_overall, score_reproducibility,
     score_satisfaction, body_md, draft
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 `);
 const insertBatchEquipment = db.prepare(`
   INSERT INTO batch_equipment (batch_id, name, sort_order) VALUES (?, ?, ?)
@@ -94,6 +94,7 @@ for (const b of batches) {
 		b.cultureName,
 		b.cultureOrigin,
 		b.cultureAmount,
+		b.cultureGeneration ?? null,
 		b.cultureId ?? null,
 		b.methodId ?? null,
 		b.resultSet,

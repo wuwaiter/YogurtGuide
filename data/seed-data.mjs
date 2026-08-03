@@ -515,6 +515,7 @@ export const methods = [
  *  cultureName: string,
  *  cultureOrigin: string,
  *  cultureAmount: string,
+ *  cultureGeneration?: number,
  *  cultureId?: string,
  *  methodId?: string,
  *  resultSet: string,
@@ -530,8 +531,8 @@ export const methods = [
 export const batches = [
 	{
 		id: 'b001-baseline',
-		title: '批次 B001 — 基準線試驗',
-		titleEn: 'Batch B001 — Baseline Trial',
+		title: '2026/07/20',
+		titleEn: '2026-07-20',
 		date: '2026-07-20',
 		ambientTempC: '28',
 		peakHeatC: '88',
@@ -567,8 +568,8 @@ export const batches = [
 	},
 	{
 		id: 'b002-fulo-microwave',
-		title: '批次 B002 — 福樂好優＋微波爐輔助',
-		titleEn: 'Batch B002 — Fulo commercial yogurt, microwave-assisted',
+		title: '2026/08/01',
+		titleEn: '2026-08-01',
 		date: '2026-08-01',
 		ambientTempC: '32',
 		inoculationTempC: '約 32',

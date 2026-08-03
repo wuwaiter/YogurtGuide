@@ -56,6 +56,7 @@ CREATE TABLE IF NOT EXISTS batches (
   culture_name TEXT NOT NULL,
   culture_origin TEXT NOT NULL,
   culture_amount TEXT NOT NULL,
+  culture_generation INTEGER,
   culture_id TEXT REFERENCES cultures(id),
   method_id TEXT REFERENCES methods(id),
   result_set TEXT NOT NULL,

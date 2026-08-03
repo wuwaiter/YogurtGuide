@@ -8,6 +8,7 @@ import {
 	getBatchIngredients,
 	listBatches,
 } from '../../lib/db';
+import { formatBatchCultureLabel, formatBatchDate } from '../../lib/batch-display';
 import { renderMarkdown } from '../../lib/markdown';
 
 assertDbExists();
@@ -27,18 +28,15 @@ if (!batch) {
 const equipment = getBatchEquipment(batch.id);
 const ingredients = getBatchIngredients(batch.id);
 const bodyHtml = renderMarkdown(batch.body_md);
+const dateLabel = formatBatchDate(batch.date);
+const cultureLabel = formatBatchCultureLabel(batch);
 ---
 
-<BaseLayout title={batch.title} description={`批次實驗 ${batch.date}`}>
+<BaseLayout title={dateLabel} description={`批次實驗 ${dateLabel} · ${cultureLabel}`}>
 	<section class="section">
 		<div class="wrap">
-			<h1 class="page-title">
-				{batch.title}
-				{batch.title_en && <span class="en-sub">{batch.title_en}</span>}
-			</h1>
-			<p class="page-lead">
-				{batch.date} · {batch.culture_name} · {batch.culture_source}
-			</p>
+			<h1 class="page-title">{dateLabel}</h1>
+			<p class="page-lead">{cultureLabel}</p>
 
 			<BatchRecord batch={batch} equipment={equipment} ingredients={ingredients} />
 

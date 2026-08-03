@@ -53,6 +53,7 @@ export type BatchRow = {
 	culture_name: string;
 	culture_origin: string;
 	culture_amount: string;
+	culture_generation: number | null;
 	culture_id: string | null;
 	method_id: string | null;
 	result_set: string;

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import { formatBatchCultureLabel, formatBatchDate } from '../lib/batch-display';
 import { assertDbExists, listBatches } from '../lib/db';
 
 assertDbExists();
@@ -34,9 +35,9 @@ const base = import.meta.env.BASE_URL;
 					batches.map((batch) => (
 						<li>
 							<a class="list-item" href={`${base}batches/${batch.id}/`}>
-								<h3>{batch.title}</h3>
+								<h3>{formatBatchDate(batch.date)}</h3>
 								<p class="meta">
-									{batch.date} · {batch.culture_name} · {batch.result_set}
+									{formatBatchCultureLabel(batch)} · {batch.result_set}
 								</p>
 							</a>
 						</li>

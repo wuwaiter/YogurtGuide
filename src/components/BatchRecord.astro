@@ -127,6 +127,14 @@ const cultureSourceLabel: Record<string, string> = {
 				<td>{d.culture_amount}</td>
 			</tr>
 			{
+				d.culture_generation != null && (
+					<tr>
+						<th>傳代次數</th>
+						<td>第 {d.culture_generation} 次</td>
+					</tr>
+				)
+			}
+			{
 				d.method_id && (
 					<tr>
 						<th>製法（method）</th>
