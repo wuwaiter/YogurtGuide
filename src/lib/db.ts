@@ -67,6 +67,8 @@ export type BatchRow = {
 	result_overall: string | null;
 	score_reproducibility: number | null;
 	score_satisfaction: number | null;
+	photo_album_url: string | null;
+	photos_json: string;
 	body_md: string;
 };
 

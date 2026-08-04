@@ -70,6 +70,8 @@ CREATE TABLE IF NOT EXISTS batches (
   result_overall TEXT,
   score_reproducibility INTEGER,
   score_satisfaction INTEGER,
+  photo_album_url TEXT,
+  photos_json TEXT NOT NULL DEFAULT '[]',
   body_md TEXT NOT NULL DEFAULT '',
   draft INTEGER NOT NULL DEFAULT 0
 );

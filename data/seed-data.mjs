@@ -808,6 +808,8 @@ export const methods = [
  *  resultOverall?: string,
  *  scoreReproducibility?: number,
  *  scoreSatisfaction?: number,
+ *  photoAlbumUrl?: string,
+ *  photos?: string[],
  *  bodyMd: string
  * }>} */
 export const batches = [
@@ -839,6 +841,8 @@ export const batches = [
 		resultOverall: '可作為後續對照的基準線批次',
 		scoreReproducibility: 3,
 		scoreSatisfaction: 3,
+		photoAlbumUrl: 'https://photos.app.goo.gl/JuT2GeDxGeWpdomt5',
+		photos: ['batches/b001/01.jpg'],
 		bodyMd: `## Observation（觀察）
 
 凝乳完整但略過頭，已有乳清析出；酸度中等可接受。微波爐＋熱水碗保溫約 32°C、發酵 11 h。

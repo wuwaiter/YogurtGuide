@@ -28,6 +28,15 @@ const ingredients = getBatchIngredients(batch.id);
 const bodyHtml = renderMarkdown(batch.body_md);
 const dateLabel = formatBatchDate(batch.date);
 const cultureLabel = formatBatchCultureLabel(batch);
+const base = import.meta.env.BASE_URL;
+
+/** @type {string[]} */
+let photos: string[] = [];
+try {
+	photos = JSON.parse(batch.photos_json || '[]');
+} catch {
+	photos = [];
+}
 ---
 
 <BaseLayout title={dateLabel} description={`批次實驗 ${dateLabel} · ${cultureLabel}`}>
@@ -35,6 +44,38 @@ const cultureLabel = formatBatchCultureLabel(batch);
 		<div class="wrap">
 			<h1 class="page-title">{dateLabel}</h1>
 			<p class="page-lead">{cultureLabel}</p>
+
+			{
+				(photos.length > 0 || batch.photo_album_url) && (
+					<section class="record-block">
+						<h2 class="record-block__title">
+							照片<span class="en-sub">Photos</span>
+						</h2>
+						{
+							photos.length > 0 && (
+								<ul class="batch-photos">
+									{photos.map((src) => (
+										<li>
+											<a href={`${base}${src}`} target="_blank" rel="noopener noreferrer">
+												<img src={`${base}${src}`} alt={`${dateLabel} 批次照片`} loading="lazy" />
+											</a>
+										</li>
+									))}
+								</ul>
+							)
+						}
+						{
+							batch.photo_album_url && (
+								<p class="batch-photos__album">
+									<a href={batch.photo_album_url} target="_blank" rel="noopener noreferrer">
+										在 Google 相簿開啟完整相簿
+									</a>
+								</p>
+							)
+						}
+					</section>
+				)
+			}
 
 			<BatchRecord batch={batch} ingredients={ingredients} />
 

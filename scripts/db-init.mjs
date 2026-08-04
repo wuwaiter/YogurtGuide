@@ -69,8 +69,8 @@ const insertBatch = db.prepare(`
     culture_source, culture_name, culture_origin, culture_amount,
     culture_generation, culture_id, method_id, result_set, result_acidity, result_texture,
     result_whey, result_flavor, result_overall, score_reproducibility,
-    score_satisfaction, body_md, draft
-  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
+    score_satisfaction, photo_album_url, photos_json, body_md, draft
+  ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)
 `);
 const insertBatchIngredient = db.prepare(`
   INSERT INTO batch_ingredients (batch_id, type, brand, amount, note, sort_order)
@@ -106,6 +106,8 @@ for (const b of batches) {
 		b.resultOverall ?? null,
 		b.scoreReproducibility ?? null,
 		b.scoreSatisfaction ?? null,
+		b.photoAlbumUrl ?? null,
+		JSON.stringify(b.photos ?? []),
 		b.bodyMd,
 	);
 	b.ingredients.forEach((ing, i) =>
