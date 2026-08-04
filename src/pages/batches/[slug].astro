@@ -45,6 +45,8 @@ try {
 			<h1 class="page-title">{dateLabel}</h1>
 			<p class="page-lead">{cultureLabel}</p>
 
+			<BatchRecord batch={batch} ingredients={ingredients} />
+
 			{
 				(photos.length > 0 || batch.photo_album_url) && (
 					<section class="record-block">
@@ -76,8 +78,6 @@ try {
 					</section>
 				)
 			}
-
-			<BatchRecord batch={batch} ingredients={ingredients} />
 
 			<article class="prose" set:html={bodyHtml} />
 		</div>
