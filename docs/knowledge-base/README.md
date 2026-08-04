@@ -26,6 +26,7 @@
 | 05 克菲爾 | 尚未上架（分類總覽 §5 已摘要） | — |
 | 06 市售優格 | `/market/` | `data/seed-data.mjs` → SQLite |
 | 07 自製 vs 市售 CFU | 尚未上架（知識庫筆記） | — |
+| SOURCES 製法補充 | `/methods/` | `data/seed-data.mjs` → SQLite |
 
 ## 更新紀錄
 
@@ -38,3 +39,5 @@
 - 2026-08-02：新增 [07-homemade-vs-commercial-cfu.md](./07-homemade-vs-commercial-cfu.md)；批次 B002（市售優格當母種、微波爐輔助發酵）。
 - 2026-08-03：Skyr 拆成 Short（嗜熱傳統）／Long（常溫黏絲）；菌種總覽除風格外改橫式條列。
 - 2026-08-03：布丁／優格狀對照補齊：新增 Amasi、Ayran、Persis；Viili／Långfil 拆 Short／Long；01／02／SOURCES 同步。
+- 2026-08-04：製法新增瀝乳、常溫室溫發酵、凝態／攪拌、無優格機保溫變通；SOURCES 製法補充。
+- 2026-08-04：製法新增野生水果引子馴化、跨界混搭商業引子（皆附安全鐵律）。

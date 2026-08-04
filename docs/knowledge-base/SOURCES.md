@@ -96,6 +96,33 @@
 
 ---
 
+## 製法補充（2026-08-04）
+
+| 來源 | URL | 取用重點 |
+|------|-----|----------|
+| The Ferment Guide — Homemade yogurt | https://thefermentguide.com/guides/homemade-yogurt | 加熱～180°F／冷卻接種；瀝乳 1–2 h 希臘式、4+ h 近 labneh；失敗排查 |
+| The Mediterranean Dish — Greek yogurt | https://www.themediterraneandish.com/how-to-make-greek-yogurt/ | 保溫約 108–112°F、6–10 h；冷藏瀝乳 2–8 h |
+| Tetra Pak — Fermented milk products | https://dairyprocessinghandbook.tetrapak.com/chapter/fermented-milk-products | Set（杯內發酵）vs Stirred（槽內發酵後溫和處理）；嗜熱約 40–43°C |
+| US Dairy — Yogurt Application Monograph | https://usdairyexcellence.org/wp-content/uploads/2023/12/Yogurt-Application-Monograph.pdf | Set／stirred／drinkable 製程概要；杯內保溫約 40–42°C |
+| Startercultures.eu — How to make yogurt | https://startercultures.eu/how-to-make-yogurt-at-home-and-answer-to-all-your-questions/ | Thermo 42–43°C vs meso 20–30°C；無優格機選項；溫區用錯為常見失敗 |
+| Revolution Fermentation — Without yogurt maker | https://revolutionfermentation.com/en/blogs/yogurt/making-yogurt-without-yogurt-maker/ | 烤箱燈、冰桶＋熱水、保溫瓶；常溫 mesophilic 路線 |
+| NCHFP — Making Yogurt at Home (PDF) | https://ucfoodsafety.ucdavis.edu/sites/g/files/dgvnsk7366/files/inline-files/295482.pdf | 加熱持溫、接種 110–112°F、保溫約 4–7 h；過久更酸與乳清 |
+| 耳東小姐 — 保溫瓶做優格 | https://oldgirllab.com/yogurt-730/ | 繁中保溫瓶實作；消毒與溫度計 |
+| 電鍋做優格步驟解析 | https://www.melvinluck.com/2026/06/blog-post_84.html | 電鍋宜保溫、勿長按煮飯鍵；瀝乳 2–6 h |
+
+對應網站製法頁：`straining`、`mesophilic-countertop`、`set-vs-stirred`、`improvised-incubation`、`wild-fruit-starter`、`cross-culture-blend`（另既有 `pasteurized-inoculation`）。
+
+### 實驗性風味製法（高風險 — 必附安全鐵律）
+
+| 主題 | 取用重點 | 本站備註 |
+|------|----------|----------|
+| 野生水果發酵液 → 馴化進乳 | 果皮天然 LAB／酵母；初代 25–30°C，續種約 40°C | 雜菌風險高；頁內強制「安全鐵律」 |
+| 優格粉＋生起司／康普茶混搭 | 可控複合風味；約 40°C／8–10 h | 仍須感官報廢標準；非零風險 |
+
+> 此二法來源為實務整理／口述流程，**非**經同儕審查的食品安全指引。操作與食用風險自負；異常批次整批丟棄。
+
+---
+
 ## 使用聲明
 
 - 知識庫為**二次整理筆記**，數據範圍可能因菌株與製程而異。  
