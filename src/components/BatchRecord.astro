@@ -1,5 +1,6 @@
 ---
 import type { BatchRow, IngredientRow } from '../lib/db';
+import { formatBatchDate } from '../lib/batch-display';
 
 interface Props {
 	batch: BatchRow;
@@ -28,6 +29,7 @@ const cultureSourceLine = (() => {
 	if (d.culture_generation != null) {
 		line += ` · 傳代第 ${d.culture_generation} 次`;
 	}
+	line += ` / ${d.culture_amount}`;
 	return line;
 })();
 
@@ -47,7 +49,7 @@ function formatTemp(value: string): string {
 	<ul class="classify-list record-fields">
 		<li class="classify-list__row">
 			<span class="classify-list__label">日期（date）</span>
-			<span class="classify-list__body">{d.date}</span>
+			<span class="classify-list__body">{formatBatchDate(d.date)}</span>
 		</li>
 		{
 			d.ambient_temp_c && (
@@ -93,7 +95,7 @@ function formatTemp(value: string): string {
 		</li>
 		<li class="classify-list__row">
 			<span class="classify-list__label">備註</span>
-			<span class="classify-list__body">{d.equipment_note ?? '—'}</span>
+			<span class="classify-list__body">{d.equipment_note || '—'}</span>
 		</li>
 	</ul>
 </section>
@@ -106,19 +108,15 @@ function formatTemp(value: string): string {
 				<li class="classify-list__row">
 					<span class="classify-list__label">{ingredientTypeLabel[ing.type] ?? ing.type}</span>
 					<span class="classify-list__body">
-						{ing.brand} · {ing.amount}
-						{ing.note ? ` · ${ing.note}` : ''}
+						{ing.brand} / {ing.amount}
+						{ing.note ? ` / ${ing.note}` : ''}
 					</span>
 				</li>
 			))
 		}
 		<li class="classify-list__row">
-			<span class="classify-list__label">來源類型</span>
+			<span class="classify-list__label">菌種來源</span>
 			<span class="classify-list__body">{cultureSourceLine}</span>
-		</li>
-		<li class="classify-list__row">
-			<span class="classify-list__label">接種量</span>
-			<span class="classify-list__body">{d.culture_amount}</span>
 		</li>
 	</ul>
 </section>
