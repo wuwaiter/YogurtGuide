@@ -531,44 +531,39 @@ export const methods = [
 export const batches = [
 	{
 		id: 'b001-baseline',
-		title: '2026/07/20',
-		titleEn: '2026-07-20',
-		date: '2026-07-20',
-		ambientTempC: '28',
-		peakHeatC: '88',
-		inoculationTempC: '42',
-		incubationTempC: '42',
-		incubationTimeH: '6h',
+		title: '2026/07/30',
+		titleEn: '2026-07-30',
+		date: '2026-07-30',
+		inoculationTempC: '32',
+		incubationTempC: '32',
+		incubationTimeH: '11h',
 		equipment: {
-			device: '優格機（定溫）',
-			vessel: '玻璃發酵罐',
-			note: '探針溫度計、厚底鍋',
+			device: '微波爐 + 一碗熱水',
+			vessel: '304 金屬制容器',
+			note: '',
 		},
 		ingredients: [
-			{ type: 'fresh-milk', brand: '光泉全脂鮮乳（示意）', amount: '1000 ml', note: '非 UHT' },
+			{ type: 'fresh-milk', brand: '義美全脂鮮奶', amount: '700 ml' },
 		],
-		cultureSource: 'new-powder',
-		cultureName: '保加利亞嗜熱菌粉（示意）',
-		cultureOrigin: '示意來源／請改為實際購買通路',
-		cultureAmount: '1 包（約對 1 L）',
-		cultureId: 'bulgarian',
-		methodId: 'pasteurized-inoculation',
-		resultSet: '凝乳完整，輕搖表面整體移動',
-		resultAcidity: '中高，乳酸感清楚',
-		resultTexture: '勺起可斷面，偏細緻',
+		cultureSource: 'commercial-yogurt',
+		cultureName: '心樸優格',
+		cultureOrigin: '市售優格當 starter',
+		cultureAmount: '120 ml',
+		resultSet: '凝乳完整但略為過頭，已有乳清析出',
+		resultAcidity: '中，乳酸感清楚但可接受',
+		resultTexture: '勺起可斷面，偏細緻，但表面不夠光滑',
 		resultWhey: '表面少量乳清',
 		resultFlavor: '典型優格酸香，略帶乳脂',
 		resultOverall: '可作為後續對照的基準線批次',
-		scoreReproducibility: 4,
-		scoreSatisfaction: 4,
+		scoreReproducibility: 3,
+		scoreSatisfaction: 3,
 		bodyMd: `## Observation（觀察）
 
-本次作為基準線（baseline）：固定奶源與製法，建立後續菌種／參數比較的對照組。
+凝乳完整但略過頭，已有乳清析出；酸度中等可接受。微波爐＋熱水碗保溫約 32°C、發酵 11 h。
 
 ## Next Trial（下次調整）
 
-- 維持製法不變，僅更換菌種，比較酸度上升速率與質地。
-- 或改用留存母種（mother culture），對照新菌粉的表現差異。`,
+製法不變，但需要縮短發酵時間。`,
 	},
 	{
 		id: 'b002-fulo-microwave',
