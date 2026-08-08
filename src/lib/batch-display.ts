@@ -1,4 +1,6 @@
-import type { BatchRow } from './db';
+import type { CollectionEntry } from 'astro:content';
+
+type BatchData = CollectionEntry<'batches'>['data'];
 
 /** `2026-08-01` → `2026/08/01` */
 export function formatBatchDate(isoDate: string): string {
@@ -7,16 +9,16 @@ export function formatBatchDate(isoDate: string): string {
 
 /** 列表／頁首副標：菌種名或市售優格；有傳代則加上次數 */
 export function formatBatchCultureLabel(batch: {
-	culture_name: string;
-	culture_generation: number | null;
+	cultureName: string;
+	cultureGeneration?: number;
 }): string {
-	const name = batch.culture_name;
-	if (batch.culture_generation != null) {
-		return `${name} · 傳代第 ${batch.culture_generation} 次`;
+	const name = batch.cultureName;
+	if (batch.cultureGeneration != null) {
+		return `${name} · 傳代第 ${batch.cultureGeneration} 次`;
 	}
 	return name;
 }
 
-export function batchPageTitle(batch: BatchRow): string {
+export function batchPageTitle(batch: BatchData): string {
 	return formatBatchDate(batch.date);
 }

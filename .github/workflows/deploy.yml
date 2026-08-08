@@ -30,9 +30,6 @@ jobs:
       - name: Install
         run: npm ci
 
-      - name: Init SQLite
-        run: npm run db:init
-
       - name: Build
         run: npm run build
 

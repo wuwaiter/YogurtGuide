@@ -1,11 +1,13 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
-import { assertDbExists, listGlossary } from '../lib/db';
-import { renderMarkdown } from '../lib/markdown';
+import { getCollection, render } from 'astro:content';
 
-assertDbExists();
-
-const terms = listGlossary();
+const entries = (await getCollection('glossary', ({ data }) => !data.draft)).sort((a, b) =>
+	a.data.termZh.localeCompare(b.data.termZh, 'zh-Hant'),
+);
+const terms = await Promise.all(
+	entries.map(async (entry) => ({ entry, Content: (await render(entry)).Content })),
+);
 
 const categoryLabel: Record<string, string> = {
 	process: '製程（process）',
@@ -23,14 +25,14 @@ const categoryLabel: Record<string, string> = {
 			<p class="page-lead">中文為主，專業用語附英文，方便閱讀與對照文獻。</p>
 			<ul class="list">
 				{
-					terms.map((term) => (
+					terms.map(({ entry, Content }) => (
 						<li class="list-item" style="cursor: default;">
 							<h3 class="glossary-term">
-								{term.term_zh}
-								<span class="glossary-term__en">{term.term_en}</span>
+								{entry.data.termZh}
+								<span class="glossary-term__en">{entry.data.termEn}</span>
 							</h3>
-							<p class="meta">{categoryLabel[term.category] ?? term.category}</p>
-							<div class="prose" set:html={renderMarkdown(term.body_md)} />
+							<p class="meta">{categoryLabel[entry.data.category] ?? entry.data.category}</p>
+							<div class="prose"><Content /></div>
 						</li>
 					))
 				}

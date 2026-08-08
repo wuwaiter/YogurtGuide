@@ -1,0 +1,110 @@
+import { defineCollection, reference } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const cultures = defineCollection({
+	loader: glob({ base: './src/content/cultures', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		titleEn: z.string(),
+		summary: z.string(),
+		species: z.string().optional(),
+		temperatureClass: z.enum(['thermophilic', 'mesophilic']),
+		form: z.string().optional(),
+		source: z.string().optional(),
+		tempRangeC: z.string().optional(),
+		timeRangeH: z.string().optional(),
+		flavorProfile: z.string().optional(),
+		textureProfile: z.string().optional(),
+		reuseHint: z.string().optional(),
+		sortOrder: z.number().default(100),
+		draft: z.boolean().default(false),
+	}),
+});
+
+const methods = defineCollection({
+	loader: glob({ base: './src/content/methods', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		titleEn: z.string(),
+		summary: z.string(),
+		equipment: z.array(z.string()).default([]),
+		suitableCultures: z.array(reference('cultures')).default([]),
+		draft: z.boolean().default(false),
+	}),
+});
+
+const ingredientSchema = z.object({
+	type: z.enum(['fresh-milk', 'milk-powder', 'water', 'other']),
+	brand: z.string(),
+	amount: z.string(),
+	note: z.string().optional(),
+});
+
+const batches = defineCollection({
+	loader: glob({ base: './src/content/batches', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		titleEn: z.string().optional(),
+		date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
+		ambientTempC: z.string().optional(),
+		peakHeatC: z.string().optional(),
+		inoculationTempC: z.string(),
+		incubationTempC: z.string(),
+		incubationTimeH: z.string(),
+		equipment: z.object({
+			device: z.string().optional(),
+			vessel: z.string().optional(),
+			note: z.string().optional(),
+		}),
+		ingredients: z.array(ingredientSchema).default([]),
+		cultureSource: z.enum(['mother', 'new-powder', 'commercial-yogurt', 'other']),
+		cultureName: z.string(),
+		cultureOrigin: z.string(),
+		cultureAmount: z.string(),
+		cultureGeneration: z.number().int().nonnegative().optional(),
+		culture: reference('cultures').optional(),
+		method: reference('methods').optional(),
+		resultSet: z.string(),
+		resultAcidity: z.string().optional(),
+		resultTexture: z.string().optional(),
+		resultWhey: z.string().optional(),
+		resultFlavor: z.string().optional(),
+		resultOverall: z.string().optional(),
+		scoreReproducibility: z.number().int().min(1).max(5).optional(),
+		scoreSatisfaction: z.number().int().min(1).max(5).optional(),
+		photoAlbumUrl: z.string().url().optional(),
+		photos: z.array(z.string()).default([]),
+		draft: z.boolean().default(false),
+	}),
+});
+
+const glossary = defineCollection({
+	loader: glob({ base: './src/content/glossary', pattern: '**/*.md' }),
+	schema: z.object({
+		termZh: z.string(),
+		termEn: z.string(),
+		category: z.enum(['process', 'microbiology', 'quality', 'equipment', 'general']),
+		draft: z.boolean().default(false),
+	}),
+});
+
+const marketYogurts = defineCollection({
+	loader: glob({ base: './src/content/market-yogurts', pattern: '**/*.md' }),
+	schema: z.object({
+		brand: z.string(),
+		productName: z.string(),
+		recommended: z.boolean().default(false),
+		milkBase: z.enum(['fresh', 'powder', 'mixed', 'other']),
+		milkBaseNote: z.string(),
+		addedSugar: z.boolean().default(false),
+		additives: z.string(),
+		cultures: z.string(),
+		ingredientsLabel: z.string(),
+		note: z.string().optional(),
+		sortOrder: z.number().default(100),
+		draft: z.boolean().default(false),
+	}),
+});
+
+export const collections = { cultures, methods, batches, glossary, marketYogurts };

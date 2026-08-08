@@ -1,12 +1,12 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import { assertDbExists, listMarketYogurts } from '../../lib/db';
+import { getCollection } from 'astro:content';
 
-assertDbExists();
-
-const yogurts = listMarketYogurts();
-const recommended = yogurts.filter((y) => y.recommended === 1);
-const others = yogurts.filter((y) => y.recommended === 0);
+const yogurts = (await getCollection('marketYogurts', ({ data }) => !data.draft)).sort(
+	(a, b) => Number(b.data.recommended) - Number(a.data.recommended) || a.data.sortOrder - b.data.sortOrder,
+);
+const recommended = yogurts.filter((y) => y.data.recommended);
+const others = yogurts.filter((y) => !y.data.recommended);
 ---
 
 <BaseLayout
@@ -38,38 +38,38 @@ const others = yogurts.filter((y) => y.recommended === 0);
 			<section class="record-block">
 				<h2 class="record-block__title">★ 符合推薦條件（{recommended.length}）</h2>
 				{
-					recommended.map((y) => (
-						<article class="market-card market-card--star" id={y.id}>
+					recommended.map(({ id, data }) => (
+						<article class="market-card market-card--star" id={id}>
 							<h3 class="market-card__title">
 								<span class="market-card__star" aria-label="推薦">★</span>
-								{y.brand} {y.product_name}
+								{data.brand} {data.productName}
 							</h3>
 							<table class="meta-table">
 								<tbody>
 									<tr>
 										<th>成分標示</th>
-										<td>{y.ingredients_label}</td>
+										<td>{data.ingredientsLabel}</td>
 									</tr>
 									<tr>
 										<th>菌種</th>
-										<td>{y.cultures}</td>
+										<td>{data.cultures}</td>
 									</tr>
 									<tr>
 										<th>乳源</th>
-										<td>{y.milk_base_note}</td>
+										<td>{data.milkBaseNote}</td>
 									</tr>
 									<tr>
 										<th>加糖</th>
-										<td>{y.added_sugar ? '有加糖' : '無加糖'}</td>
+										<td>{data.addedSugar ? '有加糖' : '無加糖'}</td>
 									</tr>
 									<tr>
 										<th>其它添加物</th>
-										<td>{y.additives}</td>
+										<td>{data.additives}</td>
 									</tr>
-									{y.note && (
+									{data.note && (
 										<tr>
 											<th>備註</th>
-											<td>{y.note}</td>
+											<td>{data.note}</td>
 										</tr>
 									)}
 								</tbody>
@@ -82,37 +82,37 @@ const others = yogurts.filter((y) => y.recommended === 0);
 			<section class="record-block">
 				<h2 class="record-block__title">其他常見款（未給 ★）（{others.length}）</h2>
 				{
-					others.map((y) => (
-						<article class="market-card" id={y.id}>
+					others.map(({ id, data }) => (
+						<article class="market-card" id={id}>
 							<h3 class="market-card__title">
-								{y.brand} {y.product_name}
+								{data.brand} {data.productName}
 							</h3>
 							<table class="meta-table">
 								<tbody>
 									<tr>
 										<th>乳源</th>
-										<td>{y.milk_base_note}</td>
+										<td>{data.milkBaseNote}</td>
 									</tr>
 									<tr>
 										<th>加糖</th>
-										<td>{y.added_sugar ? '有加糖' : '無加糖'}</td>
+										<td>{data.addedSugar ? '有加糖' : '無加糖'}</td>
 									</tr>
 									<tr>
 										<th>其他添加物</th>
-										<td>{y.additives}</td>
+										<td>{data.additives}</td>
 									</tr>
 									<tr>
 										<th>菌種</th>
-										<td>{y.cultures}</td>
+										<td>{data.cultures}</td>
 									</tr>
 									<tr>
 										<th>成分標示摘要</th>
-										<td>{y.ingredients_label}</td>
+										<td>{data.ingredientsLabel}</td>
 									</tr>
-									{y.note && (
+									{data.note && (
 										<tr>
 											<th>備註</th>
-											<td>{y.note}</td>
+											<td>{data.note}</td>
 										</tr>
 									)}
 								</tbody>

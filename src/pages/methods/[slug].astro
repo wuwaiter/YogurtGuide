@@ -1,62 +1,53 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import {
-	assertDbExists,
-	getMethod,
-	getMethodCultureIds,
-	getMethodEquipment,
-	listMethods,
-} from '../../lib/db';
-import { renderMarkdown } from '../../lib/markdown';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
 
-assertDbExists();
+interface Props {
+	method: CollectionEntry<'methods'>;
+}
 
-export function getStaticPaths() {
-	return listMethods().map((method) => ({
+export async function getStaticPaths() {
+	const methods = await getCollection('methods', ({ data }) => !data.draft);
+	return methods.map((method) => ({
 		params: { slug: method.id },
+		props: { method },
 	}));
 }
 
-const { slug } = Astro.params;
-const method = getMethod(slug!);
-if (!method) {
-	throw new Error(`Method not found: ${slug}`);
-}
-
-const equipment = getMethodEquipment(method.id);
-const suitableCultures = getMethodCultureIds(method.id);
-const bodyHtml = renderMarkdown(method.body_md);
+const { method } = Astro.props as Props;
+const data = method.data;
+const { Content } = await render(method);
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title={method.title} description={method.summary}>
+<BaseLayout title={data.title} description={data.summary}>
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">
-				{method.title}
-				<span class="en-sub">{method.title_en}</span>
+				{data.title}
+				<span class="en-sub">{data.titleEn}</span>
 			</h1>
-			<p class="page-lead">{method.summary}</p>
+			<p class="page-lead">{data.summary}</p>
 
 			<table class="meta-table">
 				<tbody>
 					{
-						equipment.length > 0 && (
+						data.equipment.length > 0 && (
 							<tr>
 								<th>器材（equipment）</th>
-								<td>{equipment.join('、')}</td>
+								<td>{data.equipment.join('、')}</td>
 							</tr>
 						)
 					}
 					{
-						suitableCultures.length > 0 && (
+						data.suitableCultures.length > 0 && (
 							<tr>
 								<th>適用菌種</th>
 								<td>
-									{suitableCultures.map((id, i) => (
+									{data.suitableCultures.map((culture, i) => (
 										<>
 											{i > 0 && '、'}
-											<a href={`${base}cultures/${id}/`}>{id}</a>
+											<a href={`${base}cultures/${culture.id}/`}>{culture.id}</a>
 										</>
 									))}
 								</td>
@@ -66,7 +57,7 @@ const base = import.meta.env.BASE_URL;
 				</tbody>
 			</table>
 
-			<article class="prose" set:html={bodyHtml} />
+			<article class="prose"><Content /></article>
 		</div>
 	</section>
 </BaseLayout>

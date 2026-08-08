@@ -41,7 +41,7 @@
 | 本質 | 土耳其等**鹹味優格飲**；先做出優格狀凝乳，再加水與鹽 |
 | DIY starter | 多標嗜熱 **40–45°C**；常強調 *S. thermophilus* |
 | 質地 | 未稀釋＝優格狀／布丁；稀釋後可飲 |
-| seed id | `ayran` |
+| content id | `ayran` |
 
 #### Persis（Persian-style）
 
@@ -51,7 +51,7 @@
 | 菌相 | 公開「Persis」正式菌相少；實務多接近嗜熱兩菌 |
 | 質地 | 優格狀／布丁 |
 | 注意 | 以包裝適溫為準；勿當成獨立標準菌種 |
-| seed id | `persis` |
+| content id | `persis` |
 
 ### A3. 希臘優格菌粉（Greek yogurt starter）
 
@@ -124,7 +124,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 適溫 | 約 20–25°C |
 | 質地 | **優格狀／布丁**；平滑可勺，**不 ropey** |
 | 風味 | 仍偏芬蘭常溫奶油香 |
-| seed id | `viili-short` |
+| content id | `viili-short` |
 | 備註 | 口感對照「布丁奶酪（優格狀）」常指這一格；可由 Long 失黏而來 |
 
 #### B1b. Long Viili（長版／黏絲）
@@ -135,7 +135,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 質地 | 溫和、**ropy／黏絲**（胞外多醣 EPS） |
 | 風味 | 偏淡、偏甜潤，帶奶油香 |
 | 型態 | heirloom；**不只乳酸菌**（見下） |
-| seed id | `viili-long` |
+| content id | `viili-long` |
 
 **傳統 Long viili 是 LAB + 黴菌 + 酵母的混合群落**，不是純乳酸菌配方：
 
@@ -158,7 +158,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 | | Short | Long |
 |--|-------|------|
-| seed id | `langfil-short` | `langfil-long` |
+| content id | `langfil-short` | `langfil-long` |
 | 質地 | 優格狀／布丁 | 長彈性黏絲（ropey） |
 | 關係 | 失黏或商家短版 | Filmjölk 的黏絲變體 |
 | 適溫 | 常溫 | 常溫 |
@@ -171,7 +171,7 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 | 適溫 | DIY 常溫；商業約 **30°C／16–24 h** |
 | 菌相（商業常見） | *Lactococcus lactis* + *L. cremoris*；傳統為自然發酵 |
 | 質地 | 可飲／酪乳至優格狀（加倍接種可更稠） |
-| seed id | `amasi` |
+| content id | `amasi` |
 
 ### B2. Filmjölk（瑞典）
 
@@ -294,21 +294,25 @@ Tetra Pak 等工業資料亦指出：優格中除兩核心菌外加菌，主因�
 
 ## E. 與資料欄位建議對應
 
-之後在 `data/seed-data.mjs` 的 `cultures` 陣列新增時可對齊：
+之後在 `src/content/cultures/` 新增 Markdown 時可對齊：
 
-```js
-{
-  id: '...',
-  title: '...',
-  titleEn: '...',
-  temperatureClass: 'thermophilic', // 或 'mesophilic'
-  reuseHint: 'heirloom / direct-set / ...',
-  // style 概念可用 id 表達：bulgarian | ayran | persis | viili-short | viili-long | amasi | ...
-  species: '...',
-  tempRangeC: '40–45',
-  timeRangeH: '4–12',
-  summary: '...',
-  bodyMd: `...`,
-  sortOrder: 10,
-}
+```markdown
+---
+title: "..."
+titleEn: "..."
+temperatureClass: "thermophilic"
+reuseHint: "heirloom / direct-set / ..."
+species: "..."
+tempRangeC: "40–45"
+timeRangeH: "4–12"
+summary: "..."
+sortOrder: 10
+draft: false
+---
+
+## 概述
+
+Markdown 正文……
 ```
+
+檔名即為 id，例如 `bulgarian.md`、`viili-short.md`。

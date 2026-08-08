@@ -4,22 +4,15 @@
 
 線上預覽（部署後）：https://wuwaiter.github.io/YogurtGuide/
 
-## 資料存放（SQLite）
-
-網站在 **建置時** 讀取 SQLite，再輸出靜態頁（適合 GitHub Pages）。
-
 | 路徑 | 用途 |
 |------|------|
-| `data/schema.sql` | 資料表結構 |
-| `data/seed-data.mjs` | **資料來源**（編輯這個來新增／修改；含 cultures／methods／batches／glossary／marketYogurts） |
-| `data/yogurtguide.db` | 由 `npm run db:init` 產生的資料庫 |
-| `scripts/db-init.mjs` | 重建資料庫 |
+| `src/content.config.ts` | Content Collections 欄位、關聯與驗證規則 |
+| `src/content/cultures/*.md` | 菌種資料與說明 |
+| `src/content/methods/*.md` | 製法資料與步驟 |
+| `src/content/batches/*.md` | 批次實驗資料與觀察 |
+| `src/content/glossary/*.md`、`market-yogurts/*.md` | 詞彙與市售優格資料 |
 
-```sh
-npm run db:init   # 依 seed 重建 yogurtguide.db
-```
-
-`npm run dev` / `npm run build` 會自動先執行 `db:init`。
+所有網站資料都使用 Markdown；結構化欄位放在 frontmatter，正文直接使用 Markdown。Astro 在建置時驗證並產生靜態頁面，不需要 SQLite 或資料庫初始化。
 
 ## 本地開發
 

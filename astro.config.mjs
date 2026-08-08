@@ -5,9 +5,4 @@ import { defineConfig } from 'astro/config';
 export default defineConfig({
 	site: 'https://wuwaiter.github.io',
 	base: '/YogurtGuide/',
-	vite: {
-		ssr: {
-			external: ['node:sqlite'],
-		},
-	},
 });

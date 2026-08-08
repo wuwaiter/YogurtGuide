@@ -32,12 +32,13 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				</ul>
 				<h2>如何新增一批次</h2>
 				<ol>
-					<li>編輯 <code>data/seed-data.mjs</code> 的 <code>batches</code> 陣列</li>
-					<li>執行 <code>npm run db:init</code>（或直接 <code>npm run dev</code>，會自動重建）</li>
+					<li>在 <code>src/content/batches/</code> 新增一個 Markdown 檔案</li>
+					<li>依 <code>src/content.config.ts</code> 的 schema 填寫 frontmatter 與正文</li>
+					<li>執行 <code>npm run build</code> 驗證資料與頁面</li>
 					<li>在瀏覽器開啟對應批次頁確認</li>
 				</ol>
 				<p>
-					菌種、製法、詞彙同樣寫在 <code>data/seed-data.mjs</code>，結構見 <code>data/schema.sql</code>。
+					菌種、製法、詞彙與市售優格同樣以 Markdown 存放在 <code>src/content/</code>。
 					知識庫筆記仍保留在 <code>docs/knowledge-base/</code>。
 				</p>
 			</div>

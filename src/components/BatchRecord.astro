@@ -1,13 +1,12 @@
 ---
-import type { BatchRow, IngredientRow } from '../lib/db';
+import type { CollectionEntry } from 'astro:content';
 import { formatBatchDate } from '../lib/batch-display';
 
 interface Props {
-	batch: BatchRow;
-	ingredients: IngredientRow[];
+	batch: CollectionEntry<'batches'>['data'];
 }
 
-const { batch: d, ingredients } = Astro.props;
+const { batch: d } = Astro.props;
 
 const ingredientTypeLabel: Record<string, string> = {
 	'fresh-milk': '鮮奶',
@@ -24,12 +23,12 @@ const cultureSourceShort: Record<string, string> = {
 };
 
 const cultureSourceLine = (() => {
-	const kind = cultureSourceShort[d.culture_source] ?? d.culture_source;
-	let line = `${kind}（${d.culture_name}）`;
-	if (d.culture_generation != null) {
-		line += ` · 傳代第 ${d.culture_generation} 次`;
+	const kind = cultureSourceShort[d.cultureSource] ?? d.cultureSource;
+	let line = `${kind}（${d.cultureName}）`;
+	if (d.cultureGeneration != null) {
+		line += ` · 傳代第 ${d.cultureGeneration} 次`;
 	}
-	line += ` / ${d.culture_amount}`;
+	line += ` / ${d.cultureAmount}`;
 	return line;
 })();
 
@@ -52,32 +51,32 @@ function formatTemp(value: string): string {
 			<span class="classify-list__body">{formatBatchDate(d.date)}</span>
 		</li>
 		{
-			d.ambient_temp_c && (
+			d.ambientTempC && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">室溫（ambient）</span>
-					<span class="classify-list__body">{formatTemp(d.ambient_temp_c)}</span>
+					<span class="classify-list__body">{formatTemp(d.ambientTempC)}</span>
 				</li>
 			)
 		}
 		{
-			d.peak_heat_c && (
+			d.peakHeatC && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">加熱高峰（peak heat）</span>
-					<span class="classify-list__body">{formatTemp(d.peak_heat_c)}</span>
+					<span class="classify-list__body">{formatTemp(d.peakHeatC)}</span>
 				</li>
 			)
 		}
 		<li class="classify-list__row">
 			<span class="classify-list__label">接種溫度（inoculation）</span>
-			<span class="classify-list__body">{formatTemp(d.inoculation_temp_c)}</span>
+			<span class="classify-list__body">{formatTemp(d.inoculationTempC)}</span>
 		</li>
 		<li class="classify-list__row">
 			<span class="classify-list__label">保溫溫度（incubation）</span>
-			<span class="classify-list__body">{formatTemp(d.incubation_temp_c)}</span>
+			<span class="classify-list__body">{formatTemp(d.incubationTempC)}</span>
 		</li>
 		<li class="classify-list__row">
 			<span class="classify-list__label">發酵時間（time）</span>
-			<span class="classify-list__body">{d.incubation_time_h}</span>
+			<span class="classify-list__body">{d.incubationTimeH}</span>
 		</li>
 	</ul>
 </section>
@@ -87,15 +86,15 @@ function formatTemp(value: string): string {
 	<ul class="classify-list record-fields">
 		<li class="classify-list__row">
 			<span class="classify-list__label">發酵設備</span>
-			<span class="classify-list__body">{d.equipment_device ?? '—'}</span>
+			<span class="classify-list__body">{d.equipment.device ?? '—'}</span>
 		</li>
 		<li class="classify-list__row">
 			<span class="classify-list__label">發酵容器</span>
-			<span class="classify-list__body">{d.equipment_vessel ?? '—'}</span>
+			<span class="classify-list__body">{d.equipment.vessel ?? '—'}</span>
 		</li>
 		<li class="classify-list__row">
 			<span class="classify-list__label">備註</span>
-			<span class="classify-list__body">{d.equipment_note || '—'}</span>
+			<span class="classify-list__body">{d.equipment.note || '—'}</span>
 		</li>
 	</ul>
 </section>
@@ -104,7 +103,7 @@ function formatTemp(value: string): string {
 	<h2 class="record-block__title">3. 食材與菌種<span class="en-sub">Ingredients & Culture</span></h2>
 	<ul class="classify-list record-fields">
 		{
-			ingredients.map((ing) => (
+			d.ingredients.map((ing) => (
 				<li class="classify-list__row">
 					<span class="classify-list__label">{ingredientTypeLabel[ing.type] ?? ing.type}</span>
 					<span class="classify-list__body">
@@ -126,56 +125,56 @@ function formatTemp(value: string): string {
 	<ul class="classify-list record-fields">
 		<li class="classify-list__row">
 			<span class="classify-list__label">凝乳（set）</span>
-			<span class="classify-list__body">{d.result_set}</span>
+			<span class="classify-list__body">{d.resultSet}</span>
 		</li>
 		{
-			d.result_acidity && (
+			d.resultAcidity && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">酸度（acidity）</span>
-					<span class="classify-list__body">{d.result_acidity}</span>
+					<span class="classify-list__body">{d.resultAcidity}</span>
 				</li>
 			)
 		}
 		{
-			d.result_texture && (
+			d.resultTexture && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">質地（texture）</span>
-					<span class="classify-list__body">{d.result_texture}</span>
+					<span class="classify-list__body">{d.resultTexture}</span>
 				</li>
 			)
 		}
 		{
-			d.result_whey && (
+			d.resultWhey && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">乳清（whey）</span>
-					<span class="classify-list__body">{d.result_whey}</span>
+					<span class="classify-list__body">{d.resultWhey}</span>
 				</li>
 			)
 		}
 		{
-			d.result_flavor && (
+			d.resultFlavor && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">風味（flavor）</span>
-					<span class="classify-list__body">{d.result_flavor}</span>
+					<span class="classify-list__body">{d.resultFlavor}</span>
 				</li>
 			)
 		}
 		{
-			d.result_overall && (
+			d.resultOverall && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">總評</span>
-					<span class="classify-list__body">{d.result_overall}</span>
+					<span class="classify-list__body">{d.resultOverall}</span>
 				</li>
 			)
 		}
 		{
-			(d.score_reproducibility || d.score_satisfaction) && (
+			(d.scoreReproducibility || d.scoreSatisfaction) && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">評分</span>
 					<span class="classify-list__body">
-						{d.score_reproducibility && <>可重複性 {d.score_reproducibility}/5</>}
-						{d.score_reproducibility && d.score_satisfaction && ' · '}
-						{d.score_satisfaction && <>滿意度 {d.score_satisfaction}/5</>}
+						{d.scoreReproducibility && <>可重複性 {d.scoreReproducibility}/5</>}
+						{d.scoreReproducibility && d.scoreSatisfaction && ' · '}
+						{d.scoreSatisfaction && <>滿意度 {d.scoreSatisfaction}/5</>}
 					</span>
 				</li>
 			)

@@ -26,7 +26,7 @@
 
 送出前檢查：刪掉宣告自己要做什麼的第一句、刪掉問「還需要什麼嗎」或重述已完成事項的最後一句、刪掉「順帶一提」、刪掉沒有資訊量的模糊副詞。然後確認：只讀第一行與最後一行，是否知道（a）下一步做什麼、（b）剛剛發生了什麼。
 
-本專案補充：改完 `data/seed-data.mjs` 後的下一步動作幾乎都是 `npm run db:init`。
+本專案補充：所有網站資料位於 `src/content/**/*.md`；修改後直接執行 `npm run build` 驗證 Content Collections。
 
 ## Development
 
@@ -47,6 +47,6 @@ Consult these guides before working on related tasks:
 - [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
 - [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
 - [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)（本專案改以 `data/seed-data.mjs` + SQLite，非 Content Collections）
+- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)（本專案使用 Markdown Content Collections）
 - [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
 - [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)

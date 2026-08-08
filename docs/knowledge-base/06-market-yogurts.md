@@ -2,7 +2,7 @@
 
 > 建立日期：2026-07-31  
 > 對應網站：`/market/`  
-> 資料：`data/seed-data.mjs` → `market_yogurts` 表
+> 資料：`src/content/market-yogurts/*.md`
 
 ---
 
@@ -44,7 +44,7 @@
 | 福樂 | 頂級無加糖希臘式優酪 | 乳脂/乳清蛋白/牛奶蛋白增稠；乳酸菌欄含玉米澱粉 |
 | 雪比 | 經典優格 | 另加異麥芽寡醣、大豆纖維（公開介紹） |
 
-細節與完整菌種清單見網站頁或 `seed-data.mjs` 的 `marketYogurts`。
+細節與完整菌種清單見網站頁或 `src/content/market-yogurts/` 的 Markdown 資料。
 
 ---
 

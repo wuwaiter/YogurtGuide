@@ -20,13 +20,13 @@
 
 | 知識庫 | 網站路徑 | 資料來源 |
 |--------|----------|----------|
-| 01 分類總覽 + 02 風格檔 | `/cultures/` 與 `/cultures/<slug>/` | `data/seed-data.mjs` → SQLite |
+| 01 分類總覽 + 02 風格檔 | `/cultures/` 與 `/cultures/<slug>/` | `src/content/cultures/*.md` |
 | 03 物種 | `/cultures/species/` | 頁面內容（靜態） |
 | 04 接種型態 | `/cultures/starters/` | 頁面內容（靜態） |
 | 05 克菲爾 | 尚未上架（分類總覽 §5 已摘要） | — |
-| 06 市售優格 | `/market/` | `data/seed-data.mjs` → SQLite |
+| 06 市售優格 | `/market/` | `src/content/market-yogurts/*.md` |
 | 07 自製 vs 市售 CFU | 尚未上架（知識庫筆記） | — |
-| SOURCES 製法補充 | `/methods/` | `data/seed-data.mjs` → SQLite |
+| SOURCES 製法補充 | `/methods/` | `src/content/methods/*.md` |
 
 ## 更新紀錄
 
@@ -41,3 +41,4 @@
 - 2026-08-03：布丁／優格狀對照補齊：新增 Amasi、Ayran、Persis；Viili／Långfil 拆 Short／Long；01／02／SOURCES 同步。
 - 2026-08-04：製法新增瀝乳、常溫室溫發酵、凝態／攪拌、無優格機保溫變通；SOURCES 製法補充。
 - 2026-08-04：製法新增野生水果引子馴化、跨界混搭商業引子（皆附安全鐵律）。
+- 2026-08-08：網站資料由 SQLite／seed 遷移至全 Markdown Content Collections；既有路由不變。
