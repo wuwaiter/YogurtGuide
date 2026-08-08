@@ -127,4 +127,4 @@ If yes, send.
 
 - Output language: Traditional Chinese. Rules above shape structure, not language.
 - Commands in this repo run in PowerShell on Windows; `npm` may need PATH refresh in a fresh shell.
-- After editing `data/seed-data.mjs`, the concrete next action is almost always `npm run db:init`.
+- After editing `src/content/**/*.md`, the concrete next action is almost always `npm run build`.
