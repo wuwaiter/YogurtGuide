@@ -1,15 +1,14 @@
 ---
 brand: "雪比"
 productName: "無加糖生優格"
-recommended: true
+recommendationStars: 1
 milkBase: "fresh"
 milkBaseNote: "生乳"
 addedSugar: false
 additives: "無（標示僅生乳＋乳酸菌）"
 cultures: "長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌"
-ingredientsLabel: "生乳、乳酸菌（長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳酸桿菌、保加利亞乳酸桿菌、嗜熱鏈球菌）"
+ingredientsLabel: "生乳、乳酸菌"
 note: "無凝固劑；搖晃易變稀或析乳清屬正常。"
 sortOrder: 10
 draft: false
 ---
-

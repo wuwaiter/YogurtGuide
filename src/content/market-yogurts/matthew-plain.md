@@ -1,15 +1,14 @@
 ---
 brand: "馬修嚴選"
 productName: "原味優格（分享號）"
-recommended: true
+recommendationStars: 1
 milkBase: "fresh"
 milkBaseNote: "台灣 鮮奶/生乳"
 addedSugar: false
 additives: "無（宣稱無加糖、無添加膠體）"
 cultures: "嗜熱鏈球菌、嗜酸乳桿菌、鼠李糖乳桿菌、長雙歧桿菌（經典四株；G+/K+ 系列菌數不同）"
-ingredientsLabel: "鮮乳/生乳、乳酸菌（系列而異）"
+ingredientsLabel: "鮮乳/生乳、乳酸菌"
 note: "G+、K+ 等同品牌系列配方不同，請以當批包裝為準。"
 sortOrder: 60
 draft: false
 ---
-

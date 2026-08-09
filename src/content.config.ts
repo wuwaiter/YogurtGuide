@@ -94,7 +94,7 @@ const marketYogurts = defineCollection({
 	schema: z.object({
 		brand: z.string(),
 		productName: z.string(),
-		recommended: z.boolean().default(false),
+		recommendationStars: z.number().int().min(0).max(2).default(0),
 		milkBase: z.enum(['fresh', 'powder', 'mixed', 'other']),
 		milkBaseNote: z.string(),
 		addedSugar: z.boolean().default(false),

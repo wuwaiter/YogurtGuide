@@ -3,15 +3,15 @@ import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 
 const yogurts = (await getCollection('marketYogurts', ({ data }) => !data.draft)).sort(
-	(a, b) => Number(b.data.recommended) - Number(a.data.recommended) || a.data.sortOrder - b.data.sortOrder,
+	(a, b) => b.data.recommendationStars - a.data.recommendationStars || a.data.sortOrder - b.data.sortOrder,
 );
-const recommended = yogurts.filter((y) => y.data.recommended);
-const others = yogurts.filter((y) => !y.data.recommended);
+const recommended = yogurts.filter((y) => y.data.recommendationStars > 0);
+const others = yogurts.filter((y) => y.data.recommendationStars === 0);
 ---
 
 <BaseLayout
 	title="市售優格"
-	description="台灣常見市售優格：乳源、加糖、添加物與菌種清單；★ 僅限鮮乳或奶粉加水加菌種。"
+	description="台灣常見市售優格：乳源、加糖、添加物與菌種清單；★ 為推薦，★★ 為最推薦。"
 >
 	<section class="section">
 		<div class="wrap">
@@ -33,15 +33,19 @@ const others = yogurts.filter((y) => !y.data.recommended);
 				<p class="meta">
 					不得另有：加糖、果膠/洋菜等膠體、香料、色素、纖維添加、濃縮乳蛋白、乳清蛋白（作增稠）等。
 				</p>
+				<p class="meta"><strong>★★ 兩顆星的為最推薦。</strong></p>
 			</section>
 
 			<section class="record-block">
-				<h2 class="record-block__title">★ 符合推薦條件（{recommended.length}）</h2>
+				<h2 class="record-block__title">★／★★ 符合推薦條件（{recommended.length}）</h2>
 				{
 					recommended.map(({ id, data }) => (
 						<article class="market-card market-card--star" id={id}>
 							<h3 class="market-card__title">
-								<span class="market-card__star" aria-label="推薦">★</span>
+								<span
+									class="market-card__star"
+									aria-label={data.recommendationStars === 2 ? '最推薦' : '推薦'}
+								>{'★'.repeat(data.recommendationStars)}</span>
 								{data.brand} {data.productName}
 							</h3>
 							<table class="meta-table">
