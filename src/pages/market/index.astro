@@ -94,24 +94,20 @@ const others = yogurts.filter((y) => y.data.recommendationStars === 0);
 							<table class="meta-table">
 								<tbody>
 									<tr>
-										<th>乳源</th>
-										<td>{data.milkBaseNote}</td>
-									</tr>
-									<tr>
-										<th>加糖</th>
-										<td>{data.addedSugar ? '有加糖' : '無加糖'}</td>
-									</tr>
-									<tr>
-										<th>其他添加物</th>
-										<td>{data.additives}</td>
+										<th>成分標示</th>
+										<td>{data.ingredientsLabel}</td>
 									</tr>
 									<tr>
 										<th>菌種</th>
 										<td>{data.cultures}</td>
 									</tr>
 									<tr>
-										<th>成分標示摘要</th>
-										<td>{data.ingredientsLabel}</td>
+										<th>加糖</th>
+										<td>{data.addedSugar ? '有加糖' : '無加糖'}</td>
+									</tr>
+									<tr>
+										<th>其它添加物</th>
+										<td>{data.additives}</td>
 									</tr>
 									{data.note && (
 										<tr>
