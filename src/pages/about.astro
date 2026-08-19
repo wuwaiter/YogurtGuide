@@ -17,11 +17,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<li>每次<strong>批次實驗（batch log）</strong>的參數、觀察與下次調整</li>
 				</ul>
 				<h2>批次必記三項（Batch Record）</h2>
-				<ol>
+				<ul>
 					<li><strong>日期及溫度</strong>：日期、室溫、保溫溫度</li>
 					<li><strong>食材與菌種</strong>：牛奶、菌種、發酵時間、發酵設備</li>
 					<li><strong>成品狀況</strong>：凝乳、質地、酸度、總評</li>
-				</ol>
+				</ul>
 				<h2>紀錄原則（Method）</h2>
 				<ul>
 					<li>一次盡量只改一個變因，其餘條件固定，以便對照。</li>
@@ -29,16 +29,16 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 					<li>觀察用語優先使用酸度、質地、乳清、風味等可比較指標。</li>
 					<li>正文以中文撰寫；專業術語附英文，例如發酵（fermentation）。</li>
 				</ul>
-				<h2>如何新增一批次</h2>
-				<ol>
-					<li>在 <code>src/content/batches/</code> 新增一個 Markdown 檔案</li>
-					<li>依 <code>src/content.config.ts</code> 的 schema 填寫 frontmatter 與正文</li>
-					<li>執行 <code>npm run build</code> 驗證資料與頁面</li>
-					<li>在瀏覽器開啟對應批次頁確認</li>
-				</ol>
-				<p>
-					菌種、製法、詞彙與市售優格同樣以 Markdown 存放在 <code>src/content/</code>。
-				</p>
+
+
+				<h2>最後的說明</h2>
+				<ul>
+					<li>很多人會接觸優格，無非就是為了健康</li>
+					<li>但會走上自製優格的路，大多數還是因為CP值</li>
+					<li>畢竟台灣除了鮮奶貴以外，菌種(DVS／DVI)也是貴的很不合理</li>
+					<li>所以我個人是比較推薦 除了鮮奶以外，也可以增加奶粉當作來源</li>
+					<li>營養價值沒有差別，而且好存放 也比較便宜</li>
+				</ul>
 			</div>
 		</div>
 	</section>
