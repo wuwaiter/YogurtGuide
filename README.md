@@ -11,6 +11,7 @@
 | `src/content/methods/*.md` | 製法資料與步驟 |
 | `src/content/batches/*.md` | 批次實驗資料與觀察 |
 | `src/content/glossary/*.md`、`market-yogurts/*.md` | 詞彙與市售優格資料 |
+| `src/pages/pairing/` | 優格搭配（單品／組合） |
 
 所有網站資料都使用 Markdown；結構化欄位放在 frontmatter，正文直接使用 Markdown。Astro 在建置時驗證並產生靜態頁面，不需要 SQLite 或資料庫初始化。
 

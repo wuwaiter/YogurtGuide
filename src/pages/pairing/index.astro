@@ -1,0 +1,174 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+
+const singles = [
+	{
+		group: '口感與堅果類',
+		items: [
+			{
+				name: '綜合堅果',
+				en: 'Walnuts / Almonds / Cashews',
+				body: '核桃、杏仁、腰果可補油脂與蛋白質，增加層次。建議無調味、低溫烘焙。',
+			},
+			{
+				name: '燕麥片／穀物麥片',
+				en: 'Oats / Granola',
+				body: '提供碳水化合物與膳食纖維，酥脆、較有飽足感。',
+			},
+			{
+				name: '奇亞籽／亞麻籽粉',
+				en: 'Chia / Flaxseed',
+				body: '吸水後會膨脹；含 Omega-3 與膳食纖維。亞麻籽粉建議用熟粉。',
+			},
+			{
+				name: '可可碎粒',
+				en: 'Cacao Nibs',
+				body: '可可豆碎粒，微苦、酥脆，抗氧化物較多。',
+			},
+		],
+	},
+	{
+		group: '風味與甜味',
+		items: [
+			{
+				name: '蜂蜜／楓糖漿',
+				en: 'Honey / Maple Syrup',
+				body: '經典天然甜味，可中和無糖優格的酸。',
+			},
+			{
+				name: '黑芝麻粉／花生粉',
+				en: 'Black sesame / Peanut powder',
+				body: '無糖粉類香氣濃；拌入後偏膏狀。芝麻粉也補鈣。',
+			},
+			{
+				name: '純肉桂粉',
+				en: 'Cinnamon',
+				body: '一小匙即可提香。選純粉、無加糖配方。',
+			},
+			{
+				name: '抹茶粉／純可可粉',
+				en: 'Matcha / Cocoa',
+				body: '攪拌即成抹茶或巧克力風味；用無糖純粉。',
+			},
+		],
+	},
+	{
+		group: '鹹食與特殊',
+		items: [
+			{
+				name: '橄欖油＋黑胡椒＋鹽',
+				en: 'Olive oil, pepper, salt',
+				body: '地中海式吃法，特別適合希臘優格：滑順、帶草本香。',
+			},
+			{
+				name: '蛋白粉',
+				en: 'Protein powder',
+				body: '運動後可拌入乳清蛋白；稠優格較容易做成慕斯感。先少量拌勻，減少結塊。',
+			},
+		],
+	},
+];
+
+const greekCombos = [
+	{
+		name: '地中海鹹香',
+		body: '特級初榨橄欖油 1 匙＋研磨黑胡椒＋少許海鹽（可加義式香草）。稠度接近奶油乳酪，可單吃或當蔬菜沾醬。',
+	},
+	{
+		name: '濃郁黑芝麻',
+		body: '無糖黑芝麻粉 1–2 匙＋蜂蜜 1 匙。希臘優格能包住芝麻粉，攪成芝麻糊般濃稠。',
+	},
+	{
+		name: '高蛋白慕斯',
+		body: '巧克力或抹茶乳清蛋白 1 匙＋少量鮮乳或水拌勻。稠度夠時接近冰淇淋／慕斯。',
+	},
+	{
+		name: '堅果香氣',
+		body: '無糖花生醬或純芝麻醬 1 匙＋可可碎粒。醬類中和酸味，碎粒補酥脆。',
+	},
+];
+
+const plainCombos = [
+	{
+		name: '高纖膨脹',
+		body: '奇亞籽 1 匙＋燕麥片／Granola＋蜂蜜。較稀的優格讓奇亞籽吸水膨脹，麥片補飽足。',
+	},
+	{
+		name: '堅果肉桂香',
+		body: '無調味綜合堅果（核桃、杏仁）＋純肉桂粉少許＋楓糖漿。肉桂融進液體，堅果補嚼勁。',
+	},
+	{
+		name: '抹茶拿鐵風',
+		body: '無糖純抹茶粉 1 小匙＋楓糖漿或蜂蜜 1 匙。流動性高較好拌勻；微酸配抹茶苦甜。',
+	},
+	{
+		name: '高纖亞麻籽',
+		body: '熟亞麻籽粉 1 匙＋熟黑芝麻粒。粉會吸水、質地略濃，補油脂與纖維。',
+	},
+];
+---
+
+<BaseLayout title="搭配" description="優格非水果單品與組合：堅果、種子、蜂蜜、鹹香與高蛋白吃法。">
+	<section class="section">
+		<div class="wrap">
+			<h1 class="page-title">搭配<span class="en-sub">Pairing</span></h1>
+			<p class="page-lead">
+				不含水果。單品先看能加什麼；組合再依無糖希臘優格與一般無糖優格分開選。
+			</p>
+			<p class="meta">單品口感類整理自公開搭配文（含 Spiced Blog 等）；份量為家用起點，依口味增減。</p>
+
+			<section class="record-block" id="singles">
+				<h2 class="record-block__title">1. 可添加的單品<span class="en-sub">Add-ins</span></h2>
+				{
+					singles.map((group) => (
+						<>
+							<h3 class="section-kicker">{group.group}</h3>
+							<ul class="list">
+								{group.items.map((item) => (
+									<li class="list-item" style="cursor: default;">
+										<h3 class="glossary-term">
+											{item.name}
+											<span class="glossary-term__en">{item.en}</span>
+										</h3>
+										<p>{item.body}</p>
+									</li>
+								))}
+							</ul>
+						</>
+					))
+				}
+			</section>
+
+			<section class="record-block" id="combos">
+				<h2 class="record-block__title">2. 搭配組合<span class="en-sub">Combinations</span></h2>
+				<p>
+					希臘優格濃稠、酸較明顯、蛋白質較高；一般無糖優格較稀、較滑、酸較溫和。濃的適合液態／醬類；稀的適合會吸水或顆粒明顯的乾貨。
+				</p>
+
+				<h3 class="section-kicker">無糖希臘優格</h3>
+				<ul class="list">
+					{
+						greekCombos.map((item) => (
+							<li class="list-item" style="cursor: default;">
+								<h3>{item.name}</h3>
+								<p>{item.body}</p>
+							</li>
+						))
+					}
+				</ul>
+
+				<h3 class="section-kicker">一般無糖優格</h3>
+				<ul class="list">
+					{
+						plainCombos.map((item) => (
+							<li class="list-item" style="cursor: default;">
+								<h3>{item.name}</h3>
+								<p>{item.body}</p>
+							</li>
+						))
+					}
+				</ul>
+			</section>
+		</div>
+	</section>
+</BaseLayout>
