@@ -83,6 +83,13 @@ function formatTemp(value: string): string {
 	}
 	return value.includes('°C') ? value : `${value}°C`;
 }
+
+function splitOverall(text: string): string[] {
+	return text
+		.split(/(?<=。)/)
+		.map((s) => s.trim())
+		.filter(Boolean);
+}
 ---
 
 <section class="record-block">
@@ -152,7 +159,11 @@ function formatTemp(value: string): string {
 			d.resultOverall && (
 				<li class="classify-list__row">
 					<span class="classify-list__label">總評</span>
-					<span class="classify-list__body">{d.resultOverall}</span>
+					<span class="classify-list__body">
+						{splitOverall(d.resultOverall).map((line) => (
+							<span class="record-overall-line">{line}</span>
+						))}
+					</span>
 				</li>
 			)
 		}

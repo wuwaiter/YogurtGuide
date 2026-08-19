@@ -337,6 +337,10 @@ p {
 	color: var(--ink);
 }
 
+.record-overall-line {
+	display: block;
+}
+
 .prose :is(h2, h3) {
 	margin-top: 2rem;
 }
