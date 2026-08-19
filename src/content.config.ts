@@ -36,7 +36,7 @@ const methods = defineCollection({
 
 const ingredientSchema = z.object({
 	type: z.enum(['fresh-milk', 'milk-powder', 'water', 'other']),
-	brand: z.string(),
+	brand: z.string().optional(),
 	amount: z.string(),
 	note: z.string().optional(),
 });
@@ -49,7 +49,7 @@ const batches = defineCollection({
 		date: z.string().regex(/^\d{4}-\d{2}-\d{2}$/),
 		ambientTempC: z.string().optional(),
 		peakHeatC: z.string().optional(),
-		inoculationTempC: z.string(),
+		inoculationTempC: z.string().optional(),
 		incubationTempC: z.string(),
 		incubationTimeH: z.string(),
 		equipment: z.object({
@@ -61,7 +61,7 @@ const batches = defineCollection({
 		cultureSource: z.enum(['mother', 'new-powder', 'commercial-yogurt', 'other']),
 		cultureName: z.string(),
 		cultureOrigin: z.string(),
-		cultureAmount: z.string(),
+		cultureAmount: z.string().optional(),
 		cultureGeneration: z.number().int().nonnegative().optional(),
 		culture: reference('cultures').optional(),
 		method: reference('methods').optional(),

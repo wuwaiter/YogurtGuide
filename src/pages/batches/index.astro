@@ -9,7 +9,7 @@ const batches = (await getCollection('batches', ({ data }) => !data.draft)).sort
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="批次實驗" description="優格批次日誌：日期溫度、器材、食材、菌種與成品狀況。">
+<BaseLayout title="批次實驗" description="優格批次日誌：日期溫度、食材與菌種、成品狀況。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">批次實驗<span class="en-sub">Batch Logs</span></h1>

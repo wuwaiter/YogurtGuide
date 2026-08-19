@@ -142,9 +142,9 @@ cert/
 # -----------------------------------------------------------------------------
 # AI Agent
 # -----------------------------------------------------------------------------
-.agent/*
-!.agent/skills/
-!.agent/Version/
+.agents/*
+!.agents/skills/
+!.agents/Version/
 .claude/
 .cursor/
 !.cursor/rules/
