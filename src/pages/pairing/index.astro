@@ -159,9 +159,6 @@ const combos = [
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">搭配<span class="en-sub">Pairing</span></h1>
-			<p class="page-lead">
-				不含水果。先看組合（依目的分組），再看可添加的單品。濃稠希臘優格適合醬類與蛋白粉；較稀的無糖優格適合會吸水的乾貨。
-			</p>
 			<p class="meta">
 				整理自公開搭配文與食譜，例如 Spiced Blog、The Mediterranean Dish 鹹香優格碗、常見花生醬優格碗。份量為家用起點，依口味增減。
 			</p>
@@ -170,17 +167,17 @@ const combos = [
 				<h2 class="record-block__title">1. 搭配組合<span class="en-sub">Combinations</span></h2>
 				{
 					combos.map((group) => (
-						<>
-							<h3 class="section-kicker">{group.group}</h3>
+						<div class="pairing-group">
+							<h3 class="pairing-group__title">{group.group}</h3>
 							<ul class="list">
 								{group.items.map((item) => (
-									<li class="list-item" style="cursor: default;">
-										<h3>{item.name}</h3>
-										<p>{item.body}</p>
+									<li class="list-item pairing-item" style="cursor: default;">
+										<h4 class="pairing-item__title">{item.name}</h4>
+										<p class="pairing-item__body">{item.body}</p>
 									</li>
 								))}
 							</ul>
-						</>
+						</div>
 					))
 				}
 			</section>
@@ -189,20 +186,20 @@ const combos = [
 				<h2 class="record-block__title">2. 可添加的單品<span class="en-sub">Add-ins</span></h2>
 				{
 					singles.map((group) => (
-						<>
-							<h3 class="section-kicker">{group.group}</h3>
+						<div class="pairing-group">
+							<h3 class="pairing-group__title">{group.group}</h3>
 							<ul class="list">
 								{group.items.map((item) => (
-									<li class="list-item" style="cursor: default;">
-										<h3 class="glossary-term">
+									<li class="list-item pairing-item" style="cursor: default;">
+										<h4 class="pairing-item__title glossary-term">
 											{item.name}
 											<span class="glossary-term__en">{item.en}</span>
-										</h3>
-										<p>{item.body}</p>
+										</h4>
+										<p class="pairing-item__body">{item.body}</p>
 									</li>
 								))}
 							</ul>
-						</>
+						</div>
 					))
 				}
 			</section>

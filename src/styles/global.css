@@ -394,9 +394,32 @@ p {
 	border-top: 1px solid var(--line);
 }
 
-.record-block__title {
-	margin: 0 0 0.85rem;
-	font-size: 1.35rem;
+.pairing-group {
+	padding-left: 1em;
+}
+
+.pairing-group__title {
+	margin: 1.5rem 0 0.35rem;
+	font-size: 1.45rem;
+	font-weight: 650;
+	color: var(--ink);
+}
+
+.pairing-item:hover {
+	padding-left: 0;
+}
+
+.pairing-item__title {
+	margin: 0 0 0.35rem;
+	font-size: 1.12rem;
+	font-weight: 600;
+	color: var(--ink);
+}
+
+.pairing-item__body {
+	margin: 0;
+	font-size: 0.95rem;
+	color: var(--ink-muted);
 }
 
 .record-chips {
