@@ -1,0 +1,37 @@
+---
+import BaseLayout from '../../../layouts/BaseLayout.astro';
+import { getCollection, render, type CollectionEntry } from 'astro:content';
+
+interface Props {
+	additive: CollectionEntry<'additives'>;
+}
+
+export async function getStaticPaths() {
+	const additives = await getCollection('additives', ({ data }) => !data.draft);
+	return additives.map((additive) => ({
+		params: { slug: additive.id },
+		props: { additive },
+	}));
+}
+
+const { additive } = Astro.props as Props;
+const data = additive.data;
+const { Content } = await render(additive);
+const base = import.meta.env.BASE_URL;
+---
+
+<BaseLayout title={data.title} description={data.summary}>
+	<section class="section">
+		<div class="wrap">
+			<p class="meta">
+				<a href={`${base}pairing/#additives`}>← 搭配／添加物</a>
+			</p>
+			<h1 class="page-title">
+				{data.title}
+				<span class="en-sub">{data.titleEn}</span>
+			</h1>
+			<p class="page-lead">{data.summary}</p>
+			<article class="prose"><Content /></article>
+		</div>
+	</section>
+</BaseLayout>

@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
 
 const singles = [
 	{
@@ -74,6 +75,36 @@ const singles = [
 				name: '芝麻醬／Za’atar',
 				en: 'Tahini / Za’atar',
 				body: '芝麻醬帶堅果香；Za’atar（百里香、蘇麥、芝麻）是地中海優格碗常見收尾香料。',
+			},
+		],
+	},
+	{
+		group: '水果',
+		items: [
+			{
+				name: '莓果',
+				en: 'Berries',
+				body: '草莓、藍莓、覆盆子：酸甜、好切、不易大量出水。冷凍莓果解凍後瀝乾再拌。',
+			},
+			{
+				name: '香蕉',
+				en: 'Banana',
+				body: '熟香蕉較甜，可少加糖。現切現吃，避免褐變。',
+			},
+			{
+				name: '芒果',
+				en: 'Mango',
+				body: '熟芒果香甜，切丁瀝乾。未熟偏酸、過熟過軟都不好拌。',
+			},
+			{
+				name: '奇異果',
+				en: 'Kiwi',
+				body: '去皮切丁，酸香清爽。和優格同屬微酸，吃起來偏清新。',
+			},
+			{
+				name: '蘋果',
+				en: 'Apple',
+				body: '選脆蘋果切丁。水分很多的水果（西瓜、葡萄過熟）容易把優格變稀。',
 			},
 		],
 	},
@@ -152,15 +183,45 @@ const combos = [
 			},
 		],
 	},
+	{
+		group: '水果',
+		items: [
+			{
+				name: '莓果蜂蜜碗',
+				body: '無糖優格＋新鮮或解凍莓果（草莓、藍莓、覆盆子）＋蜂蜜少許。可再撒 granola。莓果酸甜、不易出水成湯；現吃才加麥片才酥。',
+			},
+			{
+				name: '香蕉肉桂',
+				body: '希臘優格＋切片香蕉＋純肉桂粉＋蜂蜜或花生醬少許。香蕉補甜與綿密，現切才不容易褐變。',
+			},
+			{
+				name: '芒果奇亞',
+				body: '無糖優格＋切丁芒果＋奇亞籽 1 小匙。熱帶甜味中和酸；奇亞籽吸水增加飽足。芒果要熟、瀝乾再拌。',
+			},
+			{
+				name: '奇異果清爽',
+				body: '一般無糖優格＋去皮切丁奇異果＋蜂蜜少許。奇異果酸香、維生素 C 高，和優格的微酸很搭。',
+			},
+			{
+				name: '蘋果肉桂堅果',
+				body: '無糖優格＋切丁蘋果＋核桃＋肉桂粉。口感接近蘋果派；蘋果選脆的、現切，水分多的水果（如西瓜）不建議，容易把優格沖稀。',
+			},
+		],
+	},
 ];
+
+const additives = (await getCollection('additives', ({ data }) => !data.draft)).sort(
+	(a, b) => a.data.sortOrder - b.data.sortOrder || a.data.title.localeCompare(b.data.title, 'zh-Hant'),
+);
+const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="搭配" description="優格非水果單品與組合：高蛋白、高纖維、鹹口味與純粹好吃。">
+<BaseLayout title="搭配" description="優格單品、組合與添加物：高蛋白、高纖維、水果與菊苣纖維。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">搭配<span class="en-sub">Pairing</span></h1>
 			<p class="meta">
-				整理自公開搭配文與食譜，例如 Spiced Blog、The Mediterranean Dish 鹹香優格碗、常見花生醬優格碗。份量為家用起點，依口味增減。
+				整理自公開搭配文與食譜，例如 Spiced Blog、The Mediterranean Dish 鹹香優格碗、常見花生醬優格碗與優格水果碗。份量為家用起點，依口味增減。
 			</p>
 
 			<section class="record-block" id="combos">
@@ -202,6 +263,25 @@ const combos = [
 						</div>
 					))
 				}
+			</section>
+
+			<section class="record-block" id="additives">
+				<h2 class="record-block__title">3. 添加物<span class="en-sub">Additives</span></h2>
+				<ul class="list">
+					{
+						additives.map(({ id, data }) => (
+							<li>
+								<a class="list-item" href={`${base}pairing/additives/${id}/`}>
+									<h3>
+										{data.title}
+										<span class="en-sub">{data.titleEn}</span>
+									</h3>
+									<p>{data.summary}</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</section>
 		</div>
 	</section>
