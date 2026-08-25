@@ -1,5 +1,17 @@
 # Version History
 
+## v0.6.1 — 2026-08-24
+
+### Changes
+- 將 ELI5 Skill 改為通用回答方式，移除 YogurtGuide、Astro 與 Markdown Content Collections 專案限定。
+- ELI5 現在只調整解釋深度與表達形式，不改變任務範圍、工具、權限或領域規則。
+
+## v0.6.0 — 2026-08-24
+
+### Changes
+- 新增專案專用 ELI5 Skill，支援繁體中文零基礎解釋與按需圖解。
+- 限定 ELI5 只在明確要求時啟用，並維持 Astro、Markdown Content Collections 與既有版面架構。
+
 ## v0.5.2 — 2026-08-24
 
 ### Changes
