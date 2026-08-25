@@ -1,21 +1,26 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import CulturesSubnav from '../../components/CulturesSubnav.astro';
+import { getNumberedStrainSources, numberedStrains } from '../../data/numbered-strains';
 
 const base = import.meta.env.BASE_URL;
+const strainSources = getNumberedStrainSources(numberedStrains);
 ---
 
-<BaseLayout title="物種對照" description="優格相關乳酸菌物種中英對照與角色。">
+<BaseLayout title="菌種" description="優格相關核心菌、附加菌、常溫菌、酵母真菌與常見編號菌株。">
 	<section class="section">
 		<div class="wrap">
-			<h1 class="page-title">物種對照<span class="en-sub">Species Glossary</span></h1>
+			<h1 class="page-title">菌種<span class="en-sub">Species &amp; Strains</span></h1>
 			<p class="page-lead">
-				學名可能隨分類學更名；食品標示與舊文獻常仍用舊名。精確菌株組成以商品標示為準。
+				物種是大分類，菌株是同一物種下可追溯的特定個體。益生菌效果不能只看「A 菌／B 菌」，必須對到菌株編號。學名可能隨分類學更名；商品標示常沿用舊名。
 			</p>
-			<CulturesSubnav current="species" />
+			<CulturesSubnav current="strains" />
 
-			<section class="record-block">
-				<h2 class="record-block__title">優格核心種<span class="en-sub">Defining Pair</span></h2>
+			<section class="record-block" id="core-species">
+				<h2 class="record-block__title">1. 優格核心種<span class="en-sub">Defining Yogurt Cultures</span></h2>
+				<p class="page-lead" style="margin-bottom: 1rem;">
+					Codex CXS 243-2003 將優格定義為下列兩種菌的共生培養；其他乳酸菌或雙歧桿菌通常是附加菌，不會取代這組定義。
+				</p>
 				<table class="meta-table">
 					<thead>
 						<tr>
@@ -39,8 +44,8 @@ const base = import.meta.env.BASE_URL;
 				</table>
 			</section>
 
-			<section class="record-block">
-				<h2 class="record-block__title">附加／機能菌<span class="en-sub">Adjunct Cultures</span></h2>
+			<section class="record-block" id="adjunct-species">
+				<h2 class="record-block__title">2. 附加／機能菌<span class="en-sub">Adjunct Cultures</span></h2>
 				<table class="meta-table">
 					<thead>
 						<tr>
@@ -56,14 +61,29 @@ const base = import.meta.env.BASE_URL;
 							<td>約 37°C；常作益生添加</td>
 						</tr>
 						<tr>
-							<td>雙歧桿菌（B 菌）</td>
-							<td><em>Bifidobacterium</em> spp.</td>
-							<td>厭氧；多用在成品添加</td>
+							<td>動物雙歧桿菌乳亞種</td>
+							<td><em>Bifidobacterium animalis</em> subsp. <em>lactis</em></td>
+							<td>耐酸與耐氧性相對較好；商業優格常見 B 菌來源</td>
+						</tr>
+						<tr>
+							<td>長雙歧桿菌</td>
+							<td><em>Bifidobacterium longum</em></td>
+							<td>厭氧；常作發酵乳附加菌</td>
+						</tr>
+						<tr>
+							<td>短雙歧桿菌</td>
+							<td><em>Bifidobacterium breve</em></td>
+							<td>厭氧；嬰幼兒配方與部分發酵乳常見</td>
 						</tr>
 						<tr>
 							<td>乾酪乳桿菌</td>
 							<td><em>Lacticaseibacillus casei</em></td>
 							<td>舊名 L. casei</td>
+						</tr>
+						<tr>
+							<td>副乾酪乳桿菌</td>
+							<td><em>Lacticaseibacillus paracasei</em></td>
+							<td>舊名 L. paracasei；發酵乳飲料常見附加菌</td>
 						</tr>
 						<tr>
 							<td>鼠李糖乳桿菌</td>
@@ -76,20 +96,37 @@ const base = import.meta.env.BASE_URL;
 							<td>舊名 L. plantarum</td>
 						</tr>
 						<tr>
+							<td>加氏乳桿菌</td>
+							<td><em>Lactobacillus gasseri</em></td>
+							<td>多作優格與發酵乳附加菌</td>
+						</tr>
+						<tr>
+							<td>約氏乳桿菌</td>
+							<td><em>Lactobacillus johnsonii</em></td>
+							<td>部分發酵乳使用；La1／NCC 533 屬此物種</td>
+						</tr>
+						<tr>
 							<td>瑞士乳桿菌</td>
 							<td><em>Lactobacillus helveticus</em></td>
 							<td>嗜熱；起司／發酵乳亦常見</td>
 						</tr>
+						<tr>
+							<td>羅伊氏黏液乳桿菌</td>
+							<td><em>Limosilactobacillus reuteri</em></td>
+							<td>舊名 L. reuteri；多作附加菌，非優格核心菌</td>
+						</tr>
+						<tr>
+							<td>發酵黏液乳桿菌</td>
+							<td><em>Limosilactobacillus fermentum</em></td>
+							<td>舊名 L. fermentum；部分發酵乳研究與配方使用</td>
+						</tr>
 					</tbody>
 				</table>
-				<p>
-					工業資料常強調：優格主發酵靠兩核心種；其他菌多為附加性質。
-					<a href={`${base}cultures/#core-species`}>回到分類總覽 §4</a>
-				</p>
+				<p class="meta">這些菌可參與發酵或在成品中存活，但不等於 Codex 定義的優格核心兩菌。</p>
 			</section>
 
-			<section class="record-block">
-				<h2 class="record-block__title">常溫發酵相關<span class="en-sub">Mesophilic LAB</span></h2>
+			<section class="record-block" id="mesophilic-species">
+				<h2 class="record-block__title">3. 常溫發酵相關<span class="en-sub">Mesophilic LAB</span></h2>
 				<table class="meta-table">
 					<thead>
 						<tr>
@@ -130,8 +167,30 @@ const base = import.meta.env.BASE_URL;
 				</p>
 			</section>
 
-			<section class="record-block">
-				<h2 class="record-block__title">真菌與酵母<span class="en-sub">Fungi &amp; Yeasts</span></h2>
+			<section class="record-block" id="fungi-classification">
+				<h2 class="record-block__title">4. 依是否含酵母／真菌分類<span class="en-sub">By Fungi / Yeast</span></h2>
+				<ul class="classify-list">
+					<li class="classify-list__row">
+						<span class="classify-list__label">純乳酸菌型</span>
+						<span class="classify-list__body">
+							僅 LAB；一般優格菌粉、Filmjölk、台灣 MESO。通常不產氣；分離菌株配方長期傳代可能比例漂移。
+						</span>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">含真菌／酵母型</span>
+						<span class="classify-list__body">
+							LAB + 酵母／黴菌；傳統 Viili、Kefir、原產 Matsoni 等。風味較複雜，可能產 CO₂ 或表面菌膜。
+						</span>
+					</li>
+					<li class="classify-list__row">
+						<span class="classify-list__label">SCOBY（菌粒）型</span>
+						<span class="classify-list__body">
+							細菌與酵母包在多醣基質中；<a href={`${base}cultures/milk-kefir/`}>Milk Kefir</a> 與 <a href={`${base}cultures/water-kefir/`}>Water Kefir</a> 是不同菌粒，不能互換。
+						</span>
+					</li>
+				</ul>
+
+				<h3 class="section-kicker">常見真菌與酵母</h3>
 				<p class="page-lead" style="margin-bottom: 1rem;">
 					非乳酸菌，但傳統 Viili、Kefir、原產 Matsoni 常含。會產氣、酵母香或表面長膜。
 				</p>
@@ -164,6 +223,81 @@ const base = import.meta.env.BASE_URL;
 				<p class="meta">
 					菌種本身含 <em>G. candidum</em> 時，均勻白絲絨表面可為正常成熟；純 LAB 菌粉長毛則視為污染。
 				</p>
+			</section>
+
+			<section class="record-block" id="numbered-strains">
+				<h2 class="record-block__title">
+					5. 常見編號菌株（{numberedStrains.length}）
+					<span class="en-sub">Named &amp; Numbered Strains</span>
+				</h2>
+				<p class="page-lead" style="margin-bottom: 1rem;">
+					以下是目前公開資料可核實、曾用於優格或發酵乳的代表菌株，不是完整市售清單。編號可能是菌種保藏編號、公司研發代碼或商標名；同物種不同菌株不能視為效果相同。
+				</p>
+				<div class="table-scroll">
+					<table class="meta-table strain-table">
+						<thead>
+							<tr>
+								<th>編號／名稱</th>
+								<th>現行學名</th>
+								<th>乳製品用途</th>
+								<th>定位／來源</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								numberedStrains.map((strain) => (
+									<tr>
+										<td>{strain.designation}</td>
+										<td>
+											<em>{strain.scientificName}</em>
+											{strain.formerName && (
+												<>
+													<br />
+													<span class="meta">舊名：{strain.formerName}</span>
+												</>
+											)}
+										</td>
+										<td>{strain.dairyUse}</td>
+										<td>
+											{strain.role}
+											<br />
+											<a href={strain.sourceUrl} target="_blank" rel="noopener noreferrer">
+												{strain.sourceLabel} ↗
+											</a>
+										</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+				<p class="meta">
+					「含某物種」不代表「含上表特定菌株」。購買時要看完整學名加編號，且產品效益仍取決於活菌量、配方與研究條件。
+				</p>
+			</section>
+
+			<section class="record-block" id="sources">
+				<h2 class="record-block__title">資料來源<span class="en-sub">Sources</span></h2>
+				<ul class="source-list">
+					<li>
+						<a
+							href="https://www.fao.org/fao-who-codexalimentarius/sh-proxy/en/?lnk=1&amp;url=https%253A%2F%2Fworkspace.fao.org%2Fsites%2Fcodex%2FStandards%2FCXS%2B243-2003%2FCXS_243e.pdf"
+							target="_blank"
+							rel="noopener noreferrer"
+						>
+							Codex CXS 243-2003：發酵乳標準
+						</a>
+					</li>
+					{
+						strainSources.map((source) => (
+							<li>
+								<a href={source.sourceUrl} target="_blank" rel="noopener noreferrer">
+									{source.sourceLabel}：{source.designations.join('、')}
+								</a>
+							</li>
+						))
+					}
+				</ul>
 			</section>
 		</div>
 	</section>

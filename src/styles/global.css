@@ -299,6 +299,23 @@ p {
 	font-size: 0.95rem;
 }
 
+.table-scroll {
+	max-width: 100%;
+	overflow-x: auto;
+}
+
+.strain-table {
+	min-width: 58rem;
+}
+
+.strain-table th:first-child {
+	width: 13rem;
+}
+
+.strain-table th:nth-child(2) {
+	width: 18rem;
+}
+
 .meta-table th,
 .meta-table td {
 	text-align: left;

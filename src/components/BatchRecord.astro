@@ -26,6 +26,11 @@ function withBrand(base: string, brand?: string): string {
 	return name ? `${base}(${name})` : base;
 }
 
+function parseMl(amount: string): number | null {
+	const m = amount.replace(/\s+/g, '').match(/^(\d+(?:\.\d+)?)ml$/i);
+	return m ? Number(m[1]) : null;
+}
+
 function formatMilk(ingredients: Ingredient[]): string {
 	const fresh = ingredients.filter((i) => i.type === 'fresh-milk');
 	const powder = ingredients.filter((i) => i.type === 'milk-powder');
@@ -34,13 +39,27 @@ function formatMilk(ingredients: Ingredient[]): string {
 	const parts: string[] = [];
 
 	for (const ing of fresh) {
-		parts.push(withBrand(`鮮奶 ${compactAmount(ing.amount)}`, ing.brand));
+		let line = withBrand(`鮮奶 ${compactAmount(ing.amount)}`, ing.brand);
+		if (ing.note?.trim()) line += `, ${ing.note.trim()}`;
+		parts.push(line);
 	}
 
 	if (powder.length > 0 && water.length > 0) {
-		const vol = water[0]?.amount ?? powder[0]?.amount ?? '';
-		const brand = powder[0]?.brand || water[0]?.brand;
-		parts.push(withBrand(`奶粉+水 ${compactAmount(vol)}`, brand));
+		const powderAmt = compactAmount(powder[0].amount);
+		const waterAmt = compactAmount(water[0].amount);
+		const powderMl = parseMl(powder[0].amount);
+		const waterMl = parseMl(water[0].amount);
+		const total =
+			powderMl != null && waterMl != null
+				? compactAmount(`${powderMl + waterMl} ml`)
+				: powderAmt;
+		const brand = powder[0].brand?.trim();
+		const brandPowder = brand
+			? brand.endsWith('奶粉')
+				? brand
+				: `${brand}奶粉`
+			: '奶粉';
+		parts.push(`奶粉 ${total} (${brandPowder} ${powderAmt} + 水 ${waterAmt})`);
 	} else {
 		for (const ing of powder) {
 			parts.push(withBrand(`奶粉 ${compactAmount(ing.amount)}`, ing.brand));
