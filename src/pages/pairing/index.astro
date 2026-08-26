@@ -7,19 +7,39 @@ const singles = [
 		group: '口感與堅果類',
 		items: [
 			{
-				name: '綜合堅果',
-				en: 'Walnuts / Almonds / Cashews',
-				body: '核桃、杏仁、腰果可補油脂與蛋白質，增加層次。建議無調味、低溫烘焙。',
+				name: '核桃',
+				en: 'Walnuts',
+				body: '補充油脂與蛋白質，口感酥脆。建議選無調味、低溫烘焙。',
 			},
 			{
-				name: '燕麥片／穀物麥片',
-				en: 'Oats / Granola',
-				body: '提供碳水化合物與膳食纖維，酥脆、較有飽足感。',
+				name: '杏仁',
+				en: 'Almonds',
+				body: '帶堅果香與咬感，可補充油脂與蛋白質。建議選無調味款。',
 			},
 			{
-				name: '奇亞籽／亞麻籽粉',
-				en: 'Chia / Flaxseed',
-				body: '吸水後會膨脹；含 Omega-3 與膳食纖維。亞麻籽粉建議用熟粉。',
+				name: '腰果',
+				en: 'Cashews',
+				body: '口感較柔和、帶自然甜味，可增加飽足感。建議選無調味款。',
+			},
+			{
+				name: '燕麥片',
+				en: 'Oats',
+				body: '提供碳水化合物與膳食纖維；稍微浸泡後會變軟，飽足感較高。',
+			},
+			{
+				name: '穀物麥片',
+				en: 'Granola',
+				body: '增加酥脆口感與飽足感；選購時留意額外添加的糖與油。',
+			},
+			{
+				name: '奇亞籽',
+				en: 'Chia Seeds',
+				body: '含膳食纖維，吸水後會膨脹並讓優格變稠；先從少量加入。',
+			},
+			{
+				name: '亞麻籽粉',
+				en: 'Ground Flaxseed',
+				body: '含油脂與膳食纖維，拌入後會略為增稠；建議使用熟粉。',
 			},
 			{
 				name: '可可碎粒',
@@ -32,14 +52,24 @@ const singles = [
 		group: '風味與甜味',
 		items: [
 			{
-				name: '蜂蜜／楓糖漿',
-				en: 'Honey / Maple Syrup',
-				body: '經典天然甜味，可中和無糖優格的酸。',
+				name: '蜂蜜',
+				en: 'Honey',
+				body: '帶花香的甜味，可中和無糖優格的酸；先少量加入。',
 			},
 			{
-				name: '黑芝麻粉／花生粉',
-				en: 'Black sesame / Peanut powder',
-				body: '無糖粉類香氣濃；拌入後偏膏狀。芝麻粉也補鈣。',
+				name: '楓糖漿',
+				en: 'Maple Syrup',
+				body: '甜味溫和且容易拌勻，可中和無糖優格的酸。',
+			},
+			{
+				name: '黑芝麻粉',
+				en: 'Black Sesame Powder',
+				body: '香氣濃，拌入後呈膏狀，也可補充鈣質；建議選無糖款。',
+			},
+			{
+				name: '花生粉',
+				en: 'Peanut Powder',
+				body: '帶花生香並使質地變濃；選無糖或低糖配方。',
 			},
 			{
 				name: '純肉桂粉',
@@ -47,9 +77,14 @@ const singles = [
 				body: '一小匙即可提香。選純粉、無加糖配方。',
 			},
 			{
-				name: '抹茶粉／純可可粉',
-				en: 'Matcha / Cocoa',
-				body: '攪拌即成抹茶或巧克力風味；用無糖純粉。',
+				name: '抹茶粉',
+				en: 'Matcha',
+				body: '攪拌後形成抹茶風味；建議使用無糖純粉並先少量加入。',
+			},
+			{
+				name: '純可可粉',
+				en: 'Cocoa Powder',
+				body: '帶苦甜巧克力風味；先用少量優格化開，可減少結塊。',
 			},
 		],
 	},
@@ -57,9 +92,19 @@ const singles = [
 		group: '鹹食與特殊',
 		items: [
 			{
-				name: '橄欖油＋黑胡椒＋鹽',
-				en: 'Olive oil, pepper, salt',
-				body: '地中海式吃法，特別適合希臘優格：滑順、帶草本香。',
+				name: '橄欖油',
+				en: 'Olive Oil',
+				body: '增加滑順度與草本香，特別適合希臘優格與鹹味優格碗。',
+			},
+			{
+				name: '黑胡椒',
+				en: 'Black Pepper',
+				body: '提供辛香層次，適合搭配鹹味優格；現磨香氣較明顯。',
+			},
+			{
+				name: '鹽',
+				en: 'Salt',
+				body: '少量即可平衡酸味並凸顯鹹香；避免一次加入過多。',
 			},
 			{
 				name: '蛋白粉',
@@ -67,44 +112,24 @@ const singles = [
 				body: '運動後可拌入乳清蛋白；稠優格較容易做成慕斯感。先少量拌勻，減少結塊。',
 			},
 			{
-				name: '鷹嘴豆／水煮蛋',
-				en: 'Chickpeas / Eggs',
-				body: '鹹碗常見蛋白質來源。鷹嘴豆也補纖維；瀝乾再拌，避免把優格沖稀。',
+				name: '鷹嘴豆',
+				en: 'Chickpeas',
+				body: '鹹味優格碗常見的蛋白質與纖維來源；瀝乾再拌，避免把優格沖稀。',
 			},
 			{
-				name: '芝麻醬／Za’atar',
-				en: 'Tahini / Za’atar',
-				body: '芝麻醬帶堅果香；Za’atar（百里香、蘇麥、芝麻）是地中海優格碗常見收尾香料。',
-			},
-		],
-	},
-	{
-		group: '水果',
-		items: [
-			{
-				name: '莓果',
-				en: 'Berries',
-				body: '草莓、藍莓、覆盆子：酸甜、好切、不易大量出水。冷凍莓果解凍後瀝乾再拌。',
+				name: '水煮蛋',
+				en: 'Boiled Egg',
+				body: '提供蛋白質，切片或切丁後可放入鹹味優格碗。',
 			},
 			{
-				name: '香蕉',
-				en: 'Banana',
-				body: '熟香蕉較甜，可少加糖。現切現吃，避免褐變。',
+				name: '芝麻醬',
+				en: 'Tahini',
+				body: '帶濃郁堅果香與滑順質地，適合希臘優格與中東風味鹹碗。',
 			},
 			{
-				name: '芒果',
-				en: 'Mango',
-				body: '熟芒果香甜，切丁瀝乾。未熟偏酸、過熟過軟都不好拌。',
-			},
-			{
-				name: '奇異果',
-				en: 'Kiwi',
-				body: '去皮切丁，酸香清爽。和優格同屬微酸，吃起來偏清新。',
-			},
-			{
-				name: '蘋果',
-				en: 'Apple',
-				body: '選脆蘋果切丁。水分很多的水果（西瓜、葡萄過熟）容易把優格變稀。',
+				name: 'Za’atar',
+				en: 'Za’atar',
+				body: '由百里香、蘇麥與芝麻等組成，是地中海優格碗常見的收尾香料。',
 			},
 		],
 	},
@@ -267,21 +292,23 @@ const base = import.meta.env.BASE_URL;
 
 			<section class="record-block" id="additives">
 				<h2 class="record-block__title">3. 添加物<span class="en-sub">Additives</span></h2>
-				<ul class="list">
-					{
-						additives.map(({ id, data }) => (
-							<li>
-								<a class="list-item" href={`${base}pairing/additives/${id}/`}>
-									<h3>
-										{data.title}
-										<span class="en-sub">{data.titleEn}</span>
-									</h3>
-									<p>{data.summary}</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
+				<div class="pairing-group">
+					<ul class="list">
+						{
+							additives.map(({ id, data }) => (
+								<li>
+									<a class="list-item pairing-item" href={`${base}pairing/additives/${id}/`}>
+										<h4 class="pairing-item__title glossary-term">
+											{data.title}
+											<span class="glossary-term__en">{data.titleEn}</span>
+										</h4>
+										<p class="pairing-item__body">{data.summary}</p>
+									</a>
+								</li>
+							))
+						}
+					</ul>
+				</div>
 			</section>
 		</div>
 	</section>

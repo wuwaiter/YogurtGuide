@@ -2,6 +2,8 @@
 title: "希臘優格菌粉"
 titleEn: "Greek Yogurt Starter"
 summary: "嗜熱菌粉常訴求較厚、較溫和凝乳；真正希臘濃稠多靠瀝乳製程。"
+species: "商品配方，常見為標準優格兩菌或其搭配菌；需查看包裝完整學名"
+classificationNote: "選購／商品風格名；不是正式微生物分類"
 temperatureClass: "thermophilic"
 tempRangeC: "42–43"
 timeRangeH: "4–8"

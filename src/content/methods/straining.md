@@ -31,4 +31,4 @@ draft: false
 ## 備註
 
 - Short Skyr 傳統上瀝乳常比一般希臘優格更久（常見說明 8–12 h）。
-- 本製法可接在 [高溫巴氏後接種法](../pasteurized-inoculation/) 之後。
+- 本製法可接在 [高溫預熱後接種法](../pasteurized-inoculation/) 之後。

@@ -5,4 +5,4 @@ category: "microbiology"
 draft: false
 ---
 
-將乳糖發酵成乳酸的細菌總稱。優格主發酵靠核心兩菌；常溫 fil 與附加機能菌亦屬 LAB，有別於酵母／SCOBY 型。
+能以糖類發酵產生乳酸的一群細菌。優格主發酵依靠核心兩菌，常溫 fil 與許多附加菌也屬 LAB。酵母不屬於 LAB；Kefir 等共生菌粒則可同時包含 LAB、酵母及其他細菌。

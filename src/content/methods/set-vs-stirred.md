@@ -22,7 +22,7 @@ draft: false
 
 ### 凝態（Set）
 
-1. 乳預處理與接種（常接 [高溫巴氏後接種法](../pasteurized-inoculation/)）。
+1. 乳預處理與接種（常接 [高溫預熱後接種法](../pasteurized-inoculation/)）。
 2. 分裝至杯／罐後**靜置保溫**至凝乳。
 3. 整杯冷卻後熟；避免劇烈搖晃。
 

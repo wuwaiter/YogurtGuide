@@ -8,7 +8,7 @@ tempRangeC: "40–45"
 timeRangeH: "4–8"
 flavorProfile: "典型優格酸香"
 textureProfile: "可做成凝態；厚度中等，可再瀝乳"
-reuseHint: "常見為 direct-set；亦可以成品傳代（活性會隨代遞減）"
+reuseHint: "常見為 direct-set；是否適合以成品傳代及建議代數，應依供應商說明與實際發酵表現判斷"
 sortOrder: 10
 draft: false
 ---

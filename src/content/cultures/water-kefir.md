@@ -2,7 +2,7 @@
 title: "Water Kefir（水克菲爾／Tibicos）"
 titleEn: "Water Kefir Grains"
 summary: "以糖水培養的透明至半透明多醣晶粒；與牛奶 Kefir 是不同菌粒、不同基質的發酵系統。"
-species: "Lentilactobacillus hilgardii + Lactobacillus nagelii + Lacticaseibacillus paracasei + Leuconostoc spp. + Acetobacter spp. + yeasts; some grains contain Zymomonas"
+species: "Lentilactobacillus hilgardii + Liquorilactobacillus nagelii（舊名 Lactobacillus nagelii）+ Lacticaseibacillus paracasei + Leuconostoc spp. + Acetobacter spp. + yeasts; some grains contain Zymomonas"
 temperatureClass: "mesophilic"
 form: "water-grains"
 source: "water kefir grains"
@@ -15,7 +15,7 @@ sortOrder: 91
 draft: false
 ---
 
-## Water Kefir 是另一套菌種
+## 概述（Overview）
 
 Water Kefir 使用 **water kefir grains／crystals** 發酵蔗糖水，常搭配乾果或檸檬提供礦物質與風味。顆粒通常透明至半透明、如果凍或碎水晶；成品偏甜酸、清爽並可能帶氣泡。
 
@@ -38,7 +38,7 @@ Water Kefir 使用 **water kefir grains／crystals** 發酵蔗糖水，常搭配
 
 ## 常見菌相與製作條件
 
-Water Kefir 常見乳酸菌包括 *Lentilactobacillus hilgardii*、*Lactobacillus nagelii*、*Lacticaseibacillus paracasei* 與 *Leuconostoc*；另有醋酸菌及 *Saccharomyces*、*Dekkera*、*Pichia* 等酵母。部分樣本由 *Zymomonas* 佔優勢。
+Water Kefir 常見乳酸菌包括 *Lentilactobacillus hilgardii*、*Liquorilactobacillus nagelii*（舊名 *Lactobacillus nagelii*）、*Lacticaseibacillus paracasei* 與 *Leuconostoc*；另有醋酸菌及 *Saccharomyces*、*Dekkera*、*Pichia* 等酵母。部分樣本由 *Zymomonas* 佔優勢。
 
 這不是固定配方。研究顯示不同 water kefir grains 可分成 yeast–LAB–AAB 型與 *Zymomonas* 優勢型，即使代謝功能相近，風味與揮發物仍會不同。
 

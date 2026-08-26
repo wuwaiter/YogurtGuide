@@ -2,6 +2,8 @@
 title: "Piimä（北歐）"
 titleEn: "Piimä"
 summary: "常溫風格；很稀、可飲、風味溫和。"
+species: "Lactococcus lactis 類群為主（實際菌相依傳統來源或商品 starter 而異）"
+classificationNote: "傳統發酵乳名稱；不是單一固定菌種配方"
 temperatureClass: "mesophilic"
 tempRangeC: "20–25"
 timeRangeH: "12–24"

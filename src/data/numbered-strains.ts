@@ -5,6 +5,7 @@ export interface NumberedStrain {
 	scientificName: string;
 	formerName?: string;
 	dairyUse: string;
+	usageForm?: string;
 	role: StrainRole;
 	sourceLabel: string;
 	sourceUrl: string;
@@ -164,6 +165,7 @@ export const numberedStrains: NumberedStrain[] = [
 		scientificName: 'Lactiplantibacillus plantarum OLL2712',
 		formerName: 'Lactobacillus plantarum OLL2712',
 		dairyUse: '明治機能性優格食品使用的乳酸菌；部分產品採加熱處理菌體。',
+		usageForm: '部分產品採加熱處理菌體，不能當 starter',
 		role: '附加菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/oll2712/top/',
@@ -268,6 +270,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'JCM 5805（LC-Plasma）',
 		scientificName: 'Lactococcus lactis subsp. lactis JCM 5805',
 		dairyUse: 'Kirin／Koiwai 的 iMUSE 優格等食品使用；常採加熱處理菌體。',
+		usageForm: '常採加熱處理菌體，不能當 starter',
 		role: '附加菌',
 		sourceLabel: 'Kirin',
 		sourceUrl: 'https://www.kirinholdings.com/en/newsroom/release/2020/0928_01.pdf',
@@ -308,6 +311,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'CP2305',
 		scientificName: 'Lactobacillus gasseri CP2305',
 		dairyUse: '源自 Calpis 發酵乳菌種庫；現行食品多使用加熱處理菌體，也可添加於優格。',
+		usageForm: '現行食品多採加熱處理菌體，不能直接當 starter',
 		role: '附加菌',
 		sourceLabel: 'Asahi',
 		sourceUrl: 'https://www.asahi-gf.co.jp/en/material/cp2305/index.html',

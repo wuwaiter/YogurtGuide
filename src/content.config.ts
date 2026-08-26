@@ -9,6 +9,7 @@ const cultures = defineCollection({
 		titleEn: z.string(),
 		summary: z.string(),
 		species: z.string().optional(),
+		classificationNote: z.string().optional(),
 		temperatureClass: z.enum(['thermophilic', 'mesophilic']),
 		form: z.string().optional(),
 		source: z.string().optional(),

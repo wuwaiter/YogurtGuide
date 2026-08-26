@@ -15,7 +15,7 @@ sortOrder: 90
 draft: false
 ---
 
-## 先看是不是「牛奶型」
+## 概述（Overview）
 
 Milk Kefir 使用的是 **milk kefir grains（牛奶克菲爾菌粒）**。菌粒通常呈乳白至淡黃色、柔韌、像小花椰菜；放入牛奶後，由乳酸菌、醋酸菌與酵母共同完成發酵。
 

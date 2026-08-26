@@ -43,6 +43,7 @@ const formLabel: Record<string, string> = {
 				<span class="en-sub">{data.titleEn}</span>
 			</h1>
 			<p class="page-lead">{data.summary}</p>
+			{data.classificationNote && <p class="meta">分類註記：{data.classificationNote}</p>}
 
 			<table class="meta-table">
 				<tbody>

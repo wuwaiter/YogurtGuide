@@ -1,7 +1,7 @@
 ---
 title: "菊苣纖維"
 titleEn: "Chicory fiber (inulin)"
-summary: "好菌的食物，做之前加或做好後再加都可以"
+summary: "好菌的食物(益生原)，做之前加或做好後再加都可以"
 sortOrder: 10
 draft: false
 ---

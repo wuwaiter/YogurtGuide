@@ -1,7 +1,7 @@
 ---
-title: "高溫巴氏後接種法"
-titleEn: "Pasteurized Milk Inoculation Process"
-summary: "將鮮乳加熱至巴氏條件後冷卻接種，再於穩定保溫下完成發酵與後熟。"
+title: "高溫預熱後接種法"
+titleEn: "High-Heat Milk Pretreatment and Inoculation"
+summary: "將乳加熱至優格製程常用的高溫預熱條件，冷卻接種後再於穩定溫度完成發酵與後熟。"
 equipment: ["厚底鍋或雙重鍋","探針溫度計（probe thermometer）","保溫容器或優格機"]
 suitableCultures: ["bulgarian","traditional","greek-starter"]
 draft: false
@@ -9,7 +9,7 @@ draft: false
 
 ## 目的（Purpose）
 
-透過加熱（heat treatment）降低競爭微生物、改變乳蛋白結構，使後續接種（inoculation）後的凝乳更穩定、可重複。
+透過高溫預熱（high-heat pretreatment）降低競爭微生物，並促進乳清蛋白變性，使後續接種（inoculation）後的凝乳更穩定、可重複。85–90°C／5–10 分鐘是優格質地處理條件，不等同於把巴氏殺菌只定義成這一組溫度與時間。
 
 ## 流程（Process Steps）
 
