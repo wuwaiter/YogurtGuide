@@ -26,6 +26,16 @@ npx astro dev --background
 
 背景伺服器可用 `npx astro dev status`、`npx astro dev logs`、`npx astro dev stop` 管理。網站路徑為 `http://localhost:4321/YogurtGuide/`，`YogurtGuide` 大小寫需一致。
 
+## 新增批次實驗
+
+Windows 可直接雙擊專案根目錄的 `新增批次.bat`：
+
+1. 工具會開啟 `batch-input.txt` 範本。
+2. 填寫資料，按 `Ctrl+S` 儲存並關閉記事本。
+3. 回到批次視窗按任意鍵，工具會建立下一個 `src/content/batches/bNNN-YYYYMMDD.md`，並執行 `npm run build`。
+
+也可以在終端機執行 `npm run batch:import`。若資料無法辨識，輸入內容會保留在 `batch-input.txt`，修正後再次執行即可。菌種格式支援：`市售優格（心樸優格 120ml）`、`菌粉（川秀60菌）`、`傳代（川秀60菌 傳代*2 60ml）`。
+
 ## GitHub Pages
 
 1. 推送到 `main`

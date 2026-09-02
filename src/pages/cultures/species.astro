@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CulturesSubnav from '../../components/CulturesSubnav.astro';
 import { getNumberedStrainSources, numberedStrains } from '../../data/numbered-strains';
 
 const base = import.meta.env.BASE_URL;
@@ -17,8 +16,6 @@ const strainSources = getNumberedStrainSources(numberedStrains);
 			<p class="meta">
 				閱讀層級：發酵食品名稱（例如 Ayran）→ 微生物物種（例如 <em>Streptococcus thermophilus</em>）→ 特定菌株（例如 OLS3059）。食品名稱不等於物種，同一物種的不同菌株也不保證具有相同製程表現或健康效益。
 			</p>
-			<CulturesSubnav current="strains" />
-
 			<section class="record-block" id="core-species">
 				<h2 class="record-block__title">1. 優格核心種<span class="en-sub">Defining Yogurt Cultures</span></h2>
 				<p class="page-lead" style="margin-bottom: 1rem;">

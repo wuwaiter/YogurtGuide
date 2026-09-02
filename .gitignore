@@ -184,3 +184,6 @@ ehthumbs.db
 *.bak
 *.orig
 .history/
+
+# 批次匯入工具的本機暫存輸入
+/batch-input.txt

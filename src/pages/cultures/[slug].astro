@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CulturesSubnav from '../../components/CulturesSubnav.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -37,7 +36,6 @@ const formLabel: Record<string, string> = {
 <BaseLayout title={data.title} description={data.summary}>
 	<section class="section">
 		<div class="wrap">
-			<CulturesSubnav current="types" />
 			<h1 class="page-title">
 				{data.title}
 				<span class="en-sub">{data.titleEn}</span>

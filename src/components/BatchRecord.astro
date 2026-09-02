@@ -1,6 +1,6 @@
 ---
 import type { CollectionEntry } from 'astro:content';
-import { formatBatchDate } from '../lib/batch-display';
+import { formatBatchCultureLabel, formatBatchDate } from '../lib/batch-display';
 
 interface Props {
 	batch: CollectionEntry<'batches'>['data'];
@@ -9,13 +9,6 @@ interface Props {
 const { batch: d } = Astro.props;
 
 type Ingredient = CollectionEntry<'batches'>['data']['ingredients'][number];
-
-const cultureSourceShort: Record<string, string> = {
-	mother: '留存母種',
-	'new-powder': '新菌粉',
-	'commercial-yogurt': '市售優格',
-	other: '其他',
-};
 
 function compactAmount(amount: string): string {
 	return amount.replace(/\s+/g, '');
@@ -76,17 +69,7 @@ function formatMilk(ingredients: Ingredient[]): string {
 	return parts.join(' + ') || '—';
 }
 
-const cultureLine = (() => {
-	const kind = cultureSourceShort[d.cultureSource] ?? d.cultureSource;
-	let line = `${kind}（${d.cultureName}）`;
-	if (d.cultureGeneration != null) {
-		line += ` · 傳代第 ${d.cultureGeneration} 次`;
-	}
-	if (d.cultureAmount?.trim()) {
-		line += ` / ${d.cultureAmount}`;
-	}
-	return line;
-})();
+const cultureLine = formatBatchCultureLabel(d);
 
 const equipmentLine = [d.equipment.device, d.equipment.vessel, d.equipment.note]
 	.map((s) => s?.trim())

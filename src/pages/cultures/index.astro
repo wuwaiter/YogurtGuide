@@ -1,6 +1,5 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
-import CulturesSubnav from '../../components/CulturesSubnav.astro';
 import { getCollection } from 'astro:content';
 
 const cultures = (await getCollection('cultures', ({ data }) => !data.draft)).sort(
@@ -23,8 +22,6 @@ const tempLabel: Record<string, string> = {
 			<p class="page-lead">
 				這裡依製作條件與成品風格整理「做哪一種優格」。為方便比較，也收錄 Kefir、Skyr、Viili 與 Water Kefir 等相關發酵文化；它們不一定屬於法規定義的「優格」，其中 Water Kefir 也不是乳製品。微生物物種與編號菌株另見菌種頁。數值為常見範圍，實作以包裝與批次紀錄為準。
 			</p>
-			<CulturesSubnav current="types" />
-
 			<section class="record-block" id="by-temperature">
 				<h2 class="record-block__title">1. 依適溫分類<span class="en-sub">By Temperature</span></h2>
 				<ul class="classify-list">
