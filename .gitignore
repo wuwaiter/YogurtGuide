@@ -187,3 +187,6 @@ ehthumbs.db
 
 # 批次匯入工具的本機暫存輸入
 /batch-input.txt
+
+# 主題改版前本機備份（還原用，不上版控）
+.backup/

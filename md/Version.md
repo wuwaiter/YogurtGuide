@@ -1,5 +1,12 @@
 # Version History
 
+## v0.8.0 — 2026-09-03
+
+### Changes
+- 網站視覺改為 Powder Blue 編輯印刷風（中性白／冷灰底＋`#9EB8D3` 主色＋炭灰字）。
+- 導覽改用白底 logo、首頁 hero 改用色塊底 logo；favicon 同步更新。
+- 改版前綠系主題備份於本機 `.backup/theme-green-20260903/`（已 gitignore）。
+
 ## v0.7.5 — 2026-09-01
 
 ### Changes

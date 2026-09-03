@@ -1,14 +1,17 @@
 :root {
-	--bg: #eef3f1;
-	--bg-deep: #d9e6e1;
-	--surface: #f7faf8;
-	--ink: #1a2b28;
-	--ink-muted: #4a5f5a;
-	--accent: #0f6b5c;
-	--accent-soft: #c5ddd6;
-	--line: rgba(26, 43, 40, 0.12);
-	--hero-from: #1c3d36;
-	--hero-to: #0f6b5c;
+	/* Powder Blue mono-color editorial */
+	--bg: #fafaf7;
+	--bg-deep: #e9e9e5;
+	--surface: #ffffff;
+	--ink: #30343a;
+	--ink-muted: #5c636b;
+	--accent: #9eb8d3;
+	--accent-deep: #6f8fad;
+	--accent-soft: #d7e3ef;
+	--line: rgba(48, 52, 58, 0.12);
+	--hero-from: #9eb8d3;
+	--hero-to: #7fa3c4;
+	--hero-ink: #30343a;
 	--font-display: "Fraunces", "Iowan Old Style", "Palatino Linotype", serif;
 	--font-body: "Manrope", "Segoe UI", sans-serif;
 	--space: clamp(1rem, 2.5vw, 2rem);
@@ -34,8 +37,8 @@ body {
 	font-size: 1.05rem;
 	line-height: 1.65;
 	background:
-		radial-gradient(ellipse 90% 60% at 10% -10%, rgba(15, 107, 92, 0.14), transparent 55%),
-		radial-gradient(ellipse 70% 50% at 100% 0%, rgba(28, 61, 54, 0.1), transparent 50%),
+		radial-gradient(ellipse 90% 60% at 10% -10%, rgba(158, 184, 211, 0.28), transparent 55%),
+		radial-gradient(ellipse 70% 50% at 100% 0%, rgba(158, 184, 211, 0.16), transparent 50%),
 		linear-gradient(180deg, var(--bg) 0%, var(--bg-deep) 100%);
 }
 
@@ -45,7 +48,7 @@ img {
 }
 
 a {
-	color: var(--accent);
+	color: var(--accent-deep);
 	text-decoration-thickness: 1px;
 	text-underline-offset: 0.18em;
 }
@@ -72,7 +75,7 @@ p {
 	top: 0;
 	z-index: 20;
 	backdrop-filter: blur(10px);
-	background: rgba(238, 243, 241, 0.86);
+	background: rgba(250, 250, 247, 0.9);
 	border-bottom: 1px solid var(--line);
 }
 
@@ -92,16 +95,17 @@ p {
 }
 
 .brand {
-	font-family: var(--font-display);
-	font-size: 1.35rem;
-	font-weight: 600;
-	color: var(--ink);
+	display: inline-flex;
+	align-items: center;
 	text-decoration: none;
-	letter-spacing: -0.03em;
+	line-height: 0;
 }
 
-.brand span {
-	color: var(--accent);
+.brand__logo {
+	display: block;
+	height: 2.4rem;
+	width: auto;
+	max-width: min(42vw, 14rem);
 }
 
 .nav {
@@ -138,9 +142,9 @@ p {
 .hero {
 	position: relative;
 	overflow: hidden;
-	color: #f3faf7;
+	color: var(--hero-ink);
 	background:
-		linear-gradient(135deg, rgba(15, 107, 92, 0.25), transparent 40%),
+		linear-gradient(135deg, rgba(250, 250, 247, 0.22), transparent 42%),
 		linear-gradient(160deg, var(--hero-from), var(--hero-to));
 	min-height: min(78vh, 40rem);
 	display: grid;
@@ -153,8 +157,8 @@ p {
 	inset: auto -10% -40% 40%;
 	height: 70%;
 	background:
-		radial-gradient(circle at 30% 40%, rgba(255, 255, 255, 0.18), transparent 42%),
-		radial-gradient(circle at 70% 60%, rgba(197, 221, 214, 0.2), transparent 50%);
+		radial-gradient(circle at 30% 40%, rgba(250, 250, 247, 0.35), transparent 42%),
+		radial-gradient(circle at 70% 60%, rgba(48, 52, 58, 0.08), transparent 50%);
 	transform: rotate(-8deg);
 	pointer-events: none;
 	animation: drift 14s ease-in-out infinite alternate;
@@ -168,29 +172,32 @@ p {
 	padding: clamp(4rem, 12vh, 7rem) 0 clamp(2.5rem, 6vh, 4rem);
 }
 
-.hero__brand {
-	font-family: var(--font-display);
-	font-size: clamp(3rem, 9vw, 5.5rem);
-	font-weight: 600;
-	letter-spacing: -0.04em;
-	margin: 0 0 0.6rem;
+.hero__logo {
+	display: block;
+	width: min(100%, 34rem);
+	height: auto;
+	margin: 0 0 1rem;
 	animation: rise 0.8s ease both;
 }
 
 .hero__title {
-	font-size: clamp(1.2rem, 2.4vw, 1.55rem);
-	font-weight: 500;
-	max-width: 28ch;
-	margin: 0 0 0.75rem;
-	animation: rise 0.8s ease 0.08s both;
+	position: absolute;
+	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
+	overflow: hidden;
+	clip: rect(0, 0, 0, 0);
+	white-space: nowrap;
+	border: 0;
 }
 
 .hero__lead {
 	max-width: none;
-	color: rgba(243, 250, 247, 0.88);
+	color: rgba(48, 52, 58, 0.86);
 	margin: 0;
 	white-space: nowrap;
-	animation: rise 0.8s ease 0.16s both;
+	animation: rise 0.8s ease 0.08s both;
 }
 
 .hero__social {
@@ -198,11 +205,11 @@ p {
 	flex-wrap: wrap;
 	gap: 1rem;
 	margin: 1.15rem 0 0;
-	animation: rise 0.8s ease 0.24s both;
+	animation: rise 0.8s ease 0.16s both;
 }
 
 .hero__social a {
-	color: rgba(243, 250, 247, 0.95);
+	color: var(--hero-ink);
 	font-weight: 600;
 }
 
@@ -496,7 +503,7 @@ p {
 }
 
 .market-card__star {
-	color: var(--accent);
+	color: var(--accent-deep);
 	margin-right: 0.2rem;
 }
 
