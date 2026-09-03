@@ -74,7 +74,7 @@ const cultureLine = formatBatchCultureLabel(d);
 const equipmentLine = [d.equipment.device, d.equipment.vessel, d.equipment.note]
 	.map((s) => s?.trim())
 	.filter(Boolean)
-	.join('／') || '—';
+	.join('/') || '—';
 
 function formatTemp(value: string): string {
 	const m = value.match(/^(\d+(?:\.\d+)?)(.*)$/);

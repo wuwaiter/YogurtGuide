@@ -1,14 +1,14 @@
 ---
-title: "Long Skyr（長版／常溫黏絲）"
+title: "Long Skyr（長版/常溫黏絲）"
 titleEn: "Long Skyr (Mesophilic / Ropey)"
 summary: "常溫、可帶黏絲的 Skyr 風格變體；非傳統冰島製法。≠ Short Skyr。"
 species: "常溫 LAB 為主；商用描述常暗示混入產黏菌株（實際菌相依供應商）"
-classificationNote: "DIY 商品名／常溫變體；不是傳統冰島 Skyr 的正式分類"
+classificationNote: "DIY 商品名/常溫變體；不是傳統冰島 Skyr 的正式分類"
 temperatureClass: "mesophilic"
 tempRangeC: "20–25"
 timeRangeH: "12–24"
 flavorProfile: "溫和微酸，可帶一點甜潤"
-textureProfile: "偏厚 cream；常有 subtle ropey／黏絲"
+textureProfile: "偏厚 cream；常有 subtle ropey/黏絲"
 reuseHint: "DIY 店多作 mesophilic heirloom；勿當成傳統嗜熱 Skyr 的替代說明書"
 sortOrder: 55
 draft: false
@@ -29,4 +29,4 @@ draft: false
 | 瀝乳 | 可選（看喜歡的厚度） | **標誌步驟**（8–12 h） |
 | 名稱 | DIY 商品名 | DIY 對「傳統版」的稱呼 |
 
-→ 要做**傳統口感 Skyr**請選 Short／一般標 thermophilic 的 Skyr starter，不要用 Long 的說明書去對照文獻裡的冰島製法。
+→ 要做**傳統口感 Skyr**請選 Short/一般標 thermophilic 的 Skyr starter，不要用 Long 的說明書去對照文獻裡的冰島製法。

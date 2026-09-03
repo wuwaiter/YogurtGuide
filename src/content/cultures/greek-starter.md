@@ -3,7 +3,7 @@ title: "希臘優格菌粉"
 titleEn: "Greek Yogurt Starter"
 summary: "嗜熱菌粉常訴求較厚、較溫和凝乳；真正希臘濃稠多靠瀝乳製程。"
 species: "商品配方，常見為標準優格兩菌或其搭配菌；需查看包裝完整學名"
-classificationNote: "選購／商品風格名；不是正式微生物分類"
+classificationNote: "選購/商品風格名；不是正式微生物分類"
 temperatureClass: "thermophilic"
 tempRangeC: "42–43"
 timeRangeH: "4–8"
@@ -23,5 +23,5 @@ draft: false
 | 名稱 | 本質 |
 |------|------|
 | Greek yogurt | 多為製程（瀝乳） |
-| Greek-style（希臘式） | 常以增稠劑／奶粉模擬濃稠 |
+| Greek-style（希臘式） | 常以增稠劑/奶粉模擬濃稠 |
 | Greek yogurt starter | 菌粉風格；不保證成品已是希臘優格 |

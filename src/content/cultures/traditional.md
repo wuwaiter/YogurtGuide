@@ -1,5 +1,5 @@
 ---
-title: "傳統／標準優格菌"
+title: "傳統/標準優格菌"
 titleEn: "Traditional Yogurt Culture"
 summary: "典型嗜熱兩菌路線，接近多數市售原味優格的風味與質地。"
 species: "Streptococcus thermophilus + Lactobacillus delbrueckii subsp. bulgaricus"

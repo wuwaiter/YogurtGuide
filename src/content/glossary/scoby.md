@@ -1,5 +1,5 @@
 ---
-termZh: "SCOBY（共生菌膜／顆粒）"
+termZh: "SCOBY（共生菌膜/顆粒）"
 termEn: "SCOBY"
 category: "microbiology"
 draft: false

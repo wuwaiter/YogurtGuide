@@ -1,5 +1,60 @@
 # Version History
 
+## v0.8.20 — 2026-09-04
+
+### Changes
+- 首頁 hero 拿掉 `field notes`；恢復手寫 Yogurt 為主標；「優格製程筆記」與 `yogurt process notes` 同為等寬小標、排在手寫字下方。
+
+## v0.8.19 — 2026-09-03
+
+### Changes
+- 依 mono-color-skill 調整全站視覺：內文底改 Neutral White `#FAFAF7`（移除整頁藍漸層洗底），Powder Blue 只留 hero 色帶與規則線。
+- 新增第二墨 Signal Red `#C83232`，僅用於現行導覽底線、市售星標、field note 備註標籤、列表 hover 左規則。
+- 首頁 hero 主標改 serif「優格製程筆記」，mono 支援行 `yogurt process notes`，手寫字降為次要註記 `field notes`。
+- 去裝飾：header 取消 blur/陰影改實色紙底＋細線；QR 去圓角陰影；`record-chips` 改 rule + mono；`record-block` 去淡藍底。
+- 內頁 masthead 由全寬藍漸層改為大標題＋左側 Powder Blue 色條＋細規則線。
+- 社群圖示由黑色圓鈕改為炭色線框方形。
+
+## v0.8.18 — 2026-09-03
+
+### Changes
+- Skill 資料夾改名：`.agents/skills/mono-color/` → `.agents/skills/mono-color-skill/`（frontmatter `name` 同步）。
+
+## v0.8.17 — 2026-09-03
+
+### Changes
+- 全站內容將全形「／」統一改為半形「/」（src 內 43 個檔）。
+
+## v0.8.16 — 2026-09-03
+
+### Changes
+- 將 [mono-color-skill](https://github.com/yanliudesign/mono-color-skill) 安裝為專案 Skill：`.agents/skills/mono-color-skill/`（含 design-system／swatches／examples）。
+
+## v0.8.15 — 2026-09-03
+
+### Changes
+- 新增批次實驗 2026/09/02：義美全脂＋豐力富、莫凡彼希臘式優格 50ml 作 starter、42°C×13h；凝乳 7／質地 8／酸度 5，觀察明顯 EPS 與偏明顯酸味。
+
+## v0.8.14 — 2026-09-03
+
+### Changes
+- 統一三款市售優格標示格式：莫凡彼／科克蘭／心樸的成分標示與乳源用語。
+
+## v0.8.13 — 2026-09-03
+
+### Changes
+- Footer Instagram QR 中央圖示改為官方風格漸層圓底＋白相機；Threads 仍為黑圓白圖示。
+
+## v0.8.12 — 2026-09-03
+
+### Changes
+- 市售優格新增「莫凡彼 希臘式優格（無加糖／原味）」：成分牛奶＋四活菌，列 ★★；註明有糖口味不符推薦條件。
+
+## v0.8.11 — 2026-09-03
+
+### Changes
+- 首頁 hero 上方留白縮為約原本 2/3（min-height 78vh→52vh）。
+
 ## v0.8.10 — 2026-09-03
 
 ### Changes

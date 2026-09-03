@@ -1,5 +1,5 @@
 ---
-termZh: "DVS／DVI"
+termZh: "DVS/DVI"
 termEn: "Direct Vat Set / Inoculation"
 category: "microbiology"
 draft: false

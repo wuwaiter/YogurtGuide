@@ -2,18 +2,18 @@
 title: "常溫室溫發酵法"
 titleEn: "Mesophilic Countertop Fermentation"
 summary: "中溫菌在約 20–30°C（DIY 常 21–25°C）室溫靜置發酵；通常不需優格機定溫。"
-equipment: ["清潔玻璃／食品容器","湯匙","可選：溫度計（確認室溫）"]
+equipment: ["清潔玻璃/食品容器","湯匙","可選：溫度計（確認室溫）"]
 suitableCultures: ["viili-short","viili-long","filmjolk","onaka","caspian-sea","amasi","langfil-short","langfil-long","piima","skyr-long"]
 draft: false
 ---
 
 ## 目的（Purpose）
 
-使用 **mesophilic（中溫／常溫）** starter，在室溫附近完成酸化與凝乳。適合少設備、夏季台灣多數室內溫度；冬季若低於約 20°C 可能需延長時間或輕微保溫。
+使用 **mesophilic（中溫/常溫）** starter，在室溫附近完成酸化與凝乳。適合少設備、夏季台灣多數室內溫度；冬季若低於約 20°C 可能需延長時間或輕微保溫。
 
 ## 流程（Process Steps）
 
-1. **乳的準備（可選加熱）**：可用已巴氏／UHT 乳直接接種；若用鮮乳，可先短暫加熱殺競爭菌後**冷卻至室溫**再接種（常溫菌不要用 42°C 保溫）。
+1. **乳的準備（可選加熱）**：可用已巴氏/UHT 乳直接接種；若用鮮乳，可先短暫加熱殺競爭菌後**冷卻至室溫**再接種（常溫菌不要用 42°C 保溫）。
 2. **接種**：依包裝或母種比例均勻混入。
 3. **室溫靜置**：約 **20–30°C**（常見目標 21–25°C），**12–48 h**，至傾斜罐壁凝乳可整體移動。
 4. **冷藏後熟**：移入冰箱至少數小時，質地通常會再變實。
@@ -30,5 +30,5 @@ draft: false
 
 ## 備註
 
-- Viili／Långfil 的黏絲（ropy）來自 EPS，與「有沒有酵母」無關；失黏可能是菌株變異。
+- Viili/Långfil 的黏絲（ropy）來自 EPS，與「有沒有酵母」無關；失黏可能是菌株變異。
 - 細節見各菌種頁；總覽見 [菌種分類](../../cultures/)。

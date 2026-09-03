@@ -1,7 +1,7 @@
 ---
-title: "Short Skyr（短版／傳統嗜熱）"
+title: "Short Skyr（短版/傳統嗜熱）"
 titleEn: "Short Skyr (Thermophilic)"
-summary: "傳統冰島路線：嗜熱發酵後瀝乳。DIY 店所稱 Short Skyr＝正統 Skyr。瀝前可歸優格狀／布丁對照。"
+summary: "傳統冰島路線：嗜熱發酵後瀝乳。DIY 店所稱 Short Skyr＝正統 Skyr。瀝前可歸優格狀/布丁對照。"
 species: "Streptococcus thermophilus + Lactobacillus delbrueckii subsp. bulgaricus（常宣稱含冰島特有菌株）"
 classificationNote: "DIY 商品用語；指相對於 Long Skyr 的傳統嗜熱路線"
 temperatureClass: "thermophilic"
@@ -18,15 +18,15 @@ draft: false
 
 **Short Skyr**＝DIY 菌種商對**傳統嗜熱 Skyr**的稱呼（相對常溫「Long Skyr」）。技術上屬**新鮮起司（fresh cheese）**，只是被當優格吃。
 
-家用 starter：約 **42–43°C／6–12 h**（常見說明 42°C、約 10 h）。
+家用 starter：約 **42–43°C/6–12 h**（常見說明 42°C、約 10 h）。
 
 ## 與 Long Skyr 的差別
 
 | | Short Skyr | [Long Skyr](../skyr-long/) |
 |--|------------|----------------------------|
 | 適溫 | 嗜熱（需定溫） | 常溫（mesophilic） |
-| 質地 | 瀝乳後濃稠；**傳統不 sticky／ropy** | 常帶**黏絲（ropey）** |
-| 定位 | 接近傳統冰島製法 | DIY 變體／混菌偶然產物，非傳統 Skyr |
+| 質地 | 瀝乳後濃稠；**傳統不 sticky/ropy** | 常帶**黏絲（ropey）** |
+| 定位 | 接近傳統冰島製法 | DIY 變體/混菌偶然產物，非傳統 Skyr |
 
 ## 瀝乳是必要步驟
 

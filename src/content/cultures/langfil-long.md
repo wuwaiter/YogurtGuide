@@ -1,8 +1,8 @@
 ---
-title: "Long Långfil（長版／黏絲）"
+title: "Long Långfil（長版/黏絲）"
 titleEn: "Långfil (Long)"
 summary: "瑞典常溫；Filmjölk 的黏絲變體，彈性拉絲、奶油香。"
-species: "產 EPS 的 Lactococcus（常與 L. cremoris／ropy 菌株相關）＋ fil 系伴隨菌"
+species: "產 EPS 的 Lactococcus（常與 L. cremoris/ropy 菌株相關）＋ fil 系伴隨菌"
 temperatureClass: "mesophilic"
 tempRangeC: "20–25"
 timeRangeH: "12–24"

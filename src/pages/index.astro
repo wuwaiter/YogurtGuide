@@ -14,7 +14,8 @@ const base = import.meta.env.BASE_URL;
 	<section class="hero">
 		<div class="hero__inner">
 			<p class="hero__wordmark" aria-hidden="true">Yogurt</p>
-			<h1 class="hero__tag">優格製程筆記</h1>
+			<h1 class="hero__sub">優格製程筆記</h1>
+			<p class="hero__sub">yogurt process notes</p>
 			<p class="hero__lead">
 				以優格種類、菌種（species / strain）與製法（process）為軸，記錄可對照、可重複的發酵實驗。
 			</p>
@@ -32,7 +33,7 @@ const base = import.meta.env.BASE_URL;
 				{
 					batches.map(({ id, data }) => (
 						<li>
-							<a class="list-item" href={`${base}batches/${id}/`}>
+							<a class="list-item list-item--current" href={`${base}batches/${id}/`}>
 								<h3>{formatBatchDate(data.date)}</h3>
 								<p class="meta">
 									{formatBatchCultureLabel(data)} · {data.resultSet}

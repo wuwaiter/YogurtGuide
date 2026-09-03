@@ -37,7 +37,7 @@ const others = yogurts.filter((y) => y.data.recommendationStars === 0);
 			</section>
 
 			<section class="record-block">
-				<h2 class="record-block__title">★／★★ 符合推薦條件（{recommended.length}）</h2>
+				<h2 class="record-block__title">★/★★ 符合推薦條件（{recommended.length}）</h2>
 				{
 					recommended.map(({ id, data }) => (
 						<article class="market-card market-card--star" id={id}>

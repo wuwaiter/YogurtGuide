@@ -1,7 +1,7 @@
 ---
 title: "保加利亞優格"
 titleEn: "Bulgarian Yogurt"
-summary: "嗜熱兩菌共生；常強調較明顯的酸香與較長發酵終點。口感偏優格狀／布丁凝乳。"
+summary: "嗜熱兩菌共生；常強調較明顯的酸香與較長發酵終點。口感偏優格狀/布丁凝乳。"
 species: "Lactobacillus delbrueckii subsp. bulgaricus + Streptococcus thermophilus"
 temperatureClass: "thermophilic"
 tempRangeC: "42–43"
