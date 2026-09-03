@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import BatchFieldNote from '../../components/BatchFieldNote.astro';
 import BatchRecord from '../../components/BatchRecord.astro';
 import { getCollection, type CollectionEntry } from 'astro:content';
 import { formatBatchCultureLabel, formatBatchDate } from '../../lib/batch-display';
@@ -25,44 +26,44 @@ const photos = data.photos;
 ---
 
 <BaseLayout title={dateLabel} description={`批次實驗 ${dateLabel} · ${cultureLabel}`}>
-	<section class="section">
+	<section class="section field-note-section">
 		<div class="wrap">
-			<h1 class="page-title">{dateLabel}</h1>
-			<p class="page-lead">{cultureLabel}</p>
+			<BatchFieldNote batch={data} base={base} />
 
-			<BatchRecord batch={data} />
-
-			{
-				(photos.length > 0 || data.photoAlbumUrl) && (
-					<section class="record-block">
-						<h2 class="record-block__title">
-							照片<span class="en-sub">Photos</span>
-						</h2>
-						{
-							photos.length > 0 && (
-								<ul class="batch-photos">
-									{photos.map((src) => (
-										<li>
-											<a href={`${base}${src}`} target="_blank" rel="noopener noreferrer">
-												<img src={`${base}${src}`} alt={`${dateLabel} 批次照片`} loading="lazy" />
-											</a>
-										</li>
-									))}
-								</ul>
-							)
-						}
-						{
-							data.photoAlbumUrl && (
-								<p class="batch-photos__album">
-									<a href={data.photoAlbumUrl} target="_blank" rel="noopener noreferrer">
-										在 Google 相簿開啟完整相簿
-									</a>
-								</p>
-							)
-						}
-					</section>
-				)
-			}
+			<div class="field-note-full">
+				<BatchRecord batch={data} />
+				{
+					(photos.length > 0 || data.photoAlbumUrl) && (
+						<section class="record-block">
+							<h2 class="record-block__title">
+								照片<span class="en-sub">Photos</span>
+							</h2>
+							{
+								photos.length > 0 && (
+									<ul class="batch-photos">
+										{photos.map((src) => (
+											<li>
+												<a href={`${base}${src}`} target="_blank" rel="noopener noreferrer">
+													<img src={`${base}${src}`} alt={`${dateLabel} 批次照片`} loading="lazy" />
+												</a>
+											</li>
+										))}
+									</ul>
+								)
+							}
+							{
+								data.photoAlbumUrl && (
+									<p class="batch-photos__album">
+										<a href={data.photoAlbumUrl} target="_blank" rel="noopener noreferrer">
+											在 Google 相簿開啟完整相簿
+										</a>
+									</p>
+								)
+							}
+						</section>
+					)
+				}
+			</div>
 		</div>
 	</section>
 </BaseLayout>

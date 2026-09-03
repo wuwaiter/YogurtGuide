@@ -1,0 +1,100 @@
+---
+import type { CollectionEntry } from 'astro:content';
+import {
+	formatBatchCultureHeadline,
+	formatBatchDateDots,
+	formatTempC,
+	scoreLead,
+} from '../lib/batch-display';
+
+interface Props {
+	batch: CollectionEntry<'batches'>['data'];
+	base: string;
+}
+
+const { batch: d, base } = Astro.props;
+
+type Ingredient = CollectionEntry<'batches'>['data']['ingredients'][number];
+
+function compactAmount(amount: string): string {
+	return amount.replace(/\s+/g, '');
+}
+
+function parseMl(amount: string): number | null {
+	const m = amount.replace(/\s+/g, '').match(/^(\d+(?:\.\d+)?)ml$/i);
+	return m ? Number(m[1]) : null;
+}
+
+function milkVolume(ingredients: Ingredient[]): string {
+	const fresh = ingredients.filter((i) => i.type === 'fresh-milk');
+	const powder = ingredients.filter((i) => i.type === 'milk-powder');
+	const water = ingredients.filter((i) => i.type === 'water');
+	let total = 0;
+	let ok = true;
+	for (const ing of [...fresh, ...powder, ...water]) {
+		const n = parseMl(ing.amount);
+		if (n == null) {
+			ok = false;
+			break;
+		}
+		total += n;
+	}
+	if (ok && total > 0) return `${total}ml`;
+	if (fresh[0]) return compactAmount(fresh[0].amount);
+	return '—';
+}
+
+const cultureAmt = d.cultureAmount?.replace(/\s+/g, '');
+const cultureValue =
+	cultureAmt && cultureAmt !== '未記' ? cultureAmt : d.cultureSource === 'new-powder' ? 'powder' : '—';
+
+const facts: { key: string; value: string }[] = [
+	{ key: 'milk', value: milkVolume(d.ingredients) },
+	{ key: 'culture', value: cultureValue },
+	{ key: 'set', value: scoreLead(d.resultSet) },
+	{ key: 'acidity', value: scoreLead(d.resultAcidity) },
+	{ key: 'temperature', value: formatTempC(d.incubationTempC) },
+];
+
+const dateDots = formatBatchDateDots(d.date);
+const headline = formatBatchCultureHeadline(d);
+const memo = d.resultOverall?.trim();
+---
+
+<article class="field-note">
+	<div class="field-note__main">
+		<p class="field-note__edge">field note</p>
+		<h1 class="field-note__date">{dateDots}</h1>
+		<p class="field-note__culture">{headline}</p>
+		<dl class="field-note__facts">
+			{
+				facts.map((f) => (
+					<div class="field-note__row">
+						<dt>{f.key}</dt>
+						<dd>{f.value}</dd>
+					</div>
+				))
+			}
+		</dl>
+		{
+			memo && (
+				<div class="field-note__memo">
+					<p class="field-note__memo-label">memo</p>
+					<p>{memo}</p>
+				</div>
+			)
+		}
+		<p class="field-note__brand">YogurtGuide.</p>
+	</div>
+	<aside class="field-note__media" aria-hidden="true">
+		<div class="field-note__sketch">
+			<img
+				src={`${base}brand/field-note-yogurt.png`}
+				alt=""
+				width="720"
+				height="960"
+				loading="lazy"
+			/>
+		</div>
+	</aside>
+</article>
