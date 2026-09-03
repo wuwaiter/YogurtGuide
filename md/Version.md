@@ -1,5 +1,37 @@
 # Version History
 
+## v0.8.10 — 2026-09-03
+
+### Changes
+- 首頁 hero 社群改回黑圓圖示；footer 維持 QR。
+- Footer 文案改為「中文記述…」在上、「YogurtGuide — …」在下；QR 靠右。
+
+## v0.8.9 — 2026-09-03
+
+### Changes
+- Instagram／Threads 改為黑色系可掃描 QR（中央白圖示圓標），點擊仍開啟對應連結。
+
+## v0.8.8 — 2026-09-03
+
+### Changes
+- Instagram／Threads 圖示恢復為黑圓白圖示（撤銷漸層版）。
+
+## v0.8.7 — 2026-09-03
+
+### Changes
+- Instagram／Threads 圓形圖示改為 Instagram 風格漸層（黃橙→洋紅→紫）＋白圖示。
+
+## v0.8.6 — 2026-09-03
+
+### Changes
+- 首頁「Yogurt」改 Rock Salt；「優格製程筆記」放大一級。
+- Instagram／Threads 改為圓形黑底白圖示連結（首頁 hero 與全站 footer）。
+
+## v0.8.5 — 2026-09-03
+
+### Changes
+- 首頁 hero：「Yogurt」改手寫字體（Caveat），與「優格製程筆記」之間加一行間距。
+
 ## v0.8.4 — 2026-09-03
 
 ### Changes

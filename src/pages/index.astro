@@ -1,5 +1,6 @@
 ---
 import BaseLayout from '../layouts/BaseLayout.astro';
+import SocialIcons from '../components/SocialIcons.astro';
 import { getCollection } from 'astro:content';
 import { formatBatchCultureLabel, formatBatchDate } from '../lib/batch-display';
 
@@ -17,10 +18,7 @@ const base = import.meta.env.BASE_URL;
 			<p class="hero__lead">
 				以優格種類、菌種（species / strain）與製法（process）為軸，記錄可對照、可重複的發酵實驗。
 			</p>
-			<p class="hero__social">
-				<a href="https://www.instagram.com/yogurtguide" target="_blank" rel="noopener noreferrer">Instagram</a>
-				<a href="https://www.threads.com/@yogurtguide" target="_blank" rel="noopener noreferrer">Threads</a>
-			</p>
+			<SocialIcons variant="icon" class="hero__social" />
 		</div>
 	</section>
 

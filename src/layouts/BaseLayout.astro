@@ -1,4 +1,6 @@
 ---
+import SocialIcons from '../components/SocialIcons.astro';
+
 interface Props {
 	title?: string;
 	description?: string;
@@ -24,7 +26,7 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 		<link rel="preconnect" href="https://fonts.googleapis.com" />
 		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 		<link
-			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&display=swap"
+			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=Rock+Salt&display=swap"
 			rel="stylesheet"
 		/>
 	</head>
@@ -65,13 +67,11 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 		</main>
 		<footer class="site-footer">
 			<div class="site-footer__inner">
-				<p>YogurtGuide — Yogurt Process Notes</p>
-				<p>
-					<a href="https://www.instagram.com/yogurtguide" target="_blank" rel="noopener noreferrer">Instagram</a>
-					·
-					<a href="https://www.threads.com/@yogurtguide" target="_blank" rel="noopener noreferrer">Threads</a>
-					· 中文記述 · 專業術語附英文
-				</p>
+				<div class="site-footer__copy">
+					<p class="site-footer__note">中文記述 · 專業術語附英文</p>
+					<p class="site-footer__brand">YogurtGuide — Yogurt Process Notes</p>
+				</div>
+				<SocialIcons variant="qr" class="site-footer__social" />
 			</div>
 		</footer>
 	</body>
