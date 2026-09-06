@@ -4,8 +4,7 @@ export interface NumberedStrain {
 	designation: string;
 	scientificName: string;
 	formerName?: string;
-	dairyUse: string;
-	usageForm?: string;
+	dairyUse?: string;
 	role: StrainRole;
 	sourceLabel: string;
 	sourceUrl: string;
@@ -44,7 +43,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: '2038（LB81）',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus 2038',
-		dairyUse: '與 S. thermophilus 1131 組成明治 LB81 優格菌組。',
+		dairyUse: '明治 LB81 優格',
 		role: '優格核心菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/lb81/top/',
@@ -52,7 +51,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: '1131（LB81）',
 		scientificName: 'Streptococcus thermophilus 1131',
-		dairyUse: '與 L. bulgaricus 2038 組成明治 LB81 優格菌組。',
+		dairyUse: '明治 LB81 優格',
 		role: '優格核心菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/lb81/top/',
@@ -60,7 +59,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'BB-12 / DSM 15954',
 		scientificName: 'Bifidobacterium animalis subsp. lactis BB-12',
-		dairyUse: '優格與發酵乳常見附加雙歧桿菌。',
+		dairyUse: '統一AB優酪乳（雷特氏B菌 Bb-12）；川秀優格發酵菌粉（十菌、兒童等規格）；比優特優格發酵菌粉',
 		role: '附加菌',
 		sourceLabel: 'Novonesis',
 		sourceUrl: 'https://www.novonesis.com/en/biosolutions/human-health/b-lactis-bb-12',
@@ -68,7 +67,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LA-5 / DSM 13241',
 		scientificName: 'Lactobacillus acidophilus LA-5',
-		dairyUse: '來自乳品菌種庫，常與 BB-12 搭配於發酵乳。',
+		dairyUse: '統一AB優酪乳（亞斯菲德菌 La-5）',
 		role: '附加菌',
 		sourceLabel: 'Novonesis',
 		sourceUrl:
@@ -78,7 +77,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'LGG / ATCC 53103 / DSM 33156',
 		scientificName: 'Lacticaseibacillus rhamnosus GG',
 		formerName: 'Lactobacillus rhamnosus GG',
-		dairyUse: '用於優格等發酵乳，也常見於補充品。',
+		dairyUse: '統一 LP33 益生菌膠囊、BHK’s 十益菌EX；川秀 LGG 優格發酵菌粉',
 		role: '附加菌',
 		sourceLabel: 'Novonesis',
 		sourceUrl: 'https://www.novonesis.com/en/biosolutions/human-health/l-rhamnosus-lgg',
@@ -87,7 +86,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'Shirota / YIT 9029',
 		scientificName: 'Lacticaseibacillus paracasei strain Shirota',
 		formerName: 'Lactobacillus casei strain Shirota',
-		dairyUse: '養樂多乳酸菌飲料使用的發酵乳菌株。',
+		dairyUse: '養樂多、養樂多300／300 LIGHT、養樂多優酪乳（代田菌）',
 		role: '附加菌',
 		sourceLabel: 'Yakult',
 		sourceUrl: 'https://www.yakult.co.jp/english/inbound/shirota/',
@@ -95,7 +94,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'DN-173 010 / CNCM I-2494',
 		scientificName: 'Bifidobacterium animalis subsp. lactis CNCM I-2494',
-		dairyUse: 'Activia 的附加菌；DN 與 CNCM 編號指同一菌株。',
+		dairyUse: 'Activia',
 		role: '附加菌',
 		sourceLabel: 'Activia',
 		sourceUrl:
@@ -105,7 +104,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'DN-114 001 / CNCM I-1518',
 		scientificName: 'Lacticaseibacillus paracasei subsp. paracasei CNCM I-1518',
 		formerName: 'Lactobacillus casei DN-114 001',
-		dairyUse: 'Actimel/DanActive 發酵乳使用的附加菌。',
+		dairyUse: 'Actimel／DanActive',
 		role: '附加菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC7698120/',
@@ -113,7 +112,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'HN019',
 		scientificName: 'Bifidobacterium animalis subsp. lactis HN019',
-		dairyUse: '最初分離自優格菌種，可用於發酵食品。',
+		dairyUse: '林鳳營益生菌優酪乳；碧而優 Balance、BHK’s 十益菌EX',
 		role: '附加菌',
 		sourceLabel: 'NZMP',
 		sourceUrl: 'https://www.nzmp.com/global/en/ingredients/specialty/probiotics.html',
@@ -122,7 +121,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'HN001',
 		scientificName: 'Lacticaseibacillus rhamnosus HN001',
 		formerName: 'Lactobacillus rhamnosus HN001',
-		dairyUse: '源自起司菌種，可作為食品附加菌。',
+		dairyUse: 'BHK’s 十益菌EX、華儀優沛樂',
 		role: '附加菌',
 		sourceLabel: 'NZMP',
 		sourceUrl: 'https://www.nzmp.com/global/en/ingredients/specialty/probiotics.html',
@@ -130,7 +129,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'La1 / NCC 533 / CNCM I-1225',
 		scientificName: 'Lactobacillus johnsonii La1',
-		dairyUse: '曾用於 LC1 發酵乳，通常與嗜熱鏈球菌共同製作。',
+		dairyUse: 'Nestlé LC1 發酵乳',
 		role: '附加菌',
 		sourceLabel: 'British Journal of Nutrition',
 		sourceUrl: 'https://doi.org/10.1017/S0007114507764723',
@@ -138,7 +137,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'OLL1073R-1',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus OLL1073R-1',
-		dairyUse: '與 OLS3059 共同發酵明治 R-1 系列優格。',
+		dairyUse: '明治 R-1 優格',
 		role: '優格核心菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/1073r1/top/',
@@ -146,7 +145,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'OLS3059',
 		scientificName: 'Streptococcus thermophilus OLS3059',
-		dairyUse: '與 OLL1073R-1 共同發酵明治 R-1 系列優格。',
+		dairyUse: '明治 R-1 優格',
 		role: '優格核心菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/1073r1/top/',
@@ -155,7 +154,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'OLL2716（LG21）',
 		scientificName: 'Lactobacillus paragasseri OLL2716',
 		formerName: 'Lactobacillus gasseri OLL2716',
-		dairyUse: '明治 LG21 優格使用的附加菌。',
+		dairyUse: '明治 LG21 優格',
 		role: '附加菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/oll2716/top/',
@@ -164,8 +163,8 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'OLL2712',
 		scientificName: 'Lactiplantibacillus plantarum OLL2712',
 		formerName: 'Lactobacillus plantarum OLL2712',
-		dairyUse: '明治機能性優格食品使用的乳酸菌；部分產品採加熱處理菌體。',
-		usageForm: '部分產品採加熱處理菌體，不能當 starter',
+		dairyUse: '明治機能性優格食品',
+
 		role: '附加菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/oll2712/top/',
@@ -174,7 +173,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'PA-3',
 		scientificName: 'Lactobacillus paragasseri PA-3',
 		formerName: 'Lactobacillus gasseri PA-3',
-		dairyUse: '明治 PA-3 優格使用的附加菌。',
+		dairyUse: '明治 PA-3 優格',
 		role: '附加菌',
 		sourceLabel: 'Meiji',
 		sourceUrl: 'https://www.meiji.co.jp/yogurtlibrary/en/laboratory/report/pa-3/top/',
@@ -183,7 +182,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'SBT2055（Gasseri SP）',
 		scientificName: 'Lactobacillus paragasseri SBT2055',
 		formerName: 'Lactobacillus gasseri SBT2055',
-		dairyUse: '雪印惠 megumi Gasseri SP 優格使用的附加菌。',
+		dairyUse: '雪印惠 megumi Gasseri SP 優格',
 		role: '附加菌',
 		sourceLabel: 'Megmilk Snow Brand',
 		sourceUrl: 'https://www.meg-snow.com/functional-ingredient/probiotic/sbt2055/',
@@ -191,7 +190,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'SBT2171（Helve）',
 		scientificName: 'Lactobacillus helveticus SBT2171',
-		dairyUse: '雪印乳酸菌 Helve 飲用優格使用的附加菌。',
+		dairyUse: '雪印 Helve 飲用優格',
 		role: '附加菌',
 		sourceLabel: 'Megmilk Snow Brand',
 		sourceUrl:
@@ -200,7 +199,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'BB536',
 		scientificName: 'Bifidobacterium longum subsp. longum BB536',
-		dairyUse: '森永乳業長期用於含雙歧桿菌優格的附加菌。',
+		dairyUse: '森永含雙歧桿菌優格；Nucode 營養密碼 BB536 粉包',
 		role: '附加菌',
 		sourceLabel: 'Morinaga Milk',
 		sourceUrl: 'https://www.morinagamilk.co.jp/health/material/bifidobacterium_BB536/',
@@ -208,7 +207,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'GCL2505（BifiX）',
 		scientificName: 'Bifidobacterium animalis subsp. lactis GCL2505',
-		dairyUse: 'Glico BifiX 固態與飲用優格使用的附加菌。',
+		dairyUse: 'Glico BifiX 優格',
 		role: '附加菌',
 		sourceLabel: 'Glico',
 		sourceUrl: 'https://www.glico.com/global/100th_history_contents/highlight/product/014.html',
@@ -216,7 +215,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LKM512',
 		scientificName: 'Bifidobacterium animalis subsp. lactis LKM512',
-		dairyUse: '協同乳業 LKM512 固態與飲用優格使用的附加菌。',
+		dairyUse: '協同乳業 LKM512 優格',
 		role: '附加菌',
 		sourceLabel: 'Kyodo Milk',
 		sourceUrl: 'https://www.meito.co.jp/news/20190405.html',
@@ -225,7 +224,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'F19',
 		scientificName: 'Lacticaseibacillus paracasei subsp. paracasei F19',
 		formerName: 'Lactobacillus paracasei F19',
-		dairyUse: 'Arla Cultura 優格使用，亦供發酵乳產品配方。',
+		dairyUse: 'Arla Cultura 優格',
 		role: '附加菌',
 		sourceLabel: 'Novonesis',
 		sourceUrl:
@@ -235,7 +234,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'LB21',
 		scientificName: 'Lacticaseibacillus rhamnosus LB21',
 		formerName: 'Lactobacillus rhamnosus LB21',
-		dairyUse: '瑞典 Verum 優格與酸乳使用的附加菌。',
+		dairyUse: '瑞典 Verum 優格',
 		role: '附加菌',
 		sourceLabel: 'Norrmejerier',
 		sourceUrl:
@@ -245,7 +244,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'L. CASEI 431 / DSM 33451',
 		scientificName: 'Lacticaseibacillus paracasei subsp. paracasei 431',
 		formerName: 'Lactobacillus paracasei L. CASEI 431',
-		dairyUse: 'Novonesis 發酵乳配方使用的附加菌。',
 		role: '附加菌',
 		sourceLabel: 'Novonesis',
 		sourceUrl: 'https://www.novonesis.com/en/biosolutions/human-health/lactobacillus-l-casei-431',
@@ -253,7 +251,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'NCFM / ATCC 700396 / ATCC SD5221',
 		scientificName: 'Lactobacillus acidophilus NCFM',
-		dairyUse: '自 1970 年代起用於牛奶與優格等益生乳製品。',
+		dairyUse: '碧而優 HOWARU Balance／Protect、喜又美美國專利益生菌',
 		role: '附加菌',
 		sourceLabel: 'Journal of Dairy Science',
 		sourceUrl: 'https://doi.org/10.3168/jds.S0022-0302(01)74481-5',
@@ -261,7 +259,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'SBT2928（Bifidus SP）',
 		scientificName: 'Bifidobacterium longum SBT2928',
-		dairyUse: '與 SBT2055 共同用於雪印 Nature Megumi 優格。',
+		dairyUse: '雪印 Nature Megumi 優格',
 		role: '附加菌',
 		sourceLabel: 'Megmilk Snow Brand',
 		sourceUrl: 'https://www.meg-snow.com/products/detail.php?p=megumi',
@@ -269,8 +267,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'JCM 5805（LC-Plasma）',
 		scientificName: 'Lactococcus lactis subsp. lactis JCM 5805',
-		dairyUse: 'Kirin/Koiwai 的 iMUSE 優格等食品使用；常採加熱處理菌體。',
-		usageForm: '常採加熱處理菌體，不能當 starter',
+		dairyUse: 'Kirin／小岩井 iMUSE 優格',
 		role: '附加菌',
 		sourceLabel: 'Kirin',
 		sourceUrl: 'https://www.kirinholdings.com/en/newsroom/release/2020/0928_01.pdf',
@@ -278,7 +275,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'YIT 12272（B. breve strain Yakult）',
 		scientificName: 'Bifidobacterium breve YIT 12272',
-		dairyUse: 'Yakult Mil-Mil 系列與研究用發酵乳的附加菌。',
+		dairyUse: 'Yakult Mil-Mil',
 		role: '附加菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4034291/',
@@ -286,7 +283,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'YIT 2027',
 		scientificName: 'Lactococcus lactis YIT 2027',
-		dairyUse: '與 YIT 12272、YIT 2021 共同用於 Yakult 研究發酵乳。',
+		dairyUse: 'Yakult Mil-Mil 菌組',
 		role: '附加菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4034291/',
@@ -294,7 +291,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'YIT 2021',
 		scientificName: 'Streptococcus thermophilus YIT 2021',
-		dairyUse: '與 YIT 12272、YIT 2027 共同用於 Yakult 研究發酵乳。',
+		dairyUse: 'Yakult Mil-Mil 菌組',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC4034291/',
@@ -302,7 +299,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'CM4 / FERM BP-6060',
 		scientificName: 'Lactobacillus helveticus CM4',
-		dairyUse: 'Calpis 研究與機能發酵乳使用的蛋白水解型菌株。',
+		dairyUse: 'Calpis 機能發酵乳',
 		role: '附加菌',
 		sourceLabel: 'Journal of Dairy Science',
 		sourceUrl: 'https://doi.org/10.3168/jds.S0022-0302(06)72275-5',
@@ -310,8 +307,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'CP2305',
 		scientificName: 'Lactobacillus gasseri CP2305',
-		dairyUse: '源自 Calpis 發酵乳菌種庫；現行食品多使用加熱處理菌體，也可添加於優格。',
-		usageForm: '現行食品多採加熱處理菌體，不能直接當 starter',
+		dairyUse: 'Asahi CP2305 相關食品',
 		role: '附加菌',
 		sourceLabel: 'Asahi',
 		sourceUrl: 'https://www.asahi-gf.co.jp/en/material/cp2305/index.html',
@@ -319,7 +315,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'L-92',
 		scientificName: 'Lactobacillus acidophilus L-92',
-		dairyUse: '源自 Calpis 長期發酵乳研究的功能性菌株，現多作食品配料。',
+		dairyUse: 'Asahi L-92 相關食品',
 		role: '附加菌',
 		sourceLabel: 'Asahi',
 		sourceUrl: 'https://www.l-92.net/',
@@ -327,7 +323,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LMD-9',
 		scientificName: 'Streptococcus thermophilus LMD-9',
-		dairyUse: '乳品工業研究菌株；可與保加利亞乳桿菌共同在牛奶中培養。',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3231929/',
@@ -335,7 +330,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'CNRZ1066',
 		scientificName: 'Streptococcus thermophilus CNRZ1066',
-		dairyUse: '已定序的乳品工業菌株，用於優格菌共生與乳品適應研究。',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3231929/',
@@ -343,7 +337,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LMG 18311',
 		scientificName: 'Streptococcus thermophilus LMG 18311',
-		dairyUse: '已定序的乳品工業菌株，用於優格與起司發酵研究。',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3231929/',
@@ -351,7 +344,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'ATCC 11842 / JCM 1002 / Lb14',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus ATCC 11842',
-		dairyUse: '分離自保加利亞優格的模式菌株，用於優格發酵與基因體研究。',
 		role: '優格核心菌',
 		sourceLabel: 'ATCC',
 		sourceUrl: 'https://www.atcc.org/products/11842',
@@ -359,7 +351,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'ATCC BAA-36',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus ATCC BAA-36',
-		dairyUse: '已定序的保加利亞乳桿菌株，用於工業優格菌株比較。',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC3022021/',
@@ -367,7 +358,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'CNRZ397',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus CNRZ397',
-		dairyUse: 'INRA 乳品菌種庫菌株，用於牛奶近似培養基與優格菌生理研究。',
 		role: '優格核心菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC92460/',
@@ -375,7 +365,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LB-12',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus LB-12',
-		dairyUse: '商業優格菌株，用於發酵耐受性與乳品品質研究。',
 		role: '優格核心菌',
 		sourceLabel: 'Iraqi Journal of Veterinary Medicine',
 		sourceUrl: 'https://doi.org/10.30539/iraqijvm.v35i1.604',
@@ -383,7 +372,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'R0052 / CNCM I-1722',
 		scientificName: 'Lactobacillus helveticus R0052',
-		dairyUse: '最初分離自甜酸乳菌種，也用於發酵乳品質研究。',
 		role: '附加菌',
 		sourceLabel: 'Beneficial Microbes',
 		sourceUrl: 'https://doi.org/10.3920/BM2011.0032',
@@ -392,7 +380,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'R0011 / CNCM I-1720',
 		scientificName: 'Lacticaseibacillus rhamnosus R0011',
 		formerName: 'Lactobacillus rhamnosus R0011',
-		dairyUse: '分離自乳品 starter，曾以發酵乳形式研究與應用。',
 		role: '附加菌',
 		sourceLabel: 'Beneficial Microbes',
 		sourceUrl: 'https://doi.org/10.3920/BM2011.0032',
@@ -400,7 +387,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'ST-M5',
 		scientificName: 'Streptococcus thermophilus ST-M5',
-		dairyUse: '商業優格 starter，研究中常與 L. bulgaricus LB-12 配對。',
 		role: '優格核心菌',
 		sourceLabel: 'Journal of Dairy Science',
 		sourceUrl: 'https://doi.org/10.3168/jds.2017-13919',
@@ -408,7 +394,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'TA040',
 		scientificName: 'Streptococcus thermophilus TA040',
-		dairyUse: '商業直投優格 starter，常與 L. bulgaricus LB340 配對。',
 		role: '優格核心菌',
 		sourceLabel: 'Journal of Food Process Engineering',
 		sourceUrl: 'https://doi.org/10.1111/j.1745-4603.2007.00129.x',
@@ -416,7 +401,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LB340',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus LB340',
-		dairyUse: '商業直投優格 starter，常與 S. thermophilus TA040 配對。',
 		role: '優格核心菌',
 		sourceLabel: 'Journal of Food Process Engineering',
 		sourceUrl: 'https://doi.org/10.1111/j.1745-4603.2007.00129.x',
@@ -424,7 +408,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LA14',
 		scientificName: 'Lactobacillus acidophilus LA14',
-		dairyUse: '研究用益生優格與乳清飲料中的附加菌。',
 		role: '附加菌',
 		sourceLabel: 'Food Research International',
 		sourceUrl: 'https://doi.org/10.1016/j.foodres.2013.07.003',
@@ -432,7 +415,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'BL05',
 		scientificName: 'Bifidobacterium longum BL05',
-		dairyUse: '研究用益生優格與乳清飲料中的附加雙歧桿菌。',
+		dairyUse: 'BHK’s 十益菌EX（標示長雙歧桿菌 Bl-05）',
 		role: '附加菌',
 		sourceLabel: 'Food Research International',
 		sourceUrl: 'https://doi.org/10.1016/j.foodres.2013.07.003',
@@ -440,7 +423,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'LAFTI B94',
 		scientificName: 'Bifidobacterium animalis subsp. lactis B94',
-		dairyUse: '用於凝固型與益生優格研究，可與標準優格菌共同發酵。',
 		role: '附加菌',
 		sourceLabel: 'Foods',
 		sourceUrl: 'https://doi.org/10.3390/foods13193021',
@@ -449,7 +431,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'LAFTI L26',
 		scientificName: 'Lacticaseibacillus paracasei L26',
 		formerName: 'Lactobacillus paracasei LAFTI L26',
-		dairyUse: 'LAFTI 商業附加菌，曾測試在優格冷藏期間的存活。',
 		role: '附加菌',
 		sourceLabel: 'International Dairy Journal',
 		sourceUrl: 'https://doi.org/10.1016/j.idairyj.2005.10.008',
@@ -457,7 +438,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'Lb1466',
 		scientificName: 'Lactobacillus delbrueckii subsp. bulgaricus Lb1466',
-		dairyUse: 'LAFTI 優格研究使用的核心 starter。',
 		role: '優格核心菌',
 		sourceLabel: 'International Dairy Journal',
 		sourceUrl: 'https://doi.org/10.1016/j.idairyj.2005.10.008',
@@ -465,7 +445,6 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'St1342',
 		scientificName: 'Streptococcus thermophilus St1342',
-		dairyUse: 'LAFTI 優格研究使用的核心 starter。',
 		role: '優格核心菌',
 		sourceLabel: 'International Dairy Journal',
 		sourceUrl: 'https://doi.org/10.1016/j.idairyj.2005.10.008',
@@ -474,7 +453,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'LP33 / strain 33',
 		scientificName: 'Lacticaseibacillus paracasei 33',
 		formerName: 'Lactobacillus paracasei LP33',
-		dairyUse: '統一 LP33 機能優酪乳附加菌；產品另含優格核心兩菌。',
+		dairyUse: '統一 LP33 機能優酪乳、LP33 無加糖機能優酪乳、LP33 益生菌膠囊',
 		role: '附加菌',
 		sourceLabel: '統一益生菌',
 		sourceUrl: 'https://www.uniprobiotics.com.tw/lp33',
@@ -482,7 +461,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'MCC1274（B-3）',
 		scientificName: 'Bifidobacterium breve MCC1274',
-		dairyUse: '森永 B-3/ビヒダス 相關優格使用的附加菌；官方確認 B-3＝MCC1274。',
+		dairyUse: '森永 B-3／ビヒダス優格',
 		role: '附加菌',
 		sourceLabel: 'Morinaga Milk',
 		sourceUrl: 'https://www.morinagamilk.co.jp/products/yoghurt/bifidus_w/9912.html',
@@ -490,7 +469,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'YIT 10347（BF-1）',
 		scientificName: 'Bifidobacterium bifidum YIT 10347',
-		dairyUse: 'Yakult BF-1 飲用發酵乳使用的附加菌。',
+		dairyUse: 'Yakult BF-1',
 		role: '附加菌',
 		sourceLabel: 'Yakult',
 		sourceUrl: 'https://www.yakult.co.jp/bf-1/',
@@ -499,7 +478,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'N-1',
 		scientificName: 'Lacticaseibacillus casei N-1',
 		formerName: 'Lactobacillus casei N-1',
-		dairyUse: '丹那 N-1 優格等農協系發酵乳使用的附加菌。',
+		dairyUse: '丹那 N-1 優格',
 		role: '附加菌',
 		sourceLabel: '丹那牛乳',
 		sourceUrl: 'https://tannamilk.or.jp/products/yogurt/tanna-n1-yogurt/',
@@ -508,7 +487,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'Lpc-37 / ATCC SD5275',
 		scientificName: 'Lacticaseibacillus paracasei Lpc-37',
 		formerName: 'Lactobacillus paracasei Lpc-37',
-		dairyUse: 'IFF HOWARU 優格與新鮮發酵乳配方使用的附加菌。',
+		dairyUse: 'BHK’s 十益菌EX、華儀優沛樂',
 		role: '附加菌',
 		sourceLabel: 'IFF',
 		sourceUrl:
@@ -518,7 +497,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'Bi-07 / ATCC SD5220',
 		scientificName: 'Bifidobacterium animalis subsp. lactis Bi-07',
 		formerName: 'Bifidobacterium lactis Bi-07',
-		dairyUse: 'HOWARU 優格與發酵乳附加菌；FDA GRN 445 涵蓋乳製品用途。',
+		dairyUse: '比優特優格發酵菌粉；碧而優 Protect（NCFM＋Bi-07）',
 		role: '附加菌',
 		sourceLabel: 'FDA GRAS',
 		sourceUrl: 'https://hfpappexternal.fda.gov/scripts/fdcc/index.cfm?id=445&set=grasnotices',
@@ -527,7 +506,7 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'Bl-04 / ATCC SD5219',
 		scientificName: 'Bifidobacterium animalis subsp. lactis Bl-04',
 		formerName: 'Bifidobacterium lactis Bl-04',
-		dairyUse: 'HOWARU 優格與發酵乳附加菌；FDA GRN 445 涵蓋乳製品用途。',
+		dairyUse: '喜又美美國專利益生菌',
 		role: '附加菌',
 		sourceLabel: 'FDA GRAS',
 		sourceUrl: 'https://hfpappexternal.fda.gov/scripts/fdcc/index.cfm?id=445&set=grasnotices',
@@ -536,7 +515,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'B420',
 		scientificName: 'Bifidobacterium animalis subsp. lactis B420',
 		formerName: 'Bifidobacterium lactis B420',
-		dairyUse: 'FDA GRN 445 明列起司、乳飲與乳製品用途的附加菌。',
 		role: '附加菌',
 		sourceLabel: 'FDA GRAS',
 		sourceUrl: 'https://hfpappexternal.fda.gov/scripts/fdcc/index.cfm?id=445&set=grasnotices',
@@ -544,7 +522,7 @@ export const numberedStrains: NumberedStrain[] = [
 	{
 		designation: 'BGN4',
 		scientificName: 'Bifidobacterium bifidum BGN4',
-		dairyUse: 'FDA GRN 814 明列發酵乳、酪乳、克菲爾、乳飲與優格用途。',
+		dairyUse: '專注唯一 Double Power',
 		role: '附加菌',
 		sourceLabel: 'FDA GRAS',
 		sourceUrl: 'https://hfpappexternal.fda.gov/scripts/fdcc/index.cfm?id=814&set=grasnotices',
@@ -553,7 +531,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'LAFTI L10',
 		scientificName: 'Lactobacillus helveticus LAFTI L10',
 		formerName: 'Lactobacillus acidophilus LAFTI L10',
-		dairyUse: '山羊乳優格與優格保存試驗中的附加菌。',
 		role: '附加菌',
 		sourceLabel: 'PMC',
 		sourceUrl: 'https://pmc.ncbi.nlm.nih.gov/articles/PMC9813279/',
@@ -562,7 +539,6 @@ export const numberedStrains: NumberedStrain[] = [
 		designation: 'Zhang / CGMCC 1697',
 		scientificName: 'Lacticaseibacillus paracasei Zhang',
 		formerName: 'Lactobacillus casei Zhang',
-		dairyUse: '源自內蒙古馬奶酒，後用於凝固/攪拌優格與牛乳發酵研究。',
 		role: '附加菌',
 		sourceLabel: 'Journal of Dairy Science',
 		sourceUrl: 'https://doi.org/10.3168/jds.2008-1849',

@@ -231,7 +231,7 @@ const strainSources = getNumberedStrainSources(numberedStrains);
 					<span class="en-sub">Named &amp; Numbered Strains</span>
 				</h2>
 				<p class="page-lead" style="margin-bottom: 1rem;">
-					以下是目前公開資料可核實、曾用於優格或發酵乳的代表菌株，不是完整市售清單。編號可能是菌種保藏編號、公司研發代碼或商標名；同物種不同菌株不能視為效果相同。
+					以下是目前公開資料可核實、曾用於優格或發酵乳的代表菌株，不是完整市售清單。編號可能是菌種保藏編號、公司研發代碼或商標名；同物種不同菌株不能視為效果相同。「說明」列出已知使用該編號的產品。配方會改，以包裝為準。
 				</p>
 				<div class="table-scroll">
 					<table class="meta-table strain-table">
@@ -239,8 +239,7 @@ const strainSources = getNumberedStrainSources(numberedStrains);
 							<tr>
 								<th>編號/名稱</th>
 								<th>現行學名</th>
-								<th>乳製品用途</th>
-								<th>使用型態</th>
+								<th>說明</th>
 								<th>定位/來源</th>
 							</tr>
 						</thead>
@@ -258,8 +257,7 @@ const strainSources = getNumberedStrainSources(numberedStrains);
 												</>
 											)}
 										</td>
-										<td>{strain.dairyUse}</td>
-										<td>{strain.usageForm ?? '活菌或依產品標示；是否能當 starter 需另確認'}</td>
+										<td>{strain.dairyUse ?? ''}</td>
 										<td>
 											{strain.role}
 											<br />
@@ -274,7 +272,7 @@ const strainSources = getNumberedStrainSources(numberedStrains);
 					</table>
 				</div>
 				<p class="meta">
-					「含某物種」不代表「含上表特定菌株」。購買時要看完整學名加編號，且產品效益仍取決於活菌量、配方與研究條件。
+					「含某物種」不代表「含上表特定菌株」。購買時要看完整學名加編號。配方會改，以包裝為準。
 				</p>
 			</section>
 

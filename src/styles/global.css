@@ -706,10 +706,13 @@ main > .section:first-child > .wrap > .page-title:first-child .en-sub {
 
 .field-note__edge {
 	position: absolute;
-	left: 0.35rem;
-	top: 50%;
-	transform: translateY(-50%) rotate(-90deg);
-	transform-origin: center;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	width: 1.35rem;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 	margin: 0;
 	font-family: var(--font-mono);
 	font-size: 0.78rem;
@@ -717,6 +720,8 @@ main > .section:first-child > .wrap > .page-title:first-child .en-sub {
 	white-space: nowrap;
 	color: var(--accent-deep);
 	pointer-events: none;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
 }
 
 .field-note__date {
