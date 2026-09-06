@@ -91,6 +91,17 @@ const additives = defineCollection({
 	}),
 });
 
+const foods = defineCollection({
+	loader: glob({ base: './src/content/foods', pattern: '**/*.md' }),
+	schema: z.object({
+		title: z.string(),
+		titleEn: z.string(),
+		summary: z.string(),
+		sortOrder: z.number().default(100),
+		draft: z.boolean().default(false),
+	}),
+});
+
 const glossary = defineCollection({
 	loader: glob({ base: './src/content/glossary', pattern: '**/*.md' }),
 	schema: z.object({
@@ -119,4 +130,4 @@ const marketYogurts = defineCollection({
 	}),
 });
 
-export const collections = { cultures, methods, batches, additives, glossary, marketYogurts };
+export const collections = { cultures, methods, batches, additives, foods, glossary, marketYogurts };

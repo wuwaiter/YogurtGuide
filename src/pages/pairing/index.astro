@@ -4,32 +4,13 @@ import { getCollection } from 'astro:content';
 
 const singles = [
 	{
-		group: '口感與堅果類',
+		group: '',
 		items: [
 			{
-				name: '核桃',
-				en: 'Walnuts',
-				body: '補充油脂與蛋白質，口感酥脆。建議選無調味、低溫烘焙。',
-			},
-			{
-				name: '杏仁',
-				en: 'Almonds',
-				body: '帶堅果香與咬感，可補充油脂與蛋白質。建議選無調味款。',
-			},
-			{
-				name: '腰果',
-				en: 'Cashews',
-				body: '口感較柔和、帶自然甜味，可增加飽足感。建議選無調味款。',
-			},
-			{
-				name: '燕麥片',
+				name: '燕麥',
 				en: 'Oats',
-				body: '提供碳水化合物與膳食纖維；稍微浸泡後會變軟，飽足感較高。',
-			},
-			{
-				name: '穀物麥片',
-				en: 'Granola',
-				body: '增加酥脆口感與飽足感；選購時留意額外添加的糖與油。',
+				slug: 'oats',
+				body: '含 β-葡聚醣，有助改善膽固醇、穩定餐後血糖與增加飽足。效益取決於是否選全穀、用它取代主食澱粉、以及是否熱煮。Granola 與燕麥奶不能直接當成吃燕麥。',
 			},
 			{
 				name: '奇亞籽',
@@ -42,94 +23,9 @@ const singles = [
 				body: '含油脂與膳食纖維，拌入後會略為增稠；建議使用熟粉。',
 			},
 			{
-				name: '可可碎粒',
-				en: 'Cacao Nibs',
-				body: '可可豆碎粒，微苦、酥脆，抗氧化物較多。',
-			},
-		],
-	},
-	{
-		group: '風味與甜味',
-		items: [
-			{
-				name: '蜂蜜',
-				en: 'Honey',
-				body: '帶花香的甜味，可中和無糖優格的酸；先少量加入。',
-			},
-			{
-				name: '楓糖漿',
-				en: 'Maple Syrup',
-				body: '甜味溫和且容易拌勻，可中和無糖優格的酸。',
-			},
-			{
-				name: '黑芝麻粉',
-				en: 'Black Sesame Powder',
-				body: '香氣濃，拌入後呈膏狀，也可補充鈣質；建議選無糖款。',
-			},
-			{
-				name: '花生粉',
-				en: 'Peanut Powder',
-				body: '帶花生香並使質地變濃；選無糖或低糖配方。',
-			},
-			{
-				name: '純肉桂粉',
-				en: 'Cinnamon',
-				body: '一小匙即可提香。選純粉、無加糖配方。',
-			},
-			{
-				name: '抹茶粉',
-				en: 'Matcha',
-				body: '攪拌後形成抹茶風味；建議使用無糖純粉並先少量加入。',
-			},
-			{
-				name: '純可可粉',
-				en: 'Cocoa Powder',
-				body: '帶苦甜巧克力風味；先用少量優格化開，可減少結塊。',
-			},
-		],
-	},
-	{
-		group: '鹹食與特殊',
-		items: [
-			{
-				name: '橄欖油',
-				en: 'Olive Oil',
-				body: '增加滑順度與草本香，特別適合希臘優格與鹹味優格碗。',
-			},
-			{
-				name: '黑胡椒',
-				en: 'Black Pepper',
-				body: '提供辛香層次，適合搭配鹹味優格；現磨香氣較明顯。',
-			},
-			{
-				name: '鹽',
-				en: 'Salt',
-				body: '少量即可平衡酸味並凸顯鹹香；避免一次加入過多。',
-			},
-			{
-				name: '蛋白粉',
-				en: 'Protein powder',
-				body: '運動後可拌入乳清蛋白；稠優格較容易做成慕斯感。先少量拌勻，減少結塊。',
-			},
-			{
-				name: '鷹嘴豆',
-				en: 'Chickpeas',
-				body: '鹹味優格碗常見的蛋白質與纖維來源；瀝乾再拌，避免把優格沖稀。',
-			},
-			{
-				name: '水煮蛋',
-				en: 'Boiled Egg',
-				body: '提供蛋白質，切片或切丁後可放入鹹味優格碗。',
-			},
-			{
-				name: '芝麻醬',
-				en: 'Tahini',
-				body: '帶濃郁堅果香與滑順質地，適合希臘優格與中東風味鹹碗。',
-			},
-			{
-				name: 'Za’atar',
-				en: 'Za’atar',
-				body: '由百里香、蘇麥與芝麻等組成，是地中海優格碗常見的收尾香料。',
+				name: '洋車前子殼',
+				en: 'Psyllium husk',
+				body: '車前子外殼，水溶性纖維高，吸水後成膠、讓優格明顯變稠。先從 1/2–1 小匙拌入，隨即再喝足夠的水；粉要充分化開，避免結塊成膠坨。選未調味殼粉，不要用加糖的沖泡纖維飲。一次加太多容易脹、噎或腹瀉。',
 			},
 		],
 	},
@@ -158,7 +54,7 @@ const combos = [
 		items: [
 			{
 				name: '高纖膨脹',
-				body: '一般無糖優格＋奇亞籽 1 匙＋燕麥片/Granola＋蜂蜜。較稀的優格讓奇亞籽吸水膨脹，麥片補飽足與纖維。',
+				body: '一般無糖優格＋奇亞籽 1 匙＋全穀燕麥片（或少量低糖 Granola）＋蜂蜜。較稀的優格讓奇亞籽吸水膨脹；燕麥補纖維與飽足。要酥脆用 Granola 現撒、不要久泡。',
 			},
 			{
 				name: '高纖亞麻籽',
@@ -166,7 +62,7 @@ const combos = [
 			},
 			{
 				name: '燕麥隔夜感',
-				body: '較稀的無糖優格＋生燕麥片靜置 10–20 分鐘（或隔夜）再吃。燕麥吸水變軟、纖維感明顯；要酥脆則改撒 granola、不要久泡。',
+				body: '較稀的無糖優格＋生燕麥片靜置 10–20 分鐘（或隔夜）再吃。燕麥會變軟、纖維感明顯；冷泡溶出黏性纖維的效率低於熱煮成粥。要酥脆則改撒低糖低油 Granola、不要久泡。',
 			},
 		],
 	},
@@ -208,31 +104,6 @@ const combos = [
 			},
 		],
 	},
-	{
-		group: '水果',
-		items: [
-			{
-				name: '莓果蜂蜜碗',
-				body: '無糖優格＋新鮮或解凍莓果（草莓、藍莓、覆盆子）＋蜂蜜少許。可再撒 granola。莓果酸甜、不易出水成湯；現吃才加麥片才酥。',
-			},
-			{
-				name: '香蕉肉桂',
-				body: '希臘優格＋切片香蕉＋純肉桂粉＋蜂蜜或花生醬少許。香蕉補甜與綿密，現切才不容易褐變。',
-			},
-			{
-				name: '芒果奇亞',
-				body: '無糖優格＋切丁芒果＋奇亞籽 1 小匙。熱帶甜味中和酸；奇亞籽吸水增加飽足。芒果要熟、瀝乾再拌。',
-			},
-			{
-				name: '奇異果清爽',
-				body: '一般無糖優格＋去皮切丁奇異果＋蜂蜜少許。奇異果酸香、維生素 C 高，和優格的微酸很搭。',
-			},
-			{
-				name: '蘋果肉桂堅果',
-				body: '無糖優格＋切丁蘋果＋核桃＋肉桂粉。口感接近蘋果派；蘋果選脆的、現切，水分多的水果（如西瓜）不建議，容易把優格沖稀。',
-			},
-		],
-	},
 ];
 
 const additives = (await getCollection('additives', ({ data }) => !data.draft)).sort(
@@ -241,57 +112,48 @@ const additives = (await getCollection('additives', ({ data }) => !data.draft)).
 const base = import.meta.env.BASE_URL;
 ---
 
-<BaseLayout title="搭配" description="優格單品、組合與添加物：高蛋白、高纖維、水果與菊苣纖維。">
+<BaseLayout title="搭配" description="優格原型食材、益生元與搭配組合：高蛋白、高纖維與益生質纖維。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">搭配<span class="en-sub">Pairing</span></h1>
-			<p class="meta">
-				整理自公開搭配文與食譜，例如 Spiced Blog、The Mediterranean Dish 鹹香優格碗、常見花生醬優格碗與優格水果碗。份量為家用起點，依口味增減。
-			</p>
-
-			<section class="record-block" id="combos">
-				<h2 class="record-block__title">1. 搭配組合<span class="en-sub">Combinations</span></h2>
-				{
-					combos.map((group) => (
-						<div class="pairing-group">
-							<h3 class="pairing-group__title">{group.group}</h3>
-							<ul class="list">
-								{group.items.map((item) => (
-									<li class="list-item pairing-item" style="cursor: default;">
-										<h4 class="pairing-item__title">{item.name}</h4>
-										<p class="pairing-item__body">{item.body}</p>
-									</li>
-								))}
-							</ul>
-						</div>
-					))
-				}
-			</section>
+			<p class="meta">整理自公開搭配文與食譜</p>
 
 			<section class="record-block" id="singles">
-				<h2 class="record-block__title">2. 可添加的單品<span class="en-sub">Add-ins</span></h2>
+				<h2 class="record-block__title">1. 原型食材<span class="en-sub">Whole foods</span></h2>
 				{
 					singles.map((group) => (
 						<div class="pairing-group">
-							<h3 class="pairing-group__title">{group.group}</h3>
+							{group.group ? <h3 class="pairing-group__title">{group.group}</h3> : null}
 							<ul class="list">
-								{group.items.map((item) => (
-									<li class="list-item pairing-item" style="cursor: default;">
-										<h4 class="pairing-item__title glossary-term">
-											{item.name}
-											<span class="glossary-term__en">{item.en}</span>
-										</h4>
-										<p class="pairing-item__body">{item.body}</p>
-									</li>
-								))}
+								{group.items.map((item) =>
+									item.slug ? (
+										<li>
+											<a class="list-item pairing-item" href={`${base}pairing/foods/${item.slug}/`}>
+												<h4 class="pairing-item__title glossary-term">
+													{item.name}
+													<span class="glossary-term__en">{item.en}</span>
+												</h4>
+												<p class="pairing-item__body">{item.body}</p>
+											</a>
+										</li>
+									) : (
+										<li class="list-item pairing-item" style="cursor: default;">
+											<h4 class="pairing-item__title glossary-term">
+												{item.name}
+												<span class="glossary-term__en">{item.en}</span>
+											</h4>
+											<p class="pairing-item__body">{item.body}</p>
+										</li>
+									),
+								)}
 							</ul>
 						</div>
 					))
 				}
 			</section>
 
-			<section class="record-block" id="additives">
-				<h2 class="record-block__title">3. 添加物<span class="en-sub">Additives</span></h2>
+			<section class="record-block" id="prebiotics">
+				<h2 class="record-block__title">2. 益生元<span class="en-sub">Prebiotics</span></h2>
 				<div class="pairing-group">
 					<ul class="list">
 						{
@@ -309,6 +171,25 @@ const base = import.meta.env.BASE_URL;
 						}
 					</ul>
 				</div>
+			</section>
+
+			<section class="record-block" id="combos">
+				<h2 class="record-block__title">3. 搭配組合<span class="en-sub">Combinations</span></h2>
+				{
+					combos.map((group) => (
+						<div class="pairing-group">
+							<h3 class="pairing-group__title">{group.group}</h3>
+							<ul class="list">
+								{group.items.map((item) => (
+									<li class="list-item pairing-item" style="cursor: default;">
+										<h4 class="pairing-item__title">{item.name}</h4>
+										<p class="pairing-item__body">{item.body}</p>
+									</li>
+								))}
+							</ul>
+						</div>
+					))
+				}
 			</section>
 		</div>
 	</section>

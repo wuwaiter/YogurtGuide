@@ -3,20 +3,20 @@ import BaseLayout from '../../../layouts/BaseLayout.astro';
 import { getCollection, render, type CollectionEntry } from 'astro:content';
 
 interface Props {
-	additive: CollectionEntry<'additives'>;
+	food: CollectionEntry<'foods'>;
 }
 
 export async function getStaticPaths() {
-	const additives = await getCollection('additives', ({ data }) => !data.draft);
-	return additives.map((additive) => ({
-		params: { slug: additive.id },
-		props: { additive },
+	const foods = await getCollection('foods', ({ data }) => !data.draft);
+	return foods.map((food) => ({
+		params: { slug: food.id },
+		props: { food },
 	}));
 }
 
-const { additive } = Astro.props as Props;
-const data = additive.data;
-const { Content } = await render(additive);
+const { food } = Astro.props as Props;
+const data = food.data;
+const { Content } = await render(food);
 const base = import.meta.env.BASE_URL;
 ---
 
@@ -24,7 +24,7 @@ const base = import.meta.env.BASE_URL;
 	<section class="section">
 		<div class="wrap">
 			<p class="meta">
-				<a href={`${base}pairing/#prebiotics`}>← 搭配/益生元</a>
+				<a href={`${base}pairing/#singles`}>← 搭配/原型食材</a>
 			</p>
 			<h1 class="page-title">
 				{data.title}
