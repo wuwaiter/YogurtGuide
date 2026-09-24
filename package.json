@@ -6,14 +6,21 @@
     "node": ">=22.12.0"
   },
   "scripts": {
-	"batch:import": "node scripts/import-batch.mjs",
+    "batch:import": "node scripts/import-batch.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-	"astro": "astro",
-	"test": "node --test"
+    "astro": "astro",
+    "test": "node --test",
+    "test:ci": "node scripts/ci-require-tests.mjs",
+    "check:gitignore": "node scripts/ci-check-gitignore.mjs",
+    "check:security": "node scripts/ci-check-security.mjs",
+    "prepare": "husky"
   },
   "dependencies": {
     "astro": "^7.1.4"
+  },
+  "devDependencies": {
+    "husky": "^9.1.7"
   }
 }

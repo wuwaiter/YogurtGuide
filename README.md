@@ -36,13 +36,31 @@ Windows 可直接雙擊專案根目錄的 `新增批次.bat`：
 
 也可以在終端機執行 `npm run batch:import`。若資料無法辨識，輸入內容會保留在 `batch-input.txt`，修正後再次執行即可。菌種格式支援：`市售優格（心樸優格 120ml）`、`菌粉（川秀60菌）`、`傳代（川秀60菌 傳代*2 60ml）`。
 
-## GitHub Pages
+## CI/CD（自動檢查與部署）
 
-1. 推送到 `main`
-2. Repo → **Settings → Pages** → Source 選 **GitHub Actions**
-3. 等待 workflow 成功
+本機 `npm install` 一次後會裝好 Git hook：
 
-設定：
+1. `git commit` 會跑 `npm run test:ci`（至少一個 unit test，失敗就不能 commit）。
+2. `git push` 會跑 gitignore 與安全掃描（失敗就不能 push）。
+3. 推到 `main` 後，GitHub Actions 會再跑同一套檢查、建置，並部署到 **GitHub Pages** 與 **Cloudflare Pages**。兩邊路徑都是 `/YogurtGuide/`。
 
-- `site`: `https://wuwaiter.github.io`
-- `base`: `/YogurtGuide/`
+跳過本機 hook 可用 `git commit --no-verify` / `git push --no-verify`，但 GitHub 上的 Actions 仍會擋部署。
+
+### 看結果
+
+Repo → **Actions**。綠勾 = 通過。約 2–4 分鐘。
+
+- GitHub：https://wuwaiter.github.io/YogurtGuide/
+- Cloudflare：`https://yogurtguide.pages.dev/YogurtGuide/`（專案名是 `yogurtguide`；開根目錄會 404，要帶 `/YogurtGuide/`）
+
+### 一次性設定（約 25 分鐘）
+
+1. GitHub → **Settings → Pages** → Source 選 **GitHub Actions**。
+2. Cloudflare Dashboard → **Workers & Pages** → 建立 Pages 專案，名稱 `yogurtguide`。**關掉 Git 自動建置**（由 GitHub Actions 上傳 `dist`，不要讓 Cloudflare 再 build 一次）。
+3. Cloudflare → 建立 API Token（Account → Cloudflare Pages → Edit）與複製 Account ID。
+4. GitHub repo → **Settings → Secrets and variables → Actions** 新增：
+   - `CLOUDFLARE_API_TOKEN`
+   - `CLOUDFLARE_ACCOUNT_ID`
+5. 推到 `main`（或 Actions 裡手動跑 **Deploy**）。
+
+`astro.config.mjs`：`site` 為 `https://wuwaiter.github.io`，`base` 為 `/YogurtGuide/`。不要為 Cloudflare 改掉 `base`。
