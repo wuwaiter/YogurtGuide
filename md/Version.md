@@ -1,5 +1,10 @@
 # Version History
 
+## v0.9.5 — 2026-09-28
+
+### Changes
+- GitCommit 收進 commit 前驗證（`test:ci`，改了內容再 `build`），並刪除 PreCommitCheck。
+
 ## v0.9.4 — 2026-09-23
 
 ### Changes
