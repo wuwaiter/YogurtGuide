@@ -2,7 +2,7 @@ name: Deploy
 
 # 兩邊分開部署，檢查指令都是 npm run check:deploy。
 # - GitHub Pages：這個 workflow。檢查失敗就不上線。
-# - Cloudflare Pages：Cloudflare 自己的 Git 連線，Build command 也設成 npm run check:deploy。
+# - Cloudflare Workers：Cloudflare 自己的 Git 連線，Build command 也設成 npm run check:deploy，Deploy command 用 npx wrangler deploy（讀 wrangler.toml）。
 # 不要把 Cloudflare token 放進 GitHub secrets，也不要在這裡用 wrangler 上傳。
 
 on:

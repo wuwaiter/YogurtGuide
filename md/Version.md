@@ -3,7 +3,9 @@
 ## v0.9.8 — 2026-09-29
 
 ### Changes
-- 部署檢查收成 `npm run check:deploy`。GitHub Pages 與 Cloudflare Pages 分開跑這支指令；Cloudflare 不使用 GitHub 上的 API token。
+- 部署檢查收成 `npm run check:deploy`。GitHub Pages 與 Cloudflare 分開跑這支指令；Cloudflare 不使用 GitHub 上的 API token。
+- `wrangler.toml` 改成 Workers 靜態資源（`[assets] directory = "./dist"`），修正 Cloudflare `wrangler deploy` 找不到 entry-point。
+- Cloudflare 建置時（`WORKERS_CI=1`）`base` 改為 `/`；GitHub Pages 維持 `/YogurtGuide/`。
 
 ## v0.9.7 — 2026-09-29
 
