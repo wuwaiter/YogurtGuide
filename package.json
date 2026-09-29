@@ -15,6 +15,7 @@
     "test:ci": "node scripts/ci-require-tests.mjs",
     "check:gitignore": "node scripts/ci-check-gitignore.mjs",
     "check:security": "node scripts/ci-check-security.mjs",
+    "check:deploy": "npm run check:gitignore && npm run check:security && npm run test:ci && npm run build",
     "prepare": "husky"
   },
   "dependencies": {

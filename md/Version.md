@@ -1,5 +1,15 @@
 # Version History
 
+## v0.9.8 — 2026-09-29
+
+### Changes
+- 部署檢查收成 `npm run check:deploy`。GitHub Pages 與 Cloudflare Pages 分開跑這支指令；Cloudflare 不使用 GitHub 上的 API token。
+
+## v0.9.7 — 2026-09-29
+
+### Changes
+- 刪除 GitHub Actions 的 deploy-cloudflare。Cloudflare Pages 改由 Cloudflare 自己的 Git 連線部署；GitHub Pages 仍等 deploy.yml 的檢查通過才上線。
+
 ## v0.9.6 — 2026-09-27
 
 ### Changes
