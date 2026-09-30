@@ -1,5 +1,17 @@
 # Version History
 
+## v0.9.10 — 2026-09-30
+
+### Changes
+- CICD skill 補上：遠端用 `npm ci`、權限只開給部署 job、action 釘 commit SHA、禁止 `pull_request_target` 與把 PR 內容拼進 shell。
+
+## v0.9.9 — 2026-09-30
+
+### Changes
+- PR 的 CI 改跑 gitleaks 與 `check:deploy`，與正式部署同一套檢查，仍不部署。過期的 PR 檢查會取消，job 上限 15 分鐘。
+- 加入 Dependabot（npm 與 GitHub Actions，每週）。
+- `wrangler` 釘在 devDependency，避免 Cloudflare 每次抓最新版。
+
 ## v0.9.8 — 2026-09-29
 
 ### Changes
