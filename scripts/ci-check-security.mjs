@@ -34,6 +34,8 @@ const skipExt = new Set([
 	'.eot',
 	'.pdf',
 	'.zip',
+	'.sqlite',
+	'.sqlite3',
 ]);
 const skipThis = 'scripts/ci-check-security.mjs';
 

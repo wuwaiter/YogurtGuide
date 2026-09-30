@@ -115,6 +115,9 @@ bin/
 *.db-shm
 *.sqlite
 *.sqlite3
+!data/batches.sqlite
+!data/batch_ingredients.sqlite
+!data/batch_photos.sqlite
 
 # 專案內資料庫備份／匯出
 logs/*

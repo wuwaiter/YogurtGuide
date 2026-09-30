@@ -7,6 +7,7 @@
   },
   "scripts": {
     "batch:import": "node scripts/import-batch.mjs",
+    "batch:sqlite": "node scripts/import-batches-sqlite.mjs",
     "dev": "astro dev",
     "build": "astro build",
     "preview": "astro preview",

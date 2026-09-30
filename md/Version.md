@@ -1,5 +1,10 @@
 # Version History
 
+## v0.9.12 — 2026-09-30
+
+### Changes
+- 18 筆批次 Markdown 轉入 SQLite，一表一檔：`data/batches.sqlite`、`data/batch_ingredients.sqlite`、`data/batch_photos.sqlite`。頁面仍讀 Markdown。
+
 ## v0.9.11 — 2026-09-30
 
 ### Changes
