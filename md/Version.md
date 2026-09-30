@@ -1,5 +1,10 @@
 # Version History
 
+## v0.9.11 — 2026-09-30
+
+### Changes
+- Gitleaks 改為直接執行 `gitleaks detect`（v8.30.1），不再用會對 PR 留言的 action。Dependabot 的 PR 不會再因留言失敗而中斷。
+
 ## v0.9.10 — 2026-09-30
 
 ### Changes
