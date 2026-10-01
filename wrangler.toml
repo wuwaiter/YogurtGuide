@@ -1,5 +1,10 @@
 name = "yogurtguide"
 compatibility_date = "2026-09-26"
 
+# 正式網址。安全標頭在 public/_headers，建置後會進 dist，由 Workers 套用。
+[[routes]]
+pattern = "yogurtguide.wuwaiter.com"
+custom_domain = true
+
 [assets]
 directory = "./dist"

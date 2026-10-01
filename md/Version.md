@@ -1,5 +1,13 @@
 # Version History
 
+## v0.9.13 — 2026-10-01
+
+### Changes
+- 正式網址定為 `https://yogurtguide.wuwaiter.com/`。Cloudflare 建置產出 sitemap；每頁 canonical 與 Open Graph 都指到這個網址。
+- Cloudflare 靜態資源加上 nosniff、Referrer-Policy、禁止被 iframe。
+- 字型改放 `public/fonts/`，不再向 Google Fonts 請求。
+- GitHub Actions 改釘 commit SHA。
+
 ## v0.9.12 — 2026-09-30
 
 ### Changes

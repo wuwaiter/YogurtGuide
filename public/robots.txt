@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yogurtguide.wuwaiter.com/sitemap-index.xml

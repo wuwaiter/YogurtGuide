@@ -10,6 +10,15 @@ const { title, description = '以專業製程角度紀錄優格種類、菌種�
 const pageTitle = title ? `${title} · YogurtGuide` : 'YogurtGuide';
 const { pathname } = Astro.url;
 const base = import.meta.env.BASE_URL;
+const officialOrigin = 'https://yogurtguide.wuwaiter.com';
+const officialPath = (() => {
+	const prefix = '/YogurtGuide';
+	let path = pathname.startsWith(prefix) ? pathname.slice(prefix.length) : pathname;
+	if (!path.startsWith('/')) path = `/${path}`;
+	if (!path.endsWith('/')) path += '/';
+	return path;
+})();
+const canonical = new URL(officialPath, officialOrigin).href;
 const isStrainsPage = pathname.includes('/cultures/species');
 const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 ---
@@ -22,13 +31,16 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
 		<meta name="description" content={description} />
+		<link rel="canonical" href={canonical} />
+		<meta property="og:type" content="website" />
+		<meta property="og:site_name" content="YogurtGuide" />
+		<meta property="og:locale" content="zh_Hant" />
+		<meta property="og:title" content={pageTitle} />
+		<meta property="og:description" content={description} />
+		<meta property="og:url" content={canonical} />
+		<meta property="og:image" content={`${officialOrigin}/brand/field-note-yogurt.png`} />
 		<title>{pageTitle}</title>
-		<link rel="preconnect" href="https://fonts.googleapis.com" />
-		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-		<link
-			href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600&family=Rock+Salt&display=swap"
-			rel="stylesheet"
-		/>
+		<link rel="stylesheet" href={`${base}fonts/fonts.css`} />
 	</head>
 	<body>
 		<header class="site-header">

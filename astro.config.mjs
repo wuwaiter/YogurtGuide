@@ -1,11 +1,14 @@
 // @ts-check
+import sitemap from '@astrojs/sitemap';
 import { defineConfig } from 'astro/config';
 
-// Cloudflare Workers Builds 會注入 WORKERS_CI=1，網站放在網域根目錄；GitHub Pages 放在 /YogurtGuide/ 底下。
-// base 結尾必須有 `/`，否則 `${base}cultures/` 會變成 `/YogurtGuidecultures/`
+// 正式網址是 Cloudflare 自訂網域。GitHub Pages 仍放在 /YogurtGuide/ 底下，頁面 canonical 指回正式網址。
+// Cloudflare Workers Builds 會注入 WORKERS_CI=1。base 結尾必須有 `/`。
+const officialSite = 'https://yogurtguide.wuwaiter.com';
 const onCloudflare = process.env.WORKERS_CI === '1';
 
 export default defineConfig({
-	site: 'https://wuwaiter.github.io',
+	site: officialSite,
 	base: onCloudflare ? '/' : '/YogurtGuide/',
+	integrations: onCloudflare ? [sitemap()] : [],
 });
