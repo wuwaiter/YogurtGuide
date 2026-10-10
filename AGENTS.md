@@ -2,7 +2,7 @@
 
 回覆對象有 ADHD。輸出不只是「簡短」，而是要讓人能直接動手。語言仍為繁體中文，本節只規範「形狀」。
 
-完整原文與範例：`.cursor/skills/i-have-adhd/SKILL.md`（來源 https://github.com/MyFavoriteForkedRepo/i-have-adhd ，MIT）。
+完整原文與範例：`.agents/skills/i-have-adhd/SKILL.md`（來源 https://github.com/MyFavoriteForkedRepo/i-have-adhd ，MIT）。
 
 10 條規則：
 

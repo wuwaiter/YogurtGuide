@@ -31,10 +31,7 @@ for (const [label, options] of required) {
 	if (!options.some((opt) => has(opt))) missing.push(label);
 }
 
-const hasCursor =
-	has('.cursor/') ||
-	has('.cursor') ||
-	(text.includes('.cursor/rules') && text.includes('.cursor/skills'));
+const hasCursor = has('.cursor/') || has('.cursor');
 if (!hasCursor) missing.push('.cursor/');
 
 if (missing.length) {
