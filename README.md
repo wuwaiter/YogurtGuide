@@ -1,23 +1,28 @@
 # YogurtGuide
 
-優格製程筆記（Yogurt Process Notes）：以**菌種（culture）**與**製法（process）**為軸，記錄可對照、可重複的發酵實驗。
+優格製程筆記（Yogurt Process Notes）：以優格種類、菌種與製法為軸，記錄可對照、可重複的發酵實驗。
 
-線上預覽（部署後）：https://wuwaiter.github.io/YogurtGuide/
+- 正式網站：https://yogurtguide.wuwaiter.com/
+- GitHub Pages：https://wuwaiter.github.io/YogurtGuide/
+
+## 資料在哪
 
 | 路徑 | 用途 |
 |------|------|
-| `src/content.config.ts` | Content Collections 欄位、關聯與驗證規則 |
-| `src/content/cultures/*.md` | 優格／發酵文化種類與說明 |
-| `src/content/methods/*.md` | 製法資料與步驟 |
-| `src/content/batches/*.md` | 批次實驗資料與觀察 |
-| `src/content/glossary/*.md`、`src/content/market-yogurts/*.md` | 詞彙與市售優格資料 |
-| `src/content/additives/*.md` | 添加物詳細資料 |
-| `src/data/numbered-strains.ts` | 可追溯的編號菌株資料與來源 |
-| `src/pages/pairing/index.astro` | 優格搭配的單品／組合資料與頁面 |
+| `src/content.config.ts` | Content Collections 欄位與驗證 |
+| `src/content/cultures/*.md` | 優格與相關發酵文化 |
+| `src/content/methods/*.md` | 製法 |
+| `src/content/batches/*.md` | 批次實驗 |
+| `src/content/glossary/*.md` | 詞彙 |
+| `src/content/market-yogurts/*.md` | 市售優格 |
+| `src/content/additives/*.md`、`src/content/foods/*.md` | 添加物與搭配食物 |
+| `src/data/numbered-strains.ts` | 編號菌株 |
 
-主要內容使用 Markdown；結構化欄位放在 frontmatter，正文直接使用 Markdown。編號菌株與搭配清單目前分別使用 TypeScript 與 Astro 內嵌資料。Astro 在建置時驗證 Content Collections 並產生靜態頁面，不需要 SQLite 或資料庫初始化。
+頁面在建置時讀 Markdown。批次的 SQLite 是查詢副本，檔案是 `data/batches.sqlite`、`data/batch_ingredients.sqlite`、`data/batch_photos.sqlite`。改完批次 Markdown 後執行 `npm run batch:sqlite` 重建。
 
 ## 本地開發
+
+需要 Node.js 22.12 或更新。
 
 ```sh
 npm install
@@ -25,33 +30,14 @@ npx astro dev --background
 ```
 
 背景伺服器可用 `npx astro dev status`、`npx astro dev logs`、`npx astro dev stop` 管理。
-網站路徑為 `http://localhost:4321/YogurtGuide/`，`YogurtGuide` 大小寫需一致。
+本機網址是 `http://localhost:4321/YogurtGuide/`。`YogurtGuide` 的大小寫要一致。
 
-## CI/CD（自動檢查與部署）
+## 檢查與部署
 
-本機 `npm install` 一次後會裝好 Git hook：
+`npm install` 會裝上 Git hook。
 
-1. `git commit` 會跑 `npm run test:ci`（至少一個 unit test，失敗就不能 commit）。
-2. `git push` 會跑 gitignore 與安全掃描（失敗就不能 push）。
-3. 推到 `main` 後，GitHub Actions 會再跑同一套檢查、建置，並部署到 **GitHub Pages** 與 **Cloudflare Pages**。兩邊路徑都是 `/YogurtGuide/`。
+1. `git commit` 會跑 `npm run test:ci`。失敗就不能 commit。
+2. `git push` 會跑 gitignore 檢查與安全掃描。失敗就不能 push。
+3. 推到 `main` 之後，GitHub Actions 部署 GitHub Pages。Cloudflare 用自己的 Git 連線建置，並部署到正式網址。兩邊都跑 `npm run check:deploy`。
 
-跳過本機 hook 可用 `git commit --no-verify` / `git push --no-verify`，但 GitHub 上的 Actions 仍會擋部署。
-
-### 看結果
-
-Repo → **Actions**。綠勾 = 通過。約 2–4 分鐘。
-
-- GitHub：https://wuwaiter.github.io/YogurtGuide/
-- Cloudflare：`https://yogurtguide.pages.dev/YogurtGuide/`（專案名是 `yogurtguide`；開根目錄會 404，要帶 `/YogurtGuide/`）
-
-### 一次性設定（約 25 分鐘）
-
-1. GitHub → **Settings → Pages** → Source 選 **GitHub Actions**。
-2. Cloudflare Dashboard → **Workers & Pages** → 建立 Pages 專案，名稱 `yogurtguide`。**關掉 Git 自動建置**（由 GitHub Actions 上傳 `dist`，不要讓 Cloudflare 再 build 一次）。
-3. Cloudflare → 建立 API Token（Account → Cloudflare Pages → Edit）與複製 Account ID。
-4. GitHub repo → **Settings → Secrets and variables → Actions** 新增：
-   - `CLOUDFLARE_API_TOKEN`
-   - `CLOUDFLARE_ACCOUNT_ID`
-5. 推到 `main`（或 Actions 裡手動跑 **Deploy**）。
-
-`astro.config.mjs`：`site` 為 `https://wuwaiter.github.io`，`base` 為 `/YogurtGuide/`。不要為 Cloudflare 改掉 `base`。
+不要把 Cloudflare API token 放進 GitHub。部署結果看 GitHub 的 Actions，以及 Cloudflare 的 Workers 建置紀錄。

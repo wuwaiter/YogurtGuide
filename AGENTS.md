@@ -1,52 +1,35 @@
-## Output Style — i-have-adhd（always applied）
+## Output Style（always applied）
 
-回覆對象有 ADHD。輸出不只是「簡短」，而是要讓人能直接動手。語言仍為繁體中文，本節只規範「形狀」。
+每次回覆前先讀 `.agents/skills/i-have-adhd/SKILL.md` 並照做。
 
-完整原文與範例：`.agents/skills/i-have-adhd/SKILL.md`（來源 https://github.com/MyFavoriteForkedRepo/i-have-adhd ，MIT）。
+## 版本管理
 
-10 條規則：
+功能變更、規則變更、架構調整後，commit 前更新 `md/Version.md`。最新一筆放在 `# Version History` 下面的最上方。
 
-1. 第一行就是「可以馬上做的動作」（指令／路徑／片段優先，說明放後面）。
-2. 多步驟一律編號，每步一個有界動作。
-3. 若還有未完成事項，結尾只給**一個**兩分鐘內能做完的動作。
-4. 壓制岔題：先講完主線，第二個問題另外問「要不要處理」。
-5. 每回合重述狀態（「5 步的第 3 步完成，下一步：…」）。
-6. 時間估計要具體（「約 15 分鐘」而非「要花點時間」）。
-7. 成果講具體（現在什麼能用了、怎麼驗證），不要埋在總結裡。
-8. 錯誤用平述句：位置、原因、修法。禁止「糟糕」「似乎有問題」。
-9. 清單上限 5 項；超過就切成「現在做／之後做」。
-10. 不要開場白、不要事後總結、不要客套收尾。
+```markdown
+## vX.Y.Z — YYYY-MM-DD
 
-例外（可覆寫上述）：
-
-- 使用者要求「解釋／帶我走一遍」→ 完整說明，但仍不加開場白與收尾，用標題方便回看。
-- 破壞性操作（`rm -rf`、force push、schema 變更、刪表）→ 先確認再動手，安全優先。
-- 連續三回合都「還是壞的」→ 停止改碼，指出可能錯的假設，問一個診斷問題。
-- 需求真的有歧義 → 問一個短問題，勝過猜錯重寫。
-
-送出前檢查：刪掉宣告自己要做什麼的第一句、刪掉問「還需要什麼嗎」或重述已完成事項的最後一句、刪掉「順帶一提」、刪掉沒有資訊量的模糊副詞。然後確認：只讀第一行與最後一行，是否知道（a）下一步做什麼、（b）剛剛發生了什麼。
-
-本專案補充：所有網站資料位於 `src/content/**/*.md`；修改後直接執行 `npm run build` 驗證 Content Collections。
-
-## Development
-
-When starting the dev server, use background mode:
-
-```
-astro dev --background
+### Changes
+- 做了什麼、為什麼。
 ```
 
-Manage the background server with `astro dev stop`, `astro dev status`, and `astro dev logs`.
+Patch 用於文件與小修正。Minor 用於新功能或結構調整。Major 用於破壞性變更。
 
-## Documentation
+## 網站
 
-Full documentation: https://docs.astro.build
+正式網址是 `https://yogurtguide.wuwaiter.com/`。
+本機與 GitHub Pages 的 `base` 是 `/YogurtGuide/`。
+Cloudflare 建置設了 `WORKERS_CI=1` 時，`base` 是 `/`。
+本機預覽是 `http://localhost:4321/YogurtGuide/`。
 
-Consult these guides before working on related tasks:
+不要把 Cloudflare API token 放進 GitHub secrets。
 
-- [Adding pages, dynamic routes, or middleware](https://docs.astro.build/en/guides/routing/)
-- [Working with Astro components](https://docs.astro.build/en/basics/astro-components/)
-- [Using React, Vue, Svelte, or other framework components](https://docs.astro.build/en/guides/framework-components/)
-- [Adding or managing content](https://docs.astro.build/en/guides/content-collections/)（本專案使用 Markdown Content Collections）
-- [Adding styles or using Tailwind](https://docs.astro.build/en/guides/styling/)
-- [Supporting multiple languages](https://docs.astro.build/en/guides/internationalization/)
+## 內容
+
+頁面讀 `src/content/**/*.md`。改這些檔之後執行 `npm run build`。
+
+批次來源是 `src/content/batches/*.md`。`npm run batch:sqlite` 只從 Markdown 重建 `data/*.sqlite`。頁面不讀 SQLite。
+
+## Skills
+
+`.agents/skills` 連到 `D:\WadeDev\.ai\.skills`。這裡的修改會影響其他專案。不要把 YogurtGuide 專用名稱寫進共用 skill。

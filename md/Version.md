@@ -1,5 +1,11 @@
 # Version History
 
+## v0.9.15 — 2026-10-11
+
+### Changes
+- `AGENTS.md` 只留代理規則：回覆格式、版本紀錄、正式網址、Markdown 為批次來源、共用 skill 不可寫入專案專名。回覆格式縮成 3 條，全文改讀 i-have-adhd skill。
+- `README.md` 改寫給人看的說明，並修正正式網址、雙邊部署與 SQLite 副本的描述。
+
 ## v0.9.14 — 2026-10-11
 
 ### Changes
