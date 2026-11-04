@@ -32,7 +32,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@capacitor/cli": "^8.5.3",
+    "@capacitor/cli": "^8.6.0",
     "fflate": "^0.8.3",
     "husky": "^9.1.7",
     "wrangler": "4.143.0"
