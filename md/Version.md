@@ -1,5 +1,11 @@
 # Version History
 
+## v0.12.1 — 2026-11-02
+
+### Changes
+- 新增批次 b026（11/01 川秀60菌、鮮奶 300ml＋過量脫脂奶粉 80ml）。
+- 新增 `md/spec-kit/`：自用 SPEC-KIT 的流程（6 步、6 個關卡）、角色（用戶的 `AGENTS.md`、SPEC_BOSS、SPEC_SA）、範本與兩個 SKILL 草稿；並以本專案為例寫出需求規格 `checklist.md` 與技術規格 `plan.md`。之後用於 MES 系統開發。只有文件，尚未建 skill。
+
 ## v0.12.0 — 2026-10-21
 
 ### Changes
