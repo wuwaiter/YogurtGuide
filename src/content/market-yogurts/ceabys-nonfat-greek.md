@@ -1,7 +1,7 @@
 ---
 brand: "雪比"
 productName: "零脂希臘式優格"
-recommendationStars: 0
+recommendationStars: 1
 energyKcalPer100: 46.4
 proteinPer100: 7.1
 fatPer100: 0
@@ -14,7 +14,7 @@ addedSugar: false
 additives: "牛奶蛋白"
 cultures: "長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌"
 ingredientsLabel: "脫脂牛乳、牛奶蛋白、乳酸菌"
-note: "450 g，每罐蛋白質 32 g。蛋白質靠另加的牛奶蛋白拉高，不給 ★。"
+note: "450 g，每罐蛋白質 32 g。成分符合一星（牛奶蛋白可）。營養數字達三星（蛋白質 7.1 g、脂肪 0 g、碳水 4.5 g），但兩星以上只能用鮮乳／生乳、菌種、益生元，另加牛奶蛋白所以停在 ★。"
 packImage: "market/ceabys-nonfat-greek.jpg"
 packCaption: "正面"
 packImages:

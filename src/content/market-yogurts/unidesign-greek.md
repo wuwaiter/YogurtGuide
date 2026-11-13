@@ -14,7 +14,7 @@ addedSugar: false
 additives: "牛奶蛋白、膠原蛋白、流行鏈球菌發酵物（含透明質酸鈉）"
 cultures: "沒有菌種資訊（標示只寫「乳酸菌」）"
 ingredientsLabel: "水、生乳、全脂奶粉、牛奶蛋白、膠原蛋白、流行鏈球菌發酵物（含透明質酸鈉）、乳酸菌"
-note: "500 g。另加牛奶蛋白、膠原蛋白，不給 ★。"
+note: "500 g。另加膠原蛋白、流行鏈球菌發酵物，不給 ★。"
 packImage: "market/unidesign-greek.jpg"
 packCaption: "正面"
 packImages:

@@ -14,7 +14,7 @@ addedSugar: false
 additives: "奶粉、牛奶蛋白、乳清蛋白"
 cultures: "長雙歧桿菌、嗜酸乳桿菌、嬰兒雙歧桿菌、乾酪乳桿菌、植物乳桿菌、保加利亞乳桿菌、嗜熱鏈球菌"
 ingredientsLabel: "生乳、奶粉、牛奶蛋白、乳清蛋白、活性乳酸菌"
-note: "500 g，每盒蛋白質 40 g。蛋白質靠另加的牛奶蛋白、乳清蛋白拉高，不給 ★。"
+note: "500 g，每盒蛋白質 40 g。另加乳清蛋白，不給 ★。"
 packImage: "market/ceabys-greek-protein.jpg"
 packCaption: "正面"
 packImages:
