@@ -127,7 +127,7 @@
 
 | 需求 | 預計做法 |
 |---|---|
-| 紀錄資料 | 手機本機資料庫（SQLite 外掛） |
+| 紀錄資料 | `@capacitor-community/sqlite`（nativeBuild 2 起），只在 App；網站版不能存。移除 App／清除資料都會消失，靠第 3 階段備份 |
 | 照片 | Capacitor Filesystem，存 App 私有空間 |
 | 拍照／選圖 | Capacitor Camera |
 | 發酵提醒 | Capacitor Local Notifications（需通知權限） |

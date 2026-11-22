@@ -1,5 +1,6 @@
 import { createHash } from 'node:crypto';
 import { getCollection } from 'astro:content';
+import { FAILED_SET_MAX, batchMetrics, hoursBands, summarizeByCulture } from '../batch-insights.mjs';
 
 const officialOrigin = 'https://yogurtguide.wuwaiter.com';
 
@@ -87,10 +88,26 @@ export async function overnightOatsDocument() {
 	};
 }
 
+/** 站主批次的數字化紀錄與各菌種整理，給 App 的紀錄比對與發酵建議用。 */
+export async function batchesDocument() {
+	const batches = (await getCollection('batches', ({ data }) => !data.draft)).sort(
+		(a, b) => a.data.date.localeCompare(b.data.date) || a.id.localeCompare(b.id),
+	);
+	const items = batches.map(({ id, data }) => batchMetrics(id, data));
+	return {
+		schemaVersion: 1,
+		failedSetMax: FAILED_SET_MAX,
+		items,
+		cultures: summarizeByCulture(items.filter((m) => m.set != null)),
+		hoursBands: hoursBands(items),
+	};
+}
+
 export async function contentFiles() {
 	const documents = [
 		{ name: 'powders.json', document: await powdersDocument() },
 		{ name: 'overnight-oats.json', document: await overnightOatsDocument() },
+		{ name: 'batches.json', document: await batchesDocument() },
 	];
 	return documents.map(({ name, document }) => {
 		const body = stableStringify(document);

@@ -2,29 +2,134 @@
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { getCollection } from 'astro:content';
 import { formatBatchCultureLabel, formatBatchDate } from '../../lib/batch-display';
+import { batchMetrics, formatHours, hoursBands, summarizeByCulture } from '../../lib/batch-insights.mjs';
 
 const batches = (await getCollection('batches', ({ data }) => !data.draft)).sort(
 	(a, b) => b.data.date.localeCompare(a.data.date) || b.id.localeCompare(a.id),
 );
 const base = import.meta.env.BASE_URL;
+
+const metrics = batches.map(({ id, data }) => batchMetrics(id, data));
+const scored = metrics.filter((m) => m.set != null);
+const cultures = summarizeByCulture(scored);
+const bands = hoursBands(metrics);
+const failed = metrics.filter((m) => m.failed);
+const num = (v: number | null) => (v == null ? '—' : v.toFixed(1).replace(/\.0$/, ''));
+const hourRange = (r: { min: number; max: number } | null) =>
+	!r ? '—' : r.min === r.max ? formatHours(r.min) : `${formatHours(r.min)}–${formatHours(r.max)}`;
 ---
 
-<BaseLayout title="批次實驗" description="優格批次日誌：日期溫度、食材與菌種、成品狀況。">
+<BaseLayout title="批次實驗" description="優格批次日誌：日期溫度、食材與菌種、成品狀況，以及依菌種整理的發酵時間與評分。">
 	<section class="section">
 		<div class="wrap">
 			<h1 class="page-title">批次實驗<span class="en-sub">Batch Logs</span></h1>
-			<ul class="list">
+			<p class="page-lead">
+				站主每次在家做優格的實際紀錄，共 {metrics.length} 筆。上半部是整理後的數字，下半部是每一次的完整紀錄。
+			</p>
+
+			<section class="record-block" id="time-vs-result">
+				<h2 class="record-block__title">1. 發酵時間與成品<span class="en-sub">Time vs. Result</span></h2>
+				<p class="meta">
+					只看發酵溫度 40–43°C、凝乳不是失敗的批次。分數都換成 10 分制：凝乳、質地越高越好；酸度越高越酸，6 以上很酸、2 以下沒有明顯酸味。
+				</p>
+				<div class="table-scroll">
+					<table class="meta-table">
+						<thead>
+							<tr><th>發酵時間</th><th>批次數</th><th>凝乳</th><th>質地</th><th>酸度</th></tr>
+						</thead>
+						<tbody>
+							{
+								bands.map((b) => (
+									<tr>
+										<td>{b.label}</td>
+										<td>{b.count}</td>
+										<td>{num(b.avgSet)}</td>
+										<td>{num(b.avgTexture)}</td>
+										<td>{num(b.avgAcidity)}</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
 				{
-					batches.map(({ id, data }) => (
-						<li>
-							<a class="list-item" href={`${base}batches/${id}/`}>
-								<h3>{formatBatchDate(data.date)}</h3>
-								<p class="meta">{formatBatchCultureLabel(data)}</p>
-							</a>
-						</li>
-					))
+					failed.length > 0 && (
+						<p class="meta">
+							失敗（凝乳 3 分以下）：
+							{failed.map((m, i) => (
+								<>
+									{i > 0 && '、'}
+									<a href={`${base}batches/${m.id}/`}>{formatBatchDate(m.date)} {m.cultureName}</a>（
+									{m.incubationTempC ?? '—'}°C、{formatHours(m.incubationHours)}）
+								</>
+							))}
+							。不列入上表與下表的平均。
+						</p>
+					)
 				}
-			</ul>
+			</section>
+
+			<section class="record-block" id="by-culture">
+				<h2 class="record-block__title">2. 各菌種整理<span class="en-sub">By Culture</span></h2>
+				<p class="meta">
+					「最好的一次」是凝乳＋質地最高的那批；同分取酸度較低的。菌名照紀錄原文分組，名稱寫法不同會分成兩列。早期用文字描述成品、沒有分數的批次不列入。
+				</p>
+				<div class="table-scroll">
+					<table class="meta-table species-table">
+						<thead>
+							<tr>
+								<th>菌種</th>
+								<th>批次（傳代）</th>
+								<th>發酵時間</th>
+								<th>平均 凝乳／質地／酸度</th>
+								<th>最好的一次</th>
+							</tr>
+						</thead>
+						<tbody>
+							{
+								cultures.map((c) => (
+									<tr>
+										<td>{c.cultureName}</td>
+										<td>
+											{c.batchCount}（{c.motherCount}）{c.failedCount > 0 && <span class="meta">，失敗 {c.failedCount}</span>}
+										</td>
+										<td>{hourRange(c.hours)}</td>
+										<td>
+											{num(c.avgSet)}／{num(c.avgTexture)}／{num(c.avgAcidity)}
+										</td>
+										<td>
+											{c.best && c.bestBatchId ? (
+												<a href={`${base}batches/${c.bestBatchId}/`}>
+													{formatBatchDate(c.best.date)}：{c.best.incubationTempC ?? '—'}°C、{formatHours(c.best.incubationHours)}，
+													{num(c.best.set)}／{num(c.best.texture)}／{num(c.best.acidity)}
+												</a>
+											) : (
+												'—'
+											)}
+										</td>
+									</tr>
+								))
+							}
+						</tbody>
+					</table>
+				</div>
+			</section>
+
+			<section class="record-block" id="logs">
+				<h2 class="record-block__title">3. 每次紀錄<span class="en-sub">All Batches</span></h2>
+				<ul class="list">
+					{
+						batches.map(({ id, data }) => (
+							<li>
+								<a class="list-item" href={`${base}batches/${id}/`}>
+									<h3>{formatBatchDate(data.date)}</h3>
+									<p class="meta">{formatBatchCultureLabel(data)}</p>
+								</a>
+							</li>
+						))
+					}
+				</ul>
+			</section>
 		</div>
 	</section>
 </BaseLayout>
