@@ -15,7 +15,8 @@
     "test:ci": "node scripts/ci-require-tests.mjs",
     "check:gitignore": "node scripts/ci-check-gitignore.mjs",
     "check:security": "node scripts/ci-check-security.mjs",
-    "check:deploy": "npm run check:gitignore && npm run check:security && npm run test:ci && npm run build && npm run app:publish",
+    "check:bundle": "node scripts/ci-check-bundle.mjs",
+    "check:deploy": "npm run check:gitignore && npm run check:security && npm run test:ci && npm run build && npm run app:publish && npm run check:bundle",
     "app:sync": "node scripts/build-app.mjs --sync",
     "app:publish": "node scripts/build-app.mjs --publish",
     "app:debug": "node scripts/build-app.mjs --debug",
@@ -23,6 +24,7 @@
     "prepare": "husky"
   },
   "dependencies": {
+    "@capacitor-community/sqlite": "^8.1.1",
     "@capacitor/android": "^8.5.3",
     "@capacitor/app": "^8.1.2",
     "@capacitor/core": "^8.5.3",

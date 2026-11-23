@@ -1,0 +1,556 @@
+---
+// 我的紀錄：使用者自己的優格紀錄，只存在這支手機。規格見 md/AppPlan.md「第 2 階段」。
+// 網站版也會產生這頁，但不放導覽、不給搜尋引擎收錄，也不能存（只顯示請用 App）。
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import { getCollection } from 'astro:content';
+import { batchesDocument } from '../../lib/content-api/payloads';
+
+const forApp = process.env.CAP_BUILD === '1';
+const powders = (await getCollection('starterPowders', ({ data }) => !data.draft))
+	.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+	.map(({ id, data }) => ({
+		type: 'powder',
+		id,
+		name: `${data.brand} ${data.productName}`,
+		temperature: data.temperature ?? '',
+		fermentTime: data.fermentTime ?? '',
+	}));
+const market = (await getCollection('marketYogurts', ({ data }) => !data.draft))
+	.sort((a, b) => a.data.sortOrder - b.data.sortOrder)
+	.map(({ id, data }) => ({
+		type: 'market',
+		id,
+		name: `${data.brand} ${data.productName}`,
+		temperature: '',
+		fermentTime: '',
+	}));
+const catalogJson = JSON.stringify([...powders, ...market]).replace(/</g, '\\u003c');
+// 發酵建議用的站主批次整理（和 app-content/v1/batches.json 同一份）
+const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c');
+---
+
+<BaseLayout title="我的紀錄" description="記下自己做的每一杯優格：菌、溫度、時間、成品。資料只存在這支手機。" noindex>
+	<section class="section">
+		<div class="wrap rec">
+			<h1 class="page-title">我的紀錄<span class="en-sub">My Batches</span></h1>
+			{
+				!forApp && (
+					<p class="rec-banner">
+						這是 Android App 的功能，網頁版不能存紀錄，請用 App。
+					</p>
+				)
+			}
+			<noscript><p class="rec-banner">這個功能需要開啟 JavaScript。</p></noscript>
+			<div id="rec-app" aria-live="polite"></div>
+		</div>
+	</section>
+	<script type="application/json" id="rec-catalog" set:html={catalogJson} />
+	<script type="application/json" id="rec-site" set:html={siteJson} />
+</BaseLayout>
+
+<script>
+	import {
+		KINDS,
+		PHASES,
+		actualHours,
+		advance,
+		applyEdit,
+		createRecord,
+		lineName,
+		localDate,
+		minutesLeft,
+		nextAction,
+		parentKindsFor,
+		sortForHome,
+		suggestedHours,
+		suggestedTempC,
+	} from '../../lib/records/model.mjs';
+	import { recordStore } from '../../lib/records/store';
+	import { fermentAdvice } from '../../lib/records/advice.mjs';
+
+	type Rec = Record<string, any>;
+	interface CatalogItem {
+		type: 'powder' | 'market';
+		id: string;
+		name: string;
+		temperature: string;
+		fermentTime: string;
+	}
+
+	const root = document.getElementById('rec-app')!;
+	const catalog: CatalogItem[] = JSON.parse(document.getElementById('rec-catalog')!.textContent || '[]');
+	const site = JSON.parse(document.getElementById('rec-site')!.textContent || 'null');
+	let records: Rec[] = [];
+	let showHidden = false;
+
+	const SOURCE_LABEL: Record<string, string> = {
+		mine: '依你自己的紀錄',
+		parent: '依上一代',
+		site: '依站主的批次紀錄',
+		package: '依菌粉包裝',
+		default: '一般經驗',
+	};
+
+	/** 發酵建議區塊。apply 按鈕用 data-apply-hours，由呼叫端接。 */
+	function adviceHtml(a: ReturnType<typeof fermentAdvice>) {
+		return `<section class="rec-advice" aria-label="發酵建議">
+			<p class="rec-advice__head"><strong>建議發酵 ${a.hours} 小時</strong> <span class="meta">${SOURCE_LABEL[a.confidence]}</span></p>
+			<p class="meta">${esc(a.timing.text)}</p>
+			<button type="button" class="rec-btn" data-apply-hours="${a.hours}">用這個時間</button>
+			<ul class="rec-advice__list">${a.basis.map((b) => `<li>${esc(b.text)}</li>`).join('')}</ul>
+			${a.tips.length ? `<ul class="rec-advice__tips">${a.tips.map((t) => `<li class="is-${t.level}">${esc(t.text)}</li>`).join('')}</ul>` : ''}
+		</section>`;
+	}
+
+	function pkgFor(name: string) {
+		const hit = catalog.find((c) => c.name === name.trim());
+		const hours = hit ? suggestedHours(hit.fermentTime) : null;
+		return hours == null ? null : { hours, text: hit!.fermentTime };
+	}
+
+	const esc = (s: unknown) =>
+		String(s ?? '').replace(/[&<>"']/g, (c) => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' })[c]!);
+
+	/** ISO → datetime-local 的值（本機時間）。 */
+	function toLocalInput(iso: string | null) {
+		if (!iso) return '';
+		const d = new Date(iso);
+		return `${localDate(d)}T${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+	}
+	function fmtTime(iso: string | null) {
+		if (!iso) return '—';
+		const d = new Date(iso);
+		return `${d.getMonth() + 1}/${d.getDate()} ${String(d.getHours()).padStart(2, '0')}:${String(d.getMinutes()).padStart(2, '0')}`;
+	}
+	function fmtLeft(mins: number) {
+		const a = Math.abs(mins);
+		const text = a >= 60 ? `${Math.floor(a / 60)} 小時 ${a % 60} 分` : `${a} 分`;
+		return mins >= 0 ? `還有 ${text}` : `已超過 ${text}，去看看凝固`;
+	}
+	const scoreText = (r: Rec) =>
+		r.set == null && r.texture == null && r.acidity == null
+			? ''
+			: `凝乳 ${r.set ?? '—'}／質地 ${r.texture ?? '—'}／酸度 ${r.acidity ?? '—'}`;
+
+	async function load() {
+		records = await recordStore.all();
+	}
+	const byId = (id: string) => records.find((r) => r.id === id);
+	// 存不進去要讓使用者看到，不能讓人以為存好了。
+	function showError(err: unknown) {
+		const message = err instanceof Error ? err.message : String(err);
+		root.querySelector('.rec-save-error')?.remove();
+		root.insertAdjacentHTML('afterbegin', `<p class="rec-error rec-save-error" role="alert">沒有存到：${esc(message)}</p>`);
+		root.scrollIntoView({ block: 'start' });
+	}
+	async function save(r: Rec) {
+		try {
+			await recordStore.put(r);
+		} catch (err) {
+			showError(err);
+			throw err;
+		}
+		await load();
+	}
+
+	// ---------- 首頁 ----------
+	function cardHtml(r: Rec) {
+		const next = nextAction(r);
+		const left = minutesLeft(r);
+		const status =
+			left != null ? `<span class="rec-left${left < 0 ? ' is-over' : ''}">${fmtLeft(left)}</span>` : PHASES[r.phase as keyof typeof PHASES];
+		return `<li class="rec-card${r.hidden ? ' is-hidden' : ''}">
+			<a class="rec-card__main" href="#r/${esc(r.id)}">
+				<strong>${esc(lineName(r))}</strong>
+				<span class="meta">${esc(KINDS[r.kind as keyof typeof KINDS].label)} · ${status}${r.hidden ? ' · 已隱藏' : ''}</span>
+				${scoreText(r) ? `<span class="meta">${scoreText(r)}</span>` : ''}
+			</a>
+			${next ? `<button type="button" class="rec-btn rec-btn--primary" data-advance="${esc(r.id)}">${next.label}</button>` : ''}
+		</li>`;
+	}
+
+	function renderHome() {
+		const visible = records.filter((r) => showHidden || !r.hidden);
+		const sorted = sortForHome(visible);
+		const active = sorted.filter((r) => r.phase !== 'done');
+		const done = sorted.filter((r) => r.phase === 'done');
+		const hiddenCount = records.filter((r) => r.hidden).length;
+		root.innerHTML = `
+			<p><a class="rec-btn rec-btn--primary" href="#new">＋ 新增紀錄</a></p>
+			${
+				records.length === 0
+					? `<p class="page-lead">還沒有紀錄。按「新增紀錄」，選發酵類型、填菌和溫度，就能開始計時。</p>`
+					: ''
+			}
+			${active.length ? `<h2 class="rec-h2">進行中</h2><ul class="rec-list">${active.map(cardHtml).join('')}</ul>` : ''}
+			${done.length ? `<h2 class="rec-h2">全部紀錄</h2><ul class="rec-list">${done.map(cardHtml).join('')}</ul>` : ''}
+			${
+				hiddenCount
+					? `<p><label class="rec-check"><input type="checkbox" id="rec-show-hidden" ${showHidden ? 'checked' : ''}/> 顯示已隱藏的 ${hiddenCount} 筆</label></p>`
+					: ''
+			}
+			<p class="meta">紀錄只存在這支手機，不會上傳。</p>`;
+		root.querySelector('#rec-show-hidden')?.addEventListener('change', (e) => {
+			showHidden = (e.target as HTMLInputElement).checked;
+			renderHome();
+		});
+	}
+
+	// ---------- 新增 ----------
+	function parentOptions(kind: string) {
+		const kinds = parentKindsFor(kind);
+		return sortForHome(records.filter((r) => kinds.includes(r.kind) && !r.hidden))
+			.map((r) => `<option value="${esc(r.id)}">${esc(lineName(r))}</option>`)
+			.join('');
+	}
+
+	function renderNew(kind = '') {
+		const k = KINDS[kind as keyof typeof KINDS];
+		const kindButtons = Object.entries(KINDS)
+			.map(
+				([key, v]) =>
+					`<label class="rec-kind${key === kind ? ' is-on' : ''}"><input type="radio" name="kind" value="${key}" ${key === kind ? 'checked' : ''}/><strong>${v.label}</strong><span class="meta">${v.hint}</span></label>`,
+			)
+			.join('');
+		const parents = kind ? parentOptions(kind) : '';
+		const canFirst = kind && kind !== 'passage';
+		const sourceBlock = !kind
+			? ''
+			: kind === 'passage'
+				? parents
+					? `<label class="rec-field">上一代<select name="parentId" required>${parents}</select></label>`
+					: `<p class="rec-banner">還沒有可以傳代的紀錄。先用「菌粉／市售優格」做一次。</p>`
+				: `${
+						parents
+							? `<fieldset class="rec-field"><legend>菌從哪來</legend>
+								<label class="rec-check"><input type="radio" name="from" value="first" checked/> 第一次</label>
+								<label class="rec-check"><input type="radio" name="from" value="parent"/> 接續上一代</label>
+								<select name="parentId" hidden>${parents}</select></fieldset>`
+							: ''
+					}
+					<label class="rec-field" data-first>菌名${kind === 'starter' ? '（可從菌粉、市售優格清單選，找不到就自己打）' : ''}
+						<input name="cultureName" ${kind === 'starter' ? 'list="rec-catalog-list"' : ''} autocomplete="off" required/>
+					</label>
+					<p class="meta" id="rec-suggest"></p>`;
+		const ready = kind && !(kind === 'passage' && !parents);
+		root.innerHTML = `
+			<p><a href="#">← 回我的紀錄</a></p>
+			<form id="rec-new" class="rec-form">
+				<fieldset class="rec-kinds"><legend>1. 發酵類型</legend>${kindButtons}</fieldset>
+				${
+					ready
+						? `<fieldset class="rec-field"><legend>2. 菌</legend>${sourceBlock}</fieldset>
+				<fieldset class="rec-field"><legend>3. 條件</legend>
+					<label class="rec-field">日期<input type="date" name="startedOn" value="${localDate(new Date())}"/></label>
+					<label class="rec-field">食材<textarea name="ingredients" rows="2" placeholder="例：全脂鮮奶 900ml、脫脂奶粉 2 湯匙"></textarea></label>
+					<div class="rec-row">
+						<label class="rec-field">室溫 °C<input type="number" name="ambientTempC" inputmode="decimal" step="0.5"/></label>
+						${k?.needsTemp ? `<label class="rec-field">發酵溫度 °C<input type="number" name="incubationTempC" inputmode="decimal" step="0.5" placeholder="接續上一代可留白"/></label>` : ''}
+						<label class="rec-field">預計發酵（小時）<input type="number" name="plannedHours" inputmode="decimal" step="0.5" min="0.5"/></label>
+					</div>
+				</fieldset>
+				<div id="rec-advice-slot"></div>
+				<p class="rec-error" role="alert"></p>
+				<p class="rec-actions">
+					<button type="submit" class="rec-btn rec-btn--primary" value="start">存起來並開始發酵</button>
+					<button type="submit" class="rec-btn" value="save">先存起來</button>
+				</p>`
+						: ''
+				}
+			</form>
+			${kind === 'starter' ? `<datalist id="rec-catalog-list">${catalog.map((c) => `<option value="${esc(c.name)}">${c.type === 'powder' ? '菌粉' : '市售優格'}</option>`).join('')}</datalist>` : ''}`;
+
+		const form = root.querySelector<HTMLFormElement>('#rec-new')!;
+		form.querySelectorAll<HTMLInputElement>('input[name=kind]').forEach((el) =>
+			el.addEventListener('change', () => renderNew(el.value)),
+		);
+		// 第一次／接續上一代切換
+		form.querySelectorAll<HTMLInputElement>('input[name=from]').forEach((el) =>
+			el.addEventListener('change', () => {
+				const fromParent = el.value === 'parent' && el.checked;
+				form.querySelector<HTMLSelectElement>('select[name=parentId]')!.hidden = !fromParent;
+				const first = form.querySelector<HTMLElement>('[data-first]')!;
+				first.hidden = fromParent;
+				first.querySelector('input')!.required = !fromParent;
+			}),
+		);
+		// 從清單選到菌粉時，帶入包裝上的建議溫度與時間
+		const nameInput = form.querySelector<HTMLInputElement>('input[name=cultureName]');
+		// 只覆蓋空白或上次自動帶入的值；使用者自己改過的不動。
+		const autofill = (input: HTMLInputElement | null, value: number | null) => {
+			if (!input) return;
+			const untouched = !input.value || input.value === input.dataset.auto;
+			if (!untouched) return;
+			input.value = value == null ? '' : String(value);
+			input.dataset.auto = input.value;
+		};
+		nameInput?.addEventListener('change', () => {
+			const hit = catalog.find((c) => c.name === nameInput.value.trim());
+			const hint = root.querySelector('#rec-suggest')!;
+			autofill(form.querySelector<HTMLInputElement>('input[name=incubationTempC]'), hit ? suggestedTempC(hit.temperature) : null);
+			if (!hit) {
+				hint.textContent = '';
+				return;
+			}
+			hint.textContent = hit.temperature ? `包裝溫度：${hit.temperature}` : '';
+		});
+
+		// 發酵建議：條件一改就重算
+		const currentAdvice = () => {
+			const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+			const parent = kind === 'passage' || data.from === 'parent' ? byId(data.parentId) : null;
+			const num = (v?: string) => (v ? Number(v) : null);
+			return fermentAdvice(
+				{
+					kind,
+					cultureName: data.cultureName ?? '',
+					incubationTempC: num(data.incubationTempC),
+					ambientTempC: num(data.ambientTempC),
+					ingredients: data.ingredients ?? '',
+				},
+				{ records, parent, site, pkg: pkgFor(data.cultureName ?? '') },
+			);
+		};
+		const slot = root.querySelector<HTMLElement>('#rec-advice-slot');
+		const refreshAdvice = () => {
+			if (!slot) return;
+			const data = new FormData(form);
+			const hasCulture = (data.get('cultureName') as string)?.trim() || kind === 'passage' || data.get('from') === 'parent';
+			const advice = hasCulture ? currentAdvice() : null;
+			slot.innerHTML = advice ? adviceHtml(advice) : '<p class="meta">填了菌名就會出現這次的發酵建議。</p>';
+			const hours = form.querySelector<HTMLInputElement>('input[name=plannedHours]');
+			if (hours && advice) hours.placeholder = `留白＝建議 ${advice.hours}`;
+		};
+		form.addEventListener('input', refreshAdvice);
+		form.addEventListener('change', refreshAdvice);
+		slot?.addEventListener('click', (e) => {
+			const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-apply-hours]');
+			if (!btn) return;
+			const hours = form.querySelector<HTMLInputElement>('input[name=plannedHours]')!;
+			hours.value = btn.dataset.applyHours!;
+			hours.dataset.auto = '';
+		});
+		refreshAdvice();
+
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const submitter = (e as SubmitEvent).submitter as HTMLButtonElement | null;
+			const data = Object.fromEntries(new FormData(form)) as Record<string, string>;
+			const usesParent = kind === 'passage' || data.from === 'parent';
+			const parent = usesParent ? byId(data.parentId) : null;
+			const hit = catalog.find((c) => c.name === (data.cultureName ?? '').trim());
+			// 沒填預計時間就用建議時間
+			if (!data.plannedHours) data.plannedHours = String(currentAdvice().hours);
+			try {
+				let rec = createRecord(
+					{ ...data, kind, source: hit ? { type: hit.type, id: hit.id, name: hit.name } : null },
+					{ parent },
+				);
+				if (submitter?.value === 'start') rec = advance(rec);
+				await save(rec);
+				location.hash = `#r/${rec.id}`;
+			} catch (err) {
+				form.querySelector('.rec-error')!.textContent = (err as Error).message;
+			}
+		});
+	}
+
+	// ---------- 單筆 ----------
+	function slider(name: string, label: string, value: number | null, help = '') {
+		return `<div class="rec-field rec-score">
+			<span>${label} <output>${value ?? '還沒評'}</output></span>
+			<input type="range" name="${name}" min="1" max="10" step="1" value="${value ?? 5}" data-empty="${value == null ? '1' : ''}"/>
+			${help ? `<span class="meta">${help}</span>` : ''}
+		</div>`;
+	}
+
+	function renderDetail(id: string) {
+		const r = byId(id);
+		if (!r) {
+			root.innerHTML = `<p>找不到這筆紀錄。</p><p><a href="#">← 回我的紀錄</a></p>`;
+			return;
+		}
+		const k = KINDS[r.kind as keyof typeof KINDS];
+		const parent = r.parentId ? byId(r.parentId) : null;
+		const next = nextAction(r);
+		const left = minutesLeft(r);
+		const actual = actualHours(r);
+		root.innerHTML = `
+			<p><a href="#">← 回我的紀錄</a></p>
+			<h2 class="rec-title">${esc(lineName(r))}</h2>
+			<p class="meta">${esc(k.label)}${r.source ? ` · 來源：${esc(r.source.name)}` : ''}${
+				parent ? ` · 上一代：<a href="#r/${esc(parent.id)}">${esc(lineName(parent))}</a>` : ''
+			}</p>
+			<div class="rec-phase">
+				<p><strong>${PHASES[r.phase as keyof typeof PHASES]}</strong>${left != null ? ` · <span class="rec-left${left < 0 ? ' is-over' : ''}">${fmtLeft(left)}</span>` : ''}</p>
+				<p class="meta">開始發酵 ${fmtTime(r.fermentStartAt)} → 移入冷藏 ${fmtTime(r.chillStartAt)} → 完成 ${fmtTime(r.doneAt)}${
+					actual != null ? ` · 實際發酵 ${actual} 小時` : ''
+				}</p>
+				${next ? `<button type="button" class="rec-btn rec-btn--primary" data-advance="${esc(r.id)}">${next.label}</button>` : ''}
+				${r.phase === 'done' ? `<a class="rec-btn" href="#new/${esc(r.id)}">用這批再傳一代</a>` : ''}
+			</div>
+			${
+				r.phase === 'planned'
+					? adviceHtml(
+							fermentAdvice(
+								{ kind: r.kind, cultureName: r.cultureName, incubationTempC: r.incubationTempC, ambientTempC: r.ambientTempC, ingredients: r.ingredients },
+								{ records, parent, site, pkg: pkgFor(r.source?.name ?? r.cultureName), excludeId: r.id },
+							),
+						).replace('用這個時間', `用這個時間（目前預計 ${r.plannedHours ?? '—'} 小時）`)
+					: ''
+			}
+			<form id="rec-edit" class="rec-form">
+				<fieldset class="rec-field"><legend>成品評分</legend>
+					${slider('set', '凝乳', r.set)}
+					${slider('texture', '質地', r.texture)}
+					${slider('acidity', '酸度', r.acidity, '6 以上很酸、2 以下無明顯酸味')}
+					<label class="rec-field">心得<textarea name="note" rows="3" placeholder="例：凝乳完整，酸味略明顯，下次少 1 小時">${esc(r.note)}</textarea></label>
+				</fieldset>
+				<details class="rec-more">
+					<summary>改其他欄位</summary>
+					<label class="rec-field">菌名<input name="cultureName" value="${esc(r.cultureName)}" ${r.parentId ? 'readonly' : ''}/></label>
+					<label class="rec-field">日期<input type="date" name="startedOn" value="${esc(r.startedOn)}"/></label>
+					<label class="rec-field">食材<textarea name="ingredients" rows="2">${esc(r.ingredients)}</textarea></label>
+					<div class="rec-row">
+						<label class="rec-field">室溫 °C<input type="number" name="ambientTempC" step="0.5" value="${r.ambientTempC ?? ''}"/></label>
+						${k.needsTemp ? `<label class="rec-field">發酵溫度 °C<input type="number" name="incubationTempC" step="0.5" value="${r.incubationTempC ?? ''}"/></label>` : ''}
+						<label class="rec-field">預計發酵（小時）<input type="number" name="plannedHours" step="0.5" value="${r.plannedHours ?? ''}"/></label>
+					</div>
+					<label class="rec-field">開始發酵<input type="datetime-local" name="fermentStartAt" value="${toLocalInput(r.fermentStartAt)}"/></label>
+					<label class="rec-field">移入冷藏<input type="datetime-local" name="chillStartAt" value="${toLocalInput(r.chillStartAt)}"/></label>
+					<label class="rec-field">完成<input type="datetime-local" name="doneAt" value="${toLocalInput(r.doneAt)}"/></label>
+					<label class="rec-check"><input type="checkbox" name="hidden" ${r.hidden ? 'checked' : ''}/> 隱藏（不顯示在首頁，資料與傳代關係保留）</label>
+				</details>
+				<p class="rec-error" role="alert"></p>
+				<p class="rec-actions"><button type="submit" class="rec-btn rec-btn--primary">儲存</button> <span class="meta" id="rec-saved"></span></p>
+			</form>`;
+
+		const form = root.querySelector<HTMLFormElement>('#rec-edit')!;
+		form.querySelectorAll<HTMLInputElement>('input[type=range]').forEach((el) =>
+			el.addEventListener('input', () => {
+				el.dataset.empty = '';
+				el.parentElement!.querySelector('output')!.textContent = el.value;
+			}),
+		);
+		form.addEventListener('submit', async (e) => {
+			e.preventDefault();
+			const data = Object.fromEntries(new FormData(form)) as Record<string, any>;
+			form.querySelectorAll<HTMLInputElement>('input[type=range]').forEach((el) => {
+				if (el.dataset.empty) data[el.name] = null;
+			});
+			data.hidden = form.querySelector<HTMLInputElement>('input[name=hidden]')!.checked;
+			try {
+				await save(applyEdit(byId(id)!, data));
+				root.querySelector('#rec-saved')!.textContent = '已儲存';
+			} catch (err) {
+				form.querySelector('.rec-error')!.textContent = (err as Error).message;
+			}
+		});
+	}
+
+	// ---------- 路由 ----------
+	async function route() {
+		await load();
+		const hash = location.hash.slice(1);
+		if (hash.startsWith('r/')) renderDetail(hash.slice(2));
+		else if (hash.startsWith('new/')) {
+			// 從某一批「再傳一代」：直接帶出對應類型並選好上一代
+			const p = byId(hash.slice(4));
+			const kind = p ? (p.kind === 'starter' ? 'passage' : p.kind) : '';
+			renderNew(kind);
+			const form = root.querySelector<HTMLFormElement>('#rec-new');
+			if (p && form) {
+				const fromParent = form.querySelector<HTMLInputElement>('input[name=from][value=parent]');
+				if (fromParent) {
+					fromParent.checked = true;
+					fromParent.dispatchEvent(new Event('change'));
+				}
+				const sel = form.querySelector<HTMLSelectElement>('select[name=parentId]');
+				if (sel) sel.value = p.id;
+			}
+		} else if (hash === 'new') renderNew();
+		else renderHome();
+		window.scrollTo(0, 0);
+	}
+
+	// 單筆畫面的「用這個時間」：直接改預計時數並存起來（新增畫面另外處理）
+	root.addEventListener('click', async (e) => {
+		const apply = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-apply-hours]');
+		if (!apply || !location.hash.startsWith('#r/')) return;
+		const r = byId(location.hash.slice(3));
+		if (!r) return;
+		await save(applyEdit(r, { plannedHours: apply.dataset.applyHours }));
+		await route();
+	});
+
+	// 「開始發酵／移入冷藏／完成」按鈕（首頁與單筆共用）
+	root.addEventListener('click', async (e) => {
+		const btn = (e.target as HTMLElement).closest<HTMLButtonElement>('[data-advance]');
+		if (!btn) return;
+		const r = byId(btn.dataset.advance!);
+		if (!r) return;
+		await save(advance(r));
+		await route();
+	});
+
+	window.addEventListener('hashchange', route);
+	// 發酵中的剩餘時間每分鐘更新一次（只在首頁，避免打斷正在填的表單）
+	setInterval(() => {
+		if (!location.hash || location.hash === '#') renderHome();
+	}, 60_000);
+
+	route().catch((err) => {
+		root.innerHTML = `<p class="rec-error">打不開本機資料：${esc(err?.message ?? err)}</p>`;
+	});
+</script>
+
+<style is:global>
+	.rec { max-width: 40rem; }
+	.rec-banner { border: 1px solid var(--red); padding: 0.6rem 0.8rem; color: var(--ink); }
+	.rec-h2, .rec-title { font-size: 1.2rem; margin: 1.5rem 0 0.6rem; }
+	.rec-list { list-style: none; margin: 0; padding: 0; display: grid; gap: 0.6rem; }
+	.rec-card { display: flex; gap: 0.75rem; align-items: center; border: 1px solid var(--line); padding: 0.7rem 0.8rem; }
+	.rec-card.is-hidden { opacity: 0.6; }
+	.rec-card__main { flex: 1; min-width: 0; display: grid; gap: 0.2rem; color: var(--ink); text-decoration: none; }
+	.rec-card__main strong { overflow-wrap: anywhere; }
+	.rec-left { color: var(--accent-deep); font-weight: 600; }
+	.rec-left.is-over { color: var(--red); }
+	.rec-btn {
+		display: inline-block; border: 1px solid var(--ink); background: transparent; color: var(--ink);
+		padding: 0.55rem 0.9rem; font: inherit; font-size: 0.95rem; text-decoration: none; cursor: pointer;
+		min-height: 2.75rem; white-space: nowrap;
+	}
+	.rec-btn--primary { background: var(--ink); color: var(--paper); }
+	.rec-btn:focus-visible, .rec-kind:focus-within { outline: 2px solid var(--accent-deep); outline-offset: 2px; }
+	.rec-form { display: grid; gap: 1rem; margin-top: 1rem; }
+	.rec-form fieldset { border: 1px solid var(--line); padding: 0.8rem; margin: 0; display: grid; gap: 0.8rem; min-width: 0; }
+	.rec-form legend { font-weight: 600; padding: 0 0.3rem; }
+	.rec-field { display: grid; gap: 0.3rem; font-size: 0.95rem; }
+	.rec-field[hidden] { display: none; }
+	.rec-field input:not([type=range]):not([type=checkbox]):not([type=radio]), .rec-field select, .rec-field textarea {
+		font: inherit; padding: 0.5rem; border: 1px solid var(--rule); background: #fff; color: var(--ink); width: 100%; min-height: 2.75rem;
+	}
+	.rec-row { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: 0.8rem; }
+	.rec-kinds { grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); }
+	.rec-kind { display: grid; gap: 0.2rem; border: 1px solid var(--line); padding: 0.7rem; cursor: pointer; }
+	.rec-kind.is-on { border-color: var(--ink); box-shadow: inset 3px 0 0 var(--red); }
+	.rec-kind input { position: absolute; opacity: 0; pointer-events: none; }
+	.rec-check { display: flex; gap: 0.5rem; align-items: center; min-height: 2.5rem; }
+	.rec-score input[type=range] { width: 100%; accent-color: var(--accent-deep); }
+	.rec-score input[data-empty='1'] { opacity: 0.45; }
+	.rec-score output { font-weight: 600; }
+	.rec-phase { border: 1px solid var(--line); padding: 0.8rem; display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; }
+	.rec-phase p { flex-basis: 100%; margin: 0; }
+	.rec-more summary { cursor: pointer; min-height: 2.5rem; display: flex; align-items: center; }
+	.rec-more[open] { display: grid; gap: 0.8rem; }
+	.rec-advice { border: 1px solid var(--accent-deep); border-left-width: 4px; padding: 0.8rem; display: grid; gap: 0.5rem; margin-top: 1rem; }
+	.rec-advice p { margin: 0; }
+	.rec-advice .rec-btn { justify-self: start; }
+	.rec-advice__head strong { font-size: 1.1rem; }
+	.rec-advice__list, .rec-advice__tips { margin: 0; padding-left: 1.2rem; display: grid; gap: 0.3rem; font-size: 0.92rem; }
+	.rec-advice__list { color: var(--ink-muted); }
+	.rec-advice__tips .is-warn { color: var(--red); }
+	.rec-error { color: var(--red); margin: 0; }
+	.rec-error:empty { display: none; }
+	.rec-actions { display: flex; flex-wrap: wrap; gap: 0.6rem; align-items: center; margin: 0; }
+</style>

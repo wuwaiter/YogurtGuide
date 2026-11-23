@@ -40,3 +40,10 @@ jobs:
 
       - name: Check and build
         run: npm run check:deploy
+
+      # check:deploy 已經建好 dist-app/，這裡只同步到 android/（不需要 Android SDK）。
+      # 同步後 Capacitor 產生的外掛清單要和 commit 的一樣，否則代表裝了外掛卻忘了跑 app:sync。
+      - name: Capacitor sync
+        run: |
+          npx cap sync android
+          git diff --exit-code -- android/app/capacitor.build.gradle android/capacitor.settings.gradle

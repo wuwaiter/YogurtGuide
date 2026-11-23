@@ -45,7 +45,7 @@ function listFiles(dir) {
 }
 
 /** 從 src/config/platforms.ts 讀 nativeBuild，避免兩邊各寫一份。 */
-function readNativeBuild() {
+export function readNativeBuild() {
 	const text = readFileSync(join(root, 'src', 'config', 'platforms.ts'), 'utf8');
 	const match = text.match(/nativeBuild:\s*(\d+)/);
 	if (!match) throw new Error('platforms.ts 找不到 nativeBuild');
