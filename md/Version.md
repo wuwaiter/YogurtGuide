@@ -9,6 +9,13 @@
 - 設定頁加「所在城市」；新增紀錄時用預計發酵時段的平均氣溫帶入室溫（可改），旁邊標示 Open-Meteo 出處。不用定位權限，選的城市不會傳出手機。
 - 授權頁加「資料來源」（Open-Meteo，CC BY 4.0），隱私權頁加「天氣」。
 
+## v0.18.1 — 2026-11-24
+
+### Changes
+- `@capacitor/cli`、`core`、`android` 一起升到 8.6.2（Dependabot 分開升會版本不合、CI 失敗，所以關掉 #19、#20、#23 改在這裡一次升）。原生層有變，`nativeBuild`、`versionCode` 改為 4；授權頁版本同步。
+- `.github/dependabot.yml` 把 `@capacitor/*` 設成同一組，之後只會開一個 PR。
+- 記錄已合併的 Dependabot 升級：astro 7.4.13、wrangler、actions/checkout 7、setup-node 7、upload-pages-artifact 5、deploy-pages 5。
+
 ## v0.18.0 — 2026-11-24
 
 ### Changes
