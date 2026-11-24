@@ -1,5 +1,11 @@
 # Version History
 
+## v0.20.0 — 2026-11-24
+
+### Changes
+- App 設定頁加「App 版本」：App 版本（versionName）、原生版本（nativeBuild＝versionCode）、內容版本（目前網頁包的 commit 前 7 碼），方便確認手機收不收得到更新、回報問題。
+- 修正手機上表格欄名疊在內容上：批次實驗頁的整理表借用了菌種表的樣式，欄名寫死成「名稱、學名…」，而且左邊留白被 `.meta-table td` 蓋掉。改成通用的 `.stack-table`，欄名放在每格的 `data-label`、顯示在內容上方。
+
 ## v0.19.0 — 2026-11-24
 
 ### Changes

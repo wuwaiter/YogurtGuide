@@ -75,7 +75,7 @@ const hourRange = (r: { min: number; max: number } | null) =>
 					「最好的一次」是凝乳＋質地最高的那批；同分取酸度較低的。菌名照紀錄原文分組，名稱寫法不同會分成兩列。早期用文字描述成品、沒有分數的批次不列入。
 				</p>
 				<div class="table-scroll">
-					<table class="meta-table species-table">
+					<table class="meta-table stack-table">
 						<thead>
 							<tr>
 								<th>菌種</th>
@@ -89,15 +89,15 @@ const hourRange = (r: { min: number; max: number } | null) =>
 							{
 								cultures.map((c) => (
 									<tr>
-										<td>{c.cultureName}</td>
-										<td>
+										<td data-label="菌種">{c.cultureName}</td>
+										<td data-label="批次（傳代）">
 											{c.batchCount}（{c.motherCount}）{c.failedCount > 0 && <span class="meta">，失敗 {c.failedCount}</span>}
 										</td>
-										<td>{hourRange(c.hours)}</td>
-										<td>
+										<td data-label="發酵時間">{hourRange(c.hours)}</td>
+										<td data-label="平均 凝乳／質地／酸度">
 											{num(c.avgSet)}／{num(c.avgTexture)}／{num(c.avgAcidity)}
 										</td>
-										<td>
+										<td data-label="最好的一次">
 											{c.best && c.bestBatchId ? (
 												<a href={`${base}batches/${c.bestBatchId}/`}>
 													{formatBatchDate(c.best.date)}：{c.best.incubationTempC ?? '—'}°C、{formatHours(c.best.incubationHours)}，
