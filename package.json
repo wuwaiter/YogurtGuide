@@ -34,7 +34,7 @@
     "page-flip": "^2.0.7"
   },
   "devDependencies": {
-    "@astrojs/sitemap": "^3.7.4",
+    "@astrojs/sitemap": "^3.7.6",
     "@capacitor/cli": "^8.6.2",
     "fflate": "^0.8.3",
     "husky": "^9.1.7",
