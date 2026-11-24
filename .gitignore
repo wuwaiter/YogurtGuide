@@ -200,3 +200,4 @@ ehthumbs.db
 
 # 主題改版前本機備份（還原用，不上版控）
 .backup/
+.wrangler/

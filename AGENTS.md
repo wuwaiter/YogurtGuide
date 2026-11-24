@@ -39,6 +39,7 @@ App 第 2 階段要讀的清單資料是建置產出的 `app-content/v1/*.json`�
 這一期是網站與 Android。Android 用 Capacitor 包網站：`npm run app:sync` 建置 App 版並同步到 `android/`，`npm run app:debug` 出 debug APK，`npm run app:bundle` 出上架用 AAB。建置需要 JDK 21（本機在 `C:\Users\wuwai\jdk-21`，執行前設 `JAVA_HOME`）。`android/local.properties` 的 `sdk.dir` 用正斜線。
 App 版建置設 `CAP_BUILD=1`，`base` 是 `/`，輸出到 `dist-app/`，站內連結改寫成 `.../index.html`。
 內容更新靠 Live Update，不必重新上架：`check:deploy` 最後跑 `npm run app:publish`，把 App 版壓成 `dist/app-bundle/<commit>.zip` 並寫 `latest.json`；App 在冷啟動、從背景回來（隔 5 分鐘以上）、首頁下拉時檢查，下載完顯示「有新內容，點這裡更新」，點了立刻生效，沒點就下次開 App 生效。規則在 `src/lib/live-update.mjs`，畫面在 `src/components/AppLiveUpdate.astro`。
+網站部署是一個 Cloudflare Worker：靜態檔（`dist/`）直接回傳，`worker/index.mjs`（實作在 `worker/handlers.mjs`）只處理 `/weather.json`（KV，排程每 3 小時抓 Open-Meteo）與 Live Update 的 `/app-bundle/<id>/?href=`（只下載有變的檔案）。Worker 入口只能匯出 handler。天氣城市清單在 `src/data/weather-cities.mjs`，不要改舊 id；城市數 × 8 要遠低於 Open-Meteo 免費額度每天 1 萬次。顯示天氣的地方要放「Weather data by Open-Meteo.com」連結。
 新增 Capacitor 外掛、改權限或圖示這類原生改動，要把 `src/config/platforms.ts` 的 `nativeBuild` 與 `android/app/build.gradle` 的 `versionCode` 一起加 1 並重新上架。
 「我的紀錄」只改 `src/lib/records/store.ts`：只用 SQLite 外掛（網站版顯示請用 App）；移除 App 或清除資料就會消失。新增 Capacitor 外掛要同時補授權頁、跑 `app:sync` 並 commit `android/` 的外掛清單，CI 會檢查。
 發酵提醒規則在 `src/lib/records/reminders.mjs`（紀錄存檔時自動排／取消）；第一次開啟的引導在 `src/components/AppOnboarding.astro`，文字在 `src/lib/onboarding.mjs`。

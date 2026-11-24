@@ -68,6 +68,9 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 	import { recordStore } from '../../lib/records/store';
 	import { fermentAdvice } from '../../lib/records/advice.mjs';
 	import { syncReminder } from '../../lib/records/notify';
+	import { loadSettings } from '../../lib/settings.mjs';
+	import { WEATHER_ATTRIBUTION, averageTemp, cityById } from '../../lib/weather.mjs';
+	import { getWeather } from '../../lib/weather-client';
 
 	type Rec = Record<string, any>;
 	interface CatalogItem {
@@ -251,6 +254,7 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 						${k?.needsTemp ? `<label class="rec-field">發酵溫度 °C<input type="number" name="incubationTempC" inputmode="decimal" step="0.5" placeholder="接續上一代可留白"/></label>` : ''}
 						<label class="rec-field">預計發酵（小時）<input type="number" name="plannedHours" inputmode="decimal" step="0.5" min="0.5"/></label>
 					</div>
+					<p class="meta" id="rec-weather"></p>
 				</fieldset>
 				<div id="rec-advice-slot"></div>
 				<p class="rec-error" role="alert"></p>
@@ -332,8 +336,32 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 			const hours = form.querySelector<HTMLInputElement>('input[name=plannedHours]')!;
 			hours.value = btn.dataset.applyHours!;
 			hours.dataset.auto = '';
+			hours.dispatchEvent(new Event('change', { bubbles: true }));
 		});
 		refreshAdvice();
+
+		// 天氣帶入室溫：設定頁選了城市才做；用預計發酵這段時間的平均氣溫，使用者改過就不再覆蓋。
+		const city = cityById(loadSettings().cityId);
+		const weatherNote = root.querySelector<HTMLElement>('#rec-weather');
+		if (city && weatherNote) {
+			getWeather().then((doc) => {
+				if (!doc) {
+					weatherNote.textContent = `拿不到 ${city.name} 的天氣，請自己填室溫。`;
+					return;
+				}
+				const fillFromWeather = () => {
+					const hoursInput = form.querySelector<HTMLInputElement>('input[name=plannedHours]')!;
+					const hours = Number(hoursInput.value) || currentAdvice().hours || 8;
+					const temp = averageTemp(doc, city.id, new Date(), hours);
+					if (temp == null) return;
+					autofill(form.querySelector<HTMLInputElement>('input[name=ambientTempC]'), temp);
+					weatherNote.innerHTML = `室溫依天氣帶入：${esc(city.name)}未來 ${hours} 小時平均 ${temp}°C（室內可能不同，可以改）。<a href="${WEATHER_ATTRIBUTION.url}" target="_blank" rel="noopener noreferrer">${WEATHER_ATTRIBUTION.text}</a>`;
+					refreshAdvice();
+				};
+				fillFromWeather();
+				form.querySelector('input[name=plannedHours]')?.addEventListener('change', fillFromWeather);
+			});
+		}
 
 		form.addEventListener('submit', async (e) => {
 			e.preventDefault();

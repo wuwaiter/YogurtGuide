@@ -1,5 +1,14 @@
 # Version History
 
+## v0.19.0 — 2026-11-24
+
+### Changes
+- Live Update 改成「只下載有變的檔案」：建置時產生 `capawesome-live-update-manifest.json`（每個檔案的 SHA-256 與大小，也放進 APK 內建版本），發佈時每個檔案照分類資料夾（powders、market、batches、brand…）放到 `dist/app-bundle/<id>/files/`。App 先用 manifest 模式下載，失敗才下載整包 zip；舊版 App 照舊只看 zip。原本每次更新約 12 MB，新增一筆批次估計只要幾百 KB。
+- 新增 Cloudflare Worker（`worker/index.mjs`、`worker/handlers.mjs`）：靜態檔照舊直接回傳；`/app-bundle/<id>/?href=` 轉成對應檔案並帶 `X-Checksum`；`/weather.json` 從 KV 回傳。
+- 天氣：Worker 每 3 小時用一次請求向 Open-Meteo 抓台灣 22 縣市（各一組）與美國前 50 大城市的每小時氣溫（3 天），存進 KV（約 27 KB），App 直接讀不走 Live Update，手機快取 1 小時。城市清單在 `src/data/weather-cities.mjs`。
+- 設定頁加「所在城市」；新增紀錄時用預計發酵時段的平均氣溫帶入室溫（可改），旁邊標示 Open-Meteo 出處。不用定位權限，選的城市不會傳出手機。
+- 授權頁加「資料來源」（Open-Meteo，CC BY 4.0），隱私權頁加「天氣」。
+
 ## v0.18.0 — 2026-11-24
 
 ### Changes

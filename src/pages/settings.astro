@@ -1,11 +1,17 @@
 ---
-// App 設定：延後提醒的時數、通知權限、重看使用說明。設定存在這支手機（src/lib/settings.mjs）。
+// App 設定：天氣城市、延後提醒的時數、通知權限、重看使用說明。設定存在這支手機（src/lib/settings.mjs）。
 // 網站版也會產生這頁，但不放連結、不給搜尋引擎收錄。
 import BaseLayout from '../layouts/BaseLayout.astro';
 import { SNOOZE_MAX_HOURS, SNOOZE_MIN_HOURS, snoozeKinds } from '../lib/settings.mjs';
+import { WEATHER_CITIES } from '../data/weather-cities.mjs';
+import { WEATHER_ATTRIBUTION } from '../lib/weather.mjs';
 
 const forApp = process.env.CAP_BUILD === '1';
 const kinds = snoozeKinds();
+const cityGroups = [
+	{ label: '台灣', cities: WEATHER_CITIES.filter((c) => c.country === 'TW') },
+	{ label: '美國', cities: WEATHER_CITIES.filter((c) => c.country === 'US') },
+];
 ---
 
 <BaseLayout title="設定" description="App 的提醒設定。" noindex>
@@ -15,6 +21,29 @@ const kinds = snoozeKinds();
 			{!forApp && <p class="rec-banner">這是 Android App 的設定，網頁版用不到。</p>}
 
 			<form id="set-form" class="set-form">
+				<h2 class="set-h2">所在城市（天氣）</h2>
+				<p class="meta">
+					新增紀錄時用這個城市的天氣預報帶入室溫（預計發酵這段時間的平均）。只存在這支手機，App 下載全部城市的天氣後在手機上挑，不會把你選的城市傳出去。
+				</p>
+				<label class="set-field">
+					<span>城市</span>
+					<select name="cityId">
+						<option value="">不用天氣（自己填室溫）</option>
+						{
+							cityGroups.map((group) => (
+								<optgroup label={group.label}>
+									{group.cities.map((c) => (
+										<option value={c.id}>{c.name}</option>
+									))}
+								</optgroup>
+							))
+						}
+					</select>
+				</label>
+				<p class="meta">
+					<a href={WEATHER_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer">{WEATHER_ATTRIBUTION.text}</a>（CC BY 4.0）
+				</p>
+
 				<h2 class="set-h2">發酵提醒</h2>
 				<p class="meta">時間到的通知上有「延後」按鈕，按了會在幾小時後再提醒一次。</p>
 				{
@@ -67,6 +96,8 @@ const kinds = snoozeKinds();
 	const permBtn = document.getElementById('set-perm-btn') as HTMLButtonElement;
 
 	const settings = loadSettings();
+	const citySelect = form.querySelector<HTMLSelectElement>('select[name=cityId]')!;
+	citySelect.value = settings.cityId ?? '';
 	for (const { kind } of snoozeKinds()) {
 		form.querySelector<HTMLInputElement>(`input[name="${kind}"]`)!.value = String(settings.snoozeHours[kind]);
 	}
@@ -74,6 +105,7 @@ const kinds = snoozeKinds();
 	form.addEventListener('submit', async (e) => {
 		e.preventDefault();
 		const next = loadSettings();
+		next.cityId = citySelect.value || null;
 		for (const { kind, defaultHours } of snoozeKinds()) {
 			const input = form.querySelector<HTMLInputElement>(`input[name="${kind}"]`)!;
 			const hours = cleanSnoozeHours(input.value) ?? defaultHours;
@@ -118,6 +150,14 @@ const kinds = snoozeKinds();
 		display: grid;
 		gap: 0.35rem;
 		margin: 0.8rem 0;
+	}
+	.set-field select {
+		max-width: 100%;
+		font: inherit;
+		padding: 0.45rem 0.6rem;
+		border: 1px solid var(--line);
+		background: var(--paper);
+		color: var(--ink);
 	}
 	.set-field input {
 		width: 8rem;

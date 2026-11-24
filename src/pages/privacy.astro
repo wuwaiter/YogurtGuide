@@ -24,6 +24,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				<h2>通知</h2>
 				<p>App 只用通知提醒你發酵時間到了。提醒由手機自己排定，不經過任何伺服器。不允許通知也能使用其他功能，之後可到手機的「設定 → 應用程式 → YogurtGuide → 通知」開關。</p>
 
+				<h2>天氣</h2>
+				<p>
+					在 App 設定選了城市，新增紀錄時會用那個城市的天氣預報帶入室溫。App 下載的是所有城市的天氣（同一個檔案），在手機上挑出你選的城市，所以你選了哪個城市不會傳出手機，也不會用到手機定位。天氣資料來自 <a href="https://open-meteo.com/">Open-Meteo</a>，由 YogurtGuide 的伺服器每 3 小時取一次。
+				</p>
+
 				<h2>Google Drive</h2>
 				<p>Google 登入是可選的，只為了把紀錄備份到你自己的雲端硬碟。權限只有 <code>drive.appdata</code>，App 讀不到雲端硬碟裡的其他檔案。</p>
 				<p>
