@@ -98,7 +98,7 @@ export async function batchesDocument() {
 		schemaVersion: 1,
 		failedSetMax: FAILED_SET_MAX,
 		items,
-		cultures: summarizeByCulture(items.filter((m) => m.set != null)),
+		cultures: summarizeByCulture(items),
 		hoursBands: hoursBands(items),
 	};
 }

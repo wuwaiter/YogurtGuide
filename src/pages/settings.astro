@@ -111,10 +111,18 @@ const cityGroups = [
 		const info = await App.getInfo();
 		el('set-app-version')!.textContent = info.version;
 		el('set-native-build')!.textContent = info.build;
+		// 有換上 Live Update 的網頁包就顯示它的 id（＝commit）；還在用 APK 內建的內容就讀 build.json。
+		const { LiveUpdate } = await import('@capawesome/capacitor-live-update');
+		const current = await LiveUpdate.getCurrentBundle().catch(() => ({ bundleId: null }));
 		const build = await fetch('/build.json', { cache: 'no-store' })
 			.then((r) => (r.ok ? r.json() : null))
 			.catch(() => null);
-		el('set-content-version')!.textContent = build?.commit ? String(build.commit).slice(0, 7) : '—';
+		const short = (id: unknown) => String(id).slice(0, 7);
+		el('set-content-version')!.textContent = current.bundleId
+			? short(current.bundleId)
+			: build?.commit
+				? `${short(build.commit)}（APK 內建）`
+				: 'APK 內建';
 	}
 	showVersion().catch(() => {});
 

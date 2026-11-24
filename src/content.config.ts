@@ -67,6 +67,8 @@ const batches = defineCollection({
 		culture: reference('cultures').optional(),
 		method: reference('methods').optional(),
 		resultSet: z.string(),
+		/** 成功（OK）或失敗（NG），由站主判斷。NG 不列入平均與最佳。 */
+		result: z.enum(['OK', 'NG']),
 		resultAcidity: z.string().optional(),
 		resultTexture: z.string().optional(),
 		resultWhey: z.string().optional(),

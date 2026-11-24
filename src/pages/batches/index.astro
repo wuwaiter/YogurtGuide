@@ -10,8 +10,8 @@ const batches = (await getCollection('batches', ({ data }) => !data.draft)).sort
 const base = import.meta.env.BASE_URL;
 
 const metrics = batches.map(({ id, data }) => batchMetrics(id, data));
-const scored = metrics.filter((m) => m.set != null);
-const cultures = summarizeByCulture(scored);
+const cultures = summarizeByCulture(metrics);
+const failedIds = new Set(metrics.filter((m) => m.failed).map((m) => m.id));
 const bands = hoursBands(metrics);
 const failed = metrics.filter((m) => m.failed);
 const num = (v: number | null) => (v == null ? '—' : v.toFixed(1).replace(/\.0$/, ''));
@@ -30,7 +30,7 @@ const hourRange = (r: { min: number; max: number } | null) =>
 			<section class="record-block" id="time-vs-result">
 				<h2 class="record-block__title">1. 發酵時間與成品<span class="en-sub">Time vs. Result</span></h2>
 				<p class="meta">
-					只看發酵溫度 40–43°C、凝乳不是失敗的批次。分數都換成 10 分制：凝乳、質地越高越好；酸度越高越酸，6 以上很酸、2 以下沒有明顯酸味。
+					只看發酵溫度 40–43°C、成功（OK）的批次。分數都換成 10 分制：凝乳、質地越高越好；酸度越高越酸，6 以上很酸、2 以下沒有明顯酸味。
 				</p>
 				<div class="table-scroll">
 					<table class="meta-table">
@@ -55,7 +55,7 @@ const hourRange = (r: { min: number; max: number } | null) =>
 				{
 					failed.length > 0 && (
 						<p class="meta">
-							失敗（凝乳 3 分以下）：
+							失敗（NG，凝乳 5 分以下或站主判定失敗）：
 							{failed.map((m, i) => (
 								<>
 									{i > 0 && '、'}
@@ -72,13 +72,14 @@ const hourRange = (r: { min: number; max: number } | null) =>
 			<section class="record-block" id="by-culture">
 				<h2 class="record-block__title">2. 各菌種整理<span class="en-sub">By Culture</span></h2>
 				<p class="meta">
-					「最好的一次」是凝乳＋質地最高的那批；同分取酸度較低的。菌名照紀錄原文分組，名稱寫法不同會分成兩列。早期用文字描述成品、沒有分數的批次不列入。
+					「最好的一次」是凝乳＋質地最高的那批；同分取酸度較低的。菌名照紀錄原文分組，名稱寫法不同會分成兩列。平均與最好的一次只算成功（OK）的批次；早期用文字描述成品、沒有分數的批次算進次數，不算進平均。
 				</p>
 				<div class="table-scroll">
 					<table class="meta-table stack-table">
 						<thead>
 							<tr>
 								<th>菌種</th>
+								<th>成功／總次數</th>
 								<th>批次（傳代）</th>
 								<th>發酵時間</th>
 								<th>平均 凝乳／質地／酸度</th>
@@ -90,8 +91,11 @@ const hourRange = (r: { min: number; max: number } | null) =>
 								cultures.map((c) => (
 									<tr>
 										<td data-label="菌種">{c.cultureName}</td>
+										<td data-label="成功／總次數">
+											{c.successCount}／{c.batchCount}
+										</td>
 										<td data-label="批次（傳代）">
-											{c.batchCount}（{c.motherCount}）{c.failedCount > 0 && <span class="meta">，失敗 {c.failedCount}</span>}
+											{c.batchCount}（{c.motherCount}）
 										</td>
 										<td data-label="發酵時間">{hourRange(c.hours)}</td>
 										<td data-label="平均 凝乳／質地／酸度">
@@ -122,7 +126,12 @@ const hourRange = (r: { min: number; max: number } | null) =>
 						batches.map(({ id, data }) => (
 							<li>
 								<a class="list-item" href={`${base}batches/${id}/`}>
-									<h3>{formatBatchDate(data.date)}</h3>
+									<h3>
+										{formatBatchDate(data.date)}{' '}
+										<span class={`result-badge ${failedIds.has(id) ? 'is-ng' : 'is-ok'}`}>
+											{failedIds.has(id) ? '失敗 NG' : '成功 OK'}
+										</span>
+									</h3>
 									<p class="meta">{formatBatchCultureLabel(data)}</p>
 								</a>
 							</li>

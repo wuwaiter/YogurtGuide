@@ -1,0 +1,104 @@
+---
+// App 專用：左上「三條線」按鈕打開的側邊選單。選單內容在 BaseLayout（#app-drawer），這裡只放開關的程式與樣式。
+---
+
+<script>
+	const drawer = document.getElementById('app-drawer');
+	const button = document.getElementById('menu-btn');
+	if (drawer && button) {
+		const setOpen = (open: boolean) => {
+			drawer.hidden = !open;
+			button.setAttribute('aria-expanded', String(open));
+			document.body.classList.toggle('drawer-open', open);
+		};
+		button.addEventListener('click', () => setOpen(drawer.hidden));
+		// 點背景、選單裡的連結（含「使用說明」）都關閉。
+		drawer.querySelectorAll('[data-close-drawer], .drawer__link').forEach((el) =>
+			el.addEventListener('click', () => setOpen(false)),
+		);
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape') setOpen(false);
+		});
+	}
+</script>
+
+<style is:global>
+	.menu-btn {
+		display: inline-flex;
+		flex-direction: column;
+		justify-content: center;
+		gap: 5px;
+		width: 2.5rem;
+		height: 2.5rem;
+		margin-left: -0.5rem;
+		padding: 0.5rem;
+		border: 0;
+		background: transparent;
+		cursor: pointer;
+	}
+	.menu-btn__bar {
+		display: block;
+		height: 2px;
+		background: var(--ink);
+	}
+	/* App 頁首：三條線＋品牌靠左。 */
+	.site-header__inner:has(.menu-btn) {
+		flex-direction: row;
+		align-items: center;
+		justify-content: flex-start;
+		gap: 0.5rem;
+		padding: 0.6rem 0;
+	}
+	.drawer {
+		position: fixed;
+		inset: 0;
+		z-index: 55;
+	}
+	.drawer[hidden] {
+		display: none;
+	}
+	.drawer__backdrop {
+		position: absolute;
+		inset: 0;
+		background: color-mix(in srgb, var(--ink) 40%, transparent);
+	}
+	.drawer__panel {
+		position: absolute;
+		top: 0;
+		bottom: 0;
+		left: 0;
+		width: min(80vw, 18rem);
+		overflow-y: auto;
+		display: flex;
+		flex-direction: column;
+		padding: calc(1rem + env(safe-area-inset-top)) 0 calc(1rem + env(safe-area-inset-bottom));
+		background: var(--paper);
+		border-right: 1px solid var(--rule);
+	}
+	.drawer__brand {
+		margin: 0 1.25rem 0.75rem;
+		font-family: var(--font-display);
+		font-size: 1.35rem;
+		font-weight: 600;
+		letter-spacing: -0.03em;
+	}
+	.drawer__link {
+		display: block;
+		padding: 0.75rem 1.25rem;
+		color: var(--ink);
+		text-decoration: none;
+		font-size: 1rem;
+	}
+	.drawer__link[aria-current='page'] {
+		box-shadow: inset 3px 0 0 var(--red);
+		font-weight: 600;
+	}
+	.drawer__rule {
+		margin: 0.5rem 1.25rem;
+		border: 0;
+		border-top: 1px solid var(--line);
+	}
+	body.drawer-open {
+		overflow: hidden;
+	}
+</style>

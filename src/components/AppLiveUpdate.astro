@@ -1,6 +1,6 @@
 ---
 // App 專用：檢查並下載新的網頁包。只在 CAP_BUILD=1 的建置被 BaseLayout 引入。
-// 什麼時候檢查：①冷啟動一次 ②從背景回到 App（至少隔 5 分鐘）③首頁下拉。
+// 什麼時候檢查：①冷啟動一次 ②從背景回到 App（至少隔 5 分鐘）③首頁（我的紀錄）下拉。
 // 下載完顯示「有新內容，點這裡更新」，點了立刻換新版；沒點的話，下次重開 App 自動換上。
 // 判斷規則在 src/lib/live-update.mjs（有測試）。
 ---
@@ -123,7 +123,8 @@
 	// 首頁下拉檢查（只在頁面最上方往下拉才算）。
 	function setupPullToCheck() {
 		const path = location.pathname;
-		if (path !== '/' && path !== '/index.html') return;
+		// App 的首頁是「我的紀錄」（/index.html 會轉到這裡）。
+		if (path !== '/records/' && path !== '/records/index.html') return;
 		let startY: number | null = null;
 		let distance = 0;
 		const reset = () => {
