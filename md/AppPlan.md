@@ -102,7 +102,8 @@
 
 - 每筆紀錄的階段：**發酵 → 冷藏**。按「開始發酵」「移入冷藏」「完成」自動記時間，不用手填。
 - ①②③：預計時間從清單建議值或上一代帶入，時間到發通知提醒去看凝固。
-- ④ Kefir：開始時自選幾小時後提醒（預設 24 小時），通知內容是「去看看凝固程度」，可一鍵延後 4 小時。
+- ④ Kefir：開始時自選幾小時後提醒（預設 24 小時），通知內容是「去看看凝固程度」，可一鍵延後（時數在設定頁改，預設 4 小時；2026-11-24）。
+- 可以同時有多筆在發酵，每筆各自提醒。之後加泡菜、酸種：在 `src/lib/records/model.mjs` 的 `KINDS` 加一行，要延後按鈕就給 `snoozeHours`。
 - Kefir 二次發酵：不記錄（2026-10-28 決定）。
 
 ### 紀錄首頁
@@ -130,7 +131,7 @@
 | 紀錄資料 | `@capacitor-community/sqlite`（nativeBuild 2 起），只在 App；網站版不能存。移除 App／清除資料都會消失，靠第 3 階段備份 |
 | 照片 | Capacitor Filesystem，存 App 私有空間 |
 | 拍照／選圖 | Capacitor Camera |
-| 發酵提醒 | Capacitor Local Notifications（需通知權限） |
+| 發酵提醒 | `@capacitor/local-notifications`（nativeBuild 3 起，2026-11-24 實作；規則在 `src/lib/records/reminders.mjs`） |
 
 新增這些原生外掛時，`nativeBuild` 與 `versionCode` 一起加 1；`/licenses/` 補上新套件。
 
@@ -169,7 +170,8 @@
   1. 這是什麼：自製優格紀錄＋菌粉、市售優格資料。
   2. 怎麼記：選發酵類型 → 開始發酵 → 時間到提醒 → 移入冷藏 → 評分。
   3. 資料在哪：紀錄只存在這支手機；要發酵提醒就允許通知（在這頁才請求通知權限）。
-- 已看過的狀態存在手機（Capacitor Preferences）。
+- 已看過的狀態存在手機（WebView 的 localStorage，2026-11-24 實作；不另加 Preferences 外掛）。頁尾「使用說明」可重看。
+- 已實作：`src/components/AppOnboarding.astro`、`src/lib/onboarding.mjs`。
 
 ## 語言
 

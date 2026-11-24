@@ -1,0 +1,186 @@
+---
+// App 專用：第一次開啟的 3 頁引導，以及發酵提醒通知的點擊處理。只在 CAP_BUILD=1 的建置被 BaseLayout 引入。
+// 引導可「略過」，之後從頁尾「使用說明」重看。內容在 src/lib/onboarding.mjs。
+import { ONBOARDING_PAGES } from '../lib/onboarding.mjs';
+---
+
+<div class="ob" id="ob" role="dialog" aria-modal="true" aria-labelledby="ob-title" hidden>
+	<div class="ob__panel">
+		{
+			ONBOARDING_PAGES.map((page, i) => (
+				<section class="ob__page" data-ob-page={i} hidden={i !== 0}>
+					<p class="ob__step">
+						{i + 1} / {ONBOARDING_PAGES.length}
+					</p>
+					<h2 class="ob__title" id={i === 0 ? 'ob-title' : undefined}>
+						{page.title}
+					</h2>
+					{page.body.map((line) => (
+						<p>{line}</p>
+					))}
+					{page.asksNotification && (
+						<p>
+							<button type="button" class="ob__btn" data-ob-notify>
+								允許通知
+							</button>
+							<span class="ob__note" data-ob-notify-state />
+						</p>
+					)}
+				</section>
+			))
+		}
+		<div class="ob__actions">
+			<button type="button" class="ob__link" data-ob-skip>略過</button>
+			<button type="button" class="ob__btn ob__btn--primary" data-ob-next>下一頁</button>
+		</div>
+	</div>
+</div>
+
+<script>
+	import { Capacitor } from '@capacitor/core';
+	import { ONBOARDING_KEY, ONBOARDING_VERSION, ONBOARDING_PAGES, shouldShowOnboarding } from '../lib/onboarding.mjs';
+	import { notifyPermission, requestNotifyPermission, setupNotificationHandlers } from '../lib/records/notify';
+
+	const dialog = document.getElementById('ob') as HTMLDivElement;
+	const pages = [...dialog.querySelectorAll<HTMLElement>('[data-ob-page]')];
+	const next = dialog.querySelector<HTMLButtonElement>('[data-ob-next]')!;
+	const notifyBtn = dialog.querySelector<HTMLButtonElement>('[data-ob-notify]');
+	const notifyState = dialog.querySelector<HTMLElement>('[data-ob-notify-state]');
+	let index = 0;
+
+	const STATE_TEXT: Record<string, string> = {
+		granted: '已允許，時間到會提醒你。',
+		denied: '沒有允許。之後可到手機的「設定 → 應用程式 → YogurtGuide → 通知」打開。',
+	};
+
+	async function showNotifyState() {
+		if (!notifyBtn || !notifyState) return;
+		const state = await notifyPermission().catch(() => 'unavailable');
+		notifyBtn.hidden = state === 'granted' || state === 'unavailable';
+		notifyState.textContent = STATE_TEXT[state] ?? '';
+	}
+
+	function go(i: number) {
+		index = i;
+		pages.forEach((p, n) => (p.hidden = n !== i));
+		next.textContent = i === ONBOARDING_PAGES.length - 1 ? '開始使用' : '下一頁';
+		if (ONBOARDING_PAGES[i].asksNotification) showNotifyState();
+	}
+
+	function open() {
+		go(0);
+		dialog.hidden = false;
+		document.body.classList.add('ob-open');
+	}
+
+	function close() {
+		dialog.hidden = true;
+		document.body.classList.remove('ob-open');
+		try {
+			localStorage.setItem(ONBOARDING_KEY, String(ONBOARDING_VERSION));
+		} catch {
+			// 存不了就下次再顯示，不影響使用。
+		}
+	}
+
+	next.addEventListener('click', () => (index < pages.length - 1 ? go(index + 1) : close()));
+	dialog.querySelector('[data-ob-skip]')!.addEventListener('click', close);
+	notifyBtn?.addEventListener('click', async () => {
+		await requestNotifyPermission().catch(() => 'denied');
+		await showNotifyState();
+	});
+	document.querySelectorAll('[data-open-onboarding]').forEach((el) =>
+		el.addEventListener('click', (e) => {
+			e.preventDefault();
+			open();
+		}),
+	);
+
+	if (Capacitor.isNativePlatform()) {
+		let seen: string | null = null;
+		try {
+			seen = localStorage.getItem(ONBOARDING_KEY);
+		} catch {}
+		if (shouldShowOnboarding(seen)) open();
+
+		// 點發酵提醒：打開那筆紀錄。
+		setupNotificationHandlers((recordId) => {
+			location.href = `/records/index.html#r/${encodeURIComponent(recordId)}`;
+		}).catch(() => {});
+	}
+</script>
+
+<style>
+	.ob {
+		position: fixed;
+		inset: 0;
+		z-index: 60;
+		display: grid;
+		place-items: center;
+		padding: 1rem;
+		background: color-mix(in srgb, var(--ink) 45%, transparent);
+	}
+	.ob[hidden] {
+		display: none;
+	}
+	.ob__panel {
+		width: min(100%, 26rem);
+		background: var(--paper);
+		color: var(--ink);
+		border: 1px solid var(--ink);
+		padding: 1.25rem 1.25rem 1rem;
+		max-height: calc(100vh - 2rem);
+		overflow: auto;
+	}
+	.ob__page[hidden] {
+		display: none;
+	}
+	.ob__step {
+		margin: 0;
+		color: var(--ink-muted);
+		font-size: 0.85rem;
+	}
+	.ob__title {
+		margin: 0.3rem 0 0.8rem;
+		font-size: 1.3rem;
+	}
+	.ob__note {
+		display: block;
+		margin-top: 0.4rem;
+		color: var(--ink-muted);
+		font-size: 0.9rem;
+	}
+	.ob__actions {
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+		margin-top: 1.25rem;
+	}
+	.ob__btn {
+		border: 1px solid var(--ink);
+		background: transparent;
+		color: var(--ink);
+		padding: 0.55rem 0.9rem;
+		font: inherit;
+		cursor: pointer;
+	}
+	.ob__btn[hidden] {
+		display: none;
+	}
+	.ob__btn--primary {
+		background: var(--ink);
+		color: var(--paper);
+	}
+	.ob__link {
+		border: 0;
+		background: none;
+		color: var(--ink-muted);
+		font: inherit;
+		text-decoration: underline;
+		cursor: pointer;
+		padding: 0.55rem 0;
+	}
+	:global(body.ob-open) {
+		overflow: hidden;
+	}
+</style>

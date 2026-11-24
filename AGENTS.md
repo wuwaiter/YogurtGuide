@@ -41,5 +41,6 @@ App 版建置設 `CAP_BUILD=1`，`base` 是 `/`，輸出到 `dist-app/`，站內
 內容更新靠 Live Update，不必重新上架：`check:deploy` 最後跑 `npm run app:publish`，把 App 版壓成 `dist/app-bundle/<commit>.zip` 並寫 `latest.json`；App 在冷啟動、從背景回來（隔 5 分鐘以上）、首頁下拉時檢查，下載完顯示「有新內容，點這裡更新」，點了立刻生效，沒點就下次開 App 生效。規則在 `src/lib/live-update.mjs`，畫面在 `src/components/AppLiveUpdate.astro`。
 新增 Capacitor 外掛、改權限或圖示這類原生改動，要把 `src/config/platforms.ts` 的 `nativeBuild` 與 `android/app/build.gradle` 的 `versionCode` 一起加 1 並重新上架。
 「我的紀錄」只改 `src/lib/records/store.ts`：只用 SQLite 外掛（網站版顯示請用 App）；移除 App 或清除資料就會消失。新增 Capacitor 外掛要同時補授權頁、跑 `app:sync` 並 commit `android/` 的外掛清單，CI 會檢查。
+發酵提醒規則在 `src/lib/records/reminders.mjs`（紀錄存檔時自動排／取消）；第一次開啟的引導在 `src/components/AppOnboarding.astro`，文字在 `src/lib/onboarding.mjs`。
 keystore（`*.jks`、`*.keystore`）與 `android/key.properties` 不進版控。iOS 不要執行 `cap add ios`。
 

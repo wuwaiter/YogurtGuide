@@ -1,6 +1,7 @@
 ---
 import SocialIcons from '../components/SocialIcons.astro';
 import AppLiveUpdate from '../components/AppLiveUpdate.astro';
+import AppOnboarding from '../components/AppOnboarding.astro';
 
 interface Props {
 	title?: string;
@@ -100,12 +101,21 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 					<p class="site-footer__brand">YogurtGuide — Yogurt Process Notes</p>
 					<p class="site-footer__note">
 						<a href={`${base}privacy/`}>隱私權</a> · <a href={`${base}licenses/`}>開放原始碼授權</a>
+						{forApp && (
+							<>
+								{' · '}
+								<a href={`${base}settings/`}>設定</a>
+								{' · '}
+								<a href="#" data-open-onboarding>使用說明</a>
+							</>
+						)}
 					</p>
 				</div>
 				<SocialIcons variant="qr" class="site-footer__social" />
 			</div>
 		</footer>
 		{forApp && <AppLiveUpdate />}
+		{forApp && <AppOnboarding />}
 	</body>
 </html>
 

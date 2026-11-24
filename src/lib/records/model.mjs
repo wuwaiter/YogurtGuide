@@ -3,12 +3,16 @@
 
 export const SCHEMA_VERSION = 1;
 
-/** 發酵類型。passage 一定有上一代；mother、kefir 第一次可以沒有。 */
+/**
+ * 發酵類型。passage 一定有上一代；mother、kefir 第一次可以沒有。
+ * snoozeHours：通知上有「延後 N 小時」按鈕，這是預設 N（使用者可在設定頁改）；沒有這欄就沒有延後按鈕。
+ * 之後加泡菜、酸種，在這裡多一行即可，提醒與設定頁會自動跟上。
+ */
 export const KINDS = {
 	starter: { label: '菌粉／市售優格', hint: '用新開的菌粉或市售優格接種', defaultHours: 8, needsTemp: true },
 	passage: { label: '菌粉／市售優格的傳代', hint: '用上面那種做出來的優格再接種', defaultHours: 8, needsTemp: true },
 	mother: { label: '可傳代母菌', hint: '例如 Skyr 這類可長期傳代的菌', defaultHours: 12, needsTemp: true },
-	kefir: { label: 'Kefir', hint: '菌粒發酵，放室溫', defaultHours: 24, needsTemp: false },
+	kefir: { label: 'Kefir', hint: '菌粒發酵，放室溫', defaultHours: 24, needsTemp: false, snoozeHours: 4 },
 };
 
 export const PHASES = {

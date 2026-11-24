@@ -154,7 +154,7 @@ p {
 	color: var(--hero-ink);
 	background: var(--accent);
 	border-bottom: 1px solid var(--rule);
-	min-height: min(46vh, 24rem);
+	min-height: min(34vh, 18rem);
 	display: grid;
 	align-items: end;
 }
@@ -164,7 +164,18 @@ p {
 	z-index: 1;
 	width: min(100% - 2 * var(--space), var(--max));
 	margin: 0 auto;
-	padding: clamp(4rem, 12vh, 7rem) 0 clamp(2.5rem, 6vh, 4rem);
+	padding: clamp(1.75rem, 6vh, 4rem) 0 clamp(1.75rem, 5vh, 3rem);
+}
+
+/* 手機（含 Android App）：Hero 不撐高度，上方只留一點空間。 */
+@media (max-width: 40rem) {
+	.hero {
+		min-height: 0;
+	}
+
+	.hero__inner {
+		padding-top: 1.25rem;
+	}
 }
 
 .hero__wordmark {
@@ -368,23 +379,82 @@ main > .section:first-child > .wrap > .page-title:first-child .en-sub {
 }
 
 .species-table {
-	min-width: 52rem;
+	table-layout: fixed;
 }
 
-.species-table th:first-child {
-	width: 11rem;
+/* 欄寬比例：說明通常最長，溫度最短。 */
+.species-table th:nth-child(1) {
+	width: 16%;
 }
 
 .species-table th:nth-child(2) {
-	width: 15rem;
+	width: 22%;
 }
 
 .species-table th:nth-child(3) {
-	width: 6rem;
+	width: 11%;
 }
 
 .species-table th:nth-child(4) {
-	width: 10rem;
+	width: 23%;
+}
+
+.species-table th:nth-child(5) {
+	width: 28%;
+}
+
+.species-table td {
+	overflow-wrap: anywhere;
+}
+
+/* 窄螢幕：每一列改成一張卡片，欄名放在每格前面，不用左右捲。 */
+@media (max-width: 48rem) {
+	.species-table,
+	.species-table tbody,
+	.species-table tr,
+	.species-table td {
+		display: block;
+		width: 100%;
+	}
+
+	.species-table thead {
+		display: none;
+	}
+
+	.species-table tr {
+		padding: 0.75rem 0;
+		border-bottom: 1px solid var(--line);
+	}
+
+	.species-table td {
+		position: relative;
+		padding: 0.2rem 0 0.2rem 5.25rem;
+		border-bottom: 0;
+	}
+
+	.species-table td:empty {
+		display: none;
+	}
+
+	.species-table td:first-child {
+		font-weight: 600;
+	}
+
+	.species-table td::before {
+		position: absolute;
+		left: 0;
+		top: 0.3rem;
+		width: 4.75rem;
+		color: var(--ink-muted);
+		font-weight: 400;
+		font-size: 0.85rem;
+	}
+
+	.species-table td:nth-child(1)::before { content: '名稱'; }
+	.species-table td:nth-child(2)::before { content: '學名'; }
+	.species-table td:nth-child(3)::before { content: '適合溫度'; }
+	.species-table td:nth-child(4)::before { content: '特色'; }
+	.species-table td:nth-child(5)::before { content: '說明'; }
 }
 
 .meta-table th,
