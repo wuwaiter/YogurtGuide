@@ -67,6 +67,7 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 	} from '../../lib/records/model.mjs';
 	import { recordStore } from '../../lib/records/store';
 	import { fermentAdvice } from '../../lib/records/advice.mjs';
+	import { syncReminder } from '../../lib/records/notify';
 
 	type Rec = Record<string, any>;
 	interface CatalogItem {
@@ -150,6 +151,8 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 			showError(err);
 			throw err;
 		}
+		// 發酵提醒跟著階段走：開始發酵就排、改時間就改、移入冷藏就取消。提醒失敗不影響存檔。
+		syncReminder(r, { ask: r.phase === 'fermenting' }).catch(() => {});
 		await load();
 	}
 
@@ -189,7 +192,7 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 					? `<p><label class="rec-check"><input type="checkbox" id="rec-show-hidden" ${showHidden ? 'checked' : ''}/> 顯示已隱藏的 ${hiddenCount} 筆</label></p>`
 					: ''
 			}
-			<p class="meta">紀錄只存在這支手機，不會上傳。</p>`;
+			<p class="meta">紀錄只存在這支手機，不會上傳。可以同時有很多筆在發酵，每筆各自提醒。<a href="${import.meta.env.BASE_URL}settings/index.html">提醒設定</a></p>`;
 		root.querySelector('#rec-show-hidden')?.addEventListener('change', (e) => {
 			showHidden = (e.target as HTMLInputElement).checked;
 			renderHome();
@@ -499,9 +502,14 @@ const siteJson = JSON.stringify(await batchesDocument()).replace(/</g, '\\u003c'
 		if (!location.hash || location.hash === '#') renderHome();
 	}, 60_000);
 
-	route().catch((err) => {
-		root.innerHTML = `<p class="rec-error">打不開本機資料：${esc(err?.message ?? err)}</p>`;
-	});
+	route()
+		.then(() => {
+			// 補排還在發酵中的提醒（例如這版之前就開始發酵的紀錄）。
+			for (const r of records) if (r.phase === 'fermenting') syncReminder(r).catch(() => {});
+		})
+		.catch((err) => {
+			root.innerHTML = `<p class="rec-error">打不開本機資料：${esc(err?.message ?? err)}</p>`;
+		});
 </script>
 
 <style is:global>

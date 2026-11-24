@@ -1,0 +1,154 @@
+---
+// App 設定：延後提醒的時數、通知權限、重看使用說明。設定存在這支手機（src/lib/settings.mjs）。
+// 網站版也會產生這頁，但不放連結、不給搜尋引擎收錄。
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { SNOOZE_MAX_HOURS, SNOOZE_MIN_HOURS, snoozeKinds } from '../lib/settings.mjs';
+
+const forApp = process.env.CAP_BUILD === '1';
+const kinds = snoozeKinds();
+---
+
+<BaseLayout title="設定" description="App 的提醒設定。" noindex>
+	<section class="section">
+		<div class="wrap set">
+			<h1 class="page-title">設定<span class="en-sub">Settings</span></h1>
+			{!forApp && <p class="rec-banner">這是 Android App 的設定，網頁版用不到。</p>}
+
+			<form id="set-form" class="set-form">
+				<h2 class="set-h2">發酵提醒</h2>
+				<p class="meta">時間到的通知上有「延後」按鈕，按了會在幾小時後再提醒一次。</p>
+				{
+					kinds.map(({ kind, label, defaultHours }) => (
+						<label class="set-field">
+							<span>{label}：延後幾小時（預設 {defaultHours}）</span>
+							<input
+								type="number"
+								name={kind}
+								inputmode="decimal"
+								min={SNOOZE_MIN_HOURS}
+								max={SNOOZE_MAX_HOURS}
+								step="0.5"
+								required
+							/>
+						</label>
+					))
+				}
+				<p class="set-actions">
+					<button type="submit" class="set-btn set-btn--primary">儲存</button>
+					<span class="meta" id="set-saved" role="status"></span>
+				</p>
+			</form>
+
+			<h2 class="set-h2">通知權限</h2>
+			<p><span id="set-perm">—</span></p>
+			<p><button type="button" class="set-btn" id="set-perm-btn" hidden>允許通知</button></p>
+
+			{
+				forApp && (
+					<>
+						<h2 class="set-h2">使用說明</h2>
+						<p>
+							<a href="#" data-open-onboarding>重看第一次開啟的說明</a>
+						</p>
+					</>
+				)
+			}
+		</div>
+	</section>
+</BaseLayout>
+
+<script>
+	import { cleanSnoozeHours, loadSettings, saveSettings, snoozeKinds } from '../lib/settings.mjs';
+	import { notifyPermission, registerReminderActions, requestNotifyPermission } from '../lib/records/notify';
+
+	const form = document.getElementById('set-form') as HTMLFormElement;
+	const saved = document.getElementById('set-saved')!;
+	const perm = document.getElementById('set-perm')!;
+	const permBtn = document.getElementById('set-perm-btn') as HTMLButtonElement;
+
+	const settings = loadSettings();
+	for (const { kind } of snoozeKinds()) {
+		form.querySelector<HTMLInputElement>(`input[name="${kind}"]`)!.value = String(settings.snoozeHours[kind]);
+	}
+
+	form.addEventListener('submit', async (e) => {
+		e.preventDefault();
+		const next = loadSettings();
+		for (const { kind, defaultHours } of snoozeKinds()) {
+			const input = form.querySelector<HTMLInputElement>(`input[name="${kind}"]`)!;
+			const hours = cleanSnoozeHours(input.value) ?? defaultHours;
+			next.snoozeHours[kind] = hours;
+			input.value = String(hours);
+		}
+		try {
+			saveSettings(next);
+			await registerReminderActions().catch(() => {});
+			saved.textContent = '已儲存';
+		} catch {
+			saved.textContent = '沒有存到，請再試一次';
+		}
+	});
+
+	const PERM_TEXT: Record<string, string> = {
+		granted: '已允許，發酵時間到會提醒你。',
+		denied: '沒有允許。請到手機的「設定 → 應用程式 → YogurtGuide → 通知」打開。',
+		unavailable: '網頁版沒有通知。',
+	};
+	async function showPerm() {
+		const state = await notifyPermission().catch(() => 'unavailable');
+		perm.textContent = PERM_TEXT[state] ?? '還沒決定。';
+		permBtn.hidden = state in PERM_TEXT;
+	}
+	permBtn.addEventListener('click', async () => {
+		await requestNotifyPermission().catch(() => {});
+		await showPerm();
+	});
+	showPerm();
+</script>
+
+<style>
+	.set {
+		max-width: 40rem;
+	}
+	.set-h2 {
+		font-size: 1.2rem;
+		margin: 1.75rem 0 0.6rem;
+	}
+	.set-field {
+		display: grid;
+		gap: 0.35rem;
+		margin: 0.8rem 0;
+	}
+	.set-field input {
+		width: 8rem;
+		font: inherit;
+		padding: 0.45rem 0.6rem;
+		border: 1px solid var(--line);
+		background: var(--paper);
+		color: var(--ink);
+	}
+	.set-btn {
+		border: 1px solid var(--ink);
+		background: transparent;
+		color: var(--ink);
+		padding: 0.55rem 0.9rem;
+		font: inherit;
+		cursor: pointer;
+	}
+	.set-btn--primary {
+		background: var(--ink);
+		color: var(--paper);
+	}
+	.set-btn[hidden] {
+		display: none;
+	}
+	.set-actions {
+		display: flex;
+		gap: 0.75rem;
+		align-items: center;
+	}
+	.rec-banner {
+		border: 1px solid var(--red);
+		padding: 0.6rem 0.8rem;
+	}
+</style>

@@ -15,5 +15,5 @@ export default defineConfig({
 	// App 版另外輸出到 dist-app，不會蓋掉網站的 dist。
 	outDir: forApp ? './dist-app' : './dist',
 	// 「我的紀錄」只給 App 用，不進 sitemap（頁面另有 noindex）。
-	integrations: onCloudflare && !forApp ? [sitemap({ filter: (page) => !page.includes('/records/') })] : [],
+	integrations: onCloudflare && !forApp ? [sitemap({ filter: (page) => !page.includes('/records/') && !page.includes('/settings/') })] : [],
 });
