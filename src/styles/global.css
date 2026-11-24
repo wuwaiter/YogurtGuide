@@ -407,54 +407,46 @@ main > .section:first-child > .wrap > .page-title:first-child .en-sub {
 	overflow-wrap: anywhere;
 }
 
-/* 窄螢幕：每一列改成一張卡片，欄名放在每格前面，不用左右捲。 */
+/* 窄螢幕：.stack-table 每一列改成一張卡片，欄名（td 的 data-label）放在每格上面，不用左右捲。 */
 @media (max-width: 48rem) {
-	.species-table,
-	.species-table tbody,
-	.species-table tr,
-	.species-table td {
+	.meta-table.stack-table,
+	.stack-table tbody,
+	.stack-table tr,
+	.meta-table.stack-table td {
 		display: block;
 		width: 100%;
 	}
 
-	.species-table thead {
+	.stack-table thead {
 		display: none;
 	}
 
-	.species-table tr {
-		padding: 0.75rem 0;
+	.stack-table tr {
+		padding: 0.6rem 0;
 		border-bottom: 1px solid var(--line);
 	}
 
-	.species-table td {
-		position: relative;
-		padding: 0.2rem 0 0.2rem 5.25rem;
+	.meta-table.stack-table td {
+		padding: 0.25rem 0;
 		border-bottom: 0;
 	}
 
-	.species-table td:empty {
+	.meta-table.stack-table td:empty {
 		display: none;
 	}
 
-	.species-table td:first-child {
+	.stack-table td:first-child {
 		font-weight: 600;
 	}
 
-	.species-table td::before {
-		position: absolute;
-		left: 0;
-		top: 0.3rem;
-		width: 4.75rem;
+	.stack-table td[data-label]::before {
+		content: attr(data-label);
+		display: block;
 		color: var(--ink-muted);
+		font-size: 0.8rem;
 		font-weight: 400;
-		font-size: 0.85rem;
+		line-height: 1.4;
 	}
-
-	.species-table td:nth-child(1)::before { content: '名稱'; }
-	.species-table td:nth-child(2)::before { content: '學名'; }
-	.species-table td:nth-child(3)::before { content: '適合溫度'; }
-	.species-table td:nth-child(4)::before { content: '特色'; }
-	.species-table td:nth-child(5)::before { content: '說明'; }
 }
 
 .meta-table th,

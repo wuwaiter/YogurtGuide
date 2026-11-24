@@ -79,6 +79,17 @@ const cityGroups = [
 						<p>
 							<a href="#" data-open-onboarding>重看第一次開啟的說明</a>
 						</p>
+
+						<h2 class="set-h2">App 版本</h2>
+						<dl class="set-version">
+							<dt>App 版本</dt>
+							<dd id="set-app-version">—</dd>
+							<dt>原生版本（nativeBuild）</dt>
+							<dd id="set-native-build">—</dd>
+							<dt>內容版本</dt>
+							<dd id="set-content-version">—</dd>
+						</dl>
+						<p class="meta">回報問題時請附上這三行。</p>
 					</>
 				)
 			}
@@ -89,6 +100,23 @@ const cityGroups = [
 <script>
 	import { cleanSnoozeHours, loadSettings, saveSettings, snoozeKinds } from '../lib/settings.mjs';
 	import { notifyPermission, registerReminderActions, requestNotifyPermission } from '../lib/records/notify';
+
+	// App 版本：原生層（App.getInfo）與目前用的內容版本（Live Update 網頁包的 commit）。只在 App 顯示。
+	async function showVersion() {
+		const el = (id: string) => document.getElementById(id);
+		if (!el('set-app-version')) return;
+		const { Capacitor } = await import('@capacitor/core');
+		if (!Capacitor.isNativePlatform()) return;
+		const { App } = await import('@capacitor/app');
+		const info = await App.getInfo();
+		el('set-app-version')!.textContent = info.version;
+		el('set-native-build')!.textContent = info.build;
+		const build = await fetch('/build.json', { cache: 'no-store' })
+			.then((r) => (r.ok ? r.json() : null))
+			.catch(() => null);
+		el('set-content-version')!.textContent = build?.commit ? String(build.commit).slice(0, 7) : '—';
+	}
+	showVersion().catch(() => {});
 
 	const form = document.getElementById('set-form') as HTMLFormElement;
 	const saved = document.getElementById('set-saved')!;
@@ -186,6 +214,19 @@ const cityGroups = [
 		display: flex;
 		gap: 0.75rem;
 		align-items: center;
+	}
+	.set-version {
+		display: grid;
+		grid-template-columns: max-content 1fr;
+		gap: 0.35rem 1rem;
+		margin: 0.5rem 0;
+	}
+	.set-version dt {
+		color: var(--ink-muted);
+	}
+	.set-version dd {
+		margin: 0;
+		font-family: var(--font-mono);
 	}
 	.rec-banner {
 		border: 1px solid var(--red);

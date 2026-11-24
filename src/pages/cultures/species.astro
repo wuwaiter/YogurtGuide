@@ -239,7 +239,7 @@ const speciesRows: SpeciesRow[] = [
 					Codex CXS 243-2003 將標準優格定義為下列兩種菌的共生培養，另列「替代菌種優格」為嗜熱鏈球菌搭配其他 <em>Lactobacillus</em> 物種。其他乳酸菌或雙歧桿菌常作附加菌；產品能否稱為優格，仍需依菌種組成與販售地法規判斷。
 				</p>
 					<div class="table-scroll">
-						<table class="meta-table species-table">
+						<table class="meta-table species-table stack-table">
 							<thead>
 								<tr>
 									<th>名稱</th>
@@ -253,8 +253,8 @@ const speciesRows: SpeciesRow[] = [
 								{
 									coreRows.map((row) => (
 										<tr>
-											<td>{row.name}</td>
-											<td>
+											<td data-label="名稱">{row.name}</td>
+											<td data-label="學名">
 												<Fragment set:html={row.latin} />
 												{row.former && (
 													<>
@@ -265,9 +265,9 @@ const speciesRows: SpeciesRow[] = [
 													</>
 												)}
 											</td>
-											<td>{row.temp ?? ''}</td>
-											<td>{row.trait ?? ''}</td>
-											<td>{row.note ?? ''}</td>
+											<td data-label="適合溫度">{row.temp ?? ''}</td>
+											<td data-label="特色">{row.trait ?? ''}</td>
+											<td data-label="說明">{row.note ?? ''}</td>
 										</tr>
 									))
 								}
@@ -279,7 +279,7 @@ const speciesRows: SpeciesRow[] = [
 			<section class="record-block" id="species-list">
 				<h2 class="record-block__title">2. 菌種清單<span class="en-sub">Species</span></h2>
 					<div class="table-scroll">
-						<table class="meta-table species-table">
+						<table class="meta-table species-table stack-table">
 							<thead>
 								<tr>
 									<th>名稱</th>
@@ -293,8 +293,8 @@ const speciesRows: SpeciesRow[] = [
 								{
 									speciesRows.map((row) => (
 										<tr>
-											<td>{row.name}</td>
-											<td>
+											<td data-label="名稱">{row.name}</td>
+											<td data-label="學名">
 												<Fragment set:html={row.latin} />
 												{row.former && (
 													<>
@@ -305,9 +305,9 @@ const speciesRows: SpeciesRow[] = [
 													</>
 												)}
 											</td>
-											<td>{row.temp ?? ''}</td>
-											<td>{row.trait ?? ''}</td>
-											<td>{row.note ?? ''}</td>
+											<td data-label="適合溫度">{row.temp ?? ''}</td>
+											<td data-label="特色">{row.trait ?? ''}</td>
+											<td data-label="說明">{row.note ?? ''}</td>
 										</tr>
 									))
 								}
@@ -330,7 +330,7 @@ const speciesRows: SpeciesRow[] = [
 					以下是目前公開資料可核實、曾用於優格或發酵乳的代表菌株，不是完整市售清單。編號可能是菌種保藏編號、公司研發代碼或商標名；同物種不同菌株不能視為效果相同。「說明」列出已知使用該編號的產品。配方會改，以包裝為準。
 				</p>
 					<div class="table-scroll">
-						<table class="meta-table species-table">
+						<table class="meta-table species-table stack-table">
 							<thead>
 								<tr>
 									<th>名稱</th>
@@ -344,8 +344,8 @@ const speciesRows: SpeciesRow[] = [
 								{
 									numberedStrains.map((strain) => (
 										<tr>
-											<td>{strain.designation}</td>
-											<td>
+											<td data-label="名稱">{strain.designation}</td>
+											<td data-label="學名">
 												<em>{strain.scientificName}</em>
 												{strain.formerName && (
 													<>
@@ -354,8 +354,8 @@ const speciesRows: SpeciesRow[] = [
 													</>
 												)}
 											</td>
-											<td>{strain.temp ?? ''}</td>
-											<td>
+											<td data-label="適合溫度">{strain.temp ?? ''}</td>
+											<td data-label="特色">
 												{strain.trait && (
 													<>
 														{strain.trait}
@@ -370,7 +370,7 @@ const speciesRows: SpeciesRow[] = [
 													</>
 												)}
 											</td>
-											<td>
+											<td data-label="說明">
 												{strain.dairyUse && (
 													<>
 														{strain.dairyUse}
