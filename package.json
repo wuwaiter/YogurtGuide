@@ -30,7 +30,7 @@
     "@capacitor/core": "^8.5.3",
     "@capacitor/local-notifications": "^8.3.1",
     "@capawesome/capacitor-live-update": "^8.7.1",
-    "astro": "^7.1.4",
+    "astro": "^7.4.13",
     "page-flip": "^2.0.7"
   },
   "devDependencies": {
