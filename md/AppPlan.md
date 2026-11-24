@@ -20,7 +20,7 @@
 
 - Capacitor 8，App ID `com.wuwaiter.yogurtguide`，`android/` 專案。
 - App 版建置：`CAP_BUILD=1`、`base` 為 `/`、輸出 `dist-app/`，站內連結改寫成 `.../index.html`（`scripts/build-app.mjs`）。
-- Live Update（`@capawesome/capacitor-live-update`，自架）：`check:deploy` 產生 `dist/app-bundle/<commit>.zip` 與 `latest.json`；App 啟動時比對 `/build.json`，背景下載，下次開啟生效；10 秒內沒呼叫 `ready()` 自動退回。
+- Live Update（`@capawesome/capacitor-live-update`，自架）：`check:deploy` 產生 `dist/app-bundle/<commit>.zip` 與 `latest.json`；App 冷啟動、從背景回來（隔 5 分鐘以上）、首頁下拉時比對 `/build.json`，背景下載後顯示「有新內容，點這裡更新」，點了立刻換新版，沒點就下次開啟生效；10 秒內沒呼叫 `ready()` 自動退回。
 - `nativeBuild`（`src/config/platforms.ts`）擋住需要新原生層的網頁包。
 - Cloudflare 漏建置檢查（`deploy.yml` 的 `verify-cloudflare`，比對 `/build.json` 的 commit）。
 - 開放原始碼授權頁 `/licenses/`、隱私權頁 `/privacy/`。
@@ -41,7 +41,7 @@
 
 ### 文字：跟著 Live Update 網頁包
 
-- 頁面文字已在網頁包裡，`check:deploy` 發布後，App 下次開啟生效。
+- 頁面文字已在網頁包裡，`check:deploy` 發布後，App 下載後點提示即生效，沒點就下次開啟生效。
 
 ### 照片：不放進網頁包，改從網站讀（2026-10-28 決定，方案 B）
 

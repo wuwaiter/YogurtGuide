@@ -38,7 +38,7 @@ App 第 2 階段要讀的清單資料是建置產出的 `app-content/v1/*.json`�
 
 這一期是網站與 Android。Android 用 Capacitor 包網站：`npm run app:sync` 建置 App 版並同步到 `android/`，`npm run app:debug` 出 debug APK，`npm run app:bundle` 出上架用 AAB。建置需要 JDK 21（本機在 `C:\Users\wuwai\jdk-21`，執行前設 `JAVA_HOME`）。`android/local.properties` 的 `sdk.dir` 用正斜線。
 App 版建置設 `CAP_BUILD=1`，`base` 是 `/`，輸出到 `dist-app/`，站內連結改寫成 `.../index.html`。
-內容更新靠 Live Update，不必重新上架：`check:deploy` 最後跑 `npm run app:publish`，把 App 版壓成 `dist/app-bundle/<commit>.zip` 並寫 `latest.json`；App 啟動時比對，有新版就下載，下次開 App 生效。
+內容更新靠 Live Update，不必重新上架：`check:deploy` 最後跑 `npm run app:publish`，把 App 版壓成 `dist/app-bundle/<commit>.zip` 並寫 `latest.json`；App 在冷啟動、從背景回來（隔 5 分鐘以上）、首頁下拉時檢查，下載完顯示「有新內容，點這裡更新」，點了立刻生效，沒點就下次開 App 生效。規則在 `src/lib/live-update.mjs`，畫面在 `src/components/AppLiveUpdate.astro`。
 新增 Capacitor 外掛、改權限或圖示這類原生改動，要把 `src/config/platforms.ts` 的 `nativeBuild` 與 `android/app/build.gradle` 的 `versionCode` 一起加 1 並重新上架。
 「我的紀錄」只改 `src/lib/records/store.ts`：只用 SQLite 外掛（網站版顯示請用 App）；移除 App 或清除資料就會消失。新增 Capacitor 外掛要同時補授權頁、跑 `app:sync` 並 commit `android/` 的外掛清單，CI 會檢查。
 keystore（`*.jks`、`*.keystore`）與 `android/key.properties` 不進版控。iOS 不要執行 `cap add ios`。
