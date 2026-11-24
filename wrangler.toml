@@ -1,5 +1,7 @@
 name = "yogurtguide"
 compatibility_date = "2026-09-26"
+# 靜態檔有對應的就直接回傳；/weather.json 與 Live Update 的 ?href= 下載才進 worker/index.mjs。
+main = "worker/index.mjs"
 
 # 正式網址。安全標頭在 public/_headers，建置後會進 dist，由 Workers 套用。
 [[routes]]
@@ -8,6 +10,15 @@ custom_domain = true
 
 [assets]
 directory = "./dist"
+binding = "ASSETS"
+
+# 每 3 小時（UTC 0、3、6…點）抓一次 Open-Meteo，寫進 KV。
+[triggers]
+crons = ["0 */3 * * *"]
+
+# 存 weather.json。沒寫 id：wrangler 部署時自動建立並綁定（Workers Builds 預設開啟自動建立）。
+[[kv_namespaces]]
+binding = "WEATHER"
 
 # 非 main 分支（PR）由 Cloudflare 用 `npx wrangler preview` 建預覽網址，需要這個區塊（可以空的）。
 [previews]

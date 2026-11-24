@@ -21,6 +21,8 @@
 - Capacitor 8，App ID `com.wuwaiter.yogurtguide`，`android/` 專案。
 - App 版建置：`CAP_BUILD=1`、`base` 為 `/`、輸出 `dist-app/`，站內連結改寫成 `.../index.html`（`scripts/build-app.mjs`）。
 - Live Update（`@capawesome/capacitor-live-update`，自架）：`check:deploy` 產生 `dist/app-bundle/<commit>.zip` 與 `latest.json`；App 冷啟動、從背景回來（隔 5 分鐘以上）、首頁下拉時比對 `/build.json`，背景下載後顯示「有新內容，點這裡更新」，點了立刻換新版，沒點就下次開啟生效；10 秒內沒呼叫 `ready()` 自動退回。
+- 2026-11-24 起改成只下載有變的檔案（manifest 模式，經 `worker/handlers.mjs` 的 `?href=`），失敗才下載整包 zip。
+- 天氣（2026-11-24）：Worker 每 3 小時向 Open-Meteo 抓台灣 22 縣市與美國前 50 大城市，App 讀 `/weather.json`，依設定頁的城市帶入室溫。
 - `nativeBuild`（`src/config/platforms.ts`）擋住需要新原生層的網頁包。
 - Cloudflare 漏建置檢查（`deploy.yml` 的 `verify-cloudflare`，比對 `/build.json` 的 commit）。
 - 開放原始碼授權頁 `/licenses/`、隱私權頁 `/privacy/`。

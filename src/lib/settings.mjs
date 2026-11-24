@@ -1,5 +1,6 @@
 // App 設定（只存在這支手機的 localStorage）。畫面在 src/pages/settings.astro。
 import { KINDS } from './records/model.mjs';
+import { WEATHER_CITIES } from '../data/weather-cities.mjs';
 
 export const SETTINGS_KEY = 'yogurtguide.settings';
 export const SNOOZE_MIN_HOURS = 0.5;
@@ -31,7 +32,9 @@ export function parseSettings(raw) {
 	for (const { kind, defaultHours } of snoozeKinds()) {
 		snoozeHours[kind] = cleanSnoozeHours(data.snoozeHours?.[kind]) ?? defaultHours;
 	}
-	return { snoozeHours };
+	// 天氣城市：只收清單裡有的 id；空白＝不用天氣。
+	const cityId = WEATHER_CITIES.some((c) => c.id === data.cityId) ? data.cityId : null;
+	return { snoozeHours, cityId };
 }
 
 /** 某類型的延後時數；沒有延後按鈕的類型回傳 null。 */

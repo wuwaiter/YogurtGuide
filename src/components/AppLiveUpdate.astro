@@ -26,7 +26,22 @@
 		bundleId: string;
 		url: string;
 		checksum: string;
+		/** 有的話用「只下載有變的檔案」模式（經 worker/index.mjs）；沒有就下載整包 zip。 */
+		manifestUrl?: string;
 		minNativeBuild: number;
+	}
+
+	/** 先只下載有變的檔案；失敗（例如舊伺服器、網路中斷）就改下載整包。 */
+	async function download(latest: LatestBundle) {
+		if (latest.manifestUrl) {
+			try {
+				await LiveUpdate.downloadBundle({ bundleId: latest.bundleId, url: latest.manifestUrl, artifactType: 'manifest' });
+				return;
+			} catch {
+				// 改用整包
+			}
+		}
+		await LiveUpdate.downloadBundle({ bundleId: latest.bundleId, url: latest.url, checksum: latest.checksum });
 	}
 
 	const launchKey = 'yogurtguide.liveUpdateChecked';
@@ -81,7 +96,7 @@
 			});
 			if (latest && (decision === 'download' || decision === 'set-next')) {
 				if (decision === 'download') {
-					await LiveUpdate.downloadBundle({ bundleId: latest.bundleId, url: latest.url, checksum: latest.checksum });
+					await download(latest);
 				}
 				// 設為下次使用：沒點提示的話，下次重開 App 就是新版。
 				await LiveUpdate.setNextBundle({ bundleId: latest.bundleId });
