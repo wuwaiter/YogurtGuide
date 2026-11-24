@@ -138,6 +138,12 @@ function splitOverall(text: string): string[] {
 	<h2 class="record-block__title">3. 成品狀況<span class="en-sub">Result</span></h2>
 	<ul class="classify-list record-fields">
 		<li class="classify-list__row">
+			<span class="classify-list__label">結果</span>
+			<span class="classify-list__body">
+				<span class={`result-badge ${d.result === 'NG' ? 'is-ng' : 'is-ok'}`}>{d.result === 'NG' ? '失敗 NG' : '成功 OK'}</span>
+			</span>
+		</li>
+		<li class="classify-list__row">
 			<span class="classify-list__label">凝乳</span>
 			<span class="classify-list__body">{d.resultSet}</span>
 		</li>

@@ -2,6 +2,7 @@
 import SocialIcons from '../components/SocialIcons.astro';
 import AppLiveUpdate from '../components/AppLiveUpdate.astro';
 import AppOnboarding from '../components/AppOnboarding.astro';
+import AppDrawer from '../components/AppDrawer.astro';
 
 interface Props {
 	title?: string;
@@ -27,6 +28,19 @@ const officialPath = (() => {
 const canonical = new URL(officialPath, officialOrigin).href;
 const isStrainsPage = pathname.includes('/cultures/species');
 const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
+// 主要頁籤。網站放在頁首；App 放在左上「三條線」打開的側邊選單（另加設定、使用說明）。
+const navItems = [
+	...(forApp ? [{ label: '我的紀錄', href: `${base}records/`, current: pathname.includes('/records') }] : []),
+	{ label: '批次實驗', href: `${base}batches/`, current: pathname.includes('/batches') },
+	{ label: '菌種與菌株', href: `${base}cultures/species/`, current: isStrainsPage },
+	{ label: '優格種類', href: `${base}cultures/`, current: isYogurtTypesPage },
+	{ label: '菌粉', href: `${base}powders/`, current: pathname.includes('/powders') },
+	{ label: '搭配', href: `${base}pairing/`, current: pathname.includes('/pairing') },
+	{ label: '市售優格', href: `${base}market/`, current: pathname.includes('/market') },
+	{ label: '製法', href: `${base}methods/`, current: pathname.includes('/methods') },
+	{ label: '專有名詞', href: `${base}glossary/`, current: pathname.includes('/glossary') },
+	{ label: '關於', href: `${base}about/`, current: pathname.includes('/about') },
+];
 ---
 
 <!doctype html>
@@ -52,45 +66,55 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 	<body>
 		<header class="site-header">
 			<div class="site-header__inner">
-				<a class="brand" href={base}>
+				{
+					forApp && (
+						<button type="button" class="menu-btn" id="menu-btn" aria-label="開啟選單" aria-controls="app-drawer" aria-expanded="false">
+							<span class="menu-btn__bar" />
+							<span class="menu-btn__bar" />
+							<span class="menu-btn__bar" />
+						</button>
+					)
+				}
+				<a class="brand" href={forApp ? `${base}records/` : base}>
 					<span class="brand__word">Yogurt</span><span class="brand__guide">Guide</span>
 				</a>
-				<nav class="nav" aria-label="主要導覽">
-					{
-						forApp && (
-							<a href={`${base}records/`} aria-current={pathname.includes('/records') ? 'page' : undefined}>
-								我的紀錄
-							</a>
-						)
-					}
-					<a href={`${base}batches/`} aria-current={pathname.includes('/batches') ? 'page' : undefined}
-						>批次實驗</a
-					>
-					<a href={`${base}cultures/species/`} aria-current={isStrainsPage ? 'page' : undefined}
-						>菌種與菌株</a
-					>
-					<a href={`${base}cultures/`} aria-current={isYogurtTypesPage ? 'page' : undefined}
-						>優格種類</a
-					>
-					<a href={`${base}powders/`} aria-current={pathname.includes('/powders') ? 'page' : undefined}
-						>菌粉</a
-					>
-					<a href={`${base}pairing/`} aria-current={pathname.includes('/pairing') ? 'page' : undefined}
-						>搭配</a
-					>
-					<a href={`${base}market/`} aria-current={pathname.includes('/market') ? 'page' : undefined}
-						>市售優格</a
-					>
-					<a href={`${base}methods/`} aria-current={pathname.includes('/methods') ? 'page' : undefined}
-						>製法</a
-					>
-					<a href={`${base}glossary/`} aria-current={pathname.includes('/glossary') ? 'page' : undefined}
-						>專有名詞</a
-					>
-					<a href={`${base}about/`} aria-current={pathname.includes('/about') ? 'page' : undefined}>關於</a>
-				</nav>
+				{
+					!forApp && (
+						<nav class="nav" aria-label="主要導覽">
+							{navItems.map((item) => (
+								<a href={item.href} aria-current={item.current ? 'page' : undefined}>
+									{item.label}
+								</a>
+							))}
+						</nav>
+					)
+				}
 			</div>
 		</header>
+		{
+			forApp && (
+				<div class="drawer" id="app-drawer" hidden>
+					<div class="drawer__backdrop" data-close-drawer />
+					<nav class="drawer__panel" aria-label="主要導覽">
+						<p class="drawer__brand">
+							<span class="brand__word">Yogurt</span><span class="brand__guide">Guide</span>
+						</p>
+						{navItems.map((item) => (
+							<a class="drawer__link" href={item.href} aria-current={item.current ? 'page' : undefined}>
+								{item.label}
+							</a>
+						))}
+						<hr class="drawer__rule" />
+						<a class="drawer__link" href={`${base}settings/`} aria-current={pathname.includes('/settings') ? 'page' : undefined}>
+							設定
+						</a>
+						<a class="drawer__link" href="#" data-open-onboarding data-close-drawer>
+							使用說明
+						</a>
+					</nav>
+				</div>
+			)
+		}
 		<main>
 			<slot />
 		</main>
@@ -101,14 +125,6 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 					<p class="site-footer__brand">YogurtGuide — Yogurt Process Notes</p>
 					<p class="site-footer__note">
 						<a href={`${base}privacy/`}>隱私權</a> · <a href={`${base}licenses/`}>開放原始碼授權</a>
-						{forApp && (
-							<>
-								{' · '}
-								<a href={`${base}settings/`}>設定</a>
-								{' · '}
-								<a href="#" data-open-onboarding>使用說明</a>
-							</>
-						)}
 					</p>
 				</div>
 				<SocialIcons variant="qr" class="site-footer__social" />
@@ -116,6 +132,7 @@ const isYogurtTypesPage = pathname.includes('/cultures') && !isStrainsPage;
 		</footer>
 		{forApp && <AppLiveUpdate />}
 		{forApp && <AppOnboarding />}
+		{forApp && <AppDrawer />}
 	</body>
 </html>
 

@@ -8,7 +8,23 @@ const batches = (await getCollection('batches', ({ data }) => !data.draft))
 	.sort((a, b) => b.data.date.localeCompare(a.data.date) || b.id.localeCompare(a.id))
 	.slice(0, 1);
 const base = import.meta.env.BASE_URL;
+// App 的首頁是「我的紀錄」：App 版的 index.html 只做轉址，不載入版面（避免 Live Update 檢查在轉址途中被中斷）。
+const forApp = process.env.CAP_BUILD === '1';
 ---
+
+{
+	forApp ? (
+		<html lang="zh-Hant">
+			<head>
+				<meta charset="utf-8" />
+				<meta name="viewport" content="width=device-width" />
+				<meta http-equiv="refresh" content="0; url=/records/index.html" />
+				<title>YogurtGuide</title>
+				<script is:inline>location.replace('/records/index.html');</script>
+			</head>
+			<body />
+		</html>
+	) : (
 
 <BaseLayout>
 	<section class="hero">
@@ -45,3 +61,5 @@ const base = import.meta.env.BASE_URL;
 		</div>
 	</section>
 </BaseLayout>
+	)
+}

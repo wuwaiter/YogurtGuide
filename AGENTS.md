@@ -28,7 +28,7 @@ Cloudflare 建置設了 `WORKERS_CI=1` 時，`base` 是 `/`。
 
 頁面讀 `src/content/**/*.md`。改這些檔之後執行 `npm run build`。
 
-批次來源是 `src/content/batches/*.md`。`npm run batch:sqlite` 只從 Markdown 重建 `data/*.sqlite`。頁面不讀 SQLite。
+批次來源是 `src/content/batches/*.md`。每筆要寫 `result: "OK"` 或 `"NG"`（成功／失敗）；凝乳 5 分以下（10 分制）一定寫 NG，測試會檢查。NG 不算進平均。`npm run batch:sqlite` 只從 Markdown 重建 `data/*.sqlite`。頁面不讀 SQLite。
 
 菌粉頁不放店名與連結。沒有評價寫「沒有評價資訊」，沒有菌種寫「沒有菌種資訊」。價格只留金額、幣別、單位、日期。
 

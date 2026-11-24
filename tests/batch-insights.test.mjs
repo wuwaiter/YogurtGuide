@@ -51,6 +51,7 @@ test('菌種整理：失敗不進平均，最佳同分取酸度低', () => {
 	assert.equal(a.cultureKey, '菌A');
 	assert.equal(a.batchCount, 3);
 	assert.equal(a.failedCount, 1);
+	assert.equal(a.successCount, 2);
 	assert.equal(a.avgHours, 7.5);
 	assert.equal(a.bestBatchId, 'b');
 	assert.equal(b.cultureKey, '菌B');
@@ -60,4 +61,21 @@ test('菌種整理：失敗不進平均，最佳同分取酸度低', () => {
 		bands.map((x) => x.count),
 		[2, 1, 0],
 	);
+});
+
+test('成功／失敗：凝乳 5 分以下一定失敗，其餘看 result', () => {
+	const base = { date: '2026-01-01', cultureName: '菌', cultureSource: 'new-powder', incubationTempC: '42', incubationTimeH: '8h', resultTexture: '5/10', resultAcidity: '1/10' };
+	assert.equal(batchMetrics('a', { ...base, resultSet: '5/10', result: 'OK' }).failed, true);
+	assert.equal(batchMetrics('b', { ...base, resultSet: '3/5', result: 'OK' }).failed, false);
+	assert.equal(batchMetrics('c', { ...base, resultSet: '8/10', result: 'NG' }).failed, true);
+	assert.equal(batchMetrics('f', { ...base, resultSet: '凝乳完整', result: 'OK' }).failed, false);
+	const [s] = summarizeByCulture([
+		batchMetrics('a', { ...base, resultSet: '5/10', result: 'NG' }),
+		batchMetrics('d', { ...base, resultSet: '9/10', result: 'OK' }),
+		batchMetrics('e', { ...base, resultSet: '凝乳完整', result: 'OK' }),
+	]);
+	assert.equal(s.batchCount, 3);
+	assert.equal(s.successCount, 2);
+	assert.equal(s.avgSet, 9);
+	assert.equal(s.bestBatchId, 'd');
 });

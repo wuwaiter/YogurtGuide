@@ -3,7 +3,10 @@
 ## v0.20.0 — 2026-11-24
 
 ### Changes
-- App 設定頁加「App 版本」：App 版本（versionName）、原生版本（nativeBuild＝versionCode）、內容版本（目前網頁包的 commit 前 7 碼），方便確認手機收不收得到更新、回報問題。
+- App 版面：頁首改成左上「三條線」＋品牌，所有頁籤、設定、使用說明都移到點開的側邊選單（`src/components/AppDrawer.astro`）；頁尾不再放設定。App 的首頁改為「我的紀錄」（App 版 `index.html` 只轉址），下拉檢查更新也移到「我的紀錄」。網站版頁首不變。
+- 批次加 `result: OK | NG`（必填）。失敗規則改為凝乳 5 分以下（10 分制，原本是 3 分以下）一律 NG，其餘由站主判斷；測試會檢查 Markdown 的 result 與分數一致。現有 30 筆：b002（成型不足）、b021、b029、b030 為 NG，其餘 OK。批次清單與單筆頁顯示「成功 OK／失敗 NG」。
+- 各菌種整理：平均、時間範圍、最好的一次只算 OK；新增「成功／總次數」欄。`app-content/v1/batches.json` 的 cultures 改用全部批次並多 `successCount`。
+- App 設定頁加「App 版本」：App 版本（versionName）、原生版本（nativeBuild＝versionCode）、內容版本（目前網頁包的 commit 前 7 碼），方便確認手機收不收得到更新、回報問題。內容版本優先顯示目前換上的 Live Update 網頁包；用 APK 內建內容時顯示「（APK 內建）」。本機建置的 `build.json` 改讀 git HEAD，不再是空字串。
 - 修正手機上表格欄名疊在內容上：批次實驗頁的整理表借用了菌種表的樣式，欄名寫死成「名稱、學名…」，而且左邊留白被 `.meta-table td` 蓋掉。改成通用的 `.stack-table`，欄名放在每格的 `data-label`、顯示在內容上方。
 
 ## v0.19.0 — 2026-11-24

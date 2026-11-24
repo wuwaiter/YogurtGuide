@@ -33,8 +33,17 @@ export function cultureKey(name) {
 	return String(name ?? '').replace(/\s+/g, '');
 }
 
-/** 凝乳 ≤3 視為失敗，不列入平均。 */
-export const FAILED_SET_MAX = 3;
+/** 凝乳（10 分制）5 分以下一律算失敗。 */
+export const FAILED_SET_MAX = 5;
+
+/**
+ * 成功或失敗：凝乳 5 分以下一定失敗；其餘看批次的 result（站主判斷，例如有異味而放棄就寫 NG）。
+ * 凝乳是文字描述、沒有分數的早期批次，只看 result。
+ */
+export function isFailed(data, set) {
+	if (set != null && set <= FAILED_SET_MAX) return true;
+	return data.result === 'NG';
+}
 
 /** 一筆批次（content collection 的 data）→ 數字化紀錄。 */
 export function batchMetrics(id, data) {
@@ -52,7 +61,7 @@ export function batchMetrics(id, data) {
 		set,
 		texture: parseScore10(data.resultTexture),
 		acidity: parseScore10(data.resultAcidity),
-		failed: set != null && set <= FAILED_SET_MAX,
+		failed: isFailed(data, set),
 	};
 }
 
@@ -70,7 +79,7 @@ function range(values) {
 
 /**
  * 依菌種彙整。最佳批次＝凝乳＋質地最高；同分取酸度較低，再同分取較新。
- * 失敗批次另外計數，不進平均與最佳。
+ * 平均、時間範圍與最佳只算成功（OK）的批次；successCount／batchCount 是成功次數／總次數。
  */
 export function summarizeByCulture(metrics) {
 	const groups = new Map();
@@ -81,8 +90,8 @@ export function summarizeByCulture(metrics) {
 	return [...groups.values()]
 		.map((items) => {
 			const sorted = [...items].sort((a, b) => a.date.localeCompare(b.date));
-			const ok = sorted.filter((m) => !m.failed && m.set != null);
-			const best = [...ok].sort(
+			const ok = sorted.filter((m) => !m.failed);
+			const best = ok.filter((m) => m.set != null).sort(
 				(a, b) =>
 					(b.set ?? 0) + (b.texture ?? 0) - ((a.set ?? 0) + (a.texture ?? 0)) ||
 					(a.acidity ?? 10) - (b.acidity ?? 10) ||
@@ -92,7 +101,8 @@ export function summarizeByCulture(metrics) {
 				cultureKey: sorted[0].cultureKey,
 				cultureName: sorted.at(-1).cultureName,
 				batchCount: sorted.length,
-				failedCount: sorted.filter((m) => m.failed).length,
+				successCount: ok.length,
+				failedCount: sorted.length - ok.length,
 				motherCount: sorted.filter((m) => m.cultureSource === 'mother').length,
 				lastDate: sorted.at(-1).date,
 				tempC: range(ok.map((m) => m.incubationTempC)),
