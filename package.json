@@ -25,9 +25,9 @@
   },
   "dependencies": {
     "@capacitor-community/sqlite": "^8.1.1",
-    "@capacitor/android": "^8.5.3",
+    "@capacitor/android": "^8.6.2",
     "@capacitor/app": "^8.1.2",
-    "@capacitor/core": "^8.5.3",
+    "@capacitor/core": "^8.6.2",
     "@capacitor/local-notifications": "^8.3.1",
     "@capawesome/capacitor-live-update": "^8.7.1",
     "astro": "^7.4.13",
@@ -35,7 +35,7 @@
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.4",
-    "@capacitor/cli": "^8.5.3",
+    "@capacitor/cli": "^8.6.2",
     "fflate": "^0.8.3",
     "husky": "^9.1.7",
     "wrangler": "4.166.0"

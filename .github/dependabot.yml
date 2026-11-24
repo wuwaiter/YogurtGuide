@@ -5,6 +5,12 @@ updates:
     schedule:
       interval: weekly
     open-pull-requests-limit: 5
+    groups:
+      # Capacitor 的 cli、core、android 要同版本，分開升會互相不合、CI 失敗。
+      # @capacitor/android 是原生層：合併前要把 nativeBuild 與 versionCode 一起加 1。
+      capacitor:
+        patterns:
+          - '@capacitor/*'
   - package-ecosystem: github-actions
     directory: /
     schedule:
