@@ -1,5 +1,10 @@
 # Version History
 
+## v0.21.0 — 2026-11-25
+
+### Changes
+- 包裝圖改用「滑動＋點開放大」：拿掉 StPageFlip 翻書效果（實際看起來廉價），改成 Embla Carousel 左右滑、兩側露出前後張，點圖用 PhotoSwipe 全螢幕放大、可兩指縮放。網站與 App 一致；兩個套件都是 MIT，授權頁已更新。只有 2 張圖時也置中（`containScroll: false`，到頭／到尾那側留白）。元件介面不變（`src/components/PackShots.astro`），菌粉頁、市售優格頁不用改。
+
 ## v0.20.0 — 2026-11-24
 
 ### Changes

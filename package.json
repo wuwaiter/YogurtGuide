@@ -31,7 +31,8 @@
     "@capacitor/local-notifications": "^8.3.1",
     "@capawesome/capacitor-live-update": "^8.7.1",
     "astro": "^7.4.13",
-    "page-flip": "^2.0.7"
+    "embla-carousel": "^8.6.0",
+    "photoswipe": "^5.4.4"
   },
   "devDependencies": {
     "@astrojs/sitemap": "^3.7.6",

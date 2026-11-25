@@ -733,79 +733,92 @@ main > .section:first-child > .wrap > .page-title:first-child .en-sub {
 	min-height: 8rem;
 }
 
-.powder-shot[data-carousel] {
-	position: relative;
+/* 包裝圖（src/components/PackShots.astro）：多張時左右滑，兩側露出前後張；點圖全螢幕放大。 */
+.pack-viewport {
+	overflow: hidden;
 }
 
-/* 多張圖時是一本只顯示單頁的小書，寬高和圖片框一致（3:4、高 11rem），置中。 */
-.powder-book--flip {
-	width: 8.25rem;
-	height: 11rem;
-	margin: 0 auto;
-}
-
-.powder-page {
-	background: var(--paper);
-}
-
-.powder-book--flip .powder-page img {
-	width: 100%;
-	height: 100%;
-	object-fit: cover;
-}
-
-/* 翻起來的紙背：紙色帶一點陰影，只透出淡淡的反向印刷，像真的紙。 */
-.powder-book--flip .powder-page--back {
-	background: linear-gradient(to left, #e4e0d4 0%, var(--paper) 40%, var(--paper) 100%);
-}
-
-.powder-book--flip .powder-page--back img {
-	transform: scaleX(-1);
-	opacity: 0.12;
-}
-
-/* 圖說與頁碼一起置中在圖片下方，例如「外袋正面　1 / 2」。 */
-.powder-book__caption {
+.pack-track {
 	display: flex;
-	justify-content: center;
-	gap: 0.75rem;
-	margin-top: 0.4rem;
+	touch-action: pan-y pinch-zoom;
+}
+
+.pack-slide {
+	flex: 0 0 100%;
+	min-width: 0;
+	display: block;
+	cursor: zoom-in;
+}
+
+.pack-viewport--many .pack-slide {
+	/* 直式 3:4，最寬 15rem：手機單欄時不會被裁成橫的。 */
+	flex-basis: min(78%, 15rem);
+	margin-right: 5%;
+	opacity: 0.45;
+	transform: scale(0.93);
+	transition:
+		opacity 0.35s ease,
+		transform 0.35s ease;
+}
+
+.pack-viewport--many .pack-slide.is-active {
+	opacity: 1;
+	transform: scale(1);
+}
+
+.pack-slide img {
+	display: block;
+	width: 100%;
+	height: 11rem;
+	object-fit: contain;
+	background: var(--paper);
+	border-radius: 6px;
+}
+
+.pack-viewport--many .pack-slide img {
+	height: auto;
+	aspect-ratio: 3 / 4;
+	object-fit: cover;
+	box-shadow: 0 4px 12px rgb(0 0 0 / 0.12);
+}
+
+.pack-bar {
+	display: flex;
+	align-items: center;
+	gap: 0.5rem;
+	margin-top: 0.5rem;
 	font-size: 0.82rem;
 	color: var(--ink-muted);
+}
+
+.pack-bar__label {
+	flex: 1;
+	min-width: 0;
 	text-align: center;
 }
 
-/* 箭頭與頁碼要蓋在翻頁的紙張上面。 */
-.powder-nav,
+.pack-bar__count {
+	font-family: var(--font-mono);
+}
 
-.powder-nav {
-	position: absolute;
-	top: calc(0.55rem + 5.5rem);
-	transform: translateY(-50%);
-	width: 2rem;
-	height: 2rem;
-	border: 0;
+.pack-arrow {
+	flex: none;
+	width: 1.9rem;
+	height: 1.9rem;
+	border: 1px solid var(--line);
 	border-radius: 50%;
-	background: rgb(0 0 0 / 0.45);
-	color: #fff;
-	font-size: 1.4rem;
+	background: var(--paper);
+	color: var(--ink);
+	font-size: 1.1rem;
 	line-height: 1;
 	cursor: pointer;
 }
 
-.powder-nav--prev {
-	left: 0.8rem;
+@media (prefers-reduced-motion: reduce) {
+	.pack-viewport--many .pack-slide {
+		transition: none;
+	}
 }
-
-.powder-nav--next {
-	right: 0.8rem;
-}
-
-/* 箭頭要蓋在翻頁的紙張上面。 */
-.powder-nav {
-	z-index: 30;
-}
-
 
 .powder-shot img {
 	display: block;
