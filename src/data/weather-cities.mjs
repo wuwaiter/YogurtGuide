@@ -1,7 +1,7 @@
-// 天氣用的城市清單：Worker 依這份抓 Open-Meteo，App 設定頁也用這份當選單。
+// 天氣用的城市清單：Worker 依這份抓 MET Norway，App 設定頁也用這份當選單。
 // 台灣：22 縣市各一組，取縣市政府所在地。美國：人口前 50 大城市（依 2020 年人口普查與近年估計，順序可能略有出入）。
-// 加城市：在下面加一行（id 不要重複、不要改舊的 id，App 設定存的是 id）。Open-Meteo 免費額度約每天 1 萬次，
-// 每 3 小時抓一次，每個城市一天算 8 次：城市數 × 8 要遠低於 10,000。
+// 加城市：在下面加一行（id 不要重複、不要改舊的 id，App 設定存的是 id）。
+// 一個城市一個請求，分 3 組每小時輪流抓：城市數 ÷ 3 要低於 50（Cloudflare Workers 免費方案每次執行的對外請求上限），目前 72 ÷ 3 = 24。
 
 /** @type {{ id: string, country: 'TW' | 'US', name: string, lat: number, lon: number }[]} */
 export const WEATHER_CITIES = [

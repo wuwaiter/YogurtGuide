@@ -118,9 +118,7 @@ bin/
 *.db-shm
 *.sqlite
 *.sqlite3
-!data/batches.sqlite
-!data/batch_ingredients.sqlite
-!data/batch_photos.sqlite
+# data/*.sqlite 由 `npm run batch:sqlite` 從 Markdown 重建，不進版控（二進位檔每次都整份變動）。
 
 # 專案內資料庫備份／匯出
 logs/*
@@ -140,6 +138,9 @@ secrets.py
 cert/
 *.pfx
 *.pem
+# Live Update 簽章私鑰（含轉成 base64 的版本）：只放在 repo 外面與 Cloudflare 建置變數
+live-update-private*
+*.pem.base64*
 *.key
 *.p12
 *.crt
@@ -201,3 +202,7 @@ ehthumbs.db
 # 主題改版前本機備份（還原用，不上版控）
 .backup/
 .wrangler/
+
+# Playwright 測試輸出
+/test-results/
+/playwright-report/

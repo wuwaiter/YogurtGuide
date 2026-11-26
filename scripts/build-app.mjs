@@ -6,7 +6,7 @@
 //   --debug    同步後出 debug APK
 //   --bundle   同步後出上架用 AAB（要先有 android/key.properties）
 //   --publish  把 dist-app 壓成 Live Update 網頁包，放進網站的 dist/app-bundle/（要先跑過網站的 npm run build）
-import { createHash } from 'node:crypto';
+import { createHash, createPrivateKey, createPublicKey, sign, verify } from 'node:crypto';
 import { copyFileSync, existsSync, mkdirSync, readdirSync, readFileSync, rmSync, statSync, writeFileSync } from 'node:fs';
 import { join, dirname, relative, sep } from 'node:path';
 import { fileURLToPath } from 'node:url';
@@ -20,6 +20,33 @@ const androidDir = join(root, 'android');
 const officialOrigin = 'https://yogurtguide.wuwaiter.com';
 /** Live Update「只下載有變的檔案」的清單檔名，外掛寫死這個名字。也放進 APK 內建版本，第一次更新就能比對。 */
 export const MANIFEST_NAME = 'capawesome-live-update-manifest.json';
+/** 每個檔案的簽章（href → base64），放在 app-bundle/<id>/ 底下、不在 files/ 裡，Worker 用它回 X-Signature。 */
+export const SIGNATURES_NAME = 'signatures.json';
+
+/**
+ * Live Update 簽章：外掛用 capacitor.config.json 的 publicKey 驗證每個下載的檔案（SHA256withRSA）。
+ * 私鑰只在建置時從環境變數讀：LIVE_UPDATE_PRIVATE_KEY_B64（PEM 再轉 base64，方便貼進 Cloudflare 的建置變數）
+ * 或 LIVE_UPDATE_PRIVATE_KEY_FILE（本機檔案路徑）。私鑰不進 repo、不放 GitHub secrets。
+ */
+export function loadSigningKey(env = process.env) {
+	if (env.LIVE_UPDATE_PRIVATE_KEY_B64) return createPrivateKey(Buffer.from(env.LIVE_UPDATE_PRIVATE_KEY_B64, 'base64').toString('utf8'));
+	if (env.LIVE_UPDATE_PRIVATE_KEY_FILE) return createPrivateKey(readFileSync(env.LIVE_UPDATE_PRIVATE_KEY_FILE, 'utf8'));
+	return null;
+}
+
+/** 檔案內容的簽章（外掛端是 Signature.getInstance("SHA256withRSA")）。 */
+export function signBytes(bytes, privateKey) {
+	return sign('sha256', bytes, privateKey).toString('base64');
+}
+
+export function verifyBytes(bytes, signature, publicKey) {
+	return verify('sha256', bytes, createPublicKey(publicKey), Buffer.from(signature, 'base64'));
+}
+
+/** App 內建的公鑰（capacitor.config.json）。 */
+export function readPublicKey() {
+	return JSON.parse(readFileSync(join(root, 'capacitor.config.json'), 'utf8')).plugins?.LiveUpdate?.publicKey ?? null;
+}
 
 function run(command, { cwd = root, env = {} } = {}) {
 	const result = spawnSync(command, {
@@ -119,6 +146,12 @@ function publishBundle() {
 	}
 	const commit = process.env.WORKERS_CI_COMMIT_SHA ?? process.env.GITHUB_SHA ?? '';
 	const bundleId = commit || `local-${Date.now()}`;
+	const privateKey = loadSigningKey();
+	// Cloudflare 建置出來的就是正式網頁包：App 有公鑰、只收有簽章的包，沒有私鑰就不要發佈。
+	if (!privateKey && process.env.WORKERS_CI === '1') {
+		console.error('[app] 缺 LIVE_UPDATE_PRIVATE_KEY_B64：Cloudflare 建置要設這個變數，App 才收得到更新。');
+		process.exit(1);
+	}
 
 	const entries = readAppFiles();
 	const zip = zipSync(entries, { level: 9 });
@@ -135,12 +168,23 @@ function publishBundle() {
 		mkdirSync(dirname(target), { recursive: true });
 		copyFileSync(join(appDir, ...href.split('/')), target);
 	}
+	// 簽章：整包 zip 一個，「只下載有變的檔案」模式每個檔案（含清單檔）各一個。
+	let signature;
+	if (privateKey) {
+		signature = signBytes(zip, privateKey);
+		const signatures = Object.fromEntries(Object.entries(entries).map(([href, bytes]) => [href, signBytes(bytes, privateKey)]));
+		writeFileSync(join(outDir, bundleId, SIGNATURES_NAME), JSON.stringify(signatures));
+		console.log(`[app] 已簽章：zip 與 ${Object.keys(signatures).length} 個檔案`);
+	} else {
+		console.log('[app] 沒有私鑰：網頁包沒有簽章（只能本機或 CI 檢查用，App 不會接受）。');
+	}
 	writeFileSync(
 		join(outDir, 'latest.json'),
 		JSON.stringify({
 			bundleId,
 			url: `${officialOrigin}/app-bundle/${zipName}`,
 			checksum,
+			...(signature ? { signature } : {}),
 			manifestUrl: `${officialOrigin}/app-bundle/${bundleId}/`,
 			minNativeBuild: readNativeBuild(),
 		}),

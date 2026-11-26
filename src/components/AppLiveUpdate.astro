@@ -26,6 +26,8 @@
 		bundleId: string;
 		url: string;
 		checksum: string;
+		/** 整包 zip 的簽章（SHA256withRSA，base64）。 */
+		signature?: string;
 		/** 有的話用「只下載有變的檔案」模式（經 worker/index.mjs）；沒有就下載整包 zip。 */
 		manifestUrl?: string;
 		minNativeBuild: number;
@@ -41,7 +43,8 @@
 				// 改用整包
 			}
 		}
-		await LiveUpdate.downloadBundle({ bundleId: latest.bundleId, url: latest.url, checksum: latest.checksum });
+		// 整包 zip：簽章寫在 latest.json（App 有公鑰時一定要有）。
+		await LiveUpdate.downloadBundle({ bundleId: latest.bundleId, url: latest.url, checksum: latest.checksum, signature: latest.signature });
 	}
 
 	const launchKey = 'yogurtguide.liveUpdateChecked';

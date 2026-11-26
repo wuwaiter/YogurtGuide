@@ -9,7 +9,8 @@
     "LiveUpdate": {
       "readyTimeout": 10000,
       "autoDeleteBundles": true,
-      "autoBlockRolledBackBundles": true
+      "autoBlockRolledBackBundles": true,
+      "publicKey": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA0dukZB3vUjXqlxXVKD2D\nLP/4cgi3zHIVf/f/MzET3HE+pVnuW6niuf5IrR72zzKNc813gPeO7EmOSjTI4o1S\nZDjQJvEkdUNyu0QmfmlcbGbg/b/CGE3HJ/+tCJlF4LXhydhWBMnCuI9DFq2DBGgP\nITLgLYB9XsREYqwsZx8jRIDB1sSTmcsd3QKgoUFKIOOOfjgjBDMQGggzXvPg6Y50\nqrVUfArhM85ohiHsJyCf2LZ7n64fwNz3qSmQ6JYiCh2cm7iC34NRt3lNjCchUBAn\naMhZ7yGfEUa2yCNPIgVv5w4y/bjRtIiGI3w2vx7KsppMN32OnTF8ol4ra41ZbJu2\nHQIDAQAB\n-----END PUBLIC KEY-----"
     }
   }
 }

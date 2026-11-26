@@ -178,9 +178,10 @@ SOFTWARE.`;
 
 			<h2 class="section-kicker">資料來源</h2>
 			<p class="meta">
-				App 的天氣（帶入室溫用）來自 <a href="https://open-meteo.com/" target="_blank" rel="noopener noreferrer">Weather data by Open-Meteo.com</a>，
-				授權 <a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>。
-				YogurtGuide 每 3 小時取一次台灣 22 縣市與美國 50 個城市的每小時氣溫，四捨五入後整理成一個檔案；App 顯示的是預計發酵時段的平均值。
+				App 的天氣（帶入室溫用）是 <a href="https://api.met.no/" target="_blank" rel="noopener noreferrer">Data from MET Norway</a>（挪威氣象局），
+				授權 <a href="https://data.norge.no/nlod/en/2.0" target="_blank" rel="noopener noreferrer">NLOD 2.0</a> 與
+				<a href="https://creativecommons.org/licenses/by/4.0/" target="_blank" rel="noopener noreferrer">CC BY 4.0</a>。
+				YogurtGuide 每 3 小時取一次台灣 22 縣市與美國 50 個城市的氣溫預報，整理成每小時一筆（6 小時間隔的時段用線性內插）、四捨五入到 0.1°C，合成一個檔案；App 顯示的是預計發酵時段的平均值。MET Norway 沒有參與或背書本 App。
 			</p>
 		</div>
 	</section>
