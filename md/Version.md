@@ -1,5 +1,12 @@
 # Version History
 
+## v0.23.0 — 2026-11-26
+
+### Changes
+- Android 返回鍵：側邊選單、第一次開啟的引導、全螢幕看圖打開時，返回鍵先關掉它們，不再直接離開頁面；都沒有才回上一頁，第一頁就離開 App。登記方式在 `src/lib/back-stack.mjs`。
+- 版本號唯一來源：Android versionName 改讀 `md/Version.md` 最上面那一筆、versionCode 改讀 `platforms.ts` 的 `nativeBuild`（build.gradle 不再寫死）；package.json 拿掉版本號；`build.json` 多 `version`，App 設定頁的內容版本顯示成「v0.23.0（commit）」。
+- App 資料存放與備份（記在 `md/AppPlan.md` 第 3 階段）：Drive 備份只上傳使用者紀錄的 SQLite 檔；站主批次、網頁內容、天氣都在 Cloudflare，重新下載即可。設定要不要一起備份、照片怎麼備份，待決定。
+
 ## v0.22.0 — 2026-11-26
 
 ### Changes

@@ -144,16 +144,20 @@
 - 位置：`drive.appdata`（App 專用隱藏資料夾）。只有本 App 讀寫得到；使用者在 Drive 設定只看得到大小、可整份刪除。佔使用者自己的 Drive 空間。
 - 權限只要求 `https://www.googleapis.com/auth/drive.appdata`，送審前確認它在 Google 的分類（預期為非敏感）。
 - 不用 Android 內建自動備份：每 App 上限 25 MB，約 20 筆含照片的紀錄就滿。
-- 格式（2026-10-28 決定用 JSON）：
+- 資料放哪裡（2026-11-26 決定）：
 
-| 檔案 | 內容 |
-|---|---|
-| `records.json` | `schemaVersion`、`exportedAt`、全部紀錄與傳代關係（含隱藏的） |
-| `photos/<紀錄id>-<序號>.jpg` | 一張照片一個檔，紀錄裡存檔名 |
+| 資料 | 存放 | 要不要備份 |
+|---|---|---|
+| 站主的批次紀錄 | `src/content/batches/*.md`（網站內容，經 Live Update 到 App） | 不用，在 GitHub／Cloudflare |
+| 使用者的紀錄 | SQLite（`yogurtguide-records`，`src/lib/records/store.ts`） | **要，只備份這一個資料庫檔** |
+| 設定、看過引導 | WebView 的 localStorage | 不備份 |
+| 天氣 | Cloudflare 的 `/weather.json`，手機只存快取 | 不用，重新下載 |
+| 網頁內容、圖片 | Cloudflare（Live Update） | 不用，重新下載 |
 
-- 紀錄與照片**分開存**：`records.json` 只放文字（約幾十 KB，每次備份都上傳）；照片各自一個 `.jpg` 檔，上傳過就不再傳，只傳新增或改過的。
-  - 不把照片編碼成文字（base64）放進 JSON：體積會多約三分之一，而且改一個字就要整包重傳。
-- 還原：讀 `records.json`，依 `schemaVersion` 轉換成目前格式，再下載缺少的照片。
+- 備份格式改成**直接上傳 SQLite 資料庫檔**（取代 2026-10-28 的 `records.json`）：一個檔案、不用另外寫匯出／轉換；還原時下載回來取代本機的資料庫檔，再依資料庫裡的 schema 版本升級。
+- 待決定：
+  - 設定（天氣城市、延後時數）目前在 localStorage，重裝 App 會不見。要一起備份就改存進同一個 SQLite 檔（多一個 settings 表）。
+  - 照片（還沒做）：照片檔不在 SQLite 裡。要嘛照片也上傳（只傳新增的），要嘛照片不備份。
 
 ---
 

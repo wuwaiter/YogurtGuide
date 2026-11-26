@@ -43,8 +43,9 @@ App 版建置設 `CAP_BUILD=1`，`base` 是 `/`，輸出到 `dist-app/`，站內
 Live Update 網頁包有簽章：App 內建公鑰（`capacitor.config.json` 的 `LiveUpdate.publicKey`），只收用對應私鑰簽過的包。私鑰只在建置時從環境變數讀（Cloudflare 建置變數 `LIVE_UPDATE_PRIVATE_KEY_B64`，或本機 `LIVE_UPDATE_PRIVATE_KEY_FILE`），不進 repo、不放 GitHub secrets；Cloudflare 建置缺私鑰會失敗。換鑰匙＝改公鑰＝原生改動。
 本機建置的 `build.json` 在有未 commit 改動時是 `<commit>-dirty`。
 網頁畫面測試用 Playwright（`e2e/*.pw.mjs`，`npm run test:e2e`，要先跑過 `check:deploy`），CI 會跑。
-新增 Capacitor 外掛、改權限或圖示這類原生改動，要把 `src/config/platforms.ts` 的 `nativeBuild` 與 `android/app/build.gradle` 的 `versionCode` 一起加 1 並重新上架。
+版本號只有兩個來源：版本號是 `md/Version.md` 最上面那一筆（Android versionName 與 `build.json` 的 version 都讀它，package.json 不放版本號）；原生版本是 `src/config/platforms.ts` 的 `nativeBuild`（Android versionCode 讀它）。新增 Capacitor 外掛、改權限或圖示這類原生改動，只要把 `nativeBuild` 加 1 並重新上架。
 「我的紀錄」只改 `src/lib/records/store.ts`：只用 SQLite 外掛（網站版顯示請用 App）；移除 App 或清除資料就會消失。新增 Capacitor 外掛要同時補授權頁、跑 `app:sync` 並 commit `android/` 的外掛清單，CI 會檢查。
+Android 返回鍵：浮動畫面（側邊選單、引導、全螢幕看圖）打開時用 `src/lib/back-stack.mjs` 的 `pushBack` 登記，返回鍵先關它們，沒有才回上一頁。
 發酵提醒規則在 `src/lib/records/reminders.mjs`（紀錄存檔時自動排／取消）；第一次開啟的引導在 `src/components/AppOnboarding.astro`，文字在 `src/lib/onboarding.mjs`。
 keystore（`*.jks`、`*.keystore`）與 `android/key.properties` 不進版控。iOS 不要執行 `cap add ios`。
 
