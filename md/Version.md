@@ -1,5 +1,11 @@
 # Version History
 
+
+## v0.23.2 — 2026-11-27
+
+### Changes
+- CI 只在 PR 與手動觸發時跑（拿掉 push 觸發）：每個改動原本 push、PR 各跑一次，重複了；main 已設定必須走 PR、`check` 與 Cloudflare 建置都過才能合併。
+
 ## v0.23.1 — 2026-11-27
 
 ### Changes

@@ -122,9 +122,17 @@ test('Worker 排程：每個城市帶識別用 User-Agent 抓 MET，輪完 3 組
 	};
 	for (let group = 0; group < 3; group++) await refreshWeather(env, { fetchImpl, group });
 	assert.deepEqual([...agents], ['YogurtGuide/1.0 https://yogurtguide.wuwaiter.com/']);
-	// 一組全部失敗：丟錯、KV 不動
+	// 一組全部失敗：丟錯、KV 不動（模擬的失敗訊息不印出來，免得看起來像真的出錯）
 	const before = env.kv.get(WEATHER_KEY);
-	await assert.rejects(refreshWeather(env, { fetchImpl: async () => new Response('x', { status: 500 }), group: 0 }));
+	const logged = [];
+	const originalError = console.error;
+	console.error = (msg) => logged.push(msg);
+	try {
+		await assert.rejects(refreshWeather(env, { fetchImpl: async () => new Response('x', { status: 500 }), group: 0 }));
+	} finally {
+		console.error = originalError;
+	}
+	assert.ok(logged.length > 0 && logged.every((m) => /更新失敗：MET 回應 500/.test(m)));
 	assert.equal(env.kv.get(WEATHER_KEY), before);
 	const res = await worker.fetch(new Request('https://yogurtguide.wuwaiter.com/weather.json'), env);
 	assert.equal(res.status, 200);
