@@ -41,7 +41,7 @@ const cityGroups = [
 					</select>
 				</label>
 				<p class="meta">
-					<a href={WEATHER_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer">{WEATHER_ATTRIBUTION.text}</a>（CC BY 4.0）
+					<a href={WEATHER_ATTRIBUTION.url} target="_blank" rel="noopener noreferrer">{WEATHER_ATTRIBUTION.text}</a>（NLOD 2.0／CC BY 4.0，經整理）
 				</p>
 
 				<h2 class="set-h2">發酵提醒</h2>
@@ -117,7 +117,7 @@ const cityGroups = [
 		const build = await fetch('/build.json', { cache: 'no-store' })
 			.then((r) => (r.ok ? r.json() : null))
 			.catch(() => null);
-		const short = (id: unknown) => String(id).slice(0, 7);
+		const short = (id: unknown) => String(id).slice(0, 7) + (String(id).endsWith('-dirty') ? '-dirty' : '');
 		el('set-content-version')!.textContent = current.bundleId
 			? short(current.bundleId)
 			: build?.commit

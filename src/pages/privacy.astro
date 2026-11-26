@@ -18,7 +18,7 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				<p>網站是靜態內容，沒有帳號，不收集個人資料，也不放第三方分析腳本。</p>
 
 				<h2>Android App 存在手機裡的資料</h2>
-				<p>App 上架後，優格紀錄、照片和收藏只存在那支手機。不登入也能使用這些功能。</p>
+				<p>優格紀錄只存在那支手機，不登入也能使用。照片和收藏之後會加，加了以後一樣只存在手機。</p>
 				<p>要刪除這些資料，請到手機的「設定 → 應用程式 → YogurtGuide → 儲存空間 → 清除資料」，或直接移除 App。</p>
 
 				<h2>通知</h2>
@@ -26,10 +26,11 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 
 				<h2>天氣</h2>
 				<p>
-					在 App 設定選了城市，新增紀錄時會用那個城市的天氣預報帶入室溫。App 下載的是所有城市的天氣（同一個檔案），在手機上挑出你選的城市，所以你選了哪個城市不會傳出手機，也不會用到手機定位。天氣資料來自 <a href="https://open-meteo.com/">Open-Meteo</a>，由 YogurtGuide 的伺服器每 3 小時取一次。
+					在 App 設定選了城市，新增紀錄時會用那個城市的天氣預報帶入室溫。App 下載的是所有城市的天氣（同一個檔案），在手機上挑出你選的城市，所以你選了哪個城市不會傳出手機，也不會用到手機定位。天氣資料來自 <a href="https://api.met.no/">MET Norway</a>（挪威氣象局），由 YogurtGuide 的伺服器每 3 小時取一次；App 只連 YogurtGuide 的伺服器，不直接連 MET Norway。
 				</p>
 
-				<h2>Google Drive</h2>
+				<h2>Google Drive（之後會加）</h2>
+				<p>這個功能之後會加，目前 App 沒有 Google 登入，也不會連到 Google Drive。加了以後的做法如下。</p>
 				<p>Google 登入是可選的，只為了把紀錄備份到你自己的雲端硬碟。權限只有 <code>drive.appdata</code>，App 讀不到雲端硬碟裡的其他檔案。</p>
 				<p>
 					紀錄與照片只在你和你自己的 Drive 之間。YogurtGuide 的伺服器收不到這些內容。此使用方式遵守
@@ -38,9 +39,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 				</p>
 				<p>停止備份有兩條路：在 App 裡刪除 Drive 上的備份，或到 Google 帳戶的第三方存取權撤銷 YogurtGuide。</p>
 
-				<h2>Apple</h2>
+				<h2>Apple（之後會加）</h2>
 				<p>
-					iOS 版上架後，資料種類與 Android 相同：本機的優格紀錄、照片、收藏，以及可選的 Google Drive 備份。不做跨 App 追蹤，不使用廣告識別碼。App Store 的隱私權網址也是這一頁。
+					目前只有 Android 版，iOS 版之後會加。iOS 版上架後，資料種類與 Android 相同：本機的優格紀錄、照片、收藏，以及可選的 Google Drive 備份。不做跨 App 追蹤，不使用廣告識別碼。App Store 的隱私權網址也是這一頁。
 				</p>
 			</article>
 		</div>

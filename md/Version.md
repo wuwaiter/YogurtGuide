@@ -1,5 +1,17 @@
 # Version History
 
+## v0.22.0 — 2026-11-26
+
+### Changes
+- 天氣改用 MET Norway（挪威氣象局，NLOD 2.0／CC BY 4.0，可商用）：Open-Meteo 免費版不能商用。一個城市一個請求，Worker 改成每小時抓一組（共 3 組，每組 24 個城市，低於 Workers 免費方案 50 個對外請求），每個城市每 3 小時更新，符合 MET 的頻率限制；帶識別用 User-Agent。6 小時間隔的時段用線性內插成每小時。weather.json 格式不變，App 不用改。出處改成「Data from MET Norway」。
+- Live Update 加簽章：App 內建公鑰，建置時用私鑰簽 zip 與每個檔案（`signatures.json`，Worker 回 `X-Signature`）；`check:bundle` 用公鑰驗。私鑰只在 Cloudflare 建置變數。
+- 移除 local-notifications 外掛帶的 `SCHEDULE_EXACT_ALARM` 權限（發酵提醒用一般鬧鐘就夠，Google Play 限制精準鬧鐘）。
+- 以上兩項是原生改動：`nativeBuild`、`versionCode` 改為 5，手機要重裝 APK。
+- 隱私權頁：照片、收藏、Google Drive、iOS 標成「之後會加」。
+- `data/*.sqlite` 不再進版控。
+- 本機建置有未 commit 的改動時，`build.json` 的 commit 加上 `-dirty`。
+- 加 Playwright 網頁畫面測試（`e2e/`，17 個），CI 會跑。
+
 ## v0.21.0 — 2026-11-25
 
 ### Changes

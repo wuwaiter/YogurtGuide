@@ -12,9 +12,9 @@ custom_domain = true
 directory = "./dist"
 binding = "ASSETS"
 
-# 每 3 小時（UTC 0、3、6…點）抓一次 Open-Meteo，寫進 KV。
+# 每小時抓一組城市的 MET Norway 預報（共 3 組輪流，每個城市每 3 小時一次），寫進 KV。
 [triggers]
-crons = ["0 */3 * * *"]
+crons = ["0 * * * *"]
 
 # 存 weather.json。沒寫 id：wrangler 部署時自動建立並綁定（Workers Builds 預設開啟自動建立）。
 [[kv_namespaces]]
