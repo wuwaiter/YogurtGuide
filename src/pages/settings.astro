@@ -118,11 +118,10 @@ const cityGroups = [
 			.then((r) => (r.ok ? r.json() : null))
 			.catch(() => null);
 		const short = (id: unknown) => String(id).slice(0, 7) + (String(id).endsWith('-dirty') ? '-dirty' : '');
-		el('set-content-version')!.textContent = current.bundleId
-			? short(current.bundleId)
-			: build?.commit
-				? `${short(build.commit)}（APK 內建）`
-				: 'APK 內建';
+		// 版本號（md/Version.md）＋ commit，例如「v0.23.0（a1b2c3d）」。
+		const id = current.bundleId ?? build?.commit;
+		const parts = [id ? short(id) : '', current.bundleId ? '' : 'APK 內建'].filter(Boolean).join('，');
+		el('set-content-version')!.textContent = build?.version ? `v${build.version}（${parts}）` : parts || '—';
 	}
 	showVersion().catch(() => {});
 

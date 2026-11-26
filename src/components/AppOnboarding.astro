@@ -38,6 +38,7 @@ import { ONBOARDING_PAGES } from '../lib/onboarding.mjs';
 
 <script>
 	import { Capacitor } from '@capacitor/core';
+	import { pushBack } from '../lib/back-stack.mjs';
 	import { ONBOARDING_KEY, ONBOARDING_VERSION, ONBOARDING_PAGES, shouldShowOnboarding } from '../lib/onboarding.mjs';
 	import { notifyPermission, requestNotifyPermission, setupNotificationHandlers } from '../lib/records/notify';
 
@@ -67,13 +68,20 @@ import { ONBOARDING_PAGES } from '../lib/onboarding.mjs';
 		if (ONBOARDING_PAGES[i].asksNotification) showNotifyState();
 	}
 
+	// 返回鍵＝略過（src/lib/back-stack.mjs）。
+	let removeBack: (() => void) | null = null;
+
 	function open() {
 		go(0);
+		removeBack?.();
+		removeBack = pushBack(close);
 		dialog.hidden = false;
 		document.body.classList.add('ob-open');
 	}
 
 	function close() {
+		removeBack?.();
+		removeBack = null;
 		dialog.hidden = true;
 		document.body.classList.remove('ob-open');
 		try {

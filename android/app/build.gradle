@@ -7,6 +7,12 @@ if (keyPropertiesFile.exists()) {
     keyPropertiesFile.withInputStream { keyProperties.load(it) }
 }
 
+// 版本號只有一個來源：versionName 讀 md/Version.md 最上面那一筆（## vX.Y.Z），
+// versionCode 讀 src/config/platforms.ts 的 nativeBuild（原生改動才加 1）。規則同 scripts/version.mjs。
+def repoRoot = rootProject.projectDir.parentFile
+def appVersionName = (new File(repoRoot, 'md/Version.md').getText('UTF-8') =~ /(?m)^## v(\d+\.\d+\.\d+)/)[0][1]
+def appVersionCode = ((new File(repoRoot, 'src/config/platforms.ts').getText('UTF-8') =~ /nativeBuild:\s*(\d+)/)[0][1]) as Integer
+
 android {
     namespace = "com.wuwaiter.yogurtguide"
     compileSdk = rootProject.ext.compileSdkVersion
@@ -14,8 +20,8 @@ android {
         applicationId "com.wuwaiter.yogurtguide"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 5
-        versionName "1.0"
+        versionCode appVersionCode
+        versionName appVersionName
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         aaptOptions {
              // Files and dirs to omit from the packaged assets dir, modified to accommodate modern web apps.

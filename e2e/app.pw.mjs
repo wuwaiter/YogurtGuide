@@ -32,3 +32,28 @@ test('網站版的頁首沒有三條線（只有 App 有）', async ({ page }) =
 	await expect(page.locator('#menu-btn')).toHaveCount(0);
 	await expect(page.locator('nav.nav')).toBeVisible();
 });
+
+test('返回鍵：選單、全螢幕看圖打開時會登記，返回鍵先關它們', async ({ page }) => {
+	await page.goto(`${APP}/records/index.html`);
+	const depth = () => page.evaluate(() => (globalThis.__yogurtguideBackStack ?? []).length);
+	const back = () => page.evaluate(() => globalThis.__yogurtguideBackStack.pop().close());
+	await page.locator('#menu-btn').click();
+	expect(await depth()).toBe(1);
+	await back();
+	await expect(page.locator('#app-drawer')).toBeHidden();
+	// 點背景關掉也要取消登記
+	await page.locator('#menu-btn').click();
+	await page.locator('.drawer__backdrop').click({ position: { x: 380, y: 400 } });
+	expect(await depth()).toBe(0);
+
+	await page.goto(`${APP}/market/index.html`);
+	const pack = page.locator('[data-pack]').first();
+	await pack.scrollIntoViewIfNeeded();
+	await pack.locator('.pack-slide.is-active').click();
+	await expect(page.locator('.pswp--open')).toBeVisible();
+	expect(await depth()).toBe(1);
+	await page.waitForTimeout(500);
+	await back();
+	await expect(page.locator('.pswp')).toHaveCount(0, { timeout: 10_000 });
+	expect(await depth()).toBe(0);
+});

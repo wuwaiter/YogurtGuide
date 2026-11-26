@@ -60,6 +60,7 @@ const many = images.length > 1;
 	import EmblaCarousel from 'embla-carousel';
 	import PhotoSwipeLightbox from 'photoswipe/lightbox';
 	import 'photoswipe/style.css';
+	import { pushBack } from '../lib/back-stack.mjs';
 
 	for (const figure of document.querySelectorAll<HTMLElement>('[data-pack]')) {
 		const slides = [...figure.querySelectorAll<HTMLAnchorElement>('.pack-slide')];
@@ -99,6 +100,16 @@ const many = images.length > 1;
 				item.msrc = img.currentSrc;
 			}
 			return item;
+		});
+		// Android 返回鍵先關全螢幕，不會直接離開頁面（src/lib/back-stack.mjs）。
+		let removeBack: (() => void) | null = null;
+		lightbox.on('beforeOpen', () => {
+			removeBack?.();
+			removeBack = pushBack(() => lightbox.pswp?.close());
+		});
+		lightbox.on('close', () => {
+			removeBack?.();
+			removeBack = null;
 		});
 		// 全螢幕裡換張，關掉後外面停在同一張。
 		lightbox.on('change', () => {

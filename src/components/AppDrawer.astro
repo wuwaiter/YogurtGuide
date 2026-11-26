@@ -1,12 +1,30 @@
 ---
 // App 專用：左上「三條線」按鈕打開的側邊選單。選單內容在 BaseLayout（#app-drawer），這裡只放開關的程式與樣式。
+// 也在這裡接 Android 返回鍵：先關最上層的浮動畫面（src/lib/back-stack.mjs），沒有才回上一頁，第一頁就離開 App。
 ---
 
 <script>
+	import { App } from '@capacitor/app';
+	import { Capacitor } from '@capacitor/core';
+	import { handleBack, pushBack } from '../lib/back-stack.mjs';
+
+	if (Capacitor.isNativePlatform()) {
+		// 接手返回鍵後，系統預設的「回上一頁／離開」要自己做。
+		App.addListener('backButton', ({ canGoBack }) => {
+			if (handleBack()) return;
+			if (canGoBack) window.history.back();
+			else App.exitApp();
+		});
+	}
+
 	const drawer = document.getElementById('app-drawer');
 	const button = document.getElementById('menu-btn');
 	if (drawer && button) {
+		let removeBack: (() => void) | null = null;
 		const setOpen = (open: boolean) => {
+			if (open === !drawer.hidden) return;
+			removeBack?.();
+			removeBack = open ? pushBack(() => setOpen(false)) : null;
 			drawer.hidden = !open;
 			button.setAttribute('aria-expanded', String(open));
 			document.body.classList.toggle('drawer-open', open);
