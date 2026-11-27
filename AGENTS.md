@@ -18,7 +18,7 @@ Patch 用於文件與小修正。Minor 用於新功能或結構調整。Major �
 ## 網站
 
 正式網址在 Cloudflare : `https://yogurtguide.wuwaiter.com/`。
-本機與 GitHub Pages 的 `base` 是 `/YogurtGuide/`。
+正式網站只有 Cloudflare（2026-11-27 拿掉 GitHub Pages）。本機建置與預覽的 `base` 是 `/YogurtGuide/`。
 Cloudflare 建置設了 `WORKERS_CI=1` 時，`base` 是 `/`。
 本機預覽是 `http://localhost:4321/YogurtGuide/`。
 
