@@ -1,5 +1,9 @@
 # Version History
 
+## v0.23.3 — 2026-11-27
+
+### Changes
+- 拿掉 GitHub Pages，正式網站只剩 Cloudflare：`deploy.yml` 刪掉建置、上傳與部署 GitHub Pages 的 job，以及 `pages: write`、`id-token: write` 權限；只留 `verify-cloudflare`（合併後確認正式網站換成這次的 commit），workflow 改名「Verify production」。AGENTS.md、README、astro.config.mjs、cicd／git-commit skill 的說明一併更新。合併後到 GitHub 的 Settings → Pages 按「Unpublish site」。
 
 ## v0.23.2 — 2026-11-27
 

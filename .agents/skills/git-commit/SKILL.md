@@ -32,7 +32,7 @@ EOF
 
 6. 回報短 hash、分支名、檔案數。不要 `git push`。
 
-Push 由使用者另說。push 時本機 hook 會跑 `npm run check:gitignore` 與 `npm run check:security`；進 `main` 後由 `.github/workflows/deploy.yml` 建置並部署。
+Push 由使用者另說。push 時本機 hook 會跑 `npm run check:gitignore` 與 `npm run check:security`；進 `main` 只能經由 PR；合併後由 Cloudflare 建置並部署，`.github/workflows/deploy.yml` 確認正式網站換成這次的 commit。
 
 ## 不要做
 
